@@ -5,20 +5,13 @@ disabled_rules:
   - force_cast
   - force_try
   - function_parameter_count
-  - large_tuple
   - line_length
   - nesting
   - trailing_whitespace
   - unused_optional_binding
-  - unused_setter_value
   - void_return
   - xctfail_message
-  - discarded_notification_center_observer
   - identifier_name
-  - function_body_length
-  - reduce_into
-  - redundant_type_annotation
-  - static_operator
 
 opt_in_rules:
   - anyobject_protocol
@@ -66,8 +59,6 @@ opt_in_rules:
 
 excluded:
   - Pods
-  - BeIQ/Generated
-  - BeIQTests
 
 file_header:
   required_pattern: |
@@ -87,9 +78,6 @@ identifier_name:
     warning: 0
   max_length:
     warning: 50
-
-private_outlet:
-  allow_private_set: true
 
 type_name:
   max_length:
