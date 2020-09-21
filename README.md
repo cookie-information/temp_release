@@ -1,4 +1,4 @@
-# ClearCode-iOS
+# MobileConsents-iOS
 
 ## Useful links
 
