@@ -8,5 +8,4 @@
 
 import XCTest
 
-final class MobileConsentsTests: XCTestCase {
-}
+final class MobileConsentsTests: XCTestCase {}
