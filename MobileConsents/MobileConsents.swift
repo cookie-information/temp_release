@@ -8,6 +8,6 @@
 
 import Foundation
 
-final public class MobileConsents {
+public final class MobileConsents {
     var environment: Environment = .staging
 }
