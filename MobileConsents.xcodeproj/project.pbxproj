@@ -10,7 +10,19 @@
 		117BF13B2518D2940089C9E9 /* MobileConsents.h in Headers */ = {isa = PBXBuildFile; fileRef = 117BF1392518D2940089C9E9 /* MobileConsents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		117BF216251A72770089C9E9 /* MobileConsents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF215251A72770089C9E9 /* MobileConsents.swift */; };
 		117BF219251A72D20089C9E9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF218251A72D20089C9E9 /* Environment.swift */; };
+		9B8E95B72519C8B0001DF8BD /* MobileConsentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */; };
+		9B8E95B92519C8B0001DF8BD /* MobileConsents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsents.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9B8E95BA2519C8B0001DF8BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 117BF12D2518D2940089C9E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 117BF1352518D2940089C9E9;
+			remoteInfo = MobileConsents;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		117BF1362518D2940089C9E9 /* MobileConsents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobileConsents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -18,6 +30,8 @@
 		117BF13A2518D2940089C9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		117BF215251A72770089C9E9 /* MobileConsents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsents.swift; sourceTree = "<group>"; };
 		117BF218251A72D20089C9E9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		9B8E95B42519C8AF001DF8BD /* MobileConsentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +42,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B8E95B12519C8AF001DF8BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B8E95B92519C8B0001DF8BD /* MobileConsents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -35,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				117BF1382518D2940089C9E9 /* MobileConsents */,
+				9B8E95B52519C8B0001DF8BD /* MobileConsentsTests */,
 				117BF1372518D2940089C9E9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				117BF1362518D2940089C9E9 /* MobileConsents.framework */,
+				9B8E95B42519C8AF001DF8BD /* MobileConsentsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +106,15 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		9B8E95B52519C8B0001DF8BD /* MobileConsentsTests */ = {
+			isa = PBXGroup;
+			children = (
+				9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */,
+				9B8E95B82519C8B0001DF8BD /* Info.plist */,
+			);
+			path = MobileConsentsTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -114,18 +147,40 @@
 			productReference = 117BF1362518D2940089C9E9 /* MobileConsents.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		9B8E95B32519C8AF001DF8BD /* MobileConsentsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B8E95BE2519C8B0001DF8BD /* Build configuration list for PBXNativeTarget "MobileConsentsTests" */;
+			buildPhases = (
+				9B8E95B02519C8AF001DF8BD /* Sources */,
+				9B8E95B12519C8AF001DF8BD /* Frameworks */,
+				9B8E95B22519C8AF001DF8BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B8E95BB2519C8B0001DF8BD /* PBXTargetDependency */,
+			);
+			name = MobileConsentsTests;
+			productName = MobileConsentsTests;
+			productReference = 9B8E95B42519C8AF001DF8BD /* MobileConsentsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		117BF12D2518D2940089C9E9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1170;
 				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = ClearCode;
 				TargetAttributes = {
 					117BF1352518D2940089C9E9 = {
 						CreatedOnToolsVersion = 11.7;
 						LastSwiftMigration = 1170;
+					};
+					9B8E95B32519C8AF001DF8BD = {
+						CreatedOnToolsVersion = 11.7;
 					};
 				};
 			};
@@ -143,12 +198,20 @@
 			projectRoot = "";
 			targets = (
 				117BF1352518D2940089C9E9 /* MobileConsents */,
+				9B8E95B32519C8AF001DF8BD /* MobileConsentsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		117BF1342518D2940089C9E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B8E95B22519C8AF001DF8BD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -167,7 +230,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B8E95B02519C8AF001DF8BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B8E95B72519C8B0001DF8BD /* MobileConsentsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9B8E95BB2519C8B0001DF8BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 117BF1352518D2940089C9E9 /* MobileConsents */;
+			targetProxy = 9B8E95BA2519C8B0001DF8BD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		117BF13C2518D2940089C9E9 /* Debug */ = {
@@ -341,6 +420,42 @@
 			};
 			name = Release;
 		};
+		9B8E95BC2519C8B0001DF8BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URYNPG7RQE;
+				INFOPLIST_FILE = MobileConsentsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.droidsonroids.MobileConsentsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9B8E95BD2519C8B0001DF8BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URYNPG7RQE;
+				INFOPLIST_FILE = MobileConsentsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.droidsonroids.MobileConsentsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -358,6 +473,15 @@
 			buildConfigurations = (
 				117BF13F2518D2940089C9E9 /* Debug */,
 				117BF1402518D2940089C9E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B8E95BE2519C8B0001DF8BD /* Build configuration list for PBXNativeTarget "MobileConsentsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B8E95BC2519C8B0001DF8BD /* Debug */,
+				9B8E95BD2519C8B0001DF8BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
