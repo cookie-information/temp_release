@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		117BF13B2518D2940089C9E9 /* MobileConsents.h in Headers */ = {isa = PBXBuildFile; fileRef = 117BF1392518D2940089C9E9 /* MobileConsents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		117BF216251A72770089C9E9 /* MobileConsents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF215251A72770089C9E9 /* MobileConsents.swift */; };
+		117BF219251A72D20089C9E9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF218251A72D20089C9E9 /* Environment.swift */; };
 		9B8E95B72519C8B0001DF8BD /* MobileConsentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */; };
 		9B8E95B92519C8B0001DF8BD /* MobileConsents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsents.framework */; };
 /* End PBXBuildFile section */
@@ -26,9 +28,10 @@
 		117BF1362518D2940089C9E9 /* MobileConsents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobileConsents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117BF1392518D2940089C9E9 /* MobileConsents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileConsents.h; sourceTree = "<group>"; };
 		117BF13A2518D2940089C9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		117BF215251A72770089C9E9 /* MobileConsents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsents.swift; sourceTree = "<group>"; };
+		117BF218251A72D20089C9E9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsTests.swift; sourceTree = "<group>"; };
-		9B8E95B82519C8B0001DF8BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +74,36 @@
 		117BF1382518D2940089C9E9 /* MobileConsents */ = {
 			isa = PBXGroup;
 			children = (
+				117BF215251A72770089C9E9 /* MobileConsents.swift */,
+				117BF21A251A73330089C9E9 /* Configuration */,
+				117BF217251A72820089C9E9 /* Resources */,
+				117BF214251A72450089C9E9 /* SupportingFiles */,
+			);
+			path = MobileConsents;
+			sourceTree = "<group>";
+		};
+		117BF214251A72450089C9E9 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
 				117BF1392518D2940089C9E9 /* MobileConsents.h */,
 				117BF13A2518D2940089C9E9 /* Info.plist */,
 			);
-			path = MobileConsents;
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		117BF217251A72820089C9E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		117BF21A251A73330089C9E9 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				117BF218251A72D20089C9E9 /* Environment.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		9B8E95B52519C8B0001DF8BD /* MobileConsentsTests */ = {
@@ -148,6 +177,7 @@
 				TargetAttributes = {
 					117BF1352518D2940089C9E9 = {
 						CreatedOnToolsVersion = 11.7;
+						LastSwiftMigration = 1170;
 					};
 					9B8E95B32519C8AF001DF8BD = {
 						CreatedOnToolsVersion = 11.7;
@@ -195,6 +225,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				117BF216251A72770089C9E9 /* MobileConsents.swift in Sources */,
+				117BF219251A72D20089C9E9 /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,13 +372,14 @@
 		117BF13F2518D2940089C9E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = MobileConsents/Info.plist;
+				INFOPLIST_FILE = MobileConsents/SupportingFiles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -356,6 +389,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.droids.MobileConsents;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -364,13 +398,14 @@
 		117BF1402518D2940089C9E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = MobileConsents/Info.plist;
+				INFOPLIST_FILE = MobileConsents/SupportingFiles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
