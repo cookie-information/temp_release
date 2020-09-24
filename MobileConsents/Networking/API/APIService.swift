@@ -8,13 +8,11 @@
 
 import Foundation
 
-
 enum APIService: EndPointType {
-    
     case getConsents(uuid: String)
     case postConsent(uuid: String)
     
-    var environmentBaseURL : String {
+    var environmentBaseURL: String {
         switch NetworkManager.environment {
         case .production: return "https://produrl.com"
         case .staging: return "https://stagingurl.com"
@@ -22,7 +20,8 @@ enum APIService: EndPointType {
     }
     
     var baseURL: URL {
-        guard let url = URL(string: environmentBaseURL) else { fatalError("baseURL could not be configured.")}
+        guard let url = URL(string: environmentBaseURL) else { fatalError("baseURL could not be configured.") }
+        
         return url
     }
     
@@ -42,7 +41,7 @@ enum APIService: EndPointType {
     var parameters: Parameters? {
         switch self {
         case .postConsent(let uuid):
-            return ["uuid" : uuid]
+            return ["uuid": uuid]
         default:
             return nil
         }
@@ -54,6 +53,4 @@ enum APIService: EndPointType {
         }
         return .request
     }
-    
-    
 }

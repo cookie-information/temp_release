@@ -8,9 +8,8 @@
 
 import Foundation
 
-class NetworkLogger {
+enum NetworkLogger {
     static func log(request: URLRequest) {
-        
         print("\n ====================== START ====================== \n")
         defer { print("\n ======================  END ====================== \n") }
         
@@ -27,7 +26,7 @@ class NetworkLogger {
                         \(method) \(path)?\(query) HTTP/1.1 \n
                         HOST: \(host)\n
                         """
-        for (key,value) in request.allHTTPHeaderFields ?? [:] {
+        for (key, value) in request.allHTTPHeaderFields ?? [:] {
             logOutput += "\(key): \(value) \n"
         }
         if let body = request.httpBody {

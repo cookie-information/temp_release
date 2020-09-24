@@ -8,9 +8,9 @@
 
 import Foundation
 
-public typealias NetworkProviderCompletion = (_ data: Data?,_ response: URLResponse?,_ error: Error?)->()
+public typealias NetworkProviderCompletion = (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> ()
 
-protocol NetworkProvider: class {
+protocol NetworkProvider: AnyObject {
     associatedtype EndPoint: EndPointType
     func request(_ route: EndPoint, completion: @escaping NetworkProviderCompletion)
     func cancel()
@@ -27,7 +27,7 @@ class Provider<EndPoint: EndPointType>: NetworkProvider {
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 completion(data, response, error)
             })
-        }catch {
+        } catch {
             completion(nil, nil, error)
         }
         self.task?.resume()
@@ -37,8 +37,7 @@ class Provider<EndPoint: EndPointType>: NetworkProvider {
         self.task?.cancel()
     }
     
-    fileprivate func buildRequest(from endpoint: EndPoint) throws -> URLRequest {
-        
+    private func buildRequest(from endpoint: EndPoint) throws -> URLRequest {
         var request = URLRequest(url: endpoint.baseURL.appendingPathComponent(endpoint.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: 10.0)
@@ -60,10 +59,7 @@ class Provider<EndPoint: EndPointType>: NetworkProvider {
         }
     }
     
-    fileprivate func configureParameters(bodyParameters: Parameters?,
-                                         bodyEncoding: ParameterEncoding,
-                                         urlParameters: Parameters?,
-                                         request: inout URLRequest) throws {
+    private func configureParameters(bodyParameters: Parameters?, bodyEncoding: ParameterEncoding, urlParameters: Parameters?, request: inout URLRequest) throws {
         do {
             try bodyEncoding.encode(urlRequest: &request,
                                     bodyParameters: bodyParameters,
@@ -72,5 +68,4 @@ class Provider<EndPoint: EndPointType>: NetworkProvider {
             throw error
         }
     }
-    
 }

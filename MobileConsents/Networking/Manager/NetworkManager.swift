@@ -8,14 +8,12 @@
 
 import Foundation
 
-
-
 struct NetworkManager {
-    static let environment:Environment = .staging
+    static let environment: Environment = .staging
     let provider = Provider<APIService>()
     
-    func getConsents(forUUID uuid:String, completion: @escaping ([Consent], Error?) -> Void) {
-        provider.request(.getConsents(uuid: uuid)) { (data, response, error) in
+    func getConsents(forUUID uuid: String, completion: @escaping ([Consent], Error?) -> Void) {
+        provider.request(.getConsents(uuid: uuid)) { data, response, error in
             // TODO: to be implemented
         }
     }
