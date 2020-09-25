@@ -26,31 +26,27 @@ enum APIService: EndPointType {
     }
     
     var path: String {
+        // TODO: to be implemented
         return ""
     }
     
     var method: HTTPMethod {
         switch self {
-        case .getConsents:
-            return .get
-        case .postConsent:
-            return .post
+        case .getConsents: return .get
+        case .postConsent: return .post
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .postConsent(let uuid):
-            return ["uuid": uuid]
-        default:
-            return nil
+        case .postConsent(let uuid): return ["uuid": uuid]
+        default: return nil
         }
     }
     
     var task: Task {
-        if let parameters = parameters {
-            return .requestWithParameters(parameters: parameters, encoding: .jsonEncoding)
-        }
-        return .request
+        guard let parameters = parameters else { return .request }
+
+        return .requestWithParameters(parameters: parameters, encoding: .jsonEncoding)
     }
 }

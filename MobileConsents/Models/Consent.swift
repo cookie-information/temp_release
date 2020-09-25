@@ -9,4 +9,5 @@
 import Foundation
 
 struct Consent {
+    // TODO: to be implemented
 }

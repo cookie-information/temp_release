@@ -16,7 +16,11 @@ protocol NetworkProvider: AnyObject {
     func cancel()
 }
 
-class Provider<EndPoint: EndPointType>: NetworkProvider {
+private enum NetworkConstants {
+    static let timeoutInterval: Double = 10.0
+}
+
+final class Provider<EndPoint: EndPointType>: NetworkProvider {
     private var task: URLSessionTask?
     
     func request(_ route: EndPoint, completion: @escaping NetworkProviderCompletion) {
@@ -27,45 +31,41 @@ class Provider<EndPoint: EndPointType>: NetworkProvider {
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 completion(data, response, error)
             })
+            task?.resume()
         } catch {
             completion(nil, nil, error)
         }
-        self.task?.resume()
     }
     
     func cancel() {
-        self.task?.cancel()
+        task?.cancel()
     }
     
     private func buildRequest(from endpoint: EndPoint) throws -> URLRequest {
         var request = URLRequest(url: endpoint.baseURL.appendingPathComponent(endpoint.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: 10.0)
+                                 timeoutInterval: NetworkConstants.timeoutInterval)
         
         request.httpMethod = endpoint.method.rawValue
-        do {
-            switch endpoint.task {
-            case .request:
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            case .requestWithParameters(let parameters, let encoding):
-                try self.configureParameters(bodyParameters: parameters,
-                                             bodyEncoding: encoding,
-                                             urlParameters: nil,
-                                             request: &request)
-            }
-            return request
-        } catch {
-            throw error
+        switch endpoint.task {
+        case .request:
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        case .requestWithParameters(let parameters, let encoding):
+            try self.configureParameters(
+                bodyParameters: parameters,
+                bodyEncoding: encoding,
+                urlParameters: nil,
+                request: &request
+            )
         }
+        return request
     }
     
     private func configureParameters(bodyParameters: Parameters?, bodyEncoding: ParameterEncoding, urlParameters: Parameters?, request: inout URLRequest) throws {
-        do {
-            try bodyEncoding.encode(urlRequest: &request,
-                                    bodyParameters: bodyParameters,
-                                    urlParameters: urlParameters)
-        } catch {
-            throw error
-        }
+        try bodyEncoding.encode(
+            urlRequest: &request,
+            bodyParameters: bodyParameters,
+            urlParameters: urlParameters
+        )
     }
 }
