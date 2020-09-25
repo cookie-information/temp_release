@@ -27,14 +27,14 @@ public final class MobileConsentsSDK {
     }
     
     public func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping (ConsentSolution?, Error?) -> Void) {
-
+        // TODO: to be implemented
     }
     
     public func postConsent(_ consent: Consent, completion:@escaping (Error?) -> Void) {
-        
+        // TODO: to be implemented
     }
     
     public func cancel() {
-        
+        // TODO: to be implemented
     }
 }
