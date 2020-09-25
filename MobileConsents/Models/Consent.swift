@@ -16,9 +16,3 @@ public struct Consent {
     var processingPurposes: [Purpose]
     var customData: [String: Any]
 }
-
-public struct Purpose {
-    var universalConsentItemId: String
-    var consentGiven: Bool
-    var language: String
-}
