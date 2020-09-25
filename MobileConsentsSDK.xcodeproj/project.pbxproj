@@ -100,13 +100,9 @@
 		117BF1382518D2940089C9E9 /* MobileConsents */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< Updated upstream:MobileConsents.xcodeproj/project.pbxproj
-				117BF215251A72770089C9E9 /* MobileConsents.swift */,
-=======
 				117BF215251A72770089C9E9 /* MobileConsentsSDK.swift */,
 				11B51857251C73A200581FF4 /* Models */,
 				117BF21B251A784D0089C9E9 /* Networking */,
->>>>>>> Stashed changes:MobileConsentsSDK.xcodeproj/project.pbxproj
 				117BF21A251A73330089C9E9 /* Configuration */,
 				117BF217251A72820089C9E9 /* Resources */,
 				117BF214251A72450089C9E9 /* SupportingFiles */,
@@ -138,8 +134,6 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
-<<<<<<< Updated upstream:MobileConsents.xcodeproj/project.pbxproj
-=======
 		117BF21B251A784D0089C9E9 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +194,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
->>>>>>> Stashed changes:MobileConsentsSDK.xcodeproj/project.pbxproj
 		9B8E95B52519C8B0001DF8BD /* MobileConsentsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,9 +313,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< Updated upstream:MobileConsents.xcodeproj/project.pbxproj
-				117BF216251A72770089C9E9 /* MobileConsents.swift in Sources */,
-=======
 				11B51852251C728E00581FF4 /* NetworkManager.swift in Sources */,
 				11B5182B251C691D00581FF4 /* ParameterEncoding.swift in Sources */,
 				11B5192B251DEBCE00581FF4 /* Consent.swift in Sources */,
@@ -334,7 +324,6 @@
 				11B5184B251C710700581FF4 /* APIService.swift in Sources */,
 				11B51859251C73B400581FF4 /* ConsentItem.swift in Sources */,
 				11B5183A251C6BA700581FF4 /* Provider.swift in Sources */,
->>>>>>> Stashed changes:MobileConsentsSDK.xcodeproj/project.pbxproj
 				117BF219251A72D20089C9E9 /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
