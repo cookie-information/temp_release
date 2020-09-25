@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1141FDA6251B343700748076 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FDA5251B343700748076 /* HTTPMethod.swift */; };
+		1141FDE0251B4FEE00748076 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FDDF251B4FEE00748076 /* Task.swift */; };
+		114D8FD7251B236500D8D113 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D8FD6251B236500D8D113 /* EndPointType.swift */; };
 		117BF13B2518D2940089C9E9 /* MobileConsents.h in Headers */ = {isa = PBXBuildFile; fileRef = 117BF1392518D2940089C9E9 /* MobileConsents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		117BF216251A72770089C9E9 /* MobileConsentsSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF215251A72770089C9E9 /* MobileConsentsSDK.swift */; };
 		117BF219251A72D20089C9E9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF218251A72D20089C9E9 /* Environment.swift */; };
-
 		11B5182B251C691D00581FF4 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5182A251C691D00581FF4 /* ParameterEncoding.swift */; };
 		11B51831251C69F700581FF4 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51830251C69F700581FF4 /* JSONParameterEncoder.swift */; };
 		11B5183A251C6BA700581FF4 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51839251C6BA700581FF4 /* Provider.swift */; };
@@ -198,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */,
-				9B8E95B82519C8B0001DF8BD /* Info.plist */,
 			);
 			path = MobileConsentsTests;
 			sourceTree = "<group>";
@@ -225,6 +226,7 @@
 				117BF1322518D2940089C9E9 /* Sources */,
 				117BF1332518D2940089C9E9 /* Frameworks */,
 				117BF1342518D2940089C9E9 /* Resources */,
+				11B5185E251C895500581FF4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -260,7 +262,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = ClearCode;
 				TargetAttributes = {
 					117BF1352518D2940089C9E9 = {
@@ -308,6 +310,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		11B5185E251C895500581FF4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		117BF1322518D2940089C9E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -325,6 +347,10 @@
 				11B51859251C73B400581FF4 /* ConsentItem.swift in Sources */,
 				11B5183A251C6BA700581FF4 /* Provider.swift in Sources */,
 				117BF219251A72D20089C9E9 /* Environment.swift in Sources */,
+				11B51840251C6C4E00581FF4 /* NetworkLogger.swift in Sources */,
+				11B51831251C69F700581FF4 /* JSONParameterEncoder.swift in Sources */,
+				11B51846251C6E7D00581FF4 /* URLParameterEncoder.swift in Sources */,
+				114D8FD7251B236500D8D113 /* EndPointType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +399,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -398,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -436,6 +463,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -455,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
