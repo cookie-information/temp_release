@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "117BF1352518D2940089C9E9"
-               BuildableName = "MobileConsents.framework"
-               BlueprintName = "MobileConsents"
-               ReferencedContainer = "container:MobileConsents.xcodeproj">
+               BuildableName = "MobileConsentsSDK.framework"
+               BlueprintName = "MobileConsentsSDK"
+               ReferencedContainer = "container:MobileConsentsSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9B8E95B32519C8AF001DF8BD"
-               BuildableName = "MobileConsentsTests.xctest"
-               BlueprintName = "MobileConsentsTests"
-               ReferencedContainer = "container:MobileConsents.xcodeproj">
+               BuildableName = "MobileConsentsSDKTests.xctest"
+               BlueprintName = "MobileConsentsSDKTests"
+               ReferencedContainer = "container:MobileConsentsSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -61,9 +61,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "117BF1352518D2940089C9E9"
-            BuildableName = "MobileConsents.framework"
-            BlueprintName = "MobileConsents"
-            ReferencedContainer = "container:MobileConsents.xcodeproj">
+            BuildableName = "MobileConsentsSDK.framework"
+            BlueprintName = "MobileConsentsSDK"
+            ReferencedContainer = "container:MobileConsentsSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
