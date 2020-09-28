@@ -6,7 +6,7 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-public struct ConsentItem {
+public struct ConsentItem: Codable {
     public let universalConsentItemId: String
     public let translations: [ConsentTranslation]
 }
