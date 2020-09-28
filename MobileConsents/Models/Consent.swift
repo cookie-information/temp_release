@@ -9,10 +9,10 @@
 import Foundation
 
 public struct Consent {
-    var universalConsentSolutionId: String
-    var universalConsentSolutionVersionId: String
-    var timestamp: Date
-    var userID: String
-    var processingPurposes: [Purpose]
-    var customData: [String: Any]
+    public let universalConsentSolutionId: String
+    public let universalConsentSolutionVersionId: String
+    public let timestamp: Date
+    public let userID: String
+    public let processingPurposes: [Purpose]
+    public let customData: [String: Any]
 }

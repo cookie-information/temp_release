@@ -6,10 +6,8 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-import Foundation
-
 public struct Purpose {
-    var universalConsentItemId: String
-    var consentGiven: Bool
-    var language: String
+    public let universalConsentItemId: String
+    public let consentGiven: Bool
+    public let language: String
 }

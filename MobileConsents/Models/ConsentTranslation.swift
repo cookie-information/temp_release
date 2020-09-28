@@ -6,10 +6,8 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-import Foundation
-
 public struct ConsentTranslation {
-    public var language: String
-    public var shortText: String
-    public var longText: String
+    public let language: String
+    public let shortText: String
+    public let longText: String
 }

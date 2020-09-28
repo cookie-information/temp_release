@@ -6,10 +6,8 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-import Foundation
-
 public struct ConsentSolution {
-    public var universalConsentSolutionVersionId: String
-    public var universalConsentSolutionId: String
-    public var universalConsentItems: [ConsentItem]
+    public let universalConsentSolutionVersionId: String
+    public let universalConsentSolutionId: String
+    public let universalConsentItems: [ConsentItem]
 }
