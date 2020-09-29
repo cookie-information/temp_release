@@ -7,7 +7,7 @@
 //
 
 public struct ConsentSolution {
-    public let universalConsentSolutionVersionId: String
-    public let universalConsentSolutionId: String
-    public let universalConsentItems: [ConsentItem]
+    public let id: String
+    public let versionId: String
+    public let consentItems: [ConsentItem]
 }

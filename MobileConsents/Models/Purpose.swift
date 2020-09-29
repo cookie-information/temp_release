@@ -7,7 +7,7 @@
 //
 
 public struct Purpose {
-    public let universalConsentItemId: String
+    public let consentItemId: String
     public let consentGiven: Bool
     public let language: String
 }

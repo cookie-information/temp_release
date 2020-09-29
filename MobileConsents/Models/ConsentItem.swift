@@ -7,6 +7,6 @@
 //
 
 public struct ConsentItem {
-    public let universalConsentItemId: String
+    public let id: String
     public let translations: [ConsentTranslation]
 }
