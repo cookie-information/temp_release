@@ -1,12 +1,10 @@
 //
 //  HTTPMethod.swift
-//  MobileConsents
+//  MobileConsentsSDK
 //
 //  Created by Jan Lipmann on 23/09/2020.
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
-
-import Foundation
 
 enum HTTPMethod: String {
     case get = "GET"

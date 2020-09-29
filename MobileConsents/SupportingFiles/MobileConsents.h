@@ -1,6 +1,6 @@
 //
 //  MobileConsents.h
-//  MobileConsents
+//  MobileConsentsSDK
 //
 //  Created by Jan Lipmann on 21/09/2020.
 //  Copyright © 2020 Droids on Roids. All rights reserved.

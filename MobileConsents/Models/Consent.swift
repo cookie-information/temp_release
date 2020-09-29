@@ -1,13 +1,18 @@
 //
 //  Consent.swift
-//  MobileConsents
+//  MobileConsentsSDK
 //
-//  Created by Jan Lipmann on 24/09/2020.
+//  Created by Jan Lipmann on 25/09/2020.
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
 import Foundation
 
-struct Consent {
-    // TODO: to be implemented
+public struct Consent {
+    public let consentSolutionId: String
+    public let consentSolutionVersionId: String
+    public let timestamp: Date
+    public let userID: String
+    public let processingPurposes: [Purpose]
+    public let customData: [String: Any]
 }
