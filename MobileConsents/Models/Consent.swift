@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Consent {
-    public let universalConsentSolutionId: String
-    public let universalConsentSolutionVersionId: String
+    public let consentSolutionId: String
+    public let consentSolutionVersionId: String
     public let timestamp: Date
     public let userID: String
     public let processingPurposes: [Purpose]
