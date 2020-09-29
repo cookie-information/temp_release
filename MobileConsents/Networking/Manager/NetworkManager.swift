@@ -56,19 +56,16 @@ class NetworkManager {
             case .success:
                 if let error = error {
                     completion(nil, error)
-                    return
-                }
-                guard let data = data else {
+                } else if let data = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let consentSolution = try decoder.decode(ConsentSolution.self, from: data)
+                        completion(consentSolution, nil)
+                    } catch {
+                        completion(nil, error)
+                    }
+                } else {
                     completion(nil, NetworkResponseError.noData)
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let consentSolution = try decoder.decode(ConsentSolution.self, from: data)
-                    completion(consentSolution, nil)
-                } catch {
-                    completion(nil, error)
                 }
             case .failure(let error):
                 completion(nil, error)
@@ -78,17 +75,5 @@ class NetworkManager {
     
     func cancel() {
         provider.cancel()
-    }
-}
-
-extension HTTPURLResponse {
-    var result: NetworkResult<NetworkResponseError> {
-        switch self.statusCode {
-        case 200...299: return .success
-        case 401...500: return .failure(.authenticationError)
-        case 501...599: return .failure(.badRequest)
-        case 600: return .failure(.outdated)
-        default: return .failure(.failed)
-        }
     }
 }

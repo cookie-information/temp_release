@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum APIService: EndPointType {
+enum APIService: EndpointType {
     case getConsents(uuid: String)
     case postConsent(baseURL: URL, uuid: String)
     

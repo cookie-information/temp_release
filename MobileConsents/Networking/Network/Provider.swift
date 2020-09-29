@@ -11,7 +11,7 @@ import Foundation
 public typealias NetworkProviderCompletion = (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> ()
 
 protocol NetworkProvider: AnyObject {
-    associatedtype EndPoint: EndPointType
+    associatedtype EndPoint: EndpointType
     func request(_ route: EndPoint, completion: @escaping NetworkProviderCompletion)
     func cancel()
 }
@@ -31,7 +31,7 @@ private enum NetworkProviderError: LocalizedError {
     }
 }
 
-final class Provider<EndPoint: EndPointType>: NetworkProvider {
+final class Provider<EndPoint: EndpointType>: NetworkProvider {
     private var task: URLSessionTask?
     
     func request(_ route: EndPoint, completion: @escaping NetworkProviderCompletion) {
