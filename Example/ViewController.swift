@@ -7,14 +7,13 @@
 //
 
 import UIKit
+import MobileConsentsSDK
 
-class ViewController: UIViewController {
-
+class MobileConsentsSolution: UIViewController {
+    var moblieConsentsSDK: MobileConsentsSDK?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        moblieConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https://google.pl")!)
     }
-
-
 }
-
