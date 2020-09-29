@@ -25,8 +25,7 @@ private enum NetworkProviderError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
-        case .noBaseURL:
-            return "baseURL could not be configured."
+        case .noBaseURL: return "baseURL could not be configured."
         }
     }
 }
@@ -53,10 +52,7 @@ final class Provider<EndPoint: EndpointType>: NetworkProvider {
     }
     
     private func buildRequest(from endpoint: EndPoint) throws -> URLRequest {
-        
-        guard let baseURL = endpoint.baseURL else {
-            throw NetworkProviderError.noBaseURL
-        }
+        guard let baseURL = endpoint.baseURL else { throw NetworkProviderError.noBaseURL }
         
         var request = URLRequest(url: baseURL.appendingPathComponent(endpoint.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,

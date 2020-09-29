@@ -35,7 +35,7 @@ enum NetworkResult<T> {
     case failure(T)
 }
 
-class NetworkManager {
+final class NetworkManager {
     static let environment: Environment = .staging
     private let provider = Provider<APIService>()
     
@@ -48,8 +48,7 @@ class NetworkManager {
     func getConsents(forUUID uuid: String, completion: @escaping (ConsentSolution?, Error?) -> Void) {
         provider.request(.getConsents(uuid: uuid)) { data, response, error in
             guard let response = response as? HTTPURLResponse else {
-                completion(nil, NetworkResponseError.noProperResponse)
-                return
+                return completion(nil, NetworkResponseError.noProperResponse)
             }
             
             switch response.result {
@@ -58,8 +57,7 @@ class NetworkManager {
                     completion(nil, error)
                 } else if let data = data {
                     do {
-                        let decoder = JSONDecoder()
-                        let consentSolution = try decoder.decode(ConsentSolution.self, from: data)
+                        let consentSolution = try JSONDecoder().decode(ConsentSolution.self, from: data)
                         completion(consentSolution, nil)
                     } catch {
                         completion(nil, error)
