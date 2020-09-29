@@ -11,6 +11,9 @@
         <array key="Rubik-Medium.ttf">
             <string>Rubik-Medium</string>
         </array>
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Mobile Consents Solution-->
@@ -32,20 +35,33 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identifier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5r-s7-pdy">
-                                                <rect key="frame" x="30" y="5.5" width="364" height="14.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Identifier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5r-s7-pdy">
+                                                <rect key="frame" x="30" y="5.5" width="53" height="14.5"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vI-Kz-ZBa">
+                                                <rect key="frame" x="300" y="-3" width="94" height="23"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="23" id="9aG-Ax-cYS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
+                                                <state key="normal" title="Default identifier"/>
+                                                <connections>
+                                                    <action selector="defaultIdentifierAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="HK5-tn-1X8"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="cgY-5Q-3HF" secondAttribute="trailing" constant="20" id="5vM-uV-hbL"/>
-                                            <constraint firstItem="I5r-s7-pdy" firstAttribute="trailing" secondItem="cgY-5Q-3HF" secondAttribute="trailing" id="JG6-LO-GjA"/>
                                             <constraint firstItem="cgY-5Q-3HF" firstAttribute="leading" secondItem="9sY-DS-z63" secondAttribute="leading" constant="20" id="Nwy-eS-N5t"/>
+                                            <constraint firstItem="2vI-Kz-ZBa" firstAttribute="trailing" secondItem="cgY-5Q-3HF" secondAttribute="trailing" id="Pow-PX-8Yl"/>
+                                            <constraint firstItem="2vI-Kz-ZBa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="I5r-s7-pdy" secondAttribute="trailing" constant="5" id="RzM-Mn-icT"/>
                                             <constraint firstItem="cgY-5Q-3HF" firstAttribute="centerY" secondItem="9sY-DS-z63" secondAttribute="centerY" constant="5" id="a0k-Xb-zMJ"/>
                                             <constraint firstItem="cgY-5Q-3HF" firstAttribute="top" secondItem="I5r-s7-pdy" secondAttribute="bottom" id="kLG-od-7IS"/>
+                                            <constraint firstItem="cgY-5Q-3HF" firstAttribute="top" secondItem="2vI-Kz-ZBa" secondAttribute="bottom" id="rP9-z1-BUV"/>
                                             <constraint firstItem="I5r-s7-pdy" firstAttribute="leading" secondItem="cgY-5Q-3HF" secondAttribute="leading" constant="10" id="tmx-rS-7it"/>
                                             <constraint firstAttribute="height" constant="64" id="xap-Eq-I3A"/>
                                         </constraints>

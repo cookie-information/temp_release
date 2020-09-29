@@ -26,7 +26,6 @@ class MobileConsentsSolution: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mobileConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https://google.pl")!)
-        identifierTextField.text = "843ddd4a-3eae-4286-a17b-0e8d3337e767"
         setupAppearance()
     }
     
@@ -39,6 +38,10 @@ class MobileConsentsSolution: UIViewController {
     
     @IBAction private func getAction() {
         fetchData()
+    }
+    
+    @IBAction private func defaultIdentifierAction() {
+        identifierTextField.text = "843ddd4a-3eae-4286-a17b-0e8d3337e767"
     }
 }
 
