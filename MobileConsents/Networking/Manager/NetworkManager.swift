@@ -52,11 +52,11 @@ class NetworkManager {
                 return
             }
             
-            let result = self.handleNetworkResponse(response)
-            switch result {
+            switch response.result {
             case .success:
                 if let error = error {
                     completion(nil, error)
+                    return
                 }
                 guard let data = data else {
                     completion(nil, NetworkResponseError.noData)
@@ -76,17 +76,19 @@ class NetworkManager {
         }
     }
     
-    private func handleNetworkResponse(_ response: HTTPURLResponse) -> NetworkResult<NetworkResponseError> {
-        switch response.statusCode {
+    func cancel() {
+        provider.cancel()
+    }
+}
+
+extension HTTPURLResponse {
+    var result: NetworkResult<NetworkResponseError> {
+        switch self.statusCode {
         case 200...299: return .success
         case 401...500: return .failure(.authenticationError)
         case 501...599: return .failure(.badRequest)
         case 600: return .failure(.outdated)
         default: return .failure(.failed)
         }
-    }
-    
-    func cancel() {
-        provider.cancel()
     }
 }

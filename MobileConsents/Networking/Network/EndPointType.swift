@@ -9,7 +9,7 @@
 import Foundation
 
 protocol EndPointType {
-    var baseURL: URL { get }
+    var baseURL: URL? { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var task: Task { get }
