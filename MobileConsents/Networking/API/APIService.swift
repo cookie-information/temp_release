@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum APIService: EndPointType {
+enum APIService: EndpointType {
     case getConsents(uuid: String)
     case postConsent(baseURL: URL, uuid: String)
     
@@ -19,12 +19,10 @@ enum APIService: EndPointType {
         }
     }
     
-    var baseURL: URL {
+    var baseURL: URL? {
         switch self {
         case .getConsents:
-            guard let url = URL(string: environmentBaseURL) else { fatalError("baseURL could not be configured.") }
-            
-            return url
+            return URL(string: environmentBaseURL)
         case .postConsent(let baseURL, _):
             return baseURL
         } 

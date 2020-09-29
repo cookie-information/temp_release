@@ -11,7 +11,7 @@ import Foundation
 public typealias NetworkProviderCompletion = (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> ()
 
 protocol NetworkProvider: AnyObject {
-    associatedtype EndPoint: EndPointType
+    associatedtype EndPoint: EndpointType
     func request(_ route: EndPoint, completion: @escaping NetworkProviderCompletion)
     func cancel()
 }
@@ -20,7 +20,17 @@ private enum NetworkConstants {
     static let timeoutInterval: Double = 10.0
 }
 
-final class Provider<EndPoint: EndPointType>: NetworkProvider {
+private enum NetworkProviderError: LocalizedError {
+    case noBaseURL
+    
+    var errorDescription: String? {
+        switch self {
+        case .noBaseURL: return "baseURL could not be configured."
+        }
+    }
+}
+
+final class Provider<EndPoint: EndpointType>: NetworkProvider {
     private var task: URLSessionTask?
     
     func request(_ route: EndPoint, completion: @escaping NetworkProviderCompletion) {
@@ -42,7 +52,9 @@ final class Provider<EndPoint: EndPointType>: NetworkProvider {
     }
     
     private func buildRequest(from endpoint: EndPoint) throws -> URLRequest {
-        var request = URLRequest(url: endpoint.baseURL.appendingPathComponent(endpoint.path),
+        guard let baseURL = endpoint.baseURL else { throw NetworkProviderError.noBaseURL }
+        
+        var request = URLRequest(url: baseURL.appendingPathComponent(endpoint.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: NetworkConstants.timeoutInterval)
         

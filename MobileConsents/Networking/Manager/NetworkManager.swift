@@ -35,7 +35,7 @@ enum NetworkResult<T> {
     case failure(T)
 }
 
-class NetworkManager {
+final class NetworkManager {
     static let environment: Environment = .staging
     private let provider = Provider<APIService>()
     
@@ -48,41 +48,26 @@ class NetworkManager {
     func getConsents(forUUID uuid: String, completion: @escaping (ConsentSolution?, Error?) -> Void) {
         provider.request(.getConsents(uuid: uuid)) { data, response, error in
             guard let response = response as? HTTPURLResponse else {
-                completion(nil, NetworkResponseError.noProperResponse)
-                return
+                return completion(nil, NetworkResponseError.noProperResponse)
             }
             
-            let result = self.handleNetworkResponse(response)
-            switch result {
+            switch response.result {
             case .success:
                 if let error = error {
                     completion(nil, error)
-                }
-                guard let data = data else {
+                } else if let data = data {
+                    do {
+                        let consentSolution = try JSONDecoder().decode(ConsentSolution.self, from: data)
+                        completion(consentSolution, nil)
+                    } catch {
+                        completion(nil, error)
+                    }
+                } else {
                     completion(nil, NetworkResponseError.noData)
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let consentSolution = try decoder.decode(ConsentSolution.self, from: data)
-                    completion(consentSolution, nil)
-                } catch {
-                    completion(nil, error)
                 }
             case .failure(let error):
                 completion(nil, error)
             }
-        }
-    }
-    
-    private func handleNetworkResponse(_ response: HTTPURLResponse) -> NetworkResult<NetworkResponseError> {
-        switch response.statusCode {
-        case 200...299: return .success
-        case 401...500: return .failure(.authenticationError)
-        case 501...599: return .failure(.badRequest)
-        case 600: return .failure(.outdated)
-        default: return .failure(.failed)
         }
     }
     
