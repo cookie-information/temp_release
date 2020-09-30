@@ -19,7 +19,7 @@ public final class MobileConsentsSDK {
         self.networkManager = NetworkManager(withBaseURL: url)
     }
     
-    public func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping ConsentSolutionCompletion ) {
+    public func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping ConsentSolutionCompletion) {
         networkManager.getConsents(forUUID: universalConsentSolutionId, completion: completion)
     }
     

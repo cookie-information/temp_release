@@ -21,19 +21,15 @@ enum APIService: EndpointType {
     
     var baseURL: URL? {
         switch self {
-        case .getConsents:
-            return URL(string: environmentBaseURL)
-        case .postConsent(let baseURL, _):
-            return baseURL
+        case .getConsents: return URL(string: environmentBaseURL)
+        case .postConsent(let baseURL, _): return baseURL
         } 
     }
     
     var path: String {
         switch self {
-        case .getConsents(let uuid):
-            return "\(uuid)/consent-data.json"
-        case .postConsent:
-            return ""
+        case .getConsents(let uuid): return "\(uuid)/consent-data.json"
+        case .postConsent: return ""
         }
     }
     
