@@ -8,13 +8,70 @@
 
 import Foundation
 
-struct NetworkManager {
-    static let environment: Environment = .staging
-    let provider = Provider<APIService>()
+enum NetworkResponseError: LocalizedError {
+    case authenticationError
+    case badRequest
+    case outdated
+    case failed
+    case noData
+    case unableToDecode
+    case noProperResponse
     
-    func getConsents(forUUID uuid: String, completion: @escaping ([ConsentItem], Error?) -> Void) {
-        provider.request(.getConsents(uuid: uuid)) { data, response, error in
-            // TODO: to be implemented
+    var errorDescription: String? {
+        switch self {
+        case .authenticationError: return "You need to be authenticated first."
+        case .badRequest: return "Bad request"
+        case .outdated: return "The url you requested is outdated."
+        case .failed: return "Network request failed."
+        case .noData: return "Response returned with no data to decode."
+        case .unableToDecode: return "We could not decode the response."
+        case .noProperResponse: return "No proper response."
         }
+    }
+}
+
+enum NetworkResult<T> {
+    case success
+    case failure(T)
+}
+
+final class NetworkManager {
+    static let environment: Environment = .staging
+    private let provider = Provider<APIService>()
+    
+    private let baseURL: URL
+    
+    init(withBaseURL url: URL) {
+        baseURL = url
+    }
+    
+    func getConsents(forUUID uuid: String, completion: @escaping (ConsentSolution?, Error?) -> Void) {
+        provider.request(.getConsents(uuid: uuid)) { data, response, error in
+            guard let response = response as? HTTPURLResponse else {
+                return completion(nil, NetworkResponseError.noProperResponse)
+            }
+            
+            switch response.result {
+            case .success:
+                if let error = error {
+                    completion(nil, error)
+                } else if let data = data {
+                    do {
+                        let consentSolution = try JSONDecoder().decode(ConsentSolution.self, from: data)
+                        completion(consentSolution, nil)
+                    } catch {
+                        completion(nil, error)
+                    }
+                } else {
+                    completion(nil, NetworkResponseError.noData)
+                }
+            case .failure(let error):
+                completion(nil, error)
+            }
+        }
+    }
+    
+    func cancel() {
+        provider.cancel()
     }
 }

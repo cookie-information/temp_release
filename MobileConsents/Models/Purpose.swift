@@ -6,7 +6,7 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-public struct Purpose {
+public struct Purpose: Codable {
     public let consentItemId: String
     public let consentGiven: Bool
     public let language: String

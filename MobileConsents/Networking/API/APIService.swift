@@ -8,26 +8,29 @@
 
 import Foundation
 
-enum APIService: EndPointType {
+enum APIService: EndpointType {
     case getConsents(uuid: String)
-    case postConsent(uuid: String)
+    case postConsent(baseURL: URL, uuid: String)
     
     var environmentBaseURL: String {
         switch NetworkManager.environment {
         case .production: return "https://produrl.com"
-        case .staging: return "https://stagingurl.com"
+        case .staging: return "https://cdnapi-staging.azureedge.net/v1/"
         }
     }
     
-    var baseURL: URL {
-        guard let url = URL(string: environmentBaseURL) else { fatalError("baseURL could not be configured.") }
-        
-        return url
+    var baseURL: URL? {
+        switch self {
+        case .getConsents: return URL(string: environmentBaseURL)
+        case .postConsent(let baseURL, _): return baseURL
+        } 
     }
     
     var path: String {
-        // TODO: to be implemented
-        return ""
+        switch self {
+        case .getConsents(let uuid): return "\(uuid)/consent-data.json"
+        case .postConsent: return ""
+        }
     }
     
     var method: HTTPMethod {
@@ -39,7 +42,7 @@ enum APIService: EndPointType {
     
     var parameters: Parameters? {
         switch self {
-        case .postConsent(let uuid): return ["uuid": uuid]
+        case .postConsent(_, let uuid): return ["uuid": uuid]
         default: return nil
         }
     }
@@ -48,5 +51,15 @@ enum APIService: EndPointType {
         guard let parameters = parameters else { return .request }
 
         return .requestWithParameters(parameters: parameters, encoding: .jsonEncoding)
+    }
+    
+    var sampleData: Data {
+        // TODO: will be refactored for unit testing purposes
+        switch self {
+        case .getConsents(let uuid):
+            return uuid.data(using: .utf8) ?? Data()
+        case .postConsent(let baseURL, let uuid):
+            return uuid.data(using: .utf8) ?? Data()
+        }
     }
 }

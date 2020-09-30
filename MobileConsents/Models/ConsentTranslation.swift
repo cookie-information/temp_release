@@ -6,7 +6,7 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-public struct ConsentTranslation {
+public struct ConsentTranslation: Codable {
     public let language: String
     public let shortText: String
     public let longText: String
