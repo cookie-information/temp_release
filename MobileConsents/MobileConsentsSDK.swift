@@ -18,7 +18,6 @@ public final class MobileConsentsSDK {
     
     public init(withBaseURL url: URL) {
         self.networkManager = NetworkManager(withBaseURL: url)
-        systemInfo()
     }
     
     public func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping ConsentSolutionCompletion ) {
@@ -31,18 +30,5 @@ public final class MobileConsentsSDK {
     
     public func cancel() {
         networkManager.cancel()
-    }
-}
-
-extension MobileConsentsSDK {
-    func systemInfo() {
-        let systemVersion = UIDevice.current.systemVersion
-        print("OS version: iOS ", systemVersion)
-        
-        let bundeID = Bundle.main.bundleIdentifier
-        print("Bundle identifier: ", bundeID!)
-        
-        let appname = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")
-        print("App name: ", appname!)
     }
 }
