@@ -10,10 +10,8 @@ import Foundation
 import MobileConsentsSDK
 
 final class MobileConsentSolutionViewModel {
-    var consentSolution: ConsentSolution?
-    private var selectedItems: [ConsentItem] = []
-    
     private let mobileConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https//google.com")!)
+    private var selectedItems: [ConsentItem] = []
     
     private var items: [ConsentItem] {
         return consentSolution?.consentItems ?? []
@@ -28,17 +26,16 @@ final class MobileConsentSolutionViewModel {
         }
         return sectionTypes
     }
-    
+
+    var consentSolution: ConsentSolution?
+
     var sectionsCount: Int {
         sectionTypes.count
     }
     
-    func sectionType(forSection section: Int) -> MobileConsentsSolutionSectionType {
-        return sectionTypes[section]
-    }
-    
     private func cellTypes(forSection section: Int) -> [MobileConsentsSolutionCellType] {
-        switch sectionType(forSection: section) {
+        guard let type = sectionType(forSection: section) else { return [] }
+        switch type {
         case .info:
             return [.solutionDetails]
         case .items:
@@ -46,8 +43,12 @@ final class MobileConsentSolutionViewModel {
         }
     }
     
-    func cellType(forIndexPath indexPath: IndexPath) -> MobileConsentsSolutionCellType {
-        return cellTypes(forSection: indexPath.section)[indexPath.row]
+    func sectionType(forSection section: Int) -> MobileConsentsSolutionSectionType? {
+        return sectionTypes[safe: section]
+    }
+    
+    func cellType(forIndexPath indexPath: IndexPath) -> MobileConsentsSolutionCellType? {
+        return cellTypes(forSection: indexPath.section)[safe: indexPath.row]
     }
     
     func rowsCount(forSection section: Int) -> Int {
@@ -62,6 +63,18 @@ final class MobileConsentSolutionViewModel {
     func translation(forIndexPath indexPath: IndexPath) -> ConsentTranslation? {
         guard sectionType(forSection: indexPath.section) == .items  else { return nil }
         return items[safe: indexPath.row]?.translations[safe: indexPath.row - 1]
+    }
+    
+    func handleItemCheck(_ item: ConsentItem) {
+        if let index = selectedItems.firstIndex(where: { $0.id == item.id }) {
+            selectedItems.remove(at: index)
+        } else {
+            selectedItems.append(item)
+        }
+    }
+    
+    func isItemSelected(_ item: ConsentItem) -> Bool {
+        return selectedItems.contains(where: { $0.id == item.id })
     }
     
     func fetchData(forIdentifier identifier: String, _ completion:@escaping (Error?) -> Void) {

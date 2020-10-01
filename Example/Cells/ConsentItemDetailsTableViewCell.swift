@@ -14,21 +14,17 @@ protocol ConsentItemDetailsTableViewCellDelegate: AnyObject {
 }
 
 final class ConsentItemDetailsTableViewCell: UITableViewCell {
-    @IBOutlet private weak var checkbox: UIButton!
+    @IBOutlet private weak var checkboxButton: UIButton!
     @IBOutlet private weak var contentLabel: UILabel!
     
     weak var delegate: ConsentItemDetailsTableViewCellDelegate?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 
     func setup(withConsentItem item: ConsentItem, language: String) {
         contentLabel.text = item.translations.first(where: { $0.language == language })?.shortText
     }
 
     func setCheckboxSelected(_ selected: Bool) {
-        checkbox.isSelected = selected
+        checkboxButton.isSelected = selected
     }
     
     @IBAction private func checkBoxAction() {

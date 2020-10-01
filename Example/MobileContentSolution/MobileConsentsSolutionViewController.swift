@@ -64,7 +64,7 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellType: MobileConsentsSolutionCellType = viewModel.cellType(forIndexPath: indexPath)
+        guard let cellType: MobileConsentsSolutionCellType = viewModel.cellType(forIndexPath: indexPath) else { return UITableViewCell() }
         
         switch cellType {
         case .solutionDetails:
@@ -77,7 +77,9 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
             let cell: ConsentItemDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ConsentItemDetailsTableViewCellIdentifier", for: indexPath) as! ConsentItemDetailsTableViewCell
             if let item = viewModel.item(forIndexPath: indexPath) {
                 cell.setup(withConsentItem: item, language: language)
+                cell.setCheckboxSelected(viewModel.isItemSelected(item))
             }
+            cell.delegate = self
             return cell
         }
     }
@@ -111,16 +113,12 @@ extension MobileConsentsSolutionViewController {
         }
     }
 }
-//extension MobileConsentsSolutionViewController: ConsentItemTableViewCellDelegate {
-//    func consentItemTableViewCellDidSelectCheckBox(_ cell: ConsentItemTableViewCell) {
-//        guard let indexPath = tableView.indexPath(for: cell), let item = items[safe: indexPath.row] else { return }
-//
-//        if let index = selectedItems.firstIndex(where: { $0.id == item.id }) {
-//            selectedItems.remove(at: index)
-//        } else {
-//            selectedItems.append(item)
-//        }
-//
-//        tableView.reloadRows(at: [indexPath], with: .none)
-//    }
-//}
+
+extension MobileConsentsSolutionViewController: ConsentItemDetailsTableViewCellDelegate {
+    func consentItemDetailsTableViewCellDidSelectCheckBox(_ cell: ConsentItemDetailsTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell), let item = viewModel.item(forIndexPath: indexPath) else { return }
+
+        viewModel.handleItemCheck(item)
+        tableView.reloadRows(at: [indexPath], with: .none)
+    }
+}
