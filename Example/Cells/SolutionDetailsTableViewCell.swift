@@ -9,7 +9,7 @@
 import UIKit
 import MobileConsentsSDK
 
-class SolutionDetailsTableViewCell: UITableViewCell {
+final class SolutionDetailsTableViewCell: UITableViewCell {
     @IBOutlet private weak var identifierLabel: UILabel!
     @IBOutlet private weak var versionLabel: UILabel!
 

@@ -29,6 +29,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
     
     private var language: String {
         guard let language = languageTextField.text, !language.isEmpty else { return "EN" }
+        
         return language
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 import MobileConsentsSDK
 
-class MobileConsentsSolution: UIViewController {
+final class MobileConsentsSolution: UIViewController {
     var moblieConsentsSDK: MobileConsentsSDK?
     
     override func viewDidLoad() {

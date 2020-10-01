@@ -13,7 +13,7 @@ protocol ConsentItemDetailsTableViewCellDelegate: AnyObject {
     func consentItemDetailsTableViewCellDidSelectCheckBox(_ cell: ConsentItemDetailsTableViewCell)
 }
 
-class ConsentItemDetailsTableViewCell: UITableViewCell {
+final class ConsentItemDetailsTableViewCell: UITableViewCell {
     @IBOutlet private weak var checkbox: UIButton!
     @IBOutlet private weak var contentLabel: UILabel!
     

@@ -9,7 +9,7 @@
 import Foundation
 import MobileConsentsSDK
 
-class MobileConsentSolutionViewModel {
+final class MobileConsentSolutionViewModel {
     var consentSolution: ConsentSolution?
     private var selectedItems: [ConsentItem] = []
     
