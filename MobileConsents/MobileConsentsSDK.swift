@@ -34,7 +34,6 @@ public final class MobileConsentsSDK {
     }
 }
 
-
 extension MobileConsentsSDK {
     func systemInfo() {
         let systemVersion = UIDevice.current.systemVersion
