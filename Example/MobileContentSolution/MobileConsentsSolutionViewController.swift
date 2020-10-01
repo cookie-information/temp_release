@@ -101,12 +101,10 @@ extension MobileConsentsSolutionViewController {
         guard let identifier = identifierTextField.text else { return }
         
         viewModel.fetchData(forIdentifier: identifier) { [weak self] error in
-            if let error = error {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if let error = error {
                     self?.showError(error)
-                }
-            } else {
-                DispatchQueue.main.async { [weak self] in
+                } else {
                     self?.tableView.reloadData()
                 }
             }
