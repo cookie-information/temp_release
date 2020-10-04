@@ -8,23 +8,29 @@
 
 import Foundation
 
-enum LocalStorageManager {
-    private static let userIdKey = "com.droids.MobileConsents.userIdKey"
+protocol LocalStorageManagerProtocol {
+    var userId: String { get }
+    func generateAndStoreUserId() -> String
+    func removeUserId()
+}
+
+struct LocalStorageManager: LocalStorageManagerProtocol {
+    private let userIdKey = "com.MobileConsents.userIdKey"
         
-    static var userId: String {
+    var userId: String {
         guard let userId = UserDefaults.standard.string(forKey: userIdKey) else {
             return generateAndStoreUserId()
         }
         return userId
     }
 
-    static func generateAndStoreUserId() -> String {
+    func generateAndStoreUserId() -> String {
         let userId = UUID().uuidString
         UserDefaults.standard.set(userId, forKey: userIdKey)
         return userId
     }
     
-    static func removeUserId() {
+    func removeUserId() {
         UserDefaults.standard.removeObject(forKey: userId)
     }
 }
