@@ -12,6 +12,8 @@ public struct ConsentSolution: Codable {
     public let consentItems: [ConsentItem]
     
     enum CodingKeys: String, CodingKey {
-        case id = "universalConsentSolutionId", versionId = "universalConsentSolutionVersionId", consentItems = "universalConsentItems"
+        case id = "universalConsentSolutionId"
+        case versionId = "universalConsentSolutionVersionId"
+        case consentItems = "universalConsentItems"
     }
 }

@@ -14,6 +14,7 @@ final class MobileConsentsSolution: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         moblieConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https://google.pl")!)
     }
 }

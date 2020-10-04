@@ -34,13 +34,14 @@ final class MobileConsentsSolutionViewController: UIViewController {
     private var viewModel: MobileConsentSolutionViewModelProtocol = MobileConsentSolutionViewModel()
     
     private var language: String {
-        guard let language = languageTextField.text, !language.isEmpty else { return Constants.defaultLanguage }
+        guard let language = languageTextField.text.trimmingCharacters(in: .whitespacesAndNewlines), !language.isEmpty else { return Constants.defaultLanguage }
         
         return language
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupAppearance()
     }
     
@@ -48,6 +49,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
         getButton.layer.cornerRadius = Constants.buttonCornerRadius
     }
     
@@ -81,11 +83,13 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
             return cell
         case .consentItem:
             let cell: ConsentItemDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: ConsentItemDetailsTableViewCell.identifier(), for: indexPath) as! ConsentItemDetailsTableViewCell
+            
             if let item = viewModel.item(forIndexPath: indexPath) {
                 cell.setup(withConsentItem: item, language: language)
                 cell.setCheckboxSelected(viewModel.isItemSelected(item))
             }
             cell.delegate = self
+            
             return cell
         }
     }
@@ -100,6 +104,7 @@ extension MobileConsentsSolutionViewController {
         let controller = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         controller.addAction(okAction)
+        
         present(controller, animated: true, completion: nil)
     }
     

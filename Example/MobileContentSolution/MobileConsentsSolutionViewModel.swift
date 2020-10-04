@@ -48,11 +48,10 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     
     private func cellTypes(forSection section: Int) -> [MobileConsentsSolutionCellType] {
         guard let type = sectionType(forSection: section) else { return [] }
+        
         switch type {
-        case .info:
-            return [.solutionDetails]
-        case .items:
-            return Array(repeating: .consentItem, count: items.count)
+        case .info: return [.solutionDetails]
+        case .items: return Array(repeating: .consentItem, count: items.count)
         }
     }
     
@@ -70,11 +69,13 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     
     func item(forIndexPath indexPath: IndexPath) -> ConsentItem? {
         guard sectionType(forSection: indexPath.section) == .items  else { return nil }
+        
         return items[safe: indexPath.row]
     }
     
     func translation(forIndexPath indexPath: IndexPath) -> ConsentTranslation? {
         guard sectionType(forSection: indexPath.section) == .items  else { return nil }
+        
         return items[safe: indexPath.row]?.translations[safe: indexPath.row - 1]
     }
     
