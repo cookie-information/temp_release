@@ -34,7 +34,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
     private var viewModel: MobileConsentSolutionViewModelProtocol = MobileConsentSolutionViewModel()
     
     private var language: String {
-        guard let language = languageTextField.text.trimmingCharacters(in: .whitespacesAndNewlines), !language.isEmpty else { return Constants.defaultLanguage }
+        guard let language = languageTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !language.isEmpty else { return Constants.defaultLanguage }
         
         return language
     }

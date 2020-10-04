@@ -15,12 +15,17 @@ protocol ConsentItemDetailsTableViewCellDelegate: AnyObject {
 
 final class ConsentItemDetailsTableViewCell: UITableViewCell {
     @IBOutlet private weak var checkboxButton: UIButton!
-    @IBOutlet private weak var contentLabel: UILabel!
+    @IBOutlet private weak var consentItemIdLabel: UILabel!
+    @IBOutlet private weak var shortTextLabel: UILabel!
+    @IBOutlet private weak var longTextLabel: UILabel!
     
     weak var delegate: ConsentItemDetailsTableViewCellDelegate?
 
     func setup(withConsentItem item: ConsentItem, language: String) {
-        contentLabel.text = item.translations.first(where: { $0.language == language })?.shortText
+        consentItemIdLabel.text = item.id
+        let translation = item.translations.first(where: { $0.language == language })
+        shortTextLabel.text = translation?.shortText
+        longTextLabel.text = translation?.longText
     }
 
     func setCheckboxSelected(_ selected: Bool) {
