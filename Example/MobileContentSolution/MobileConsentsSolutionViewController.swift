@@ -35,6 +35,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupAppearance()
     }
     
@@ -42,6 +43,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
         getButton.layer.cornerRadius = 5.0
     }
     
@@ -75,11 +77,13 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
             return cell
         case .consentItem:
             let cell: ConsentItemDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ConsentItemDetailsTableViewCellIdentifier", for: indexPath) as! ConsentItemDetailsTableViewCell
+            
             if let item = viewModel.item(forIndexPath: indexPath) {
                 cell.setup(withConsentItem: item, language: language)
                 cell.setCheckboxSelected(viewModel.isItemSelected(item))
             }
             cell.delegate = self
+            
             return cell
         }
     }
@@ -94,6 +98,7 @@ extension MobileConsentsSolutionViewController {
         let controller = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         controller.addAction(okAction)
+        
         present(controller, animated: true, completion: nil)
     }
     
