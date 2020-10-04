@@ -9,7 +9,20 @@
 import Foundation
 import MobileConsentsSDK
 
-final class MobileConsentSolutionViewModel {
+protocol MobileConsentSolutionViewModelProtocol {
+    var consentSolution: ConsentSolution? { get }
+    var sectionsCount: Int { get }
+    func sectionType(forSection section: Int) -> MobileConsentsSolutionSectionType?
+    func cellType(forIndexPath indexPath: IndexPath) -> MobileConsentsSolutionCellType?
+    func rowsCount(forSection section: Int) -> Int
+    func item(forIndexPath indexPath: IndexPath) -> ConsentItem?
+    func translation(forIndexPath indexPath: IndexPath) -> ConsentTranslation?
+    func handleItemCheck(_ item: ConsentItem)
+    func isItemSelected(_ item: ConsentItem) -> Bool
+    func fetchData(forIdentifier identifier: String, _ completion:@escaping (Error?) -> Void)
+}
+
+final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
     private let mobileConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https//google.com")!)
     private var selectedItems: [ConsentItem] = []
     

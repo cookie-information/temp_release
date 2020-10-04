@@ -25,10 +25,16 @@ final class MobileConsentsSolutionViewController: UIViewController {
     @IBOutlet private weak var getButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
     
-    private var viewModel = MobileConsentSolutionViewModel()
+    private enum Constants {
+        static let defaultLanguage = "EN"
+        static let sampleIdentifier = "843ddd4a-3eae-4286-a17b-0e8d3337e767"
+        static let buttonCornerRadius: CGFloat = 5.0
+    }
+    
+    private var viewModel: MobileConsentSolutionViewModelProtocol = MobileConsentSolutionViewModel()
     
     private var language: String {
-        guard let language = languageTextField.text, !language.isEmpty else { return "EN" }
+        guard let language = languageTextField.text, !language.isEmpty else { return Constants.defaultLanguage }
         
         return language
     }
@@ -42,7 +48,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        getButton.layer.cornerRadius = 5.0
+        getButton.layer.cornerRadius = Constants.buttonCornerRadius
     }
     
     @IBAction private func getAction() {
@@ -50,7 +56,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
     }
     
     @IBAction private func defaultIdentifierAction() {
-        identifierTextField.text = "843ddd4a-3eae-4286-a17b-0e8d3337e767"
+        identifierTextField.text = Constants.sampleIdentifier
     }
 }
 
@@ -68,13 +74,13 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
         
         switch cellType {
         case .solutionDetails:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SolutionDetailsTableViewCellIdentifier", for: indexPath) as! SolutionDetailsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: SolutionDetailsTableViewCell.identifier(), for: indexPath) as! SolutionDetailsTableViewCell
             if let solution = viewModel.consentSolution {
                 cell.setup(withConsentsSolution: solution)
             }
             return cell
         case .consentItem:
-            let cell: ConsentItemDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ConsentItemDetailsTableViewCellIdentifier", for: indexPath) as! ConsentItemDetailsTableViewCell
+            let cell: ConsentItemDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: ConsentItemDetailsTableViewCell.identifier(), for: indexPath) as! ConsentItemDetailsTableViewCell
             if let item = viewModel.item(forIndexPath: indexPath) {
                 cell.setup(withConsentItem: item, language: language)
                 cell.setCheckboxSelected(viewModel.isItemSelected(item))
