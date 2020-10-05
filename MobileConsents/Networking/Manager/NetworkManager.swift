@@ -40,13 +40,15 @@ final class NetworkManager {
     private let provider = Provider<APIService>()
     private let baseURL: URL
     private let localStorageManager: LocalStorageManagerProtocol
+    private let platformInformationGenerator: PlatformInformationGeneratorProtocol
 
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManagerProtocol = LocalStorageManager()) {
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(), platformInformationGenerator: PlatformInformationGeneratorProtocol = PlatformInformationGenerator()) {
         self.baseURL = url
         self.localStorageManager = localStorageManager
+        self.platformInformationGenerator = platformInformationGenerator
     }
     
-    func getConsents(forUUID uuid: String, completion: @escaping (ConsentSolution?, Error?) -> Void) {
+    func getConsentSolution(forUUID uuid: String, completion: @escaping (ConsentSolution?, Error?) -> Void) {
         provider.request(.getConsents(uuid: uuid)) { data, response, error in
             guard let response = response as? HTTPURLResponse else {
                 return completion(nil, NetworkResponseError.noProperResponse)
@@ -68,6 +70,26 @@ final class NetworkManager {
                 }
             case .failure(let error):
                 completion(nil, error)
+            }
+        }
+    }
+    
+    func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void) {
+        let platformInformation = platformInformationGenerator.generatePlatformInformation()
+        provider.request(.postConsent(baseURL: baseURL, uuid: consent.consentSolutionId, platformInformation: platformInformation)) { _, response, error in
+            if let error = error {
+                completion(error)
+            } else {
+                guard let response = response as? HTTPURLResponse else {
+                    return completion(NetworkResponseError.noProperResponse)
+                }
+                
+                switch response.result {
+                case .success:
+                    completion(nil)
+                case .failure(let error):
+                    completion(error)
+                }
             }
         }
     }

@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 enum APIService: EndpointType {
     case getConsents(uuid: String)
-    case postConsent(baseURL: URL, uuid: String)
+    case postConsent(baseURL: URL, uuid: String, platformInformation: [String: Any]?)
     
     var environmentBaseURL: String {
         switch NetworkManager.environment {
@@ -22,7 +23,7 @@ enum APIService: EndpointType {
     var baseURL: URL? {
         switch self {
         case .getConsents: return URL(string: environmentBaseURL)
-        case .postConsent(let baseURL, _): return baseURL
+        case .postConsent(let baseURL, _, _): return baseURL
         } 
     }
     
@@ -42,7 +43,13 @@ enum APIService: EndpointType {
     
     var parameters: Parameters? {
         switch self {
-        case .postConsent(_, let uuid): return ["uuid": uuid]
+        case .postConsent(_, let uuid, let platformInformation):
+            var parameters: Parameters = ["uuid": uuid]
+            if let platformInformation = platformInformation {
+                parameters["platformInformation"] = platformInformation
+            }
+            
+            return parameters
         default: return nil
         }
     }
@@ -58,7 +65,7 @@ enum APIService: EndpointType {
         switch self {
         case .getConsents(let uuid):
             return uuid.data(using: .utf8) ?? Data()
-        case .postConsent(let baseURL, let uuid):
+        case .postConsent(let baseURL, let uuid, let platformInformation):
             return uuid.data(using: .utf8) ?? Data()
         }
     }

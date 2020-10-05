@@ -20,11 +20,11 @@ public final class MobileConsentsSDK {
     }
     
     public func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping ConsentSolutionCompletion) {
-        networkManager.getConsents(forUUID: universalConsentSolutionId, completion: completion)
+        networkManager.getConsentSolution(forUUID: universalConsentSolutionId, completion: completion)
     }
     
     public func postConsent(_ consent: Consent, completion:@escaping (Error?) -> Void) {
-        // TODO: to be implemented
+        networkManager.postConsent(consent, completion: completion)
     }
     
     public func cancel() {
