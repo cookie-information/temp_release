@@ -12,14 +12,14 @@ import MobileConsentsSDK
 protocol MobileConsentSolutionViewModelProtocol {
     var consentSolution: ConsentSolution? { get }
     var sectionsCount: Int { get }
-    func sectionType(forSection section: Int) -> MobileConsentsSolutionSectionType?
-    func cellType(forIndexPath indexPath: IndexPath) -> MobileConsentsSolutionCellType?
-    func rowsCount(forSection section: Int) -> Int
-    func item(forIndexPath indexPath: IndexPath) -> ConsentItem?
-    func translation(forIndexPath indexPath: IndexPath) -> ConsentTranslation?
+    func sectionType(for section: Int) -> MobileConsentsSolutionSectionType?
+    func cellType(for indexPath: IndexPath) -> MobileConsentsSolutionCellType?
+    func rowsCount(for section: Int) -> Int
+    func item(for indexPath: IndexPath) -> ConsentItem?
+    func translation(for indexPath: IndexPath) -> ConsentTranslation?
     func handleItemCheck(_ item: ConsentItem)
     func isItemSelected(_ item: ConsentItem) -> Bool
-    func fetchData(forIdentifier identifier: String, _ completion:@escaping (Error?) -> Void)
+    func fetchData(for identifier: String, _ completion:@escaping (Error?) -> Void)
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
@@ -47,7 +47,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     }
     
     private func cellTypes(forSection section: Int) -> [MobileConsentsSolutionCellType] {
-        guard let type = sectionType(forSection: section) else { return [] }
+        guard let type = sectionType(for: section) else { return [] }
         
         switch type {
         case .info: return [.solutionDetails]
@@ -55,26 +55,26 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         }
     }
     
-    func sectionType(forSection section: Int) -> MobileConsentsSolutionSectionType? {
+    func sectionType(for section: Int) -> MobileConsentsSolutionSectionType? {
         return sectionTypes[safe: section]
     }
     
-    func cellType(forIndexPath indexPath: IndexPath) -> MobileConsentsSolutionCellType? {
+    func cellType(for indexPath: IndexPath) -> MobileConsentsSolutionCellType? {
         return cellTypes(forSection: indexPath.section)[safe: indexPath.row]
     }
     
-    func rowsCount(forSection section: Int) -> Int {
+    func rowsCount(for section: Int) -> Int {
         return cellTypes(forSection: section).count
     }
     
-    func item(forIndexPath indexPath: IndexPath) -> ConsentItem? {
-        guard sectionType(forSection: indexPath.section) == .items  else { return nil }
+    func item(for indexPath: IndexPath) -> ConsentItem? {
+        guard sectionType(for: indexPath.section) == .items  else { return nil }
         
         return items[safe: indexPath.row]
     }
     
-    func translation(forIndexPath indexPath: IndexPath) -> ConsentTranslation? {
-        guard sectionType(forSection: indexPath.section) == .items  else { return nil }
+    func translation(for indexPath: IndexPath) -> ConsentTranslation? {
+        guard sectionType(for: indexPath.section) == .items  else { return nil }
         
         return items[safe: indexPath.row]?.translations[safe: indexPath.row - 1]
     }
@@ -91,7 +91,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         return selectedItems.contains(where: { $0.id == item.id })
     }
     
-    func fetchData(forIdentifier identifier: String, _ completion:@escaping (Error?) -> Void) {
+    func fetchData(for identifier: String, _ completion:@escaping (Error?) -> Void) {
         mobileConsentsSDK.fetchConsentSolution(forUniversalConsentSolutionId: identifier, completion: { [weak self] solution, error in
             if let error = error {
                 completion(error)

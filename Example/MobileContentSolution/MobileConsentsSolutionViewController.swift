@@ -68,11 +68,11 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  viewModel.rowsCount(forSection: section)
+        return  viewModel.rowsCount(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellType: MobileConsentsSolutionCellType = viewModel.cellType(forIndexPath: indexPath) else { return UITableViewCell() }
+        guard let cellType: MobileConsentsSolutionCellType = viewModel.cellType(for: indexPath) else { return UITableViewCell() }
         
         switch cellType {
         case .solutionDetails:
@@ -84,7 +84,7 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
         case .consentItem:
             let cell: ConsentItemDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: ConsentItemDetailsTableViewCell.identifier(), for: indexPath) as! ConsentItemDetailsTableViewCell
             
-            if let item = viewModel.item(forIndexPath: indexPath) {
+            if let item = viewModel.item(for: indexPath) {
                 cell.setup(withConsentItem: item, language: language)
                 cell.setCheckboxSelected(viewModel.isItemSelected(item))
             }
@@ -111,7 +111,7 @@ extension MobileConsentsSolutionViewController {
     private func fetchData() {
         guard let identifier = identifierTextField.text else { return }
         
-        viewModel.fetchData(forIdentifier: identifier) { [weak self] error in
+        viewModel.fetchData(for: identifier) { [weak self] error in
             DispatchQueue.main.async {
                 if let error = error {
                     self?.showError(error)
@@ -125,7 +125,7 @@ extension MobileConsentsSolutionViewController {
 
 extension MobileConsentsSolutionViewController: ConsentItemDetailsTableViewCellDelegate {
     func consentItemDetailsTableViewCellDidSelectCheckBox(_ cell: ConsentItemDetailsTableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell), let item = viewModel.item(forIndexPath: indexPath) else { return }
+        guard let indexPath = tableView.indexPath(for: cell), let item = viewModel.item(for: indexPath) else { return }
 
         viewModel.handleItemCheck(item)
         tableView.reloadRows(at: [indexPath], with: .none)
