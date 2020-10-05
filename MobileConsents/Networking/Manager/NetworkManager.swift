@@ -38,11 +38,12 @@ enum NetworkResult<T> {
 final class NetworkManager {
     static let environment: Environment = .staging
     private let provider = Provider<APIService>()
-    
     private let baseURL: URL
-    
-    init(withBaseURL url: URL) {
-        baseURL = url
+    private let localStorageManager: LocalStorageManagerProtocol
+
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManagerProtocol = LocalStorageManager()) {
+        self.baseURL = url
+        self.localStorageManager = localStorageManager
     }
     
     func getConsents(forUUID uuid: String, completion: @escaping (ConsentSolution?, Error?) -> Void) {
