@@ -6,7 +6,7 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public final class MobileConsentsSDK {
     var environment: Environment = .staging
