@@ -13,8 +13,8 @@
 		1161EBB8252588880078C76F /* MobileConsentsSolutionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1161EBB7252588880078C76F /* MobileConsentsSolutionViewModel.swift */; };
 		1161EBC025258ADD0078C76F /* SolutionDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1161EBBF25258ADD0078C76F /* SolutionDetailsTableViewCell.swift */; };
 		1161EBC52525A1700078C76F /* ConsentItemDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1161EBC42525A1700078C76F /* ConsentItemDetailsTableViewCell.swift */; };
-		1161EC45252A17FC0078C76F /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1161EC44252A17FC0078C76F /* UITableViewCell+Extensions.swift */; };
 		1161EBE42525DB840078C76F /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1161EBE32525DB840078C76F /* LocalStorageManager.swift */; };
+		1161EC45252A17FC0078C76F /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1161EC44252A17FC0078C76F /* UITableViewCell+Extensions.swift */; };
 		117BF13B2518D2940089C9E9 /* MobileConsents.h in Headers */ = {isa = PBXBuildFile; fileRef = 117BF1392518D2940089C9E9 /* MobileConsents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		117BF216251A72770089C9E9 /* MobileConsentsSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF215251A72770089C9E9 /* MobileConsentsSDK.swift */; };
 		117BF219251A72D20089C9E9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BF218251A72D20089C9E9 /* Environment.swift */; };
@@ -23,7 +23,6 @@
 		119AFB0C25230F9100186CB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119AFB0A25230F9100186CB7 /* Main.storyboard */; };
 		119AFB0E25230F9200186CB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 119AFB0D25230F9200186CB7 /* Assets.xcassets */; };
 		119AFB1125230F9200186CB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 119AFB0F25230F9200186CB7 /* LaunchScreen.storyboard */; };
-		119AFB1A25230F9F00186CB7 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 		119AFB3325232A7100186CB7 /* HTTPURLResponse+Extenions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119AFB3225232A7100186CB7 /* HTTPURLResponse+Extenions.swift */; };
 		119AFB49252377B100186CB7 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 119AFB45252377B000186CB7 /* Rubik-Light.ttf */; };
 		119AFB4A252377B100186CB7 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 119AFB46252377B000186CB7 /* Rubik-Medium.ttf */; };
@@ -42,6 +41,8 @@
 		11B51925251DCA8000581FF4 /* ConsentTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51924251DCA8000581FF4 /* ConsentTranslation.swift */; };
 		11B5192B251DEBCE00581FF4 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5192A251DEBCE00581FF4 /* Consent.swift */; };
 		11B51943251E19A100581FF4 /* Purpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* Purpose.swift */; };
+		9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
+		9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B8E95B72519C8B0001DF8BD /* MobileConsentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */; };
 		9B8E95B92519C8B0001DF8BD /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9B01504A252C63AD00FE97A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1141FDA5251B343700748076 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		1141FDDF251B4FEE00748076 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -70,8 +85,8 @@
 		1161EBB7252588880078C76F /* MobileConsentsSolutionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSolutionViewModel.swift; sourceTree = "<group>"; };
 		1161EBBF25258ADD0078C76F /* SolutionDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		1161EBC42525A1700078C76F /* ConsentItemDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentItemDetailsTableViewCell.swift; sourceTree = "<group>"; };
-		1161EC44252A17FC0078C76F /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		1161EBE32525DB840078C76F /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
+		1161EC44252A17FC0078C76F /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MobileConsentsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117BF1392518D2940089C9E9 /* MobileConsents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileConsents.h; sourceTree = "<group>"; };
 		117BF13A2518D2940089C9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				119AFB1A25230F9F00186CB7 /* MobileConsentsSDK.framework in Frameworks */,
+				9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +402,7 @@
 				119AFAFE25230F9100186CB7 /* Sources */,
 				119AFAFF25230F9100186CB7 /* Frameworks */,
 				119AFB0025230F9100186CB7 /* Resources */,
+				9B01504A252C63AD00FE97A8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
