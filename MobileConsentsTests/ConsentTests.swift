@@ -1,0 +1,28 @@
+//
+//  ConsentTests.swift
+//  MobileConsentsSDKTests
+//
+//  Created by Jan Lipmann on 06/10/2020.
+//  Copyright © 2020 ClearCode. All rights reserved.
+//
+
+import XCTest
+
+class ConsentTests: XCTestCase {
+    func testJSONRepresentation() throws {
+        let purpose = Purpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
+        var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", userID: "USER_ID", customData: ["FIRST_DATA_KEY": "FIRST_DATA"])
+        consent.addProcessingPurpose(purpose)
+        let json = consent.JSONRepresentation()
+        
+        XCTAssertEqual(json["universalConsentSolutionId"] as? String, consent.consentSolutionId, "Consent JSONRepresentation should return properly encoded object")
+    }
+
+    func testAddPurpose() throws {
+        let purpose = Purpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
+        var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", userID: "USER_ID", customData: [:])
+        consent.addProcessingPurpose(purpose)
+        
+        XCTAssertEqual(purpose.consentItemId, consent.processingPurposes.first?.consentItemId, "Add purpose to Consent - consentItemIds should be equal")
+    }
+}

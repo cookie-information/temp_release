@@ -76,7 +76,9 @@ final class NetworkManager {
     
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void) {
         let platformInformation = platformInformationGenerator.generatePlatformInformation()
-        provider.request(.postConsent(baseURL: baseURL, uuid: consent.consentSolutionId, platformInformation: platformInformation)) { _, response, error in
+        let consentPayload = consent.JSONRepresentation()
+        let userId = localStorageManager.userId
+        provider.request(.postConsent(baseURL: baseURL, userId: userId, payload: consentPayload, platformInformation: platformInformation)) { _, response, error in
             if let error = error {
                 completion(error)
             } else {

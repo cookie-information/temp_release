@@ -10,7 +10,6 @@ import Foundation
 
 protocol LocalStorageManagerProtocol {
     var userId: String { get }
-    func generateAndStoreUserId() -> String
     func removeUserId()
 }
 
@@ -24,7 +23,7 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
         return userId
     }
 
-    func generateAndStoreUserId() -> String {
+    private func generateAndStoreUserId() -> String {
         let userId = UUID().uuidString
         UserDefaults.standard.set(userId, forKey: userIdKey)
         return userId
