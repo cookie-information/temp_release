@@ -20,13 +20,14 @@ protocol MobileConsentSolutionViewModelProtocol {
     func translation(for indexPath: IndexPath) -> ConsentTranslation?
     func handleItemCheck(_ item: ConsentItem)
     func isItemSelected(_ item: ConsentItem) -> Bool
-    func fetchData(for identifier: String, _ completion:@escaping (Error?) -> Void)
+    func fetchData(for identifier: String, language: String, _ completion:@escaping (Error?) -> Void)
+    func sendData( _ completion:@escaping (Error?) -> Void)
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
-    private let mobileConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https//google.com")!)
+    private let mobileConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https://consents-gathering-app-staging.app.cookieinformation.com")!)
     private var selectedItems: [ConsentItem] = []
-    
+    private var language: String?
     private var items: [ConsentItem] {
         return consentSolution?.consentItems ?? []
     }
@@ -48,7 +49,22 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     }
     
     var sendAvailable: Bool {
-        !selectedItems.isEmpty
+        consentSolution != nil
+    }
+    
+    var consent: Consent? {
+        guard let consentSolution = consentSolution, let language = language else { return nil }
+        
+        let customData = ["email": "test@test.com", "device_id": "824c259c-7bf5-4d2a-81bf-22c09af31261"]
+        var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId, customData: customData)
+        
+        items.forEach { item in
+            let selected = selectedItems.contains(where: { $0.id == item.id })
+            let purpose = Purpose(consentItemId: item.id, consentGiven: selected, language: language)
+            consent.addProcessingPurpose(purpose)
+        }
+        
+        return consent
     }
     
     private func cellTypes(forSection section: Int) -> [MobileConsentsSolutionCellType] {
@@ -96,7 +112,8 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         return selectedItems.contains(where: { $0.id == item.id })
     }
     
-    func fetchData(for identifier: String, _ completion:@escaping (Error?) -> Void) {
+    func fetchData(for identifier: String, language: String, _ completion:@escaping (Error?) -> Void) {
+        self.language = language
         mobileConsentsSDK.fetchConsentSolution(forUniversalConsentSolutionId: identifier, completion: { [weak self] solution, error in
             if let error = error {
                 completion(error)
@@ -105,5 +122,14 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
                 completion(nil)
             }
         })
+    }
+    
+    func sendData( _ completion:@escaping (Error?) -> Void) {
+        guard let consent = consent else {
+            completion(MobileConsentError.noConsentToSend)
+            return
+        }
+
+        mobileConsentsSDK.postConsent(consent, completion: completion)
     }
 }

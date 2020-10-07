@@ -19,7 +19,7 @@ enum MobileConsentsSolutionCellType {
     case consentItem
 }
 
-final class MobileConsentsSolutionViewController: UIViewController {
+final class MobileConsentsSolutionViewController: BaseViewController {
     @IBOutlet private weak var identifierTextField: UITextField!
     @IBOutlet private weak var languageTextField: UITextField!
     @IBOutlet private weak var getButton: UIButton!
@@ -69,7 +69,16 @@ final class MobileConsentsSolutionViewController: UIViewController {
     }
     
     @IBAction private func sendAction() {
-        
+        showProgressView()
+        viewModel.sendData { [weak self] error in
+            self?.dismissProgressView({
+                if let error = error {
+                    self?.showError(error)
+                } else {
+                    self?.showMessage("Consent sent")
+                }
+            })
+        }
     }
 }
 
@@ -110,26 +119,21 @@ extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableVi
     }
 }
 
-extension MobileConsentsSolutionViewController {
-    private func showError(_ error: Error) {
-        let controller = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        controller.addAction(okAction)
-        
-        present(controller, animated: true, completion: nil)
-    }
-    
+extension MobileConsentsSolutionViewController {    
     private func fetchData() {
         guard let identifier = identifierTextField.text else { return }
-        
-        viewModel.fetchData(for: identifier) { [weak self] error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.showError(error)
-                } else {
-                    self?.tableView.reloadData()
+        showProgressView()
+        viewModel.fetchData(for: identifier, language: language) { [weak self] error in
+            self?.dismissProgressView({
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self?.showError(error)
+                    } else {
+                        self?.tableView.reloadData()
+                        self?.updateView()
+                    }
                 }
-            }
+            })
         }
     }
 }
@@ -140,6 +144,5 @@ extension MobileConsentsSolutionViewController: ConsentItemDetailsTableViewCellD
 
         viewModel.handleItemCheck(item)
         tableView.reloadRows(at: [indexPath], with: .none)
-        updateView()
     }
 }

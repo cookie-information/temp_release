@@ -25,4 +25,13 @@ class ConsentTests: XCTestCase {
         
         XCTAssertEqual(purpose.consentItemId, consent.processingPurposes.first?.consentItemId, "Add purpose to Consent - consentItemIds should be equal")
     }
+    
+    func testParsedCustomData() throws {
+        let customData = ["FIRST_DATA_KEY": "FIRST_DATA"]
+        let consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", customData: customData )
+        let parsedCustomData = consent.parsedCustomData()
+        
+        XCTAssertEqual(parsedCustomData.first?["fieldName"], customData.first?.key, "")
+        XCTAssertEqual(parsedCustomData.first?["fieldValue"], customData.first?.value, "")
+    }
 }

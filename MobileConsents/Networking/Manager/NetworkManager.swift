@@ -16,6 +16,7 @@ enum NetworkResponseError: LocalizedError {
     case noData
     case unableToDecode
     case noProperResponse
+    case notFound
     
     var errorDescription: String? {
         switch self {
@@ -26,6 +27,7 @@ enum NetworkResponseError: LocalizedError {
         case .noData: return "Response returned with no data to decode."
         case .unableToDecode: return "We could not decode the response."
         case .noProperResponse: return "No proper response."
+        case .notFound: return "Not found"
         }
     }
 }
@@ -53,7 +55,7 @@ final class NetworkManager {
             guard let response = response as? HTTPURLResponse else {
                 return completion(nil, NetworkResponseError.noProperResponse)
             }
-            
+
             switch response.result {
             case .success:
                 if let error = error {
