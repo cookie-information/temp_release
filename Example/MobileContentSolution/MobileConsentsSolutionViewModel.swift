@@ -12,6 +12,7 @@ import MobileConsentsSDK
 protocol MobileConsentSolutionViewModelProtocol {
     var consentSolution: ConsentSolution? { get }
     var sectionsCount: Int { get }
+    var sendAvailable: Bool { get }
     func sectionType(for section: Int) -> MobileConsentsSolutionSectionType?
     func cellType(for indexPath: IndexPath) -> MobileConsentsSolutionCellType?
     func rowsCount(for section: Int) -> Int
@@ -44,6 +45,10 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
 
     var sectionsCount: Int {
         sectionTypes.count
+    }
+    
+    var sendAvailable: Bool {
+        !selectedItems.isEmpty
     }
     
     private func cellTypes(forSection section: Int) -> [MobileConsentsSolutionCellType] {

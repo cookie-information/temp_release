@@ -23,6 +23,7 @@ final class MobileConsentsSolutionViewController: UIViewController {
     @IBOutlet private weak var identifierTextField: UITextField!
     @IBOutlet private weak var languageTextField: UITextField!
     @IBOutlet private weak var getButton: UIButton!
+    @IBOutlet private weak var sendButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
     
     private enum Constants {
@@ -41,7 +42,6 @@ final class MobileConsentsSolutionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupAppearance()
     }
     
@@ -50,7 +50,14 @@ final class MobileConsentsSolutionViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         
-        getButton.layer.cornerRadius = Constants.buttonCornerRadius
+        getButton.setCornerRadius(Constants.buttonCornerRadius)
+        sendButton.setCornerRadius(Constants.buttonCornerRadius)
+        
+        sendButton.setEnabled(false)
+    }
+    
+    private func updateView() {
+        sendButton.setEnabled(viewModel.sendAvailable)
     }
     
     @IBAction private func getAction() {
@@ -59,6 +66,10 @@ final class MobileConsentsSolutionViewController: UIViewController {
     
     @IBAction private func defaultIdentifierAction() {
         identifierTextField.text = Constants.sampleIdentifier
+    }
+    
+    @IBAction private func sendAction() {
+        
     }
 }
 
@@ -129,5 +140,6 @@ extension MobileConsentsSolutionViewController: ConsentItemDetailsTableViewCellD
 
         viewModel.handleItemCheck(item)
         tableView.reloadRows(at: [indexPath], with: .none)
+        updateView()
     }
 }

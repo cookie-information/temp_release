@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11181159252D9AE0007918FE /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11181158252D9AE0007918FE /* UIButton+Extensions.swift */; };
 		111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CC4252C522100E93EE2 /* ConsentTests.swift */; };
 		111C7CC9252C528700E93EE2 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5192A251DEBCE00581FF4 /* Consent.swift */; };
 		111C7CCD252C52C200E93EE2 /* Purpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* Purpose.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11181158252D9AE0007918FE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		111C7CC4252C522100E93EE2 /* ConsentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentTests.swift; sourceTree = "<group>"; };
 		111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO8601DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		111C7CDA252C970100E93EE2 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -296,8 +298,8 @@
 		119AFB5F2523871F00186CB7 /* MobileContentSolution */ = {
 			isa = PBXGroup;
 			children = (
-				119AFB0825230F9100186CB7 /* MobileConsentsSolutionViewController.swift */,
 				1161EBB7252588880078C76F /* MobileConsentsSolutionViewModel.swift */,
+				119AFB0825230F9100186CB7 /* MobileConsentsSolutionViewController.swift */,
 			);
 			path = MobileContentSolution;
 			sourceTree = "<group>";
@@ -307,6 +309,7 @@
 			children = (
 				119AFB632523880A00186CB7 /* Collection+Extensions.swift */,
 				1161EC44252A17FC0078C76F /* UITableViewCell+Extensions.swift */,
+				11181158252D9AE0007918FE /* UIButton+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				119AFB0925230F9100186CB7 /* MobileConsentsSolutionViewController.swift in Sources */,
+				11181159252D9AE0007918FE /* UIButton+Extensions.swift in Sources */,
 				119AFB642523880A00186CB7 /* Collection+Extensions.swift in Sources */,
 				119AFB0525230F9100186CB7 /* AppDelegate.swift in Sources */,
 				1161EBC025258ADD0078C76F /* SolutionDetailsTableViewCell.swift in Sources */,
