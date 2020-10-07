@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 enum APIService: EndpointType {
     case getConsents(uuid: String)
@@ -46,9 +45,7 @@ enum APIService: EndpointType {
         case .postConsent(_, let userId, let payload, let platformInformation):
             var parameters: Parameters = payload
             parameters["userId"] = userId
-            if let platformInformation = platformInformation {
-                parameters["platformInformation"] = platformInformation
-            }
+            parameters["platformInformation"] = platformInformation
             
             return parameters
         default: return nil
