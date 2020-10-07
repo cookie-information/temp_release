@@ -11,7 +11,7 @@ import XCTest
 class ConsentTests: XCTestCase {
     func testJSONRepresentation() throws {
         let purpose = Purpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
-        var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", userID: "USER_ID", customData: ["FIRST_DATA_KEY": "FIRST_DATA"])
+        var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", customData: ["FIRST_DATA_KEY": "FIRST_DATA"])
         consent.addProcessingPurpose(purpose)
         let json = consent.JSONRepresentation()
         
@@ -20,7 +20,7 @@ class ConsentTests: XCTestCase {
 
     func testAddPurpose() throws {
         let purpose = Purpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
-        var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", userID: "USER_ID", customData: [:])
+        var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", customData: [:])
         consent.addProcessingPurpose(purpose)
         
         XCTAssertEqual(purpose.consentItemId, consent.processingPurposes.first?.consentItemId, "Add purpose to Consent - consentItemIds should be equal")
