@@ -29,9 +29,9 @@ public struct Consent {
     
     public func JSONRepresentation() -> [String: Any] {
         var json: [String: Any] = [
-                                 "universalConsentSolutionId": consentSolutionId,
-                                 "universalConsentSolutionVersionId": consentSolutionVersionId,
-                                 "customData": parsedCustomData()
+            "universalConsentSolutionId": consentSolutionId,
+            "universalConsentSolutionVersionId": consentSolutionVersionId,
+            "customData": parsedCustomData()
         ]
         
         if let purposesData = try? JSONEncoder().encode(processingPurposes), let purposesJSON = try? JSONSerialization.jsonObject(with: purposesData) as? [[String: Any]] {
