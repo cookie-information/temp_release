@@ -116,7 +116,7 @@
 		117BF13A2518D2940089C9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		117BF215251A72770089C9E9 /* MobileConsentsSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSDK.swift; sourceTree = "<group>"; };
 		117BF218251A72D20089C9E9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		119AFB0225230F9100186CB7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		119AFB0225230F9100186CB7 /* MobileConsent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileConsent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		119AFB0425230F9100186CB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		119AFB0825230F9100186CB7 /* MobileConsentsSolutionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSolutionViewController.swift; sourceTree = "<group>"; };
 		119AFB0B25230F9100186CB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 			children = (
 				117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */,
 				9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */,
-				119AFB0225230F9100186CB7 /* Example.app */,
+				119AFB0225230F9100186CB7 /* MobileConsent.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -436,9 +436,9 @@
 			productReference = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		119AFB0125230F9100186CB7 /* Example */ = {
+		119AFB0125230F9100186CB7 /* MobileConsent */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "Example" */;
+			buildConfigurationList = 119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "MobileConsent" */;
 			buildPhases = (
 				119AFAFE25230F9100186CB7 /* Sources */,
 				119AFAFF25230F9100186CB7 /* Frameworks */,
@@ -450,9 +450,9 @@
 			dependencies = (
 				119AFB1D25230F9F00186CB7 /* PBXTargetDependency */,
 			);
-			name = Example;
+			name = MobileConsent;
 			productName = Example;
-			productReference = 119AFB0225230F9100186CB7 /* Example.app */;
+			productReference = 119AFB0225230F9100186CB7 /* MobileConsent.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9B8E95B32519C8AF001DF8BD /* MobileConsentsSDKTests */ = {
@@ -510,7 +510,7 @@
 			targets = (
 				117BF1352518D2940089C9E9 /* MobileConsentsSDK */,
 				9B8E95B32519C8AF001DF8BD /* MobileConsentsSDKTests */,
-				119AFB0125230F9100186CB7 /* Example */,
+				119AFB0125230F9100186CB7 /* MobileConsent */,
 			);
 		};
 /* End PBXProject section */
@@ -935,7 +935,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "Example" */ = {
+		119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "MobileConsent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				119AFB1325230F9200186CB7 /* Debug */,
