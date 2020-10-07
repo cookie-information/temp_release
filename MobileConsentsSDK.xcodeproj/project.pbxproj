@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CC4252C522100E93EE2 /* ConsentTests.swift */; };
+		111C7CC9252C528700E93EE2 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5192A251DEBCE00581FF4 /* Consent.swift */; };
+		111C7CCD252C52C200E93EE2 /* Purpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* Purpose.swift */; };
+		111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */; };
+		111C7CD6252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */; };
+		111C7CDB252C970100E93EE2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CDA252C970100E93EE2 /* Date+Extensions.swift */; };
+		111C7CDC252C970100E93EE2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CDA252C970100E93EE2 /* Date+Extensions.swift */; };
+		111C7CE1252C972900E93EE2 /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CE0252C972900E93EE2 /* Formatter+Extensions.swift */; };
+		111C7CE2252C972900E93EE2 /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CE0252C972900E93EE2 /* Formatter+Extensions.swift */; };
+		111C7CE7252C976600E93EE2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CE6252C976600E93EE2 /* String+Extensions.swift */; };
+		111C7CE8252C976600E93EE2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CE6252C976600E93EE2 /* String+Extensions.swift */; };
 		1141FDA6251B343700748076 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FDA5251B343700748076 /* HTTPMethod.swift */; };
 		1141FDE0251B4FEE00748076 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1141FDDF251B4FEE00748076 /* Task.swift */; };
 		114D8FD7251B236500D8D113 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D8FD6251B236500D8D113 /* EndpointType.swift */; };
@@ -80,6 +91,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		111C7CC4252C522100E93EE2 /* ConsentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentTests.swift; sourceTree = "<group>"; };
+		111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO8601DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		111C7CDA252C970100E93EE2 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		111C7CE0252C972900E93EE2 /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
+		111C7CE6252C976600E93EE2 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1141FDA5251B343700748076 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		1141FDDF251B4FEE00748076 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		114D8FD6251B236500D8D113 /* EndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
@@ -253,6 +269,10 @@
 			isa = PBXGroup;
 			children = (
 				119AFB3225232A7100186CB7 /* HTTPURLResponse+Extenions.swift */,
+				111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */,
+				111C7CE0252C972900E93EE2 /* Formatter+Extensions.swift */,
+				111C7CDA252C970100E93EE2 /* Date+Extensions.swift */,
+				111C7CE6252C976600E93EE2 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -361,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */,
+				111C7CC4252C522100E93EE2 /* ConsentTests.swift */,
 			);
 			path = MobileConsentsTests;
 			sourceTree = "<group>";
@@ -534,10 +555,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				11B51852251C728E00581FF4 /* NetworkManager.swift in Sources */,
+				111C7CDB252C970100E93EE2 /* Date+Extensions.swift in Sources */,
 				11B5182B251C691D00581FF4 /* ParameterEncoding.swift in Sources */,
 				11B5192B251DEBCE00581FF4 /* Consent.swift in Sources */,
+				111C7CE7252C976600E93EE2 /* String+Extensions.swift in Sources */,
 				1141FDA6251B343700748076 /* HTTPMethod.swift in Sources */,
 				117BF216251A72770089C9E9 /* MobileConsentsSDK.swift in Sources */,
+				111C7CE1252C972900E93EE2 /* Formatter+Extensions.swift in Sources */,
+				111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
 				11B51925251DCA8000581FF4 /* ConsentTranslation.swift in Sources */,
 				1141FDE0251B4FEE00748076 /* Task.swift in Sources */,
 				11B51921251DC95500581FF4 /* ConsentSolution.swift in Sources */,
@@ -574,7 +599,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				111C7CC9252C528700E93EE2 /* Consent.swift in Sources */,
+				111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */,
+				111C7CD6252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
+				111C7CCD252C52C200E93EE2 /* Purpose.swift in Sources */,
+				111C7CE8252C976600E93EE2 /* String+Extensions.swift in Sources */,
+				111C7CE2252C972900E93EE2 /* Formatter+Extensions.swift in Sources */,
 				9B8E95B72519C8B0001DF8BD /* MobileConsentsTests.swift in Sources */,
+				111C7CDC252C970100E93EE2 /* Date+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,7 +826,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -814,7 +846,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
