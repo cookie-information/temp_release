@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import UIKit
 
 enum APIService: EndpointType {
     case getConsents(uuid: String)
-    case postConsent(baseURL: URL, uuid: String, platformInformation: [String: Any]?)
+    case postConsent(baseURL: URL, uuid: String, platformInformation: [String: Any])
     
     var environmentBaseURL: String {
         switch NetworkManager.environment {
@@ -45,10 +44,8 @@ enum APIService: EndpointType {
         switch self {
         case .postConsent(_, let uuid, let platformInformation):
             var parameters: Parameters = ["uuid": uuid]
-            if let platformInformation = platformInformation {
-                parameters["platformInformation"] = platformInformation
-            }
-            
+            parameters["platformInformation"] = platformInformation
+
             return parameters
         default: return nil
         }

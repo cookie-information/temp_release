@@ -85,10 +85,8 @@ final class NetworkManager {
                 }
                 
                 switch response.result {
-                case .success:
-                    completion(nil)
-                case .failure(let error):
-                    completion(error)
+                case .success: completion(nil)
+                case .failure(let error): completion(error)
                 }
             }
         }
