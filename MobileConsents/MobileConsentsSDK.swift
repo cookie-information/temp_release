@@ -12,11 +12,17 @@ public final class MobileConsentsSDK {
     var environment: Environment = .staging
     
     private let networkManager: NetworkManager
+    private let localStorageManager: LocalStorageManager
     
     public typealias ConsentSolutionCompletion = (ConsentSolution?, Error?) -> Void
     
-    public init(withBaseURL url: URL) {
-        self.networkManager = NetworkManager(withBaseURL: url)
+    public convenience init(withBaseURL url: URL) {
+        self.init(withBaseURL: url, localStorageManager: LocalStorageManager())
+    }
+    
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager) {
+        self.localStorageManager = localStorageManager
+        self.networkManager = NetworkManager(withBaseURL: url, localStorageManager: self.localStorageManager)
     }
     
     public func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping ConsentSolutionCompletion) {
@@ -24,10 +30,24 @@ public final class MobileConsentsSDK {
     }
     
     public func postConsent(_ consent: Consent, completion:@escaping (Error?) -> Void) {
-        networkManager.postConsent(consent, completion: completion)
+        networkManager.postConsent(consent) {[weak self] error in
+            if let error = error {
+                completion(error)
+            } else {
+                self?.saveConsentResult(consent)
+                completion(nil)
+            }
+        }
     }
     
     public func cancel() {
         networkManager.cancel()
+    }
+}
+
+extension MobileConsentsSDK {
+    func saveConsentResult(_ consent: Consent) {
+        let consents = consent.processingPurposes.map({ [$0.consentItemId: $0.consentGiven] })
+        localStorageManager.addConsentsArray(consents)
     }
 }

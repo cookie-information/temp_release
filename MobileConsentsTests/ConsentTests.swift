@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ConsentTests: XCTestCase {
+final class ConsentTests: XCTestCase {
     func testJSONRepresentation() throws {
         let purpose = Purpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
         var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", customData: ["FIRST_DATA_KEY": "FIRST_DATA"])
