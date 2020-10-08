@@ -25,6 +25,7 @@ class SavedDataViewController: BaseViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
     }
+
     @IBAction private func closeAction() {
         dismiss(animated: true)
     }
