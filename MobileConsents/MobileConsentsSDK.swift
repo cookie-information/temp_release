@@ -40,6 +40,11 @@ public final class MobileConsentsSDK {
         }
     }
     
+    public func getSavedConsents() -> [SavedConsent] {
+        let savedData = localStorageManager.consents
+        return savedData.map { SavedConsent(consentItemId: $0.key, consentGiven: $0.value) }
+    }
+    
     public func cancel() {
         networkManager.cancel()
     }

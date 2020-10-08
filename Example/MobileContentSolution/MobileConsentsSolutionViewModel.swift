@@ -13,6 +13,7 @@ protocol MobileConsentSolutionViewModelProtocol {
     var consentSolution: ConsentSolution? { get }
     var sectionsCount: Int { get }
     var sendAvailable: Bool { get }
+    var savedConsents: [SavedConsent] { get }
     func sectionType(for section: Int) -> MobileConsentsSolutionSectionType?
     func cellType(for indexPath: IndexPath) -> MobileConsentsSolutionCellType?
     func rowsCount(for section: Int) -> Int
@@ -52,7 +53,11 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         consentSolution != nil
     }
     
-    var consent: Consent? {
+    var savedConsents: [SavedConsent] {
+        return mobileConsentsSDK.getSavedConsents()
+    }
+    
+    private var consent: Consent? {
         guard let consentSolution = consentSolution, let language = language else { return nil }
         
         let customData = ["email": "test@test.com", "device_id": "824c259c-7bf5-4d2a-81bf-22c09af31261"]

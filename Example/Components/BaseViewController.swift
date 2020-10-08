@@ -13,6 +13,10 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Rubik-Medium", size: 24)!]
+        navigationController?.navigationBar.barTintColor = .white
+        title = "Mobile Consents"
     }
     
     func showError(_ error: Error) {
