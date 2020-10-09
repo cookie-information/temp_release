@@ -40,7 +40,7 @@ enum NetworkLogger {
     
     static func log(response: URLResponse, data: Data? = nil) {
         #if DEBUG
-            print("\n ====================== RESPONS START ====================== \n")
+            print("\n ====================== RESPONSE START ====================== \n")
             defer { print("\n ======================  RESPONSE END ====================== \n") }
             
         guard let response = response as? HTTPURLResponse else {
@@ -68,7 +68,7 @@ enum NetworkLogger {
         logOutput += "\(response.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode)) \n"
         
         if let body = data {
-            logOutput += "\n \(NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "")"
+            logOutput += "\n \(String(data: body, encoding: .utf8) ?? "")"
         }
         
         print(logOutput)

@@ -15,7 +15,7 @@ public struct Consent {
     public var processingPurposes: [Purpose]
     public let customData: [String: String]?
     
-    public init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: String]?) {
+    public init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: String]? = [:]) {
         self.consentSolutionId = consentSolutionId
         self.consentSolutionVersionId = consentSolutionVersionId
         self.timestamp = Date()

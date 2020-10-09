@@ -112,19 +112,20 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         return selectedItems.contains(where: { $0.id == item.id })
     }
     
-    func fetchData(for identifier: String, language: String, _ completion:@escaping (Error?) -> Void) {
+    func fetchData(for identifier: String, language: String, _ completion: @escaping (Error?) -> Void) {
         self.language = language
-        mobileConsentsSDK.fetchConsentSolution(forUniversalConsentSolutionId: identifier, completion: { [weak self] solution, error in
-            if let error = error {
-                completion(error)
-            } else {
-                self?.consentSolution = solution
+        mobileConsentsSDK.fetchConsentSolution(forUniversalConsentSolutionId: identifier, completion: { [weak self] result in
+            switch result {
+            case .success(let consentSolution):
+                self?.consentSolution = consentSolution
                 completion(nil)
+            case .failure(let error):
+                completion(error)
             }
         })
     }
     
-    func sendData( _ completion:@escaping (Error?) -> Void) {
+    func sendData( _ completion: @escaping (Error?) -> Void) {
         guard let consent = consent else {
             completion(MobileConsentError.noConsentToSend)
             return

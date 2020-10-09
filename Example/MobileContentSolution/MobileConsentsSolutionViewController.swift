@@ -71,13 +71,13 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     @IBAction private func sendAction() {
         showProgressView()
         viewModel.sendData { [weak self] error in
-            self?.dismissProgressView({
+            self?.dismissProgressView {
                 if let error = error {
                     self?.showError(error)
                 } else {
                     self?.showMessage("Consent sent")
                 }
-            })
+            }
         }
     }
 }
@@ -124,7 +124,7 @@ extension MobileConsentsSolutionViewController {
         guard let identifier = identifierTextField.text else { return }
         showProgressView()
         viewModel.fetchData(for: identifier, language: language) { [weak self] error in
-            self?.dismissProgressView({
+            self?.dismissProgressView {
                 DispatchQueue.main.async {
                     if let error = error {
                         self?.showError(error)
@@ -133,7 +133,7 @@ extension MobileConsentsSolutionViewController {
                         self?.updateView()
                     }
                 }
-            })
+            }
         }
     }
 }
