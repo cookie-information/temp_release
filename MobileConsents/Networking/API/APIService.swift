@@ -29,7 +29,7 @@ enum APIService: EndpointType {
     var path: String {
         switch self {
         case .getConsents(let uuid): return "\(uuid)/consent-data.json"
-        case .postConsent: return ""
+        case .postConsent: return "/consents"
         }
     }
     

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "119AFB0125230F9100186CB7"
-               BuildableName = "Example.app"
-               BlueprintName = "Example"
+               BuildableName = "MobileConsent.app"
+               BlueprintName = "MobileConsent"
                ReferencedContainer = "container:MobileConsentsSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "119AFB0125230F9100186CB7"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
+            BuildableName = "MobileConsent.app"
+            BlueprintName = "MobileConsent"
             ReferencedContainer = "container:MobileConsentsSDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "119AFB0125230F9100186CB7"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
+            BuildableName = "MobileConsent.app"
+            BlueprintName = "MobileConsent"
             ReferencedContainer = "container:MobileConsentsSDK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

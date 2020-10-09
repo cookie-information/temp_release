@@ -39,6 +39,9 @@ final class Provider<EndPoint: EndpointType>: NetworkProvider {
             let request = try self.buildRequest(from: route)
             NetworkLogger.log(request: request)
             task = session.dataTask(with: request, completionHandler: { data, response, error in
+                if let response = response {
+                    NetworkLogger.log(response: response, data: data)
+                }
                 completion(data, response, error)
             })
             task?.resume()

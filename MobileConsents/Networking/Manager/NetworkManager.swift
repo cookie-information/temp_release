@@ -16,6 +16,7 @@ enum NetworkResponseError: LocalizedError {
     case noData
     case unableToDecode
     case noProperResponse
+    case notFound
     
     var errorDescription: String? {
         switch self {
@@ -26,6 +27,7 @@ enum NetworkResponseError: LocalizedError {
         case .noData: return "Response returned with no data to decode."
         case .unableToDecode: return "We could not decode the response."
         case .noProperResponse: return "No proper response."
+        case .notFound: return "Not found"
         }
     }
 }
@@ -48,28 +50,28 @@ final class NetworkManager {
         self.platformInformationGenerator = platformInformationGenerator
     }
     
-    func getConsentSolution(forUUID uuid: String, completion: @escaping (ConsentSolution?, Error?) -> Void) {
+    func getConsentSolution(forUUID uuid: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
         provider.request(.getConsents(uuid: uuid)) { data, response, error in
             guard let response = response as? HTTPURLResponse else {
-                return completion(nil, NetworkResponseError.noProperResponse)
+                return completion(.failure(NetworkResponseError.noProperResponse))
             }
-            
+
             switch response.result {
             case .success:
                 if let error = error {
-                    completion(nil, error)
+                    completion(.failure(error))
                 } else if let data = data {
                     do {
                         let consentSolution = try JSONDecoder().decode(ConsentSolution.self, from: data)
-                        completion(consentSolution, nil)
+                        completion(.success(consentSolution))
                     } catch {
-                        completion(nil, error)
+                        completion(.failure(error))
                     }
                 } else {
-                    completion(nil, NetworkResponseError.noData)
+                    completion(.failure(NetworkResponseError.noData))
                 }
             case .failure(let error):
-                completion(nil, error)
+                completion(.failure(error))
             }
         }
     }

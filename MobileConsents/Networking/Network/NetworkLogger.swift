@@ -11,8 +11,8 @@ import Foundation
 enum NetworkLogger {
     static func log(request: URLRequest) {
         #if DEBUG
-            print("\n ====================== START ====================== \n")
-            defer { print("\n ======================  END ====================== \n") }
+            print("\n ====================== REQUEST START ====================== \n")
+            defer { print("\n ======================  REQUEST END ====================== \n") }
             
             let urlAsString = request.url?.absoluteString ?? ""
             let urlComponents = NSURLComponents(string: urlAsString)
@@ -38,7 +38,40 @@ enum NetworkLogger {
         #endif
     }
     
-    static func log(response: URLResponse) {
-        // TODO: to be implemented
+    static func log(response: URLResponse, data: Data? = nil) {
+        #if DEBUG
+            print("\n ====================== RESPONSE START ====================== \n")
+            defer { print("\n ======================  RESPONSE END ====================== \n") }
+            
+        guard let response = response as? HTTPURLResponse else {
+            print("NO PROPER RESPONSE FORMAT")
+            return
+        }
+        
+        let urlAsString = response.url?.absoluteString ?? ""
+        let urlComponents = NSURLComponents(string: urlAsString)
+        
+        let path = "\(urlComponents?.path ?? "")"
+        let query = "\(urlComponents?.query ?? "")"
+        let host = "\(urlComponents?.host ?? "")"
+        
+        var logOutput = """
+                        \(urlAsString) \n\n
+                        \(path)?\(query) HTTP/1.1 \n
+                        HOST: \(host)\n
+          """
+        
+        for (key, value) in response.allHeaderFields {
+            logOutput += "\(key): \(value) \n"
+        }
+        
+        logOutput += "\(response.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode)) \n"
+        
+        if let body = data {
+            logOutput += "\n \(String(data: body, encoding: .utf8) ?? "")"
+        }
+        
+        print(logOutput)
+        #endif
     }
 }

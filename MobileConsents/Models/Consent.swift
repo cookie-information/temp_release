@@ -13,9 +13,9 @@ public struct Consent {
     public let consentSolutionVersionId: String
     public let timestamp: Date
     public var processingPurposes: [Purpose]
-    public let customData: [String: Any]
+    public let customData: [String: String]?
     
-    init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: Any]) {
+    public init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: String]? = [:]) {
         self.consentSolutionId = consentSolutionId
         self.consentSolutionVersionId = consentSolutionVersionId
         self.timestamp = Date()
@@ -23,7 +23,7 @@ public struct Consent {
         self.customData = customData
     }
     
-    mutating func addProcessingPurpose(_ purpose: Purpose) {
+    public mutating func addProcessingPurpose(_ purpose: Purpose) {
         processingPurposes.append(purpose)
     }
     
@@ -31,13 +31,22 @@ public struct Consent {
         var json: [String: Any] = [
             "universalConsentSolutionId": consentSolutionId,
             "universalConsentSolutionVersionId": consentSolutionVersionId,
-            "customData": customData
+            "customData": parsedCustomData()
         ]
+        
         if let purposesData = try? JSONEncoder().encode(processingPurposes), let purposesJSON = try? JSONSerialization.jsonObject(with: purposesData) as? [[String: Any]] {
             json["processingPurposes"] = purposesJSON
         }
         json["timestamp"] = timestamp.iso8601withFractionalSeconds
         
         return json
+    }
+    
+    func parsedCustomData() -> [[String: String]] {
+        guard let customData = customData else { return [] }
+        let parsed = customData.map { dictItem in
+            return ["fieldName": dictItem.key, "fieldValue": dictItem.value]
+        }
+        return parsed
     }
 }

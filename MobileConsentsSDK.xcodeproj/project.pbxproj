@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11181159252D9AE0007918FE /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11181158252D9AE0007918FE /* UIButton+Extensions.swift */; };
+		11181177252DA91A007918FE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11181176252DA91A007918FE /* BaseViewController.swift */; };
+		1118117B252DAA4E007918FE /* MobileConsentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118117A252DAA4E007918FE /* MobileConsentError.swift */; };
 		111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CC4252C522100E93EE2 /* ConsentTests.swift */; };
 		111C7CC9252C528700E93EE2 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5192A251DEBCE00581FF4 /* Consent.swift */; };
 		111C7CCD252C52C200E93EE2 /* Purpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* Purpose.swift */; };
@@ -91,6 +94,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11181158252D9AE0007918FE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		11181176252DA91A007918FE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		1118117A252DAA4E007918FE /* MobileConsentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentError.swift; sourceTree = "<group>"; };
 		111C7CC4252C522100E93EE2 /* ConsentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentTests.swift; sourceTree = "<group>"; };
 		111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO8601DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		111C7CDA252C970100E93EE2 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -110,7 +116,7 @@
 		117BF13A2518D2940089C9E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		117BF215251A72770089C9E9 /* MobileConsentsSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSDK.swift; sourceTree = "<group>"; };
 		117BF218251A72D20089C9E9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		119AFB0225230F9100186CB7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		119AFB0225230F9100186CB7 /* MobileConsent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileConsent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		119AFB0425230F9100186CB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		119AFB0825230F9100186CB7 /* MobileConsentsSolutionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSolutionViewController.swift; sourceTree = "<group>"; };
 		119AFB0B25230F9100186CB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,6 +172,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11181175252DA901007918FE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1118117A252DAA4E007918FE /* MobileConsentError.swift */,
+				11181176252DA91A007918FE /* BaseViewController.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		1161EBE22525DB700078C76F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +205,7 @@
 			children = (
 				117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */,
 				9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */,
-				119AFB0225230F9100186CB7 /* Example.app */,
+				119AFB0225230F9100186CB7 /* MobileConsent.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				119AFB0425230F9100186CB7 /* AppDelegate.swift */,
+				11181175252DA901007918FE /* Components */,
 				119AFB5F2523871F00186CB7 /* MobileContentSolution */,
 				119AFB502523785600186CB7 /* Cells */,
 				119AFB432523778000186CB7 /* Resources */,
@@ -311,8 +327,8 @@
 		119AFB5F2523871F00186CB7 /* MobileContentSolution */ = {
 			isa = PBXGroup;
 			children = (
-				119AFB0825230F9100186CB7 /* MobileConsentsSolutionViewController.swift */,
 				1161EBB7252588880078C76F /* MobileConsentsSolutionViewModel.swift */,
+				119AFB0825230F9100186CB7 /* MobileConsentsSolutionViewController.swift */,
 			);
 			path = MobileContentSolution;
 			sourceTree = "<group>";
@@ -322,6 +338,7 @@
 			children = (
 				119AFB632523880A00186CB7 /* Collection+Extensions.swift */,
 				1161EC44252A17FC0078C76F /* UITableViewCell+Extensions.swift */,
+				11181158252D9AE0007918FE /* UIButton+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -419,9 +436,9 @@
 			productReference = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		119AFB0125230F9100186CB7 /* Example */ = {
+		119AFB0125230F9100186CB7 /* MobileConsent */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "Example" */;
+			buildConfigurationList = 119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "MobileConsent" */;
 			buildPhases = (
 				119AFAFE25230F9100186CB7 /* Sources */,
 				119AFAFF25230F9100186CB7 /* Frameworks */,
@@ -433,9 +450,9 @@
 			dependencies = (
 				119AFB1D25230F9F00186CB7 /* PBXTargetDependency */,
 			);
-			name = Example;
+			name = MobileConsent;
 			productName = Example;
-			productReference = 119AFB0225230F9100186CB7 /* Example.app */;
+			productReference = 119AFB0225230F9100186CB7 /* MobileConsent.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9B8E95B32519C8AF001DF8BD /* MobileConsentsSDKTests */ = {
@@ -493,7 +510,7 @@
 			targets = (
 				117BF1352518D2940089C9E9 /* MobileConsentsSDK */,
 				9B8E95B32519C8AF001DF8BD /* MobileConsentsSDKTests */,
-				119AFB0125230F9100186CB7 /* Example */,
+				119AFB0125230F9100186CB7 /* MobileConsent */,
 			);
 		};
 /* End PBXProject section */
@@ -586,10 +603,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				119AFB0925230F9100186CB7 /* MobileConsentsSolutionViewController.swift in Sources */,
+				11181159252D9AE0007918FE /* UIButton+Extensions.swift in Sources */,
 				119AFB642523880A00186CB7 /* Collection+Extensions.swift in Sources */,
 				119AFB0525230F9100186CB7 /* AppDelegate.swift in Sources */,
 				1161EBC025258ADD0078C76F /* SolutionDetailsTableViewCell.swift in Sources */,
+				11181177252DA91A007918FE /* BaseViewController.swift in Sources */,
 				1161EC45252A17FC0078C76F /* UITableViewCell+Extensions.swift in Sources */,
+				1118117B252DAA4E007918FE /* MobileConsentError.swift in Sources */,
 				1161EBC52525A1700078C76F /* ConsentItemDetailsTableViewCell.swift in Sources */,
 				1161EBB8252588880078C76F /* MobileConsentsSolutionViewModel.swift in Sources */,
 			);
@@ -915,7 +935,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "Example" */ = {
+		119AFB1525230F9200186CB7 /* Build configuration list for PBXNativeTarget "MobileConsent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				119AFB1325230F9200186CB7 /* Debug */,
