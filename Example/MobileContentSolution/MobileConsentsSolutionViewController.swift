@@ -80,6 +80,12 @@ final class MobileConsentsSolutionViewController: BaseViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navigationController = segue.destination as? UINavigationController, let savedDataViewController = navigationController.viewControllers.first as? SavedDataViewController else { return }
+        
+        savedDataViewController.savedItems = viewModel.savedConsents
+    }
 }
 
 extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableViewDelegate {

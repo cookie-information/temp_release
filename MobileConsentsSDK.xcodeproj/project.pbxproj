@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1116CB94252DFF4E0080E01E /* LocalStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116CB93252DFF4E0080E01E /* LocalStorageManagerTests.swift */; };
+		1116CB97252DFF560080E01E /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1161EBE32525DB840078C76F /* LocalStorageManager.swift */; };
+		1116CC18252EED740080E01E /* SavedDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116CC10252EED6D0080E01E /* SavedDataViewController.swift */; };
+		1116CC1C252EEFA60080E01E /* SavedItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116CC1B252EEFA60080E01E /* SavedItemTableViewCell.swift */; };
+		1116CC20252EF3C60080E01E /* SavedConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116CC1F252EF3C60080E01E /* SavedConsent.swift */; };
+		1116CC21252EF3C60080E01E /* SavedConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116CC1F252EF3C60080E01E /* SavedConsent.swift */; };
 		11181159252D9AE0007918FE /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11181158252D9AE0007918FE /* UIButton+Extensions.swift */; };
 		11181177252DA91A007918FE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11181176252DA91A007918FE /* BaseViewController.swift */; };
 		1118117B252DAA4E007918FE /* MobileConsentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118117A252DAA4E007918FE /* MobileConsentError.swift */; };
@@ -58,7 +64,7 @@
 		11B51943251E19A100581FF4 /* Purpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* Purpose.swift */; };
 		9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 		9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9B8E95B72519C8B0001DF8BD /* MobileConsentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */; };
+		9B8E95B72519C8B0001DF8BD /* MobileConsentsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */; };
 		9B8E95B92519C8B0001DF8BD /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +100,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1116CB93252DFF4E0080E01E /* LocalStorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManagerTests.swift; sourceTree = "<group>"; };
+		1116CC10252EED6D0080E01E /* SavedDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDataViewController.swift; sourceTree = "<group>"; };
+		1116CC1B252EEFA60080E01E /* SavedItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedItemTableViewCell.swift; sourceTree = "<group>"; };
+		1116CC1F252EF3C60080E01E /* SavedConsent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedConsent.swift; sourceTree = "<group>"; };
 		11181158252D9AE0007918FE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		11181176252DA91A007918FE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1118117A252DAA4E007918FE /* MobileConsentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentError.swift; sourceTree = "<group>"; };
@@ -142,7 +152,7 @@
 		11B5192A251DEBCE00581FF4 /* Consent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
 		11B51942251E19A100581FF4 /* Purpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purpose.swift; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsTests.swift; sourceTree = "<group>"; };
+		9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSDKTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +182,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1116CC0F252EED4F0080E01E /* SavedData */ = {
+			isa = PBXGroup;
+			children = (
+				1116CC10252EED6D0080E01E /* SavedDataViewController.swift */,
+				1116CC1B252EEFA60080E01E /* SavedItemTableViewCell.swift */,
+			);
+			path = SavedData;
+			sourceTree = "<group>";
+		};
 		11181175252DA901007918FE /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +282,7 @@
 		119AFB0325230F9100186CB7 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				1116CC0F252EED4F0080E01E /* SavedData */,
 				119AFB0425230F9100186CB7 /* AppDelegate.swift */,
 				11181175252DA901007918FE /* Components */,
 				119AFB5F2523871F00186CB7 /* MobileContentSolution */,
@@ -390,6 +410,7 @@
 				11B51924251DCA8000581FF4 /* ConsentTranslation.swift */,
 				11B5192A251DEBCE00581FF4 /* Consent.swift */,
 				11B51942251E19A100581FF4 /* Purpose.swift */,
+				1116CC1F252EF3C60080E01E /* SavedConsent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -397,8 +418,9 @@
 		9B8E95B52519C8B0001DF8BD /* MobileConsentsTests */ = {
 			isa = PBXGroup;
 			children = (
-				9B8E95B62519C8B0001DF8BD /* MobileConsentsTests.swift */,
+				9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */,
 				111C7CC4252C522100E93EE2 /* ConsentTests.swift */,
+				1116CB93252DFF4E0080E01E /* LocalStorageManagerTests.swift */,
 			);
 			path = MobileConsentsTests;
 			sourceTree = "<group>";
@@ -595,6 +617,7 @@
 				11B51846251C6E7D00581FF4 /* URLParameterEncoder.swift in Sources */,
 				114D8FD7251B236500D8D113 /* EndpointType.swift in Sources */,
 				1161EC59252B510F0078C76F /* PlatformInformationGenerator.swift in Sources */,
+				1116CC20252EF3C60080E01E /* SavedConsent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,11 +627,13 @@
 			files = (
 				119AFB0925230F9100186CB7 /* MobileConsentsSolutionViewController.swift in Sources */,
 				11181159252D9AE0007918FE /* UIButton+Extensions.swift in Sources */,
+				1116CC18252EED740080E01E /* SavedDataViewController.swift in Sources */,
 				119AFB642523880A00186CB7 /* Collection+Extensions.swift in Sources */,
 				119AFB0525230F9100186CB7 /* AppDelegate.swift in Sources */,
 				1161EBC025258ADD0078C76F /* SolutionDetailsTableViewCell.swift in Sources */,
 				11181177252DA91A007918FE /* BaseViewController.swift in Sources */,
 				1161EC45252A17FC0078C76F /* UITableViewCell+Extensions.swift in Sources */,
+				1116CC1C252EEFA60080E01E /* SavedItemTableViewCell.swift in Sources */,
 				1118117B252DAA4E007918FE /* MobileConsentError.swift in Sources */,
 				1161EBC52525A1700078C76F /* ConsentItemDetailsTableViewCell.swift in Sources */,
 				1161EBB8252588880078C76F /* MobileConsentsSolutionViewModel.swift in Sources */,
@@ -623,9 +648,12 @@
 				111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */,
 				111C7CD6252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
 				111C7CCD252C52C200E93EE2 /* Purpose.swift in Sources */,
+				1116CB94252DFF4E0080E01E /* LocalStorageManagerTests.swift in Sources */,
 				111C7CE8252C976600E93EE2 /* String+Extensions.swift in Sources */,
 				111C7CE2252C972900E93EE2 /* Formatter+Extensions.swift in Sources */,
-				9B8E95B72519C8B0001DF8BD /* MobileConsentsTests.swift in Sources */,
+				1116CB97252DFF560080E01E /* LocalStorageManager.swift in Sources */,
+				1116CC21252EF3C60080E01E /* SavedConsent.swift in Sources */,
+				9B8E95B72519C8B0001DF8BD /* MobileConsentsSDKTests.swift in Sources */,
 				111C7CDC252C970100E93EE2 /* Date+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

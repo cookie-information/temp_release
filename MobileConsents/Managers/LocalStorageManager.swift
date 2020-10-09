@@ -10,12 +10,17 @@ import Foundation
 
 protocol LocalStorageManagerProtocol {
     var userId: String { get }
+    var consents: [String: Bool] { get }
     func removeUserId()
+    func addConsent(consentItemId: String, consentGiven: Bool)
+    func addConsentsArray(_ consentsArray: [[String: Bool]])
+    func clearAll()
 }
 
 struct LocalStorageManager: LocalStorageManagerProtocol {
     private let userIdKey = "com.MobileConsents.userIdKey"
-        
+    private let consentsKey = "com.MobileConsents.userIdKey"
+    
     var userId: String {
         guard let userId = UserDefaults.standard.string(forKey: userIdKey) else {
             return generateAndStoreUserId()
@@ -31,5 +36,30 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     
     func removeUserId() {
         UserDefaults.standard.removeObject(forKey: userId)
+    }
+    
+    var consents: [String: Bool] {
+        guard let consents = UserDefaults.standard.object(forKey: consentsKey) as? [String: Bool] else { return [:] }
+        
+        return consents
+    }
+    
+    func addConsent(consentItemId: String, consentGiven: Bool) {
+        var consents = self.consents
+        consents[consentItemId] = consentGiven
+        UserDefaults.standard.set(consents, forKey: consentsKey)
+    }
+    
+    func addConsentsArray(_ consentsArray: [[String: Bool]]) {
+        let localConsents = self.consents
+        let tupleArray: [(String, Bool)] = consentsArray.flatMap { $0 }
+        let newConsents = Dictionary(tupleArray, uniquingKeysWith: { _, last in last })
+        let merged = newConsents.reduce(into: localConsents) { r, e in r[e.0] = e.1 }
+        UserDefaults.standard.set(merged, forKey: consentsKey)
+    }
+    
+    func clearAll() {
+        UserDefaults.standard.removeObject(forKey: userIdKey)
+        UserDefaults.standard.removeObject(forKey: consentsKey)
     }
 }
