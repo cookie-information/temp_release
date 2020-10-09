@@ -13,7 +13,7 @@ public final class MobileConsentsSDK {
     
     private let networkManager: NetworkManager
     
-    public typealias ConsentSolutionCompletion =  (Result<ConsentSolution, Error>) -> Void //(ConsentSolution?, Error?) -> Void
+    public typealias ConsentSolutionCompletion = (Result<ConsentSolution, Error>) -> Void
     
     public init(withBaseURL url: URL) {
         self.networkManager = NetworkManager(withBaseURL: url)
