@@ -19,7 +19,7 @@ protocol LocalStorageManagerProtocol {
 
 struct LocalStorageManager: LocalStorageManagerProtocol {
     private let userIdKey = "com.MobileConsents.userIdKey"
-    private let consentsKey = "com.MobileConsents.userIdKey"
+    private let consentsKey = "com.MobileConsents.consentsKey"
     
     var userId: String {
         guard let userId = UserDefaults.standard.string(forKey: userIdKey) else {

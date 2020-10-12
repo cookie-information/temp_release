@@ -19,6 +19,12 @@ final class LocalStorageManagerTests: XCTestCase {
         XCTAssertNotNil(localStorageManager.userId)
     }
     
+    func testNotRegenerateUserId() throws {
+        let firstUserId = localStorageManager.userId
+        let secondUserId = localStorageManager.userId
+        XCTAssertEqual(firstUserId, secondUserId)
+    }
+    
     func testAddUniqueConsent() throws {
         localStorageManager.addConsent(consentItemId: "CONSENT_ID_1", consentGiven: true)
         let consents = localStorageManager.consents
