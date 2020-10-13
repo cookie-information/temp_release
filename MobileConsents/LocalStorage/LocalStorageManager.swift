@@ -8,12 +8,6 @@
 
 import Foundation
 
-protocol UserDefaultsProtocol {
-    func set<T>(_ value: T?, forKey key: String)
-    func get<T>(forKey key: String) -> T?
-    func removeObject(forKey key: String)
-}
-
 protocol LocalStorageManagerProtocol {
     var userId: String { get }
     var consents: [String: Bool] { get }
@@ -73,15 +67,5 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     func clearAll() {
         userDefaults.removeObject(forKey: userIdKey)
         userDefaults.removeObject(forKey: consentsKey)
-    }
-}
-
-extension UserDefaults: UserDefaultsProtocol {
-    func set<T>(_ value: T?, forKey key: String) {
-        setValue(value, forKey: key)
-    }
-    
-    func get<T>(forKey key: String) -> T? {
-        return object(forKey: key) as? T
     }
 }
