@@ -8,6 +8,12 @@
 
 import Foundation
 
+protocol UserDefaultsProtocol {
+    func set<T>(_ value: T?, forKey key: String)
+    func get<T>(forKey key: String) -> T?
+    func removeObject(forKey key: String)
+}
+
 protocol LocalStorageManagerProtocol {
     var userId: String { get }
     var consents: [String: Bool] { get }
@@ -21,14 +27,14 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     private let userIdKey = "com.MobileConsents.userIdKey"
     private let consentsKey = "com.MobileConsents.consentsKey"
     
-    private let userDefaults: UserDefaults
+    private let userDefaults: UserDefaultsProtocol
     
-    init(userDefaults: UserDefaults = UserDefaults.standard) {
+    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
         self.userDefaults = userDefaults
     }
     
     var userId: String {
-        guard let userId = userDefaults.string(forKey: userIdKey) else {
+        guard let userId: String = userDefaults.get(forKey: userIdKey) else {
             return generateAndStoreUserId()
         }
         return userId
@@ -45,7 +51,7 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     }
     
     var consents: [String: Bool] {
-        guard let consents = userDefaults.object(forKey: consentsKey) as? [String: Bool] else { return [:] }
+        guard let consents: [String: Bool] = userDefaults.get(forKey: consentsKey) else { return [:] }
         
         return consents
     }
@@ -67,5 +73,15 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     func clearAll() {
         userDefaults.removeObject(forKey: userIdKey)
         userDefaults.removeObject(forKey: consentsKey)
+    }
+}
+
+extension UserDefaults: UserDefaultsProtocol {
+    func set<T>(_ value: T?, forKey key: String) {
+        setValue(value, forKey: key)
+    }
+    
+    func get<T>(forKey key: String) -> T? {
+        return object(forKey: key) as? T
     }
 }

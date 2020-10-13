@@ -9,7 +9,7 @@
 import XCTest
 
 final class LocalStorageManagerTests: XCTestCase {
-    let localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(userDefaults: UserDefaults())
+    let localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(userDefaults: MockedUserDefaults())
     
     override func setUp() {
         localStorageManager.clearAll()
