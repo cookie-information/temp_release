@@ -9,7 +9,6 @@
 import Foundation
 
 enum NetworkResponseError: LocalizedError {
-    case authenticationError
     case badRequest
     case outdated
     case failed
@@ -20,7 +19,6 @@ enum NetworkResponseError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
-        case .authenticationError: return "You need to be authenticated first."
         case .badRequest: return "Bad request"
         case .outdated: return "The url you requested is outdated."
         case .failed: return "Network request failed."
@@ -70,8 +68,7 @@ final class NetworkManager {
                 } else {
                     completion(.failure(NetworkResponseError.noData))
                 }
-            case .failure(let error):
-                completion(.failure(error))
+            case .failure(let error): completion(.failure(error))
             }
         }
     }
@@ -80,7 +77,7 @@ final class NetworkManager {
         let platformInformation = platformInformationGenerator.generatePlatformInformation()
         let consentPayload = consent.JSONRepresentation()
         let userId = localStorageManager.userId
-        provider.request(.postConsent(baseURL: baseURL, userId: userId, payload: consentPayload, platformInformation: platformInformation)) { _, response, error in
+        provider.request(.postConsent(baseURL: baseURL, userId: userId, payload: consentPayload, platformInformation: platformInformation)) { data, response, error in
             if let error = error {
                 completion(error)
             } else {
@@ -90,7 +87,14 @@ final class NetworkManager {
                 
                 switch response.result {
                 case .success: completion(nil)
-                case .failure(let error): completion(error)
+                case .failure(let error):
+                    switch error {
+                    case .badRequest:
+                        guard let data = data, let apiError = try? JSONDecoder().decode(APIError.self, from: data) else { return completion(error) }
+                        
+                        completion(apiError)
+                    default: completion(error)
+                    }
                 }
             }
         }
