@@ -21,8 +21,14 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     private let userIdKey = "com.MobileConsents.userIdKey"
     private let consentsKey = "com.MobileConsents.consentsKey"
     
+    private let userDefaults: UserDefaults
+    
+    init(userDefaults: UserDefaults = UserDefaults.standard) {
+        self.userDefaults = userDefaults
+    }
+    
     var userId: String {
-        guard let userId = UserDefaults.standard.string(forKey: userIdKey) else {
+        guard let userId = userDefaults.string(forKey: userIdKey) else {
             return generateAndStoreUserId()
         }
         return userId
@@ -30,16 +36,16 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
 
     private func generateAndStoreUserId() -> String {
         let userId = UUID().uuidString
-        UserDefaults.standard.set(userId, forKey: userIdKey)
+        userDefaults.set(userId, forKey: userIdKey)
         return userId
     }
     
     func removeUserId() {
-        UserDefaults.standard.removeObject(forKey: userId)
+        userDefaults.removeObject(forKey: userId)
     }
     
     var consents: [String: Bool] {
-        guard let consents = UserDefaults.standard.object(forKey: consentsKey) as? [String: Bool] else { return [:] }
+        guard let consents = userDefaults.object(forKey: consentsKey) as? [String: Bool] else { return [:] }
         
         return consents
     }
@@ -47,7 +53,7 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     func addConsent(consentItemId: String, consentGiven: Bool) {
         var consents = self.consents
         consents[consentItemId] = consentGiven
-        UserDefaults.standard.set(consents, forKey: consentsKey)
+        userDefaults.set(consents, forKey: consentsKey)
     }
     
     func addConsentsArray(_ consentsArray: [[String: Bool]]) {
@@ -55,11 +61,11 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
         let tupleArray: [(String, Bool)] = consentsArray.flatMap { $0 }
         let newConsents = Dictionary(tupleArray, uniquingKeysWith: { _, last in last })
         let merged = newConsents.reduce(into: localConsents) { r, e in r[e.0] = e.1 }
-        UserDefaults.standard.set(merged, forKey: consentsKey)
+        userDefaults.set(merged, forKey: consentsKey)
     }
     
     func clearAll() {
-        UserDefaults.standard.removeObject(forKey: userIdKey)
-        UserDefaults.standard.removeObject(forKey: consentsKey)
+        userDefaults.removeObject(forKey: userIdKey)
+        userDefaults.removeObject(forKey: consentsKey)
     }
 }
