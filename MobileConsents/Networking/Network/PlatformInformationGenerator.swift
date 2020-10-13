@@ -15,7 +15,7 @@ protocol PlatformInformationGeneratorProtocol {
 struct PlatformInformationGenerator: PlatformInformationGeneratorProtocol {
     func generatePlatformInformation() -> [String: String] {
         return [
-            "operatingSystem": UIDevice.current.systemVersion,
+            "operatingSystem": "iOS \(UIDevice.current.systemVersion)",
             "applicationId": Bundle.main.bundleIdentifier ?? "",
             "applicationName": Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
         ]

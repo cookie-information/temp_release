@@ -12,9 +12,7 @@ extension HTTPURLResponse {
     var result: NetworkResult<NetworkResponseError> {
         switch self.statusCode {
         case 200...299: return .success
-        case 404: return .failure(.notFound)
-        case 401...500: return .failure(.authenticationError)
-        case 501...599: return .failure(.badRequest)
+        case 400...599: return .failure(.badRequest)
         case 600: return .failure(.outdated)
         default: return .failure(.failed)
         }
