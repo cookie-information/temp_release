@@ -9,7 +9,7 @@
 import XCTest
 
 final class LocalStorageManagerTests: XCTestCase {
-    let localStorageManager: LocalStorageManagerProtocol = LocalStorageManager()
+    let localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(userDefaults: MockedUserDefaults())
     
     override func setUp() {
         localStorageManager.clearAll()
@@ -17,6 +17,12 @@ final class LocalStorageManagerTests: XCTestCase {
     
     func testGetUserId() throws {
         XCTAssertNotNil(localStorageManager.userId)
+    }
+    
+    func testNotRegenerateUserId() throws {
+        let firstUserId = localStorageManager.userId
+        let secondUserId = localStorageManager.userId
+        XCTAssertEqual(firstUserId, secondUserId)
     }
     
     func testAddUniqueConsent() throws {
