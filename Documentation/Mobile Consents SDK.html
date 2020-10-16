@@ -20,29 +20,29 @@
 <pre class=" language-swift"><code class="prism  language-swift">mobileConsentsSDK<span class="token punctuation">.</span><span class="token function">fetchConsentSolution</span><span class="token punctuation">(</span>forUniversalConsentSolutionId<span class="token punctuation">:</span> <span class="token string">"consent solution identifier"</span><span class="token punctuation">,</span> completion<span class="token punctuation">:</span> <span class="token punctuation">{</span> result <span class="token keyword">in</span>
 	<span class="token keyword">switch</span> result <span class="token punctuation">{</span>
 	<span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token keyword">let</span> consentSolution<span class="token punctuation">)</span><span class="token punctuation">:</span>
-		<span class="token comment">/* here you can maek use of fetched ConsentSolution object */</span>
+	  <span class="token comment">/* here you can maek use of fetched ConsentSolution object */</span>
 	<span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">failure</span><span class="token punctuation">(</span><span class="token keyword">let</span> error<span class="token punctuation">)</span><span class="token punctuation">:</span>
-		<span class="token comment">/* here you can handle error from fetching te content solution */</span>
+	  <span class="token comment">/* here you can handle error from fetching te content solution */</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span> 
 
 <span class="token comment">/* ConsentSolution object structure */</span>
 
 <span class="token keyword">struct</span>  <span class="token builtin">ConsentSolution</span> <span class="token punctuation">{</span>
-	<span class="token keyword">let</span>  id<span class="token punctuation">:</span> <span class="token builtin">String</span>
-	<span class="token keyword">let</span>  versionId<span class="token punctuation">:</span> <span class="token builtin">String</span>
-	<span class="token keyword">let</span>  consentItems<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">ConsentItem</span><span class="token punctuation">]</span>
+  <span class="token keyword">let</span>  id<span class="token punctuation">:</span> <span class="token builtin">String</span>
+  <span class="token keyword">let</span>  versionId<span class="token punctuation">:</span> <span class="token builtin">String</span>
+  <span class="token keyword">let</span>  consentItems<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">ConsentItem</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">struct</span>  <span class="token builtin">ConsentItem</span> <span class="token punctuation">{</span>
-	<span class="token keyword">let</span>  id<span class="token punctuation">:</span> <span class="token builtin">String</span>
-	<span class="token keyword">let</span>  translations<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">ConsentTranslation</span><span class="token punctuation">]</span>
+  <span class="token keyword">let</span>  id<span class="token punctuation">:</span> <span class="token builtin">String</span>
+  <span class="token keyword">let</span>  translations<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">ConsentTranslation</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">struct</span>  <span class="token builtin">ConsentTranslation</span> <span class="token punctuation">{</span>
-	<span class="token keyword">let</span>  language<span class="token punctuation">:</span> <span class="token builtin">String</span>
-	<span class="token keyword">let</span>  shortText<span class="token punctuation">:</span> <span class="token builtin">String</span>
-	<span class="token keyword">let</span>  longText<span class="token punctuation">:</span> <span class="token builtin">String</span>
+  <span class="token keyword">let</span>  language<span class="token punctuation">:</span> <span class="token builtin">String</span>
+  <span class="token keyword">let</span>  shortText<span class="token punctuation">:</span> <span class="token builtin">String</span>
+  <span class="token keyword">let</span>  longText<span class="token punctuation">:</span> <span class="token builtin">String</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="sending-consent-to-server">Sending Consent to server</h2>
@@ -63,8 +63,20 @@ consent<span class="token punctuation">.</span><span class="token function">addP
 </code></pre>
 <p>After seting up the Consent object you are ready to send it to server</p>
 <pre class=" language-swift"><code class="prism  language-swift">mobileConsentsSDK<span class="token punctuation">.</span><span class="token function">postConsent</span><span class="token punctuation">(</span>consent<span class="token punctuation">)</span> <span class="token punctuation">{</span> error <span class="token keyword">in</span>
-	<span class="token comment">/* if error is nil it means that post succeeded */</span>
+  <span class="token comment">/* if error is nil it means that post succeeded */</span>
 <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="getting-lacally-saved-consents-data">Getting lacally saved consents data</h2>
+<pre class=" language-swift"><code class="prism  language-swift"><span class="token keyword">let</span> savedData<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token builtin">SavedConsent</span><span class="token punctuation">]</span> <span class="token operator">=</span> mobileConsentsSDK<span class="token punctuation">.</span><span class="token function">getSavedConsents</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>SavedConsent object structure</p>
+<pre class=" language-swift"><code class="prism  language-swift"><span class="token keyword">struct</span>  <span class="token builtin">SavedConsent</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span>  consentItemId<span class="token punctuation">:</span> <span class="token builtin">String</span>
+  <span class="token keyword">let</span>  consentGiven<span class="token punctuation">:</span> <span class="token builtin">Bool</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="canceling-last-save-request">Canceling last save request</h2>
+<pre class=" language-swift"><code class="prism  language-swift">mobileConsentsSDK<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
 </div>
 </body>

@@ -17,29 +17,29 @@ let mobileConsentsSDK = MobileConsents(withBaseURL: serverURL)
 mobileConsentsSDK.fetchConsentSolution(forUniversalConsentSolutionId: "consent solution identifier", completion: { result in
 	switch result {
 	case .success(let consentSolution):
-		/* here you can maek use of fetched ConsentSolution object */
+	  /* here you can maek use of fetched ConsentSolution object */
 	case .failure(let error):
-		/* here you can handle error from fetching te content solution */
+	  /* here you can handle error from fetching te content solution */
 	}
 }) 
 
 /* ConsentSolution object structure */
 
 struct  ConsentSolution {
-	let  id: String
-	let  versionId: String
-	let  consentItems: [ConsentItem]
+  let  id: String
+  let  versionId: String
+  let  consentItems: [ConsentItem]
 }
 
 struct  ConsentItem {
-	let  id: String
-	let  translations: [ConsentTranslation]
+  let  id: String
+  let  translations: [ConsentTranslation]
 }
 
 struct  ConsentTranslation {
-	let  language: String
-	let  shortText: String
-	let  longText: String
+  let  language: String
+  let  shortText: String
+  let  longText: String
 }
 ```
 
@@ -65,7 +65,22 @@ consent.addProcessingPurpose(purpose)
 After seting up the Consent object you are ready to send it to server
 ```swift
 mobileConsentsSDK.postConsent(consent) { error in
-	/* if error is nil it means that post succeeded */
+  /* if error is nil it means that post succeeded */
+}
+```
+## Getting lacally saved consents data
+```swift
+let savedData:[SavedConsent] = mobileConsentsSDK.getSavedConsents()
+```
+SavedConsent object structure
+```swift
+struct  SavedConsent {
+  let  consentItemId: String
+  let  consentGiven: Bool
 }
 ```
 
+## Canceling last save request
+```swift
+mobileConsentsSDK.cancel()
+```
