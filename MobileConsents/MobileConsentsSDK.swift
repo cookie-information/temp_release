@@ -55,7 +55,7 @@ public final class MobileConsentsSDK {
         }
     }
     
-    /// Method responsible for getting saved locally.
+    /// Method responsible for getting saved locally consents.
     ///
     /// Returns array of SavedConsent object
     public func getSavedConsents() -> [SavedConsent] {

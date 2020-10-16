@@ -56,13 +56,13 @@ var consent = Consent(consentSolutionId: "consentSolution.id", consentSolutionVe
 Then you have to add processing purposes which contains a given consents
 
 ```swift
-/* given consents are included in main consent object as Puposes objects which you can add to Consent object using `addProcessingPurpose` function */
+/* given consents are included in main consent object as Purposes objects which you can add to Consent object using `addProcessingPurpose` function */
 
 let purpose = Purpose(consentItemId: "consentItem.id", consentGiven: {true / false}, language: "en")
 consent.addProcessingPurpose(purpose)
 
 ```
-After seting up the Consent object you are ready to send it to server
+After setting up the Consent object you are ready to send it to the server
 ```swift
 mobileConsentsSDK.postConsent(consent) { error in
   /* if error is nil it means that post succeeded */
