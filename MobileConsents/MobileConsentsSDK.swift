@@ -12,7 +12,7 @@ public final class MobileConsentsSDK {
     var environment: Environment = .staging
     
     private let networkManager: NetworkManager
-    private var localStorageManager: LocalStorageManager
+    private let localStorageManager: LocalStorageManager
     
     public typealias ConsentSolutionCompletion = (Result<ConsentSolution, Error>) -> Void
     
@@ -20,13 +20,12 @@ public final class MobileConsentsSDK {
     ///
     /// - Parameters:
     ///   - url: URL to server where Consents will be posted
-    public init(withBaseURL url: URL) {
-        self.localStorageManager = LocalStorageManager()
-        self.networkManager = NetworkManager(withBaseURL: url, localStorageManager: self.localStorageManager)
+    public convenience init(withBaseURL url: URL) {
+        self.init(withBaseURL: url, localStorageManager: LocalStorageManager())
     }
     
-    convenience init(withBaseURL url: URL, localStorageManager: LocalStorageManager) {
-        self.init(withBaseURL: url)
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager) {
+        self.networkManager = NetworkManager(withBaseURL: url, localStorageManager: localStorageManager)
         self.localStorageManager = localStorageManager
     }
     
