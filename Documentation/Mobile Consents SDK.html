@@ -9,7 +9,7 @@
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><p><img src="https://img.shields.io/cocoapods/v/MobileConsentsSDK?label=latest%20release" alt="enter image description here"></p>
+  <div class="stackedit__html"><p><img src="https://img.shields.io/cocoapods/v/MobileConsentsSDK?label=latest%20release" alt="cocapods spec version badge"></p>
 <h1 id="mobile-consents-sdk">Mobile Consents SDK</h1>
 <h1 id="installation">Installation</h1>
 <p>MobileConsentsSDK is available through <a href="https://cocoapods.org">CocoaPods</a>. To install it, simply add the following line to your Podfile:</p>
@@ -68,7 +68,7 @@
 consent<span class="token punctuation">.</span><span class="token function">addProcessingPurpose</span><span class="token punctuation">(</span>purpose<span class="token punctuation">)</span>
 
 </code></pre>
-<p>After seting up the Consent object you are ready to send it to server</p>
+<p>After setting up the Consent object you are ready to send it to the server</p>
 <pre class=" language-swift"><code class="prism  language-swift">mobileConsentsSDK<span class="token punctuation">.</span><span class="token function">postConsent</span><span class="token punctuation">(</span>consent<span class="token punctuation">)</span> <span class="token punctuation">{</span> error <span class="token keyword">in</span>
   <span class="token comment">/* if error is nil it means that post succeeded */</span>
 <span class="token punctuation">}</span>

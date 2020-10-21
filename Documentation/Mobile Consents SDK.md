@@ -1,4 +1,4 @@
-﻿![enter image description here](https://img.shields.io/cocoapods/v/MobileConsentsSDK?label=latest%20release)
+﻿![cocapods spec version badge](https://img.shields.io/cocoapods/v/MobileConsentsSDK?label=latest%20release)
 
 # Mobile Consents SDK
 
@@ -70,7 +70,7 @@ let purpose = ProcessingPurpose(consentItemId: "consentItem.id", consentGiven: {
 consent.addProcessingPurpose(purpose)
 
 ```
-After seting up the Consent object you are ready to send it to server
+After setting up the Consent object you are ready to send it to the server
 ```swift
 mobileConsentsSDK.postConsent(consent) { error in
   /* if error is nil it means that post succeeded */
