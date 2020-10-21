@@ -65,7 +65,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         
         items.forEach { item in
             let selected = selectedItems.contains(where: { $0.id == item.id })
-            let purpose = Purpose(consentItemId: item.id, consentGiven: selected, language: language)
+            let purpose = ProcessingPurpose(consentItemId: item.id, consentGiven: selected, language: language)
             consent.addProcessingPurpose(purpose)
         }
         
