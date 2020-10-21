@@ -26,7 +26,7 @@ protocol MobileConsentSolutionViewModelProtocol {
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
-    private let mobileConsentsSDK = MobileConsentsSDK(withBaseURL: URL(string: "https://consents-gathering-app-staging.app.cookieinformation.com")!)
+    private let mobileConsentsSDK = MobileConsents(withBaseURL: URL(string: "https://consents-gathering-app-staging.app.cookieinformation.com")!)
     private var selectedItems: [ConsentItem] = []
     private var language: String?
     private var items: [ConsentItem] {

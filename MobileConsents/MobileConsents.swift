@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class MobileConsentsSDK {
+public final class MobileConsents {
     var environment: Environment = .staging
     
     private let networkManager: NetworkManager
@@ -69,7 +69,7 @@ public final class MobileConsentsSDK {
     }
 }
 
-extension MobileConsentsSDK {
+extension MobileConsents {
     func saveConsentResult(_ consent: Consent) {
         let consents = consent.processingPurposes.map({ [$0.consentItemId: $0.consentGiven] })
         localStorageManager.addConsentsArray(consents)
