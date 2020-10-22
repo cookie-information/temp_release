@@ -10,7 +10,7 @@ import XCTest
 
 final class ConsentTests: XCTestCase {
     func testJSONRepresentation() throws {
-        let purpose = Purpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
+        let purpose = ProcessingPurpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
         var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", customData: ["FIRST_DATA_KEY": "FIRST_DATA"])
         consent.addProcessingPurpose(purpose)
         let json = consent.JSONRepresentation()
@@ -19,7 +19,7 @@ final class ConsentTests: XCTestCase {
     }
 
     func testAddPurpose() throws {
-        let purpose = Purpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
+        let purpose = ProcessingPurpose(consentItemId: "CONSENT_ITEM_ID", consentGiven: true, language: "PL")
         var consent = Consent(consentSolutionId: "ID", consentSolutionVersionId: "VERSION_ID", customData: [:])
         consent.addProcessingPurpose(purpose)
         

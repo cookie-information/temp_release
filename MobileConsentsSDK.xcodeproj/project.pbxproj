@@ -18,7 +18,7 @@
 		1118117B252DAA4E007918FE /* MobileConsentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118117A252DAA4E007918FE /* MobileConsentError.swift */; };
 		111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CC4252C522100E93EE2 /* ConsentTests.swift */; };
 		111C7CC9252C528700E93EE2 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5192A251DEBCE00581FF4 /* Consent.swift */; };
-		111C7CCD252C52C200E93EE2 /* Purpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* Purpose.swift */; };
+		111C7CCD252C52C200E93EE2 /* ProcessingPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* ProcessingPurpose.swift */; };
 		111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */; };
 		111C7CD6252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */; };
 		111C7CDB252C970100E93EE2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CDA252C970100E93EE2 /* Date+Extensions.swift */; };
@@ -68,7 +68,7 @@
 		11B51921251DC95500581FF4 /* ConsentSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51920251DC95500581FF4 /* ConsentSolution.swift */; };
 		11B51925251DCA8000581FF4 /* ConsentTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51924251DCA8000581FF4 /* ConsentTranslation.swift */; };
 		11B5192B251DEBCE00581FF4 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5192A251DEBCE00581FF4 /* Consent.swift */; };
-		11B51943251E19A100581FF4 /* Purpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* Purpose.swift */; };
+		11B51943251E19A100581FF4 /* ProcessingPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* ProcessingPurpose.swift */; };
 		9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 		9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B8E95B72519C8B0001DF8BD /* MobileConsentsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */; };
@@ -161,7 +161,7 @@
 		11B51920251DC95500581FF4 /* ConsentSolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentSolution.swift; sourceTree = "<group>"; };
 		11B51924251DCA8000581FF4 /* ConsentTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentTranslation.swift; sourceTree = "<group>"; };
 		11B5192A251DEBCE00581FF4 /* Consent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
-		11B51942251E19A100581FF4 /* Purpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purpose.swift; sourceTree = "<group>"; };
+		11B51942251E19A100581FF4 /* ProcessingPurpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingPurpose.swift; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSDKTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -431,7 +431,7 @@
 				11B51920251DC95500581FF4 /* ConsentSolution.swift */,
 				11B51924251DCA8000581FF4 /* ConsentTranslation.swift */,
 				11B5192A251DEBCE00581FF4 /* Consent.swift */,
-				11B51942251E19A100581FF4 /* Purpose.swift */,
+				11B51942251E19A100581FF4 /* ProcessingPurpose.swift */,
 				1116CC1F252EF3C60080E01E /* SavedConsent.swift */,
 			);
 			path = Models;
@@ -631,6 +631,8 @@
 				111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
 				11B51925251DCA8000581FF4 /* ConsentTranslation.swift in Sources */,
 				1141FDE0251B4FEE00748076 /* Task.swift in Sources */,
+				11B51921251DC95500581FF4 /* ConsentSolution.swift in Sources */,
+				11B51943251E19A100581FF4 /* ProcessingPurpose.swift in Sources */,
 				1161EBE42525DB840078C76F /* LocalStorageManager.swift in Sources */,
 				11B5184B251C710700581FF4 /* APIService.swift in Sources */,
 				11B51859251C73B400581FF4 /* ConsentItem.swift in Sources */,
@@ -676,7 +678,7 @@
 				111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */,
 				112C42FD2535C65C004E115A /* UserDefaultsProtocol.swift in Sources */,
 				111C7CD6252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
-				111C7CCD252C52C200E93EE2 /* Purpose.swift in Sources */,
+				111C7CCD252C52C200E93EE2 /* ProcessingPurpose.swift in Sources */,
 				1116CB94252DFF4E0080E01E /* LocalStorageManagerTests.swift in Sources */,
 				112C427A25348FC2004E115A /* APIError.swift in Sources */,
 				111C7CE8252C976600E93EE2 /* String+Extensions.swift in Sources */,

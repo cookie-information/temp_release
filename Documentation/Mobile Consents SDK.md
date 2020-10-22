@@ -1,13 +1,21 @@
-﻿# Mobile Consents SDK
+﻿![cocapods spec version badge](https://img.shields.io/cocoapods/v/MobileConsentsSDK?label=latest%20release)
+
+# Mobile Consents SDK
 
 # Installation
-
+MobileConsentsSDK is available through [CocoaPods](https://cocoapods.org). To install it, simply add the following line to your Podfile:
+```ruby
+pod 'MobileConsentsSDK'
+```
+Then run `pod install`.
 
 # Using the SDK
 
 ## Initializing
 
 ```swift 
+import MobileConsentsSDK
+
 let serverURL = URL(string: "{address_of_the_server_to_send_consent}")!
 let mobileConsentsSDK = MobileConsents(withBaseURL: serverURL)
 ```
@@ -17,7 +25,7 @@ let mobileConsentsSDK = MobileConsents(withBaseURL: serverURL)
 mobileConsentsSDK.fetchConsentSolution(forUniversalConsentSolutionId: "consent solution identifier", completion: { result in
 	switch result {
 	case .success(let consentSolution):
-	  /* here you can maek use of fetched ConsentSolution object */
+	  /* here you can make use of fetched ConsentSolution object */
 	case .failure(let error):
 	  /* here you can handle error from fetching te content solution */
 	}
@@ -56,9 +64,9 @@ var consent = Consent(consentSolutionId: "consentSolution.id", consentSolutionVe
 Then you have to add processing purposes which contains a given consents
 
 ```swift
-/* given consents are included in main consent object as Purposes objects which you can add to Consent object using `addProcessingPurpose` function */
+/* given consents are included in main consent object as ProcessingPurpose objects which you can add to Consent object using `addProcessingPurpose` function */
 
-let purpose = Purpose(consentItemId: "consentItem.id", consentGiven: {true / false}, language: "en")
+let purpose = ProcessingPurpose(consentItemId: "consentItem.id", consentGiven: {true / false}, language: "en")
 consent.addProcessingPurpose(purpose)
 
 ```
@@ -68,7 +76,7 @@ mobileConsentsSDK.postConsent(consent) { error in
   /* if error is nil it means that post succeeded */
 }
 ```
-## Getting lacally saved consents data
+## Getting locally saved consents data
 ```swift
 let savedData:[SavedConsent] = mobileConsentsSDK.getSavedConsents()
 ```
@@ -80,7 +88,7 @@ struct  SavedConsent {
 }
 ```
 
-## Canceling last save request
+## Canceling last post to server request
 ```swift
 mobileConsentsSDK.cancel()
 ```

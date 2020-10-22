@@ -12,7 +12,7 @@ public struct Consent {
     public let consentSolutionId: String
     public let consentSolutionVersionId: String
     public let timestamp: Date
-    public var processingPurposes: [Purpose]
+    public var processingPurposes: [ProcessingPurpose]
     public let customData: [String: String]?
     
     public init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: String]? = [:]) {
@@ -23,7 +23,7 @@ public struct Consent {
         self.customData = customData
     }
     
-    public mutating func addProcessingPurpose(_ purpose: Purpose) {
+    public mutating func addProcessingPurpose(_ purpose: ProcessingPurpose) {
         processingPurposes.append(purpose)
     }
     
