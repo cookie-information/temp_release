@@ -14,7 +14,7 @@ enum APIService: EndpointType {
     
     var environmentBaseURL: String {
         switch NetworkManager.environment {
-        case .production: return "https://produrl.com"
+        case .production: return "https://cdnapi-prod.azureedge.net/v1/"
         case .staging: return "https://cdnapi-staging.azureedge.net/v1/"
         }
     }
@@ -59,7 +59,6 @@ enum APIService: EndpointType {
     }
     
     var sampleData: Data {
-        // TODO: will be refactored for unit testing purposes
         switch self {
         case .getConsents(let uuid):
             return uuid.data(using: .utf8) ?? Data()

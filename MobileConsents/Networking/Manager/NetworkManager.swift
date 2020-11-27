@@ -36,7 +36,7 @@ enum NetworkResult<T> {
 }
 
 final class NetworkManager {
-    static let environment: Environment = .staging
+    static let environment: Environment = .production
     private let provider = Provider<APIService>()
     private let baseURL: URL
     private let localStorageManager: LocalStorageManagerProtocol
