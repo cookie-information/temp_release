@@ -28,7 +28,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     
     private enum Constants {
         static let defaultLanguage = "EN"
-        static let sampleIdentifier = "843ddd4a-3eae-4286-a17b-0e8d3337e767"
+        static let sampleIdentifier = "19e927e8-5767-4f11-93dd-4dec4d57456e"
         static let buttonCornerRadius: CGFloat = 5.0
     }
     
