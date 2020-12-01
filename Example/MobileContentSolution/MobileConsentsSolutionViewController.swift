@@ -53,6 +53,9 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         getButton.setCornerRadius(Constants.buttonCornerRadius)
         sendButton.setCornerRadius(Constants.buttonCornerRadius)
         
+        identifierTextField.delegate = self
+        languageTextField.delegate = self
+        
         sendButton.setEnabled(false)
     }
     
@@ -61,6 +64,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     }
     
     @IBAction private func getAction() {
+        view.endEditing(true)
         fetchData()
     }
     
@@ -150,5 +154,12 @@ extension MobileConsentsSolutionViewController: ConsentItemDetailsTableViewCellD
 
         viewModel.handleItemCheck(item)
         tableView.reloadRows(at: [indexPath], with: .none)
+    }
+}
+
+extension MobileConsentsSolutionViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
