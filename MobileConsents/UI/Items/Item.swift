@@ -18,8 +18,8 @@ protocol Item {
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView)
 }
 
-class BaseItem {
-    let numberOfCells = 1
+extension Item {
+    var numberOfCells: Int { 1 }
     
     func height(forCellAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension

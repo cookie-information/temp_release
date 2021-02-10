@@ -43,8 +43,8 @@ final class LongTextItem: Item {
         switch indexPath.row {
         case 0:
             isExpanded.toggle()
-            
-//            tableView.reloadRows(at: [IndexPath(row: 1, section: indexPath.section)], with: .automatic)
+            (tableView.cellForRow(at: indexPath) as? HeaderTableViewCell)?.setIsExpanded(isExpanded, animated: true)
+
             tableView.beginUpdates()
             tableView.endUpdates()
         default:
@@ -66,6 +66,7 @@ final class LongTextItem: Item {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.header, for: indexPath) as! HeaderTableViewCell
         
         cell.setTitle(title)
+        cell.setIsExpanded(isExpanded, animated: false)
         
         return cell
     }

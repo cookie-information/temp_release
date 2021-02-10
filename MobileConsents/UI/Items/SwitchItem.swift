@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SwitchItem: BaseItem, Item {
+final class SwitchItem: Item {
     private static let cellIdentifier = "SwitchItem"
     
     static func registerCells(in tableView: UITableView) {
