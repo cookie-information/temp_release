@@ -67,6 +67,12 @@ public final class MobileConsents {
     public func cancel() {
         networkManager.cancel()
     }
+    
+    public static func showFullScreenConsents() {
+        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+        
+        keyWindow?.rootViewController?.present(FullScreenConsentsViewController(), animated: true, completion: nil)
+    }
 }
 
 extension MobileConsents {

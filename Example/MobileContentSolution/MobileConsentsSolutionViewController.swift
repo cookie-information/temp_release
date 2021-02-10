@@ -43,6 +43,8 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()
+        
+        MobileConsents.showFullScreenConsents()
     }
     
     private func setupAppearance() {
