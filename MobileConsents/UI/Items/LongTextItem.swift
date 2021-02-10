@@ -24,7 +24,7 @@ final class LongTextItem: Item {
     private let title: String
     private let text: String
     
-    private var isExpanded = true
+    private var isExpanded = false
     
     init(title: String, text: String) {
         self.title = title

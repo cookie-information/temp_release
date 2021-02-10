@@ -31,12 +31,9 @@ final class HeaderTableViewCell: UITableViewCell {
         contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        let bottomConstrant = label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-        bottomConstrant.priority = .fittingSizeLevel
-        
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            bottomConstrant,
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])

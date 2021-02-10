@@ -13,8 +13,10 @@ final class FullScreenConsentsViewController: UIViewController {
     private let items: ItemCollection = ItemCollection(items: [
         LongTextItem(title: "Example title 1", text: String.loremIpsum(paragraphs: 1)),
         LongTextItem(title: "Example title 2", text: String.loremIpsum(paragraphs: 1)),
+        SwitchItem(title: "Example switch 1", isOn: false),
         LongTextItem(title: "Example title 3", text: String.loremIpsum(paragraphs: 1)),
-        LongTextItem(title: "Example title 4", text: String.loremIpsum(paragraphs: 1))
+        LongTextItem(title: "Example title 4", text: String.loremIpsum(paragraphs: 1)),
+        SwitchItem(title: "Example switch 2", isOn: true)
     ])
     
     private let tableView = UITableView()
@@ -43,9 +45,10 @@ final class FullScreenConsentsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        [
-            LongTextItem.self
-        ].forEach {
+        ([
+            LongTextItem.self,
+            SwitchItem.self
+        ] as [Item.Type]).forEach {
             $0.registerCells(in: tableView)
         }
     }
@@ -57,20 +60,20 @@ extension FullScreenConsentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items.item(at: section).numberOfCells
+        items[section].numberOfCells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        items.item(at: indexPath).cell(for: indexPath, in: tableView)
+        items[indexPath].cell(for: indexPath, in: tableView)
     }
 }
 
 extension FullScreenConsentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        items.item(at: indexPath).height(forCellAt: indexPath)
+        items[indexPath].height(forCellAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        items.item(at: indexPath).didSelectCell(at: indexPath, in: tableView)
+        items[indexPath].didSelectCell(at: indexPath, in: tableView)
     }
 }

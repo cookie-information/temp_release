@@ -18,6 +18,18 @@ protocol Item {
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView)
 }
 
+class BaseItem {
+    let numberOfCells = 1
+    
+    func height(forCellAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+}
+
 struct ItemCollection {
     private let items: [Item]
     
@@ -29,11 +41,11 @@ struct ItemCollection {
         self.items = items
     }
     
-    func item(at index: Int) -> Item {
+    subscript(index: Int) -> Item {
         items[index]
     }
     
-    func item(at indexPath: IndexPath) -> Item {
+    subscript(indexPath: IndexPath) -> Item {
         items[indexPath.section]
     }
 }
