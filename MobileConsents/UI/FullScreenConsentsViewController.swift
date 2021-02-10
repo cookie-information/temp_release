@@ -8,20 +8,16 @@
 
 import UIKit
 
-enum CellType {
-    case header(String)
-    case description(String)
-}
-
 final class FullScreenConsentsViewController: UIViewController {
-    private let content: [CellType] = [
-        .header("A"),
-        .description(String.loremIpsum(paragraphs: 1))
-    ]
+    
+    private let items: ItemCollection = ItemCollection(items: [
+        LongTextItem(title: "Example title 1", text: String.loremIpsum(paragraphs: 1)),
+        LongTextItem(title: "Example title 2", text: String.loremIpsum(paragraphs: 1)),
+        LongTextItem(title: "Example title 3", text: String.loremIpsum(paragraphs: 1)),
+        LongTextItem(title: "Example title 4", text: String.loremIpsum(paragraphs: 1))
+    ])
     
     private let tableView = UITableView()
-    
-    private var isExpanded = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,125 +40,37 @@ final class FullScreenConsentsViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: "Header")
-        tableView.register(ContentTableViewCell.self, forCellReuseIdentifier: "Content")
-        
         tableView.dataSource = self
         tableView.delegate = self
+        
+        [
+            LongTextItem.self
+        ].forEach {
+            $0.registerCells(in: tableView)
+        }
     }
 }
 
 extension FullScreenConsentsViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        items.numberOfSections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        content.count
+        items.item(at: section).numberOfCells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch content[indexPath.item] {
-        case .header(let header):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Header", for: indexPath)
-            
-            (cell as? HeaderTableViewCell)?.setTitle("\(header) \(indexPath)")
-            
-            return cell
-        case .description(let description):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Content", for: indexPath)
-            
-            (cell as? ContentTableViewCell)?.setText(description)
-            
-            return cell
-        }
+        items.item(at: indexPath).cell(for: indexPath, in: tableView)
     }
 }
 
 extension FullScreenConsentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch content[indexPath.row] {
-        case .header: return UITableView.automaticDimension
-        case .description: return isExpanded ? UITableView.automaticDimension : .zero
-        }
+        items.item(at: indexPath).height(forCellAt: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch content[indexPath.row] {
-        case .header:
-            isExpanded.toggle()
-            
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        case .description:
-            break
-        }
-        
-        tableView.deselectRow(at: indexPath, animated: false)
-    }
-}
-
-final class HeaderTableViewCell: UITableViewCell {
-    private let label = UILabel()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setTitle(_ title: String) {
-        label.text = title
-    }
-    
-    private func setup() {
-        contentView.backgroundColor = .lightGray
-        
-        contentView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        let bottomConstrant = label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-        bottomConstrant.priority = .fittingSizeLevel
-        
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            bottomConstrant,
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-        ])
-    }
-}
-
-final class ContentTableViewCell: UITableViewCell {
-    private let label = UILabel()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setText(_ text: String) {
-        label.text = text
-    }
-    
-    private func setup() {
-        label.numberOfLines = 0
-        
-        contentView.backgroundColor = .white
-        
-        contentView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-        ])
+        items.item(at: indexPath).didSelectCell(at: indexPath, in: tableView)
     }
 }
