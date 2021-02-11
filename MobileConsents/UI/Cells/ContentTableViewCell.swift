@@ -33,9 +33,13 @@ final class ContentTableViewCell: UITableViewCell {
         contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         
+        let bottomConstraint = label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+        
+        bottomConstraint.priority = .defaultHigh
+        
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            bottomConstraint,
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])

@@ -13,10 +13,10 @@ final class FullScreenConsentsViewController: UIViewController {
     private let items: ItemCollection = ItemCollection(items: [
         LongTextItem(title: "Example title 1", text: String.loremIpsum(paragraphs: 1)),
         LongTextItem(title: "Example title 2", text: String.loremIpsum(paragraphs: 1)),
-        SwitchItem(title: "Example switch 1", isOn: false),
         LongTextItem(title: "Example title 3", text: String.loremIpsum(paragraphs: 1)),
         LongTextItem(title: "Example title 4", text: String.loremIpsum(paragraphs: 1)),
-        SwitchItem(title: "Example switch 2", isOn: true)
+        SwitchItem(title: "Example switch 2", isOn: true),
+        SwitchItem(title: "Example switch 1", isOn: false)
     ])
     
     private let tableView = UITableView()
