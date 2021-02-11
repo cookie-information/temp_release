@@ -29,10 +29,8 @@ final class FontLoader {
             return
         }
         
-        var error: Unmanaged<CFError>? = nil
-        
-        if !CTFontManagerRegisterGraphicsFont(font, &error) {
-            print("Failed to register font: \(error?.takeUnretainedValue().localizedDescription ?? "")")
+        if !CTFontManagerRegisterGraphicsFont(font, nil) {
+            NSLog("MobileConsentsSDK - failed to register font \(name). Font might be already loaded")
         }
     }
 }
