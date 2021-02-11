@@ -88,7 +88,7 @@ extension UITextView {
               <head>
                 <style>
                   body {
-                    font-family: -apple-system;
+                    font-family: Rubik;
                     font-size: 12pt;
                   }
                   a {
