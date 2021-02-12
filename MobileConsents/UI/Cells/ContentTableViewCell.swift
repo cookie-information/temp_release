@@ -9,7 +9,7 @@
 import UIKit
 
 final class ContentTableViewCell: UITableViewCell {
-    private let textView = UITextView()
+    private let textView = HTMLTextView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,11 +22,9 @@ final class ContentTableViewCell: UITableViewCell {
     }
     
     func setText(_ text: String) {
-//        textView.text = text
+        let htmlString = "Lorem ipsum privacy <a href=\"https://www.apple.com\">I accept terms and conditions</a> The data collected includes:<br><ul><li>Your <b>shoe</b> <i>size</i></li><li>Your <b><em>head</em></b> size</li></ul>"
         
-        let htmlString = "<a href=\"https://www.apple.com\">Visit website</a> The data collected includes:<br><ul><li>Your <b>shoe</b> size</li></ul>"
-        
-        textView.setHTMLText(htmlString)
+        textView.htmlText = htmlString
     }
     
     private func setup() {
@@ -35,6 +33,35 @@ final class ContentTableViewCell: UITableViewCell {
         textView.font = .systemFont(ofSize: 18)
         textView.delegate = self
         textView.linkTextAttributes = [:]
+        
+        let bodyColor: UIColor
+        
+        if #available(iOS 13.0, *) {
+            bodyColor = UIColor(dynamicProvider: { traitCollection in
+                switch traitCollection.userInterfaceStyle {
+                case .dark: return UIColor.white
+                default: return UIColor.black
+                }
+            })
+        } else {
+            bodyColor = .black
+        }
+        
+        textView.style = [
+            "body": [
+                "font-family": "Rubik",
+                "font-size": "12pt",
+                "color": .init { bodyColor.hexString }
+            ],
+            "a": [
+                "font-weight": "bold",
+                "text-decoration": "none",
+                "color": .init { bodyColor.hexString }
+            ],
+            "li": [
+                "list-style-position": "inside"
+            ]
+        ]
         
         contentView.backgroundColor = .white
         
@@ -59,54 +86,5 @@ extension ContentTableViewCell: UITextViewDelegate {
         print(URL)
         
         return false
-    }
-}
-
-extension NSAttributedString {
-     static func fromHTML(_ html: String) -> NSAttributedString? {
-        guard let data = html.data(using: .utf8) else {
-            return nil
-        }
-        let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        
-        return try? NSAttributedString(
-            data: data,
-            options: options,
-            documentAttributes: nil
-        )
-    }
-}
-
-extension UITextView {
-    func setHTMLText(_ htmlText: String) {
-        let htmlTemplate = """
-            <!doctype html>
-            <html>
-              <head>
-                <style>
-                  body {
-                    font-family: Rubik;
-                    font-size: 12pt;
-                  }
-                  a {
-                    font-weight: bold;
-                    text-decoration: none;
-                    color: black;
-                  }
-                  li {
-                    list-style-position: inside;
-                  }
-                </style>
-              </head>
-              <body>
-                \(htmlText)
-              </body>
-            </html>
-            """
-        
-        attributedText = NSAttributedString.fromHTML(htmlTemplate)
     }
 }

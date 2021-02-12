@@ -82,6 +82,7 @@
 		916293EF25D5A925004820C7 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EB25D5A925004820C7 /* Rubik-Medium.ttf */; };
 		916293F025D5A925004820C7 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EC25D5A925004820C7 /* Rubik-Regular.ttf */; };
 		916293F625D5AA94004820C7 /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916293F525D5AA94004820C7 /* FontLoader.swift */; };
+		91CD980D25D6B881001CAC83 /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD980C25D6B881001CAC83 /* HTMLTextView.swift */; };
 		9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 		9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B8E95B72519C8B0001DF8BD /* MobileConsentsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */; };
@@ -188,6 +189,7 @@
 		916293EB25D5A925004820C7 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		916293EC25D5A925004820C7 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		916293F525D5AA94004820C7 /* FontLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontLoader.swift; sourceTree = "<group>"; };
+		91CD980C25D6B881001CAC83 /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSDKTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -468,6 +470,7 @@
 		910AF04325D3C3B000D5F2BF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				91CD980B25D6B86C001CAC83 /* Views */,
 				910AF06925D4038E00D5F2BF /* Cells */,
 				910AF05A25D3FE0700D5F2BF /* Items */,
 				910AF04425D3C3E400D5F2BF /* FullScreenConsentsViewController.swift */,
@@ -506,6 +509,14 @@
 				916293EC25D5A925004820C7 /* Rubik-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		91CD980B25D6B86C001CAC83 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				91CD980C25D6B881001CAC83 /* HTMLTextView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		9B8E95B52519C8B0001DF8BD /* MobileConsentsTests */ = {
@@ -725,6 +736,7 @@
 				11B51831251C69F700581FF4 /* JSONParameterEncoder.swift in Sources */,
 				11B51846251C6E7D00581FF4 /* URLParameterEncoder.swift in Sources */,
 				114D8FD7251B236500D8D113 /* EndpointType.swift in Sources */,
+				91CD980D25D6B881001CAC83 /* HTMLTextView.swift in Sources */,
 				1161EC59252B510F0078C76F /* PlatformInformationGenerator.swift in Sources */,
 				910AF06225D3FE2F00D5F2BF /* LongTextItem.swift in Sources */,
 				1116CC20252EF3C60080E01E /* SavedConsent.swift in Sources */,

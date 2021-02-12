@@ -1,0 +1,117 @@
+//
+//  HTMLTextView.swift
+//  MobileConsentsSDK
+//
+//  Created by Sebastian Osiński on 12/02/2021.
+//  Copyright © 2021 ClearCode. All rights reserved.
+//
+
+import UIKit
+
+final class HTMLTextView: UITextView {
+    struct StyleValue: ExpressibleByStringLiteral {
+        let expression: () -> String
+        
+        init(stringLiteral value: String) {
+            self.expression = { value }
+        }
+        
+        init(_ expression: @escaping () -> String) {
+            self.expression = expression
+        }
+    }
+    
+    var style: [String: [String: StyleValue]] = [:] {
+        didSet {
+            updateHTML()
+        }
+    }
+    
+    var htmlText: String? {
+        didSet {
+            updateHTML()
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+            updateHTML()
+        }
+    }
+    
+    private func updateHTML() {
+        guard let htmlText = htmlText else {
+            attributedText = nil
+            
+            return
+        }
+        
+        let htmlTemplate = """
+            <!doctype html>
+            <html>
+              <head>
+                <style>
+                  \(css(from: style))
+                </style>
+              </head>
+              <body>
+                \(htmlText)
+              </body>
+            </html>
+            """
+        
+        attributedText = NSAttributedString.fromHTML(htmlTemplate)
+    }
+    
+    private func css(from style: [String: [String: StyleValue]]) -> String {
+        var css = ""
+        
+        for (tag, styles) in style {
+            css += tag + "{"
+            
+            for (key, value) in styles {
+                css += key + ":" + value.expression() + ";"
+            }
+            
+            css += "}"
+        }
+        
+        return css
+    }
+}
+
+private extension NSAttributedString {
+     static func fromHTML(_ html: String) -> NSAttributedString? {
+        guard let data = html.data(using: .utf8) else {
+            return nil
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        return try? NSAttributedString(
+            data: data,
+            options: options,
+            documentAttributes: nil
+        )
+    }
+}
+
+extension UIColor {
+    var hexString: String {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return String(format: "#%06x", rgb)
+    }
+}
