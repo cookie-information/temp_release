@@ -33,12 +33,11 @@ final class HeaderTableViewCell: UITableViewCell {
     }
     
     private func setup() {
-        if #available(iOS 13.0, *) {
-            chevronIconView.image = UIImage(systemName: "chevron.left")
-            chevronIconView.tintColor = .black
-        }
+        chevronIconView.image = UIImage(named: "headerChevron", in: Bundle(for: Self.self), compatibleWith: nil)
         
-        contentView.backgroundColor = .lightGray
+        contentView.backgroundColor = .headerBackground
+        label.textColor = .headerText
+        label.font = .regular(size: 13)
         
         contentView.addSubview(label)
         contentView.addSubview(chevronIconView)
@@ -46,11 +45,11 @@ final class HeaderTableViewCell: UITableViewCell {
         chevronIconView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 29),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            chevronIconView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8),
-            chevronIconView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -16),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
+            chevronIconView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 9),
+            chevronIconView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -27),
             chevronIconView.centerYAnchor.constraint(equalTo: label.centerYAnchor)
         ])
     }

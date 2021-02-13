@@ -50,7 +50,7 @@ final class ContentTableViewCell: UITableViewCell {
         textView.style = [
             "body": [
                 "font-family": "Rubik",
-                "font-size": "12pt",
+                "font-size": "13pt",
                 "color": .init { bodyColor.hexString }
             ],
             "a": [

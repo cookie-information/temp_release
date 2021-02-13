@@ -30,6 +30,8 @@ final class FullScreenConsentsViewController: UIViewController {
     }
     
     private func setup() {
+        tableView.separatorInset = .zero
+        tableView.separatorColor = .privacyCenterSeparator
         tableView.tableFooterView = UIView()
         
         view.addSubview(tableView)
