@@ -22,7 +22,7 @@ final class ContentTableViewCell: UITableViewCell {
     }
     
     func setText(_ text: String) {
-        let htmlString = "Lorem ipsum privacy <a href=\"https://www.apple.com\">I accept terms and conditions</a> The data collected includes:<br><ul><li>Your <b>shoe</b> <i>size</i></li><li>Your <b><em>head</em></b> size</li></ul>"
+        let htmlString = "Lorem ipsum privacy<br> <a href=\"https://www.apple.com\">I accept terms and conditions</a><br>The data collected includes:<br><ul><li>Your <b>shoe</b> <i>size</i></li><li>Your <b><em>head</em></b> size</li></ul>"
         
         textView.htmlText = htmlString
     }

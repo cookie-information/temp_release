@@ -13,9 +13,13 @@ final class FontLoader {
     static func loadFonts() {
         [
             "Rubik-Light",
+            "Rubik-LightItalic",
             "Rubik-Medium",
+            "Rubik-MediumItalic",
             "Rubik-Regular",
-            "Rubik-Bold"
+            "Rubik-Italic",
+            "Rubik-Bold",
+            "Rubik-BoldItalic"
         ].forEach(loadFont)
     }
     
