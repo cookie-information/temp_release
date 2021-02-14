@@ -30,7 +30,6 @@ final class ContentTableViewCell: UITableViewCell {
     private func setup() {
         textView.isEditable = false
         textView.isScrollEnabled = false
-        textView.font = .systemFont(ofSize: 18)
         textView.delegate = self
         textView.linkTextAttributes = [:]
         

@@ -12,6 +12,9 @@ final class HeaderTableViewCell: UITableViewCell {
     private let label = UILabel()
     private let chevronIconView = UIImageView()
     
+    private var title: String?
+    private var isExpanded = false
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -23,21 +26,25 @@ final class HeaderTableViewCell: UITableViewCell {
     }
     
     func setTitle(_ title: String) {
-        label.text = title
+        self.title = title
+        
+        updateLabel()
     }
     
     func setIsExpanded(_ isExpanded: Bool, animated: Bool) {
+        self.isExpanded = isExpanded
+        
         UIView.animate(withDuration: animated ? 0.3 : 0.0) { [chevronIconView] in
             chevronIconView.transform = isExpanded ? .init(rotationAngle: -.pi / 2) : .identity
         }
         
-        if isExpanded {
-            label.attributedText = label.text.map {
-                NSAttributedString(string: $0, attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
-            }
-        } else {
-            label.text = label.text
-        }
+        updateLabel()
+    }
+    
+    private func updateLabel() {
+        let attributes: [NSAttributedString.Key: Any] = isExpanded ? [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue] : [:]
+        
+        label.attributedText = title.map { NSAttributedString(string: $0, attributes: attributes) }
     }
     
     private func setup() {
