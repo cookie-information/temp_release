@@ -33,18 +33,7 @@ final class ContentTableViewCell: UITableViewCell {
         textView.delegate = self
         textView.linkTextAttributes = [:]
         
-        let bodyColor: UIColor
-        
-        if #available(iOS 13.0, *) {
-            bodyColor = UIColor(dynamicProvider: { traitCollection in
-                switch traitCollection.userInterfaceStyle {
-                case .dark: return UIColor.white
-                default: return UIColor.black
-                }
-            })
-        } else {
-            bodyColor = .black
-        }
+        let bodyColor = UIColor.adaptive(light: .black, dark: .white)
         
         textView.style = [
             "body": [
