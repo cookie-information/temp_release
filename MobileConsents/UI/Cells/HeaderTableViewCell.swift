@@ -30,6 +30,14 @@ final class HeaderTableViewCell: UITableViewCell {
         UIView.animate(withDuration: animated ? 0.3 : 0.0) { [chevronIconView] in
             chevronIconView.transform = isExpanded ? .init(rotationAngle: -.pi / 2) : .identity
         }
+        
+        if isExpanded {
+            label.attributedText = label.text.map {
+                NSAttributedString(string: $0, attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue])
+            }
+        } else {
+            label.text = label.text
+        }
     }
     
     private func setup() {

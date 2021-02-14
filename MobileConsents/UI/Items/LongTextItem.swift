@@ -9,17 +9,14 @@
 import UIKit
 
 final class LongTextItem: Item {
-    private enum CellIdentifiers {
-        static let header = "LongTextItemHeader"
-        static let content = "LongTextItemContent"
-    }
-    
     static func registerCells(in tableView: UITableView) {
-        tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: CellIdentifiers.header)
-        tableView.register(ContentTableViewCell.self, forCellReuseIdentifier: CellIdentifiers.content)
+        tableView.register(HeaderTableViewCell.self)
+        tableView.register(ContentTableViewCell.self)
     }
     
-    let numberOfCells = 2
+    var numberOfCells: Int {
+        isExpanded ? 2 : 1
+    }
     
     private let title: String
     private let text: String
@@ -40,30 +37,20 @@ final class LongTextItem: Item {
     }
     
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
-        switch indexPath.row {
-        case 0:
-            isExpanded.toggle()
-            (tableView.cellForRow(at: indexPath) as? HeaderTableViewCell)?.setIsExpanded(isExpanded, animated: true)
-
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        default:
-            break
+        defer {
+            tableView.deselectRow(at: indexPath, animated: false)
         }
         
-        tableView.deselectRow(at: indexPath, animated: false)
-    }
-    
-    func height(forCellAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0: return UITableView.automaticDimension
-        case 1: return isExpanded ? UITableView.automaticDimension : .zero
-        default: fatalError("Incorrect row")
-        }
+        guard indexPath.row == 0 else { return }
+        
+        isExpanded.toggle()
+        (tableView.cellForRow(at: indexPath) as? HeaderTableViewCell)?.setIsExpanded(isExpanded, animated: true)
+        
+        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .fade)
     }
     
     private func headerCell(at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.header, for: indexPath) as! HeaderTableViewCell
+        let cell: HeaderTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         
         cell.setTitle(title)
         cell.setIsExpanded(isExpanded, animated: false)
@@ -72,7 +59,7 @@ final class LongTextItem: Item {
     }
     
     private func contentCell(at indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.content, for: indexPath) as! ContentTableViewCell
+        let cell: ContentTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         
         cell.setText(text)
         

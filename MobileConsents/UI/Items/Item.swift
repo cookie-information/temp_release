@@ -14,16 +14,11 @@ protocol Item {
     var numberOfCells: Int { get }
     
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell
-    func height(forCellAt indexPath: IndexPath) -> CGFloat
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView)
 }
 
 extension Item {
     var numberOfCells: Int { 1 }
-    
-    func height(forCellAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-    }
     
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
         tableView.deselectRow(at: indexPath, animated: false)

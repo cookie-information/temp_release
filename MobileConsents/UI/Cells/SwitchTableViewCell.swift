@@ -63,4 +63,3 @@ final class SwitchTableViewCell: UITableViewCell {
         valueChanged?(uiSwitch.isOn)
     }
 }
-

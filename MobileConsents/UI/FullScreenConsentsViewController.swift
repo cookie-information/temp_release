@@ -70,11 +70,7 @@ extension FullScreenConsentsViewController: UITableViewDataSource {
     }
 }
 
-extension FullScreenConsentsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        items[indexPath].height(forCellAt: indexPath)
-    }
-    
+extension FullScreenConsentsViewController: UITableViewDelegate {    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         items[indexPath].didSelectCell(at: indexPath, in: tableView)
     }
