@@ -41,6 +41,8 @@ final class SwitchTableViewCell: UITableViewCell {
     private func setup() {
         selectionStyle = .none
         
+        label.font = .regular(size: 13)
+        
         uiSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         
         contentView.addSubview(label)
@@ -52,10 +54,10 @@ final class SwitchTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
             uiSwitch.centerYAnchor.constraint(equalTo: label.centerYAnchor),
             uiSwitch.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8),
-            uiSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            uiSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -29)
         ])
     }
     

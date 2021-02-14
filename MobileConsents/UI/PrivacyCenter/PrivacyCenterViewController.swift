@@ -38,6 +38,15 @@ final class PrivacyCenterViewController: UIViewController {
     }
     
     private func setup() {
+        let acceptButton = UIButton()
+        acceptButton.setTitle("Accept", for: .normal)
+        acceptButton.setTitleColor(.white, for: .normal)
+        acceptButton.titleLabel?.font = .medium(size: 15)
+        acceptButton.contentEdgeInsets = .init(top: 2, left: 13, bottom: 2, right: 13)
+        acceptButton.setBackgroundImage(.resizableRoundedRect(color: .privacyCenterAcceptButton, cornerRadius: 4), for: .normal)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: acceptButton)
+        
         tableView.separatorInset = .zero
         tableView.separatorColor = .privacyCenterSeparator
         tableView.tableFooterView = UIView()

@@ -70,8 +70,10 @@ public final class MobileConsents {
     
     public static func showFullScreenConsents() {
         let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+        let viewController = UINavigationController(rootViewController: PrivacyCenterViewController())
+        viewController.modalPresentationStyle = .fullScreen
         
-        keyWindow?.rootViewController?.present(PrivacyCenterViewController(), animated: true, completion: nil)
+        keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
 }
 

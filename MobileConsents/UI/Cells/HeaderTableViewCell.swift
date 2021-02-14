@@ -26,7 +26,7 @@ final class HeaderTableViewCell: UITableViewCell {
     }
     
     func setTitle(_ title: String) {
-        self.title = title
+        self.title = title.uppercased()
         
         updateLabel()
     }
@@ -42,7 +42,13 @@ final class HeaderTableViewCell: UITableViewCell {
     }
     
     private func updateLabel() {
-        let attributes: [NSAttributedString.Key: Any] = isExpanded ? [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue] : [:]
+        var attributes: [NSAttributedString.Key: Any] = [
+            .kern: 1.2
+        ]
+        
+        if isExpanded {
+            attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
+        }
         
         label.attributedText = title.map { NSAttributedString(string: $0, attributes: attributes) }
     }
