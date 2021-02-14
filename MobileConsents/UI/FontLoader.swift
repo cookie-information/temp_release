@@ -10,7 +10,11 @@ import Foundation
 import CoreText
 
 final class FontLoader {
-    static func loadFonts() {
+    static func loadFontsIfNeeded() {
+        _ = loadFontsOnce
+    }
+    
+    private static let loadFontsOnce: Void = {
         [
             "Rubik-Light",
             "Rubik-LightItalic",
@@ -21,7 +25,7 @@ final class FontLoader {
             "Rubik-Bold",
             "Rubik-BoldItalic"
         ].forEach(loadFont)
-    }
+    }()
     
     private static func loadFont(name: String) {
         guard let font = Bundle(for: FontLoader.self)

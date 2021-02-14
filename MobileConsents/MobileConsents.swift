@@ -9,10 +9,6 @@
 import UIKit
 
 public final class MobileConsents {
-    private static let load: Void = {
-        FontLoader.loadFonts()
-    }()
-    
     var environment: Environment = .production
     
     private let networkManager: NetworkManager
@@ -28,9 +24,7 @@ public final class MobileConsents {
         self.init(withBaseURL: url, localStorageManager: LocalStorageManager())
     }
     
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManager) {
-        _ = Self.load
-        
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager) {        
         self.networkManager = NetworkManager(withBaseURL: url, localStorageManager: localStorageManager)
         self.localStorageManager = localStorageManager
     }

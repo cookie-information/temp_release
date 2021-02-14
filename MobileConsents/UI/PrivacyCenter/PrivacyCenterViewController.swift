@@ -10,14 +10,24 @@ import UIKit
 
 final class PrivacyCenterViewController: UIViewController {
     private let sections: [Section] = [
-        ConsentItemSection(title: "Example title 1", text: String.loremIpsum(paragraphs: 1)),
-        ConsentItemSection(title: "Example title 2", text: String.loremIpsum(paragraphs: 1)),
-        ConsentItemSection(title: "Example title 3", text: String.loremIpsum(paragraphs: 1)),
-        ConsentItemSection(title: "Example title 4", text: String.loremIpsum(paragraphs: 1)),
+        ConsentItemSection(title: "Example title 1", text: ""),
+        ConsentItemSection(title: "Example title 2", text: ""),
+        ConsentItemSection(title: "Example title 3", text: ""),
+        ConsentItemSection(title: "Example title 4", text: ""),
         PreferencesSection(title: "Example switch 2", isOn: true)
     ]
     
     private let tableView = UITableView()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        FontLoader.loadFontsIfNeeded()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
