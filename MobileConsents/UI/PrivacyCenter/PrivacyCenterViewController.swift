@@ -1,5 +1,5 @@
 //
-//  FullScreenConsentsViewController.swift
+//  PrivacyCenterViewController.swift
 //  MobileConsentsSDK
 //
 //  Created by Sebastian Osiński on 10/02/2021.
@@ -8,16 +8,14 @@
 
 import UIKit
 
-final class FullScreenConsentsViewController: UIViewController {
-    
-    private let items: ItemCollection = ItemCollection(items: [
-        LongTextItem(title: "Example title 1", text: String.loremIpsum(paragraphs: 1)),
-        LongTextItem(title: "Example title 2", text: String.loremIpsum(paragraphs: 1)),
-        LongTextItem(title: "Example title 3", text: String.loremIpsum(paragraphs: 1)),
-        LongTextItem(title: "Example title 4", text: String.loremIpsum(paragraphs: 1)),
-        SwitchItem(title: "Example switch 2", isOn: true),
-        SwitchItem(title: "Example switch 1", isOn: false)
-    ])
+final class PrivacyCenterViewController: UIViewController {
+    private let sections: [Section] = [
+        ConsentItemSection(title: "Example title 1", text: String.loremIpsum(paragraphs: 1)),
+        ConsentItemSection(title: "Example title 2", text: String.loremIpsum(paragraphs: 1)),
+        ConsentItemSection(title: "Example title 3", text: String.loremIpsum(paragraphs: 1)),
+        ConsentItemSection(title: "Example title 4", text: String.loremIpsum(paragraphs: 1)),
+        PreferencesSection(title: "Example switch 2", isOn: true)
+    ]
     
     private let tableView = UITableView()
     
@@ -48,30 +46,30 @@ final class FullScreenConsentsViewController: UIViewController {
         tableView.delegate = self
         
         ([
-            LongTextItem.self,
-            SwitchItem.self
-        ] as [Item.Type]).forEach {
+            ConsentItemSection.self,
+            PreferencesSection.self
+        ] as [Section.Type]).forEach {
             $0.registerCells(in: tableView)
         }
     }
 }
 
-extension FullScreenConsentsViewController: UITableViewDataSource {
+extension PrivacyCenterViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        items.numberOfSections
+        sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        items[section].numberOfCells
+        sections[section].numberOfCells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        items[indexPath].cell(for: indexPath, in: tableView)
+        sections[indexPath.section].cell(for: indexPath, in: tableView)
     }
 }
 
-extension FullScreenConsentsViewController: UITableViewDelegate {    
+extension PrivacyCenterViewController: UITableViewDelegate {    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        items[indexPath].didSelectCell(at: indexPath, in: tableView)
+        sections[indexPath.section].didSelectCell(at: indexPath, in: tableView)
     }
 }

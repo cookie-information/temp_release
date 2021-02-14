@@ -1,5 +1,5 @@
 //
-//  Item.swift
+//  Section.swift
 //  MobileConsentsSDK
 //
 //  Created by Sebastian Osiński on 10/02/2021.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol Item {
+protocol Section {
     static func registerCells(in tableView: UITableView)
     
     var numberOfCells: Int { get }
@@ -17,30 +17,10 @@ protocol Item {
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView)
 }
 
-extension Item {
+extension Section {
     var numberOfCells: Int { 1 }
     
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
         tableView.deselectRow(at: indexPath, animated: false)
-    }
-}
-
-struct ItemCollection {
-    private let items: [Item]
-    
-    var numberOfSections: Int {
-        items.count
-    }
-    
-    init(items: [Item]) {
-        self.items = items
-    }
-    
-    subscript(index: Int) -> Item {
-        items[index]
-    }
-    
-    subscript(indexPath: IndexPath) -> Item {
-        items[indexPath.section]
     }
 }

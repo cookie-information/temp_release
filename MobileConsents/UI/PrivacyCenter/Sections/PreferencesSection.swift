@@ -1,5 +1,5 @@
 //
-//  SwitchItem.swift
+//  PreferencesSection.swift
 //  MobileConsentsSDK
 //
 //  Created by Sebastian Osiński on 10/02/2021.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SwitchItem: Item {
+final class PreferencesSection: Section {
     static func registerCells(in tableView: UITableView) {
         tableView.register(HeaderTableViewCell.self)
         tableView.register(SwitchTableViewCell.self)

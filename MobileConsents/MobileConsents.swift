@@ -77,7 +77,7 @@ public final class MobileConsents {
     public static func showFullScreenConsents() {
         let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
         
-        keyWindow?.rootViewController?.present(FullScreenConsentsViewController(), animated: true, completion: nil)
+        keyWindow?.rootViewController?.present(PrivacyCenterViewController(), animated: true, completion: nil)
     }
 }
 

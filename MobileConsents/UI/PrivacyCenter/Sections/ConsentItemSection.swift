@@ -1,5 +1,5 @@
 //
-//  LongTextItem.swift
+//  ConsentItemSection.swift
 //  MobileConsentsSDK
 //
 //  Created by Sebastian Osiński on 10/02/2021.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LongTextItem: Item {
+final class ConsentItemSection: Section {
     static func registerCells(in tableView: UITableView) {
         tableView.register(HeaderTableViewCell.self)
         tableView.register(ContentTableViewCell.self)
