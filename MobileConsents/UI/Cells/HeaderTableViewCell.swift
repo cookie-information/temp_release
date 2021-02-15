@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HeaderTableViewCell: UITableViewCell {
+final class HeaderTableViewCell: BaseTableViewCell {
     private let label = UILabel()
     private let chevronIconView = UIImageView()
     
@@ -54,6 +54,7 @@ final class HeaderTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        isSeparatorHidden = false
         chevronIconView.image = UIImage(named: "headerChevron", in: Bundle(for: Self.self), compatibleWith: nil)
         
         contentView.backgroundColor = .headerBackground

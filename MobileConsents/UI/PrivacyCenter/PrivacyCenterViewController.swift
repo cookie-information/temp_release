@@ -47,8 +47,7 @@ final class PrivacyCenterViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: acceptButton)
         
-        tableView.separatorInset = .zero
-        tableView.separatorColor = .privacyCenterSeparator
+        tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         
         view.addSubview(tableView)

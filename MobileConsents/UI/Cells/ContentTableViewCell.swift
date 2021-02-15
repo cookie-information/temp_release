@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ContentTableViewCell: UITableViewCell {
+final class ContentTableViewCell: BaseTableViewCell {
     private let textView = HTMLTextView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,6 +28,8 @@ final class ContentTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        isSeparatorHidden = false
+        
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.delegate = self

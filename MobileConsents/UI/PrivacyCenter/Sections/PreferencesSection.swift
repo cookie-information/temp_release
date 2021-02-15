@@ -71,6 +71,7 @@ final class PreferencesSection: Section {
             
             let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             
+            cell.isSeparatorHidden = indexPath.row != (numberOfCells - 1) // Show separator only in last cell
             cell.setTitle("Preference \(adjustedRow)")
             cell.setValue(isOn[adjustedRow])
             cell.valueChanged = { [weak self] newValue in

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SwitchTableViewCell: UITableViewCell {
+final class SwitchTableViewCell: BaseTableViewCell {
     var valueChanged: ((Bool) -> Void)?
     
     private let uiSwitch = UISwitch()
@@ -28,6 +28,7 @@ final class SwitchTableViewCell: UITableViewCell {
         label.text = nil
         uiSwitch.isOn = false
         valueChanged = nil
+        isSeparatorHidden = true
     }
     
     func setTitle(_ title: String) {

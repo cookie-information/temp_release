@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SubheaderTableViewCell: UITableViewCell {
+final class SubheaderTableViewCell: BaseTableViewCell {
     private let label = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -26,6 +26,8 @@ final class SubheaderTableViewCell: UITableViewCell {
     }
     
     private func setup() {
+        isSeparatorHidden = false
+        
         contentView.backgroundColor = .headerBackground
         label.textColor = .privacyCenterText
         label.font = .regular(size: 11)
