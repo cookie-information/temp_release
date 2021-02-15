@@ -20,12 +20,20 @@ public final class MobileConsents {
     ///
     /// - Parameters:
     ///   - url: URL to server where Consents will be posted
-    public convenience init(withBaseURL url: URL) {
-        self.init(withBaseURL: url, localStorageManager: LocalStorageManager())
+    ///   - locale: Locale used for translations. Defaults to `Locale.autoupdatingCurrent`
+    public convenience init(withBaseURL url: URL, locale: Locale = .autoupdatingCurrent) {
+        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), locale: locale)
     }
     
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManager) {        
-        self.networkManager = NetworkManager(withBaseURL: url, localStorageManager: localStorageManager)
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, locale: Locale) {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.userInfo[translationLocale] = locale
+        
+        self.networkManager = NetworkManager(
+            withBaseURL: url,
+            jsonDecoder: jsonDecoder,
+            localStorageManager: localStorageManager
+        )
         self.localStorageManager = localStorageManager
     }
     

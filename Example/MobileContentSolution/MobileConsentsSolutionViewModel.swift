@@ -102,7 +102,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     func translation(for indexPath: IndexPath) -> ConsentTranslation? {
         guard sectionType(for: indexPath.section) == .items  else { return nil }
         
-        return items[safe: indexPath.row]?.translations[safe: indexPath.row - 1]
+        return items[safe: indexPath.row]?.translations.translations[safe: indexPath.row - 1]
     }
     
     func handleItemCheck(_ item: ConsentItem) {
