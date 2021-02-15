@@ -37,7 +37,10 @@ final class HTMLTextView: UITextView {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
-            updateHTML()
+            // Fixes crash caused by trait collection change when link in text view is tapped and external Safari opens
+            DispatchQueue.main.async {
+                self.updateHTML()
+            }
         }
     }
     
@@ -93,10 +96,16 @@ private extension NSAttributedString {
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
         
-        return try? NSAttributedString(
+        guard let attributedString = try? NSMutableAttributedString(
             data: data,
             options: options,
             documentAttributes: nil
-        )
+        ) else { return nil }
+        
+        if attributedString.string.last == "\n" {
+            attributedString.deleteCharacters(in: NSRange(location: attributedString.length - 1, length: 1))
+        }
+        
+        return attributedString
     }
 }

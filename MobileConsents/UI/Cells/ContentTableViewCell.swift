@@ -38,7 +38,7 @@ final class ContentTableViewCell: UITableViewCell {
         textView.style = [
             "body": [
                 "font-family": "Rubik",
-                "font-size": "13pt",
+                "font-size": "13px",
                 "color": .init { bodyColor.hexString }
             ],
             "a": [
@@ -57,10 +57,10 @@ final class ContentTableViewCell: UITableViewCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
 }
@@ -69,6 +69,6 @@ extension ContentTableViewCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         print(URL)
         
-        return false
+        return true
     }
 }
