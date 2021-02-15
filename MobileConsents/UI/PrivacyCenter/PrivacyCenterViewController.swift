@@ -9,18 +9,15 @@
 import UIKit
 
 final class PrivacyCenterViewController: UIViewController {
-    private let sections: [Section] = [
-        ConsentItemSection(title: "Example title 1", text: ""),
-        ConsentItemSection(title: "Example title 2", text: ""),
-        ConsentItemSection(title: "Example title 3", text: ""),
-        ConsentItemSection(title: "Example title 4", text: ""),
-        PreferencesSection(isOn: [true, false, true, false])
-    ]
+    private var sections = [Section]()
     
+    private let viewModel: PrivacyCenterViewModelProtocol
     private let tableView = UITableView()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(viewModel: PrivacyCenterViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
         
         FontLoader.loadFontsIfNeeded()
     }
@@ -38,6 +35,11 @@ final class PrivacyCenterViewController: UIViewController {
     }
     
     private func setup() {
+        setupLayout()
+        setupViewModel()
+    }
+    
+    private func setupLayout() {
         let acceptButton = UIButton()
         acceptButton.setTitle("Accept", for: .normal)
         acceptButton.setTitleColor(.white, for: .normal)
@@ -69,6 +71,15 @@ final class PrivacyCenterViewController: UIViewController {
         ] as [Section.Type]).forEach {
             $0.registerCells(in: tableView)
         }
+    }
+    
+    private func setupViewModel() {
+        viewModel.onDataLoaded = { [weak self] sections in
+            self?.sections = sections
+            self?.tableView.reloadData()
+        }
+        
+        viewModel.viewDidLoad()
     }
 }
 
