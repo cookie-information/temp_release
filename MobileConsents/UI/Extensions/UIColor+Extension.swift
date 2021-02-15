@@ -13,6 +13,7 @@ extension UIColor {
     static let headerText = UIColor(hex: 0xA0A0A0)
     static let privacyCenterSeparator = UIColor(hex: 0xE4E8F0)
     static let privacyCenterAcceptButton = UIColor(hex: 0x2E5BFF)
+    static let privacyCenterText = UIColor(hex: 0x596075)
 }
 
 extension UIColor {

@@ -14,7 +14,7 @@ final class PrivacyCenterViewController: UIViewController {
         ConsentItemSection(title: "Example title 2", text: ""),
         ConsentItemSection(title: "Example title 3", text: ""),
         ConsentItemSection(title: "Example title 4", text: ""),
-        PreferencesSection(title: "Example switch 2", isOn: true)
+        PreferencesSection(isOn: [true, false, true, false])
     ]
     
     private let tableView = UITableView()

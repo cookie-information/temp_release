@@ -33,7 +33,7 @@ final class ContentTableViewCell: UITableViewCell {
         textView.delegate = self
         textView.linkTextAttributes = [:]
         
-        let bodyColor = UIColor.adaptive(light: .black, dark: .white)
+        let bodyColor = UIColor.adaptive(light: .privacyCenterText, dark: .white)
         
         textView.style = [
             "body": [
