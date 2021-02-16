@@ -8,7 +8,31 @@
 
 import UIKit
 
+protocol PreferenceViewModelProtocol: AnyObject {
+    var title: String { get }
+    var isOn: Bool { get set }
+    
+//    var valueChanged: ((Bool) -> Void)? { get set }
+}
+
+final class PreferenceViewModel: PreferenceViewModelProtocol {
+    let title: String
+    
+    var isOn: Bool
+    
+    init(title: String, isOn: Bool) {
+        self.title = title
+        self.isOn = isOn
+    }
+}
+
 final class PreferencesSection: Section {
+    struct Translations {
+        let header: String
+        let poweredBy: String
+        let title: String
+    }
+    
     private enum Indices {
         static let header = 0
         static let poweredBy = 1
@@ -27,14 +51,16 @@ final class PreferencesSection: Section {
     }
     
     var numberOfCells: Int {
-        isExpanded ? (Indices.count + isOn.count) : 1
+        isExpanded ? (Indices.count + viewModels.count) : 1
     }
     
-    private var isOn: [Bool]
+    private let viewModels: [PreferenceViewModelProtocol]
+    private let translations: Translations
     private var isExpanded = true
     
-    init(isOn: [Bool]) {
-        self.isOn = isOn
+    init(viewModels: [PreferenceViewModelProtocol], translations: Translations) {
+        self.viewModels = viewModels
+        self.translations = translations
     }
     
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
@@ -51,34 +77,53 @@ final class PreferencesSection: Section {
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
         switch indexPath.row {
         case Indices.header:
-            let cell: HeaderTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.setTitle("Preferences")
-            cell.setIsExpanded(isExpanded, animated: false)
-            
-            return cell
+            return headerCell(for: indexPath, in: tableView)
         case Indices.poweredBy:
-            let cell: SubheaderTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.setTitle("Powered by Cookie Information")
-            
-            return cell
+            return poweredByCell(for: indexPath, in: tableView)
         case Indices.title:
-            let cell: TitleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.setTitle("CONSENT PREFERENCES")
-            
-            return cell
+            return titleCell(for: indexPath, in: tableView)
         default:
-            let adjustedRow = indexPath.row - Indices.count
-            
-            let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            
-            cell.isSeparatorHidden = indexPath.row != (numberOfCells - 1) // Show separator only in last cell
-            cell.setTitle("Preference \(adjustedRow)")
-            cell.setValue(isOn[adjustedRow])
-            cell.valueChanged = { [weak self] newValue in
-                self?.isOn[adjustedRow] = newValue
-            }
-            
-            return cell
+            return switchCell(for: indexPath, in: tableView)
         }
+    }
+    
+    private func headerCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        let cell: HeaderTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.setTitle(translations.header)
+        cell.setIsExpanded(isExpanded, animated: false)
+        
+        return cell
+    }
+    
+    private func poweredByCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        let cell: SubheaderTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.setTitle(translations.poweredBy)
+        
+        return cell
+    }
+    
+    private func titleCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        let cell: TitleTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.setTitle(translations.title)
+        
+        return cell
+    }
+    
+    private func switchCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        let adjustedRow = indexPath.row - Indices.count
+        
+        let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        
+        cell.isSeparatorHidden = indexPath.row != (numberOfCells - 1) // Show separator only in last cell
+        
+        let viewModel = viewModels[adjustedRow]
+        
+        cell.setTitle(viewModel.title)
+        cell.setValue(viewModel.isOn)
+        cell.valueChanged = { [weak viewModel] newValue in
+            viewModel?.isOn = newValue
+        }
+        
+        return cell
     }
 }
