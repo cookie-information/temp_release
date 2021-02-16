@@ -35,10 +35,12 @@ final class ContentTableViewCell: BaseTableViewCell {
         
         let bodyColor = UIColor.adaptive(light: .privacyCenterText, dark: .white)
         
+        let fontSize = { UIFontMetrics(forTextStyle: .body).scaledValue(for: 13) }
+        
         textView.style = [
             "body": [
                 "font-family": "Rubik",
-                "font-size": "13px",
+                "font-size": .init { "\(fontSize())px" },
                 "color": .init { bodyColor.hexString }
             ],
             "a": [
