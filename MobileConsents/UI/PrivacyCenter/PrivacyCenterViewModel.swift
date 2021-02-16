@@ -8,23 +8,39 @@
 
 import Foundation
 
+struct PrivacyCenterData {
+    struct Translations {
+        let title: String
+    }
+    
+    let translations: Translations
+    let sections: [Section]
+}
+
 protocol PrivacyCenterViewModelProtocol: AnyObject {
-    var onDataLoaded: (([Section]) -> Void)? { get set }
+    var onDataLoaded: ((PrivacyCenterData) -> Void)? { get set }
     
     func viewDidLoad()
     func acceptButtonTapped()
 }
 
 final class PrivacyCenterViewModel {
-    var onDataLoaded: (([Section]) -> Void)?
+    var onDataLoaded: ((PrivacyCenterData) -> Void)?
 }
 
 extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     func viewDidLoad() {
         let sections = SectionGenerator().generateSections(from: mockConsentSolution)
         
+        let data = PrivacyCenterData(
+            translations: .init(
+                title: mockConsentSolution.templateTexts.privacyCenterTitle.localeTranslation()?.text ?? ""
+            ),
+            sections: sections
+        )
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.onDataLoaded?(sections)
+            self.onDataLoaded?(data)
         }
     }
     

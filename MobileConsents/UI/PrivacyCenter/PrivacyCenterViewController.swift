@@ -74,8 +74,9 @@ final class PrivacyCenterViewController: UIViewController {
     }
     
     private func setupViewModel() {
-        viewModel.onDataLoaded = { [weak self] sections in
-            self?.sections = sections
+        viewModel.onDataLoaded = { [weak self] data in
+            self?.title = data.translations.title
+            self?.sections = data.sections
             self?.tableView.reloadData()
         }
         
