@@ -9,8 +9,6 @@
 import UIKit
 
 public final class MobileConsents {
-    var environment: Environment = .production
-    
     private let networkManager: NetworkManager
     private let localStorageManager: LocalStorageManager
     
