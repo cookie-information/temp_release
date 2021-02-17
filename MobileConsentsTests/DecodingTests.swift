@@ -159,4 +159,3 @@ private let expectedConsentSolution = ConsentSolution(
         )
     ]
 )
-

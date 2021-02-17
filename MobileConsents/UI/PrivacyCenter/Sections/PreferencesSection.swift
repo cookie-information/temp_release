@@ -46,7 +46,7 @@ final class PreferencesSection: Section {
             HeaderTableViewCell.self,
             SubheaderTableViewCell.self,
             TitleTableViewCell.self,
-            SwitchTableViewCell.self,
+            SwitchTableViewCell.self
         ].forEach(tableView.register)
     }
     
