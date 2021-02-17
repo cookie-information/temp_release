@@ -44,7 +44,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         super.viewDidLoad()
         setupAppearance()
         
-        MobileConsents.showFullScreenConsents()
+        MobileConsents.showPrivacyCenter()
     }
     
     private func setupAppearance() {

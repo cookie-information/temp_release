@@ -76,7 +76,7 @@ public final class MobileConsents {
         networkManager.cancel()
     }
     
-    public static func showFullScreenConsents() {
+    public static func showPrivacyCenter() {
         let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
         let viewModel = PrivacyCenterViewModel()
         let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))

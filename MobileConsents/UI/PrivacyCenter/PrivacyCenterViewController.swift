@@ -75,12 +75,38 @@ final class PrivacyCenterViewController: UIViewController {
     
     private func setupViewModel() {
         viewModel.onDataLoaded = { [weak self] data in
-            self?.title = data.translations.title
+            self?.setTitle(data.translations.title)
             self?.sections = data.sections
             self?.tableView.reloadData()
         }
         
         viewModel.viewDidLoad()
+    }
+    
+    private func setTitle(_ title: String) {
+        navigationItem.titleView = nil
+        
+        let label = UILabel()
+        label.text = title
+        label.font = .medium(size: 18)
+        
+        let imageView = UIImageView(image: UIImage(named: "downChevron", in: Bundle(for: Self.self), compatibleWith: nil))
+        
+        let stackView = UIStackView(arrangedSubviews: [label, imageView])
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.spacing = 10
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        
+        stackView.layoutIfNeeded()
+        stackView.sizeToFit()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = true
+        
+        navigationItem.titleView = stackView
     }
 }
 
