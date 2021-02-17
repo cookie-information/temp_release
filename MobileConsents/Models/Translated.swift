@@ -33,7 +33,7 @@ public struct Translated<T: Translation & Decodable & Equatable>: Decodable, Equ
     }
     
     public func localeTranslation() -> T? {
-        locale.flatMap(translation(with:))
+        locale.flatMap(translation(with:)) ?? translation(with: Locale(identifier: "EN"))
     }
 }
 
