@@ -11,8 +11,6 @@ import UIKit
 protocol PreferenceViewModelProtocol: AnyObject {
     var title: String { get }
     var isOn: Bool { get set }
-    
-//    var valueChanged: ((Bool) -> Void)? { get set }
 }
 
 final class PreferenceViewModel: PreferenceViewModelProtocol {
