@@ -6,6 +6,7 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
+@testable import MobileConsentsSDK
 import XCTest
 
 final class ConsentTests: XCTestCase {

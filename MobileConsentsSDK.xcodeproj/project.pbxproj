@@ -17,7 +17,6 @@
 		11181177252DA91A007918FE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11181176252DA91A007918FE /* BaseViewController.swift */; };
 		1118117B252DAA4E007918FE /* MobileConsentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1118117A252DAA4E007918FE /* MobileConsentError.swift */; };
 		111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CC4252C522100E93EE2 /* ConsentTests.swift */; };
-		111C7CC9252C528700E93EE2 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B5192A251DEBCE00581FF4 /* Consent.swift */; };
 		111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */; };
 		111C7CD6252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CD4252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift */; };
 		111C7CDB252C970100E93EE2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C7CDA252C970100E93EE2 /* Date+Extensions.swift */; };
@@ -73,6 +72,7 @@
 		910AF06225D3FE2F00D5F2BF /* ConsentItemSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06125D3FE2F00D5F2BF /* ConsentItemSection.swift */; };
 		910AF06625D400C300D5F2BF /* PreferencesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06525D400C300D5F2BF /* PreferencesSection.swift */; };
 		910AF06B25D4039B00D5F2BF /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */; };
+		913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */; };
 		916293ED25D5A925004820C7 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293E925D5A925004820C7 /* Rubik-Bold.ttf */; };
 		916293EE25D5A925004820C7 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EA25D5A925004820C7 /* Rubik-Light.ttf */; };
 		916293EF25D5A925004820C7 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EB25D5A925004820C7 /* Rubik-Medium.ttf */; };
@@ -200,6 +200,7 @@
 		910AF06125D3FE2F00D5F2BF /* ConsentItemSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentItemSection.swift; sourceTree = "<group>"; };
 		910AF06525D400C300D5F2BF /* PreferencesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesSection.swift; sourceTree = "<group>"; };
 		910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+FromHTML.swift"; sourceTree = "<group>"; };
 		916293E925D5A925004820C7 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		916293EA25D5A925004820C7 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
 		916293EB25D5A925004820C7 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
@@ -580,6 +581,7 @@
 				91CD982725D86257001CAC83 /* UIFont+Extension.swift */,
 				91CD982B25D97405001CAC83 /* UITableView+Reusable.swift */,
 				916C541125DA71B6000B7993 /* UIView+Extension.swift */,
+				913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -799,6 +801,7 @@
 				916C541225DA71B6000B7993 /* UIView+Extension.swift in Sources */,
 				111C7CE7252C976600E93EE2 /* String+Extensions.swift in Sources */,
 				1141FDA6251B343700748076 /* HTTPMethod.swift in Sources */,
+				913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */,
 				9172AD7E25DBB84100CB0FFC /* ProcessingPurpose.swift in Sources */,
 				112C42FC2535C65C004E115A /* UserDefaultsProtocol.swift in Sources */,
 				117BF216251A72770089C9E9 /* MobileConsents.swift in Sources */,
@@ -861,7 +864,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				112C42F62535C60B004E115A /* UserDefaults+Extensions.swift in Sources */,
-				111C7CC9252C528700E93EE2 /* Consent.swift in Sources */,
 				112C42EF2535B044004E115A /* MockedUserDefaults.swift in Sources */,
 				111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */,
 				112C42FD2535C65C004E115A /* UserDefaultsProtocol.swift in Sources */,

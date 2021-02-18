@@ -9,7 +9,9 @@
 import Foundation
 import CoreText
 
-final class FontLoader {
+private final class BundleLocator {}
+
+enum FontLoader {
     static func loadFontsIfNeeded() {
         _ = loadFontsOnce
     }
@@ -28,7 +30,7 @@ final class FontLoader {
     }()
     
     private static func loadFont(name: String) {
-        guard let font = Bundle(for: FontLoader.self)
+        guard let font = Bundle(for: BundleLocator.self)
             .path(forResource: name, ofType: "ttf")
             .flatMap(NSData.init(contentsOfFile:))
             .flatMap(CGDataProvider.init(data:))

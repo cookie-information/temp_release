@@ -36,4 +36,3 @@ public struct Translated<T: Translation & Decodable & Equatable>: Decodable, Equ
         locale.flatMap(translation(with:)) ?? translation(with: Locale(identifier: "EN"))
     }
 }
-

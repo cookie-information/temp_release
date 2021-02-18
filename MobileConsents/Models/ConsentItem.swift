@@ -7,8 +7,8 @@
 //
 
 public enum ConsentItemType: String, Decodable {
-    case setting = "setting"
-    case info = "info"
+    case setting
+    case info
 }
 
 public struct ConsentItem: Decodable, Equatable {
