@@ -89,6 +89,14 @@ public final class MobileConsents {
         
         keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
+    
+    public static func showPrivacyPopUp() {
+        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+        
+        let viewController = PrivacyPopUpViewController()
+        
+        keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
+    }
 }
 
 extension MobileConsents {

@@ -73,6 +73,8 @@
 		910AF06625D400C300D5F2BF /* PreferencesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06525D400C300D5F2BF /* PreferencesSection.swift */; };
 		910AF06B25D4039B00D5F2BF /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */; };
 		913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */; };
+		913A058225DE74FE00571BA3 /* PopUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */; };
+		913A058825DE7D3B00571BA3 /* PrivacyPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */; };
 		916293ED25D5A925004820C7 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293E925D5A925004820C7 /* Rubik-Bold.ttf */; };
 		916293EE25D5A925004820C7 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EA25D5A925004820C7 /* Rubik-Light.ttf */; };
 		916293EF25D5A925004820C7 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EB25D5A925004820C7 /* Rubik-Medium.ttf */; };
@@ -201,6 +203,8 @@
 		910AF06525D400C300D5F2BF /* PreferencesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesSection.swift; sourceTree = "<group>"; };
 		910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+FromHTML.swift"; sourceTree = "<group>"; };
+		913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPresentationController.swift; sourceTree = "<group>"; };
+		913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPopUpViewController.swift; sourceTree = "<group>"; };
 		916293E925D5A925004820C7 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		916293EA25D5A925004820C7 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
 		916293EB25D5A925004820C7 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 		910AF04325D3C3B000D5F2BF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				913A058025DE718E00571BA3 /* PopUp */,
 				91CD983725D97872001CAC83 /* PrivacyCenter */,
 				91CD981C25D85FEB001CAC83 /* Extensions */,
 				91CD980B25D6B86C001CAC83 /* Views */,
@@ -540,6 +545,15 @@
 				916C541525DA73AA000B7993 /* BaseTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		913A058025DE718E00571BA3 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */,
+				913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */,
+			);
+			path = PopUp;
 			sourceTree = "<group>";
 		};
 		916293E825D5A925004820C7 /* Fonts */ = {
@@ -795,6 +809,7 @@
 				916C542525DA8064000B7993 /* TemplateTexts.swift in Sources */,
 				112C42F52535C60B004E115A /* UserDefaults+Extensions.swift in Sources */,
 				11B51852251C728E00581FF4 /* NetworkManager.swift in Sources */,
+				913A058825DE7D3B00571BA3 /* PrivacyPopUpViewController.swift in Sources */,
 				910AF06B25D4039B00D5F2BF /* SwitchTableViewCell.swift in Sources */,
 				111C7CDB252C970100E93EE2 /* Date+Extensions.swift in Sources */,
 				11B5192B251DEBCE00581FF4 /* Consent.swift in Sources */,
@@ -806,6 +821,7 @@
 				112C42FC2535C65C004E115A /* UserDefaultsProtocol.swift in Sources */,
 				117BF216251A72770089C9E9 /* MobileConsents.swift in Sources */,
 				91CD981E25D85FFA001CAC83 /* UIColor+Extension.swift in Sources */,
+				913A058225DE74FE00571BA3 /* PopUpPresentationController.swift in Sources */,
 				111C7CE1252C972900E93EE2 /* Formatter+Extensions.swift in Sources */,
 				916C542125DA7A5B000B7993 /* TemplateTranslation.swift in Sources */,
 				91CD982C25D97405001CAC83 /* UITableView+Reusable.swift in Sources */,
