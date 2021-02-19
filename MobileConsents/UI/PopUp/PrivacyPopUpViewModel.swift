@@ -23,6 +23,8 @@ protocol PrivacyPopUpViewModelProtocol: AnyObject {
 final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     var onDataLoaded: ((PrivacyPopUpData) -> Void)?
     
+    var router: RouterProtocol?
+    
     func viewDidLoad() {
         let solution = mockConsentSolution
         
@@ -98,5 +100,12 @@ extension PrivacyPopUpViewModel: PopUpConsentViewModelDelegate {
 extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
     func buttonTapped(type: PopUpButtonViewModel.ButtonType) {
         print("Button \(type) tapped")
+        
+        switch type {
+        case .privacyCenter:
+            router?.showPrivacyCenter()
+        default:
+            ()
+        }
     }
 }
