@@ -9,12 +9,13 @@
 import UIKit
 
 final class PrivacyPopUpViewController: UIViewController {
+    private let titleView = PopUpTitleView()
     private let tableView = UITableView()
+    private let buttonsView = PopUpButtonsView()
     
     private var sections: [Section] = [
-        PopUpHeaderSection(),
-        PopUpConsentsSection(),
-        PopUpButtonsSection()
+        PopUpDescriptionSection(),
+        PopUpConsentsSection()
     ]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -31,26 +32,46 @@ final class PrivacyPopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         
+        view.addSubview(titleView)
         view.addSubview(tableView)
+        view.addSubview(buttonsView)
+        titleView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        buttonsView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            titleView.topAnchor.constraint(equalTo: view.topAnchor),
+            titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: titleView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonsView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            buttonsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            buttonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         ([
-            PopUpHeaderSection.self,
-            PopUpConsentsSection.self,
-            PopUpButtonsSection.self
+            PopUpDescriptionSection.self,
+            PopUpConsentsSection.self
         ] as [Section.Type]).forEach { $0.registerCells(in: tableView) }
         
         tableView.dataSource = self
+        
+        titleView.setText("Test title")
+        
+        buttonsView.setButtonViewModels([
+            PopUpButtonViewModel(title: "Read more", color: .popUpButton1),
+            PopUpButtonViewModel(title: "Reject all", color: .popUpButton1),
+            PopUpButtonViewModel(title: "Accept all", color: .popUpButton2),
+            PopUpButtonViewModel(title: "Accept selected", color: .popUpButton2)
+        ])
     }
 }
 

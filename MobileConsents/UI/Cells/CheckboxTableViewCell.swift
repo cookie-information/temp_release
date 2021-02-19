@@ -22,6 +22,10 @@ final class CheckboxTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setText(_ text: String, isRequired: Bool) {
+        textView.htmlText = text + (isRequired ? "<b>*</b>" : "")
+    }
+    
     private func setup() {
         selectionStyle = .none
         
@@ -32,9 +36,7 @@ final class CheckboxTableViewCell: UITableViewCell {
         
         textView.isScrollEnabled = false
         textView.isEditable = false
-        textView.textContainerInset = .zero//
         textView.style = contentStyle
-        textView.htmlText = "Lorem ipsum dolor sit amet<br>Lorem dorem borem"
         
         contentView.addSubview(checkbox)
         contentView.addSubview(textView)
