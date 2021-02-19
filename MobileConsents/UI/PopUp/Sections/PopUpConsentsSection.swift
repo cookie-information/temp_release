@@ -16,12 +16,20 @@ protocol PopUpConsentViewModelProtocol: AnyObject {
     func onSelectionChange(_ isSelected: Bool)
 }
 
+protocol PopUpConsentViewModelDelegate: AnyObject {
+    func consentSelectionDidChange(id: String, isSelected: Bool)
+}
+
 final class PopUpConsentViewModel: PopUpConsentViewModelProtocol {
     let text: String
     let isRequired: Bool
+    private let id: String
     private(set) var isSelected = false
     
-    init(text: String, isRequired: Bool) {
+    weak var delegate: PopUpConsentViewModelDelegate?
+    
+    init(id: String, text: String, isRequired: Bool) {
+        self.id = id
         self.text = text
         self.isRequired = isRequired
     }
@@ -29,7 +37,7 @@ final class PopUpConsentViewModel: PopUpConsentViewModelProtocol {
     func onSelectionChange(_ isSelected: Bool) {
         self.isSelected = isSelected
         
-        print("\(text) selection changed")
+        delegate?.consentSelectionDidChange(id: id, isSelected: isSelected)
     }
 }
 

@@ -15,12 +15,32 @@ protocol PopUpButtonViewModelProtocol {
     func onTap()
 }
 
-struct PopUpButtonViewModel: PopUpButtonViewModelProtocol {
-    var title: String
-    var color: UIColor
+protocol PopUpButtonViewModelDelegate: AnyObject {
+    func buttonTapped(type: PopUpButtonViewModel.ButtonType)
+}
+
+final class PopUpButtonViewModel: PopUpButtonViewModelProtocol {
+    enum ButtonType {
+        case privacyCenter
+        case rejectAll
+        case acceptAll
+        case acceptSelected
+    }
+    
+    let title: String
+    let color: UIColor
+    let type: ButtonType
+    
+    weak var delegate: PopUpButtonViewModelDelegate?
+    
+    init(title: String, color: UIColor, type: ButtonType) {
+        self.title = title
+        self.color = color
+        self.type = type
+    }
     
     func onTap() {
-        print("\(title) tapped")
+        delegate?.buttonTapped(type: type)
     }
 }
 

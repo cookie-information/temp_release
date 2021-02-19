@@ -33,20 +33,17 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             .consentItems
             .filter { $0.type == .setting }
             .map { item in
-                PopUpConsentViewModel(
+                let vm = PopUpConsentViewModel(
+                    id: item.id,
                     text: item.translations.localeTranslation()?.longText ?? "",
                     isRequired: item.required
                 )
+                vm.delegate = self
+                
+                return vm
             }
         
         let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
-        
-        let buttonViewModels: [PopUpButtonViewModelProtocol] = [
-            PopUpButtonViewModel(title: solution.templateTexts.privacyCenterButton.localeTranslation()?.text ?? "", color: .popUpButton1),
-            PopUpButtonViewModel(title: solution.templateTexts.rejectAllButton.localeTranslation()?.text ?? "", color: .popUpButton1),
-            PopUpButtonViewModel(title: solution.templateTexts.acceptAllButton.localeTranslation()?.text ?? "", color: .popUpButton2),
-            PopUpButtonViewModel(title: solution.templateTexts.acceptSelectedButton.localeTranslation()?.text ?? "", color: .popUpButton2)
-        ]
         
         let data = PrivacyPopUpData(
             title: title,
@@ -54,11 +51,52 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
                 descriptionSection,
                 consentsSection
             ],
-            buttonViewModels: buttonViewModels
+            buttonViewModels: buttonViewModels(templateTexts: solution.templateTexts)
         )
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.onDataLoaded?(data)
         }
+    }
+    
+    private func buttonViewModels(templateTexts: TemplateTexts) -> [PopUpButtonViewModelProtocol] {
+        let viewModels = [
+            PopUpButtonViewModel(
+                title: templateTexts.privacyCenterButton.localeTranslation()?.text ?? "",
+                color: .popUpButton1,
+                type: .privacyCenter
+            ),
+            PopUpButtonViewModel(
+                title: templateTexts.rejectAllButton.localeTranslation()?.text ?? "",
+                color: .popUpButton1,
+                type: .rejectAll
+            ),
+            PopUpButtonViewModel(
+                title: templateTexts.acceptAllButton.localeTranslation()?.text ?? "",
+                color: .popUpButton2,
+                type: .acceptAll
+            ),
+            PopUpButtonViewModel(
+                title: templateTexts.acceptSelectedButton.localeTranslation()?.text ?? "",
+                color: .popUpButton2,
+                type: .acceptSelected
+            )
+        ]
+        
+        viewModels.forEach { $0.delegate = self }
+        
+        return viewModels
+    }
+}
+
+extension PrivacyPopUpViewModel: PopUpConsentViewModelDelegate {
+    func consentSelectionDidChange(id: String, isSelected: Bool) {
+        print("Item \(id) selection changed to: \(isSelected)")
+    }
+}
+
+extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
+    func buttonTapped(type: PopUpButtonViewModel.ButtonType) {
+        print("Button \(type) tapped")
     }
 }
