@@ -13,13 +13,14 @@ final class PrivacyPopUpViewController: UIViewController {
     private let tableView = UITableView()
     private let buttonsView = PopUpButtonsView()
     
-    private var sections: [Section] = [
-        PopUpDescriptionSection(),
-        PopUpConsentsSection()
-    ]
+    private let viewModel: PrivacyPopUpViewModelProtocol
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    private var sections = [Section]()
+    
+    init(viewModel: PrivacyPopUpViewModelProtocol) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
         
         transitioningDelegate = self
         modalPresentationStyle = .custom
@@ -32,6 +33,11 @@ final class PrivacyPopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupLayout()
+        setupViewModel()
+    }
+    
+    private func setupLayout() {
         view.backgroundColor = .white
         
         tableView.separatorStyle = .none
@@ -63,15 +69,17 @@ final class PrivacyPopUpViewController: UIViewController {
         ] as [Section.Type]).forEach { $0.registerCells(in: tableView) }
         
         tableView.dataSource = self
+    }
+    
+    private func setupViewModel() {
+        viewModel.onDataLoaded = { [weak self] data in
+            self?.titleView.setText(data.title)
+            self?.buttonsView.setButtonViewModels(data.buttonViewModels)
+            self?.sections = data.sections
+            self?.tableView.reloadData()
+        }
         
-        titleView.setText("Test title")
-        
-        buttonsView.setButtonViewModels([
-            PopUpButtonViewModel(title: "Read more", color: .popUpButton1),
-            PopUpButtonViewModel(title: "Reject all", color: .popUpButton1),
-            PopUpButtonViewModel(title: "Accept all", color: .popUpButton2),
-            PopUpButtonViewModel(title: "Accept selected", color: .popUpButton2)
-        ])
+        viewModel.viewDidLoad()
     }
 }
 

@@ -9,6 +9,8 @@
 import UIKit
 
 final class CheckboxTableViewCell: UITableViewCell {
+    var valueChanged: ((Bool) -> Void)?
+    
     private let checkbox = UIButton()
     private let textView = HTMLTextView()
     
@@ -26,9 +28,15 @@ final class CheckboxTableViewCell: UITableViewCell {
         textView.htmlText = text + (isRequired ? "<b>*</b>" : "")
     }
     
+    func setIsSelected(_ isSelected: Bool) {
+        checkbox.isSelected = isSelected
+    }
+    
     private func setup() {
         selectionStyle = .none
         
+        checkbox.titleLabel?.font = .systemFont(ofSize: 1)
+//        checkbox.contentEdgeInsets = UIEdgeInsets(top: -8, left: 0, bottom: -8, right: 0)
         checkbox.setImage(UIImage(named: "checkbox", in: Bundle(for: Self.self), compatibleWith: nil), for: .normal)
         checkbox.setImage(UIImage(named: "checkboxSelected", in: Bundle(for: Self.self), compatibleWith: nil), for: .selected)
         
@@ -36,6 +44,7 @@ final class CheckboxTableViewCell: UITableViewCell {
         
         textView.isScrollEnabled = false
         textView.isEditable = false
+        textView.textContainerInset = .zero
         textView.style = contentStyle
         
         contentView.addSubview(checkbox)
@@ -43,6 +52,9 @@ final class CheckboxTableViewCell: UITableViewCell {
         
         checkbox.translatesAutoresizingMaskIntoConstraints = false
         textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        checkbox.setContentCompressionResistancePriority(.required, for: .horizontal)
+        textView.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
         
         NSLayoutConstraint.activate([
             checkbox.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -57,5 +69,7 @@ final class CheckboxTableViewCell: UITableViewCell {
     
     @objc private func checkboxTapped() {
         checkbox.isSelected.toggle()
+        
+        valueChanged?(checkbox.isSelected)
     }
 }

@@ -93,7 +93,8 @@ public final class MobileConsents {
     public static func showPrivacyPopUp() {
         let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
         
-        let viewController = PrivacyPopUpViewController()
+        let viewModel = PrivacyPopUpViewModel()
+        let viewController = PrivacyPopUpViewController(viewModel: viewModel)
         
         keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }

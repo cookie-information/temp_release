@@ -9,13 +9,19 @@
 import UIKit
 
 final class PopUpDescriptionSection: Section {
+    private let text: String
+    
     static func registerCells(in tableView: UITableView) {
         tableView.register(PopUpDescriptionTableViewCell.self)
     }
     
+    init(text: String) {
+        self.text = text
+    }
+    
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
         let cell: PopUpDescriptionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.setText("Test description")
+        cell.setText(text)
         
         return cell
     }

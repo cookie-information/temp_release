@@ -99,6 +99,7 @@
 		91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */; };
 		91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */; };
 		91B780C225DFC83C00B78B38 /* PopUpTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780C125DFC83C00B78B38 /* PopUpTitleView.swift */; };
+		91B780C625DFD0D000B78B38 /* PrivacyPopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780C525DFD0D000B78B38 /* PrivacyPopUpViewModel.swift */; };
 		91CD980D25D6B881001CAC83 /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD980C25D6B881001CAC83 /* HTMLTextView.swift */; };
 		91CD981625D6BB3E001CAC83 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91CD981225D6BB3E001CAC83 /* Rubik-BoldItalic.ttf */; };
 		91CD981725D6BB3E001CAC83 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91CD981325D6BB3E001CAC83 /* Rubik-MediumItalic.ttf */; };
@@ -233,6 +234,7 @@
 		91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConsentsSection.swift; sourceTree = "<group>"; };
 		91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonsView.swift; sourceTree = "<group>"; };
 		91B780C125DFC83C00B78B38 /* PopUpTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTitleView.swift; sourceTree = "<group>"; };
+		91B780C525DFD0D000B78B38 /* PrivacyPopUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPopUpViewModel.swift; sourceTree = "<group>"; };
 		91CD980C25D6B881001CAC83 /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 		91CD981225D6BB3E001CAC83 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
 		91CD981325D6BB3E001CAC83 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 				913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */,
 				91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */,
 				91B780C125DFC83C00B78B38 /* PopUpTitleView.swift */,
+				91B780C525DFD0D000B78B38 /* PrivacyPopUpViewModel.swift */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 				11B51859251C73B400581FF4 /* ConsentItem.swift in Sources */,
 				91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */,
 				910AF04525D3C3E400D5F2BF /* PrivacyCenterViewController.swift in Sources */,
+				91B780C625DFD0D000B78B38 /* PrivacyPopUpViewModel.swift in Sources */,
 				11B5183A251C6BA700581FF4 /* Provider.swift in Sources */,
 				91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */,
 				910AF05725D3F1D200D5F2BF /* ContentTableViewCell.swift in Sources */,
