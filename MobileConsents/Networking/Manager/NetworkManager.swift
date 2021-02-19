@@ -39,17 +39,24 @@ final class NetworkManager {
     static let environment: Environment = .production
     private let provider = Provider<APIService>()
     private let baseURL: URL
+    private let jsonDecoder: JSONDecoder
     private let localStorageManager: LocalStorageManagerProtocol
     private let platformInformationGenerator: PlatformInformationGeneratorProtocol
 
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(), platformInformationGenerator: PlatformInformationGeneratorProtocol = PlatformInformationGenerator()) {
+    init(
+        withBaseURL url: URL,
+        jsonDecoder: JSONDecoder,
+        localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(),
+        platformInformationGenerator: PlatformInformationGeneratorProtocol = PlatformInformationGenerator()
+    ) {
         self.baseURL = url
+        self.jsonDecoder = jsonDecoder
         self.localStorageManager = localStorageManager
         self.platformInformationGenerator = platformInformationGenerator
     }
     
     func getConsentSolution(forUUID uuid: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
-        provider.request(.getConsents(uuid: uuid)) { data, response, error in
+        provider.request(.getConsents(uuid: uuid)) { [jsonDecoder] data, response, error in
             guard let response = response as? HTTPURLResponse else {
                 return completion(.failure(NetworkResponseError.noProperResponse))
             }
@@ -60,7 +67,7 @@ final class NetworkManager {
                     completion(.failure(error))
                 } else if let data = data {
                     do {
-                        let consentSolution = try JSONDecoder().decode(ConsentSolution.self, from: data)
+                        let consentSolution = try jsonDecoder.decode(ConsentSolution.self, from: data)
                         completion(.success(consentSolution))
                     } catch {
                         completion(.failure(error))

@@ -6,12 +6,21 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-public struct ConsentItem: Codable {
+public enum ConsentItemType: String, Decodable {
+    case setting
+    case info
+}
+
+public struct ConsentItem: Decodable, Equatable {
     public let id: String
-    public let translations: [ConsentTranslation]
+    public let required: Bool
+    public let type: ConsentItemType
+    public let translations: Translated<ConsentTranslation>
     
     enum CodingKeys: String, CodingKey {
         case id = "universalConsentItemId"
         case translations
+        case required
+        case type
     }
 }

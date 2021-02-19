@@ -9,8 +9,6 @@
 import UIKit
 
 public final class MobileConsents {
-    var environment: Environment = .production
-    
     private let networkManager: NetworkManager
     private let localStorageManager: LocalStorageManager
     
@@ -20,12 +18,20 @@ public final class MobileConsents {
     ///
     /// - Parameters:
     ///   - url: URL to server where Consents will be posted
-    public convenience init(withBaseURL url: URL) {
-        self.init(withBaseURL: url, localStorageManager: LocalStorageManager())
+    ///   - locale: Locale used for translations. Defaults to `Locale.autoupdatingCurrent`
+    public convenience init(withBaseURL url: URL, locale: Locale = .autoupdatingCurrent) {
+        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), locale: locale)
     }
     
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManager) {
-        self.networkManager = NetworkManager(withBaseURL: url, localStorageManager: localStorageManager)
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, locale: Locale) {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.userInfo[translationLocale] = locale
+        
+        self.networkManager = NetworkManager(
+            withBaseURL: url,
+            jsonDecoder: jsonDecoder,
+            localStorageManager: localStorageManager
+        )
         self.localStorageManager = localStorageManager
     }
     
@@ -66,6 +72,22 @@ public final class MobileConsents {
     ///
     public func cancel() {
         networkManager.cancel()
+    }
+    
+    public static func showPrivacyCenter() {
+        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+        let viewModel = PrivacyCenterViewModel()
+        let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundColor = .white
+            viewController.navigationBar.standardAppearance = appearance
+        } else {
+            viewController.navigationBar.backgroundColor = .white
+        }
+        viewController.modalPresentationStyle = .fullScreen
+        
+        keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
 }
 
