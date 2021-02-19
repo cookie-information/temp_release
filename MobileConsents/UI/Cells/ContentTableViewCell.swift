@@ -33,25 +33,7 @@ final class ContentTableViewCell: BaseTableViewCell {
         textView.delegate = self
         textView.linkTextAttributes = [:]
         
-        let bodyColor = UIColor.adaptive(light: .privacyCenterText, dark: .white)
-        
-        let fontSize = { UIFontMetrics(forTextStyle: .body).scaledValue(for: 13) }
-        
-        textView.style = [
-            "body": [
-                "font-family": "Rubik",
-                "font-size": .init { "\(fontSize())px" },
-                "color": .init { bodyColor.hexString }
-            ],
-            "a": [
-                "font-weight": "bold",
-                "text-decoration": "none",
-                "color": .init { bodyColor.hexString }
-            ],
-            "li": [
-                "list-style-position": "inside"
-            ]
-        ]
+        textView.style = contentStyle
         
         contentView.backgroundColor = .white
         
@@ -74,3 +56,23 @@ extension ContentTableViewCell: UITextViewDelegate {
         return true
     }
 }
+
+let bodyColor = UIColor.adaptive(light: .privacyCenterText, dark: .white)
+
+let fontSize = { UIFontMetrics(forTextStyle: .body).scaledValue(for: 13) }
+
+let contentStyle: [String: [String: HTMLTextView.StyleValue]] = [
+    "body": [
+        "font-family": "Rubik",
+        "font-size": .init { "\(fontSize())px" },
+        "color": .init { bodyColor.hexString }
+    ],
+    "a": [
+        "font-weight": "bold",
+        "text-decoration": "none",
+        "color": .init { bodyColor.hexString }
+    ],
+    "li": [
+        "list-style-position": "inside"
+    ]
+]

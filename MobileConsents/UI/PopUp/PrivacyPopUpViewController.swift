@@ -9,6 +9,14 @@
 import UIKit
 
 final class PrivacyPopUpViewController: UIViewController {
+    private let tableView = UITableView()
+    
+    private var sections: [Section] = [
+        PopUpHeaderSection(),
+        PopUpConsentsSection(),
+        PopUpButtonsSection()
+    ]
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -23,7 +31,40 @@ final class PrivacyPopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
+        tableView.separatorStyle = .none
+        tableView.tableFooterView = UIView()
+        
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        ([
+            PopUpHeaderSection.self,
+            PopUpConsentsSection.self,
+            PopUpButtonsSection.self
+        ] as [Section.Type]).forEach { $0.registerCells(in: tableView) }
+        
+        tableView.dataSource = self
+    }
+}
+
+extension PrivacyPopUpViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        sections[section].numberOfCells
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        sections[indexPath.section].cell(for: indexPath, in: tableView)
     }
 }
 

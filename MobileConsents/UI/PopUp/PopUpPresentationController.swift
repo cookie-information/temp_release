@@ -31,5 +31,6 @@ final class PopUpPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         containerView?.backgroundColor = .popUpOverlay
         presentedView?.layer.cornerRadius = 5
+        presentedView?.layer.masksToBounds = true
     }
 }
