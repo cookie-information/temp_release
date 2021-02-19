@@ -48,6 +48,12 @@ final class PrivacyCenterViewController: UIViewController {
         acceptButton.setBackgroundImage(.resizableRoundedRect(color: .privacyCenterAcceptButton, cornerRadius: 4), for: .normal)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: acceptButton)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "backArrow", in: Bundle(for: Self.self), compatibleWith: nil),
+            style: .plain,
+            target: self,
+            action: #selector(backButtonTapped)
+        )
         
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
@@ -107,6 +113,10 @@ final class PrivacyCenterViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = true
         
         navigationItem.titleView = stackView
+    }
+    
+    @objc private func backButtonTapped() {
+        viewModel.backButtonTapped()
     }
 }
 

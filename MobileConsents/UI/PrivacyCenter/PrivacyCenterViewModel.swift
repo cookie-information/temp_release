@@ -22,10 +22,13 @@ protocol PrivacyCenterViewModelProtocol: AnyObject {
     
     func viewDidLoad()
     func acceptButtonTapped()
+    func backButtonTapped()
 }
 
 final class PrivacyCenterViewModel {
     var onDataLoaded: ((PrivacyCenterData) -> Void)?
+    
+    var router: RouterProtocol?
 }
 
 extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
@@ -46,6 +49,10 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     
     func acceptButtonTapped() {
         print("Accept button tapped")
+    }
+    
+    func backButtonTapped() {
+        router?.closePrivacyCenter()
     }
 }
 

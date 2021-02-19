@@ -10,6 +10,8 @@ import UIKit
 
 protocol RouterProtocol {
     func showPrivacyCenter()
+    
+    func closePrivacyCenter()
 }
 
 final class Router: RouterProtocol {
@@ -17,6 +19,7 @@ final class Router: RouterProtocol {
     
     func showPrivacyCenter() {
         let viewModel = PrivacyCenterViewModel()
+        viewModel.router = self
         let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
@@ -26,8 +29,12 @@ final class Router: RouterProtocol {
             viewController.navigationBar.backgroundColor = .white
         }
         
-        viewController.modalPresentationStyle = .fullScreen
+        viewController.modalPresentationStyle = .overFullScreen
         
         rootViewController?.present(viewController, animated: true)
+    }
+    
+    func closePrivacyCenter() {
+        rootViewController?.dismiss(animated: true)
     }
 }
