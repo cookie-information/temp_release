@@ -8,11 +8,22 @@
 
 import UIKit
 
+protocol CheckboxTableViewCellViewModel: AnyObject {
+    var text: String { get }
+    var isRequired: Bool { get }
+    var isSelected: Bool { get }
+    var onUpdate: ((CheckboxTableViewCellViewModel) -> Void)? { get set }
+    
+    func selectionDidChange(_ isSelected: Bool)
+}
+
 final class CheckboxTableViewCell: UITableViewCell {
     var valueChanged: ((Bool) -> Void)?
     
     private let checkbox = UIButton()
     private let textView = HTMLTextView()
+    
+    private var viewModel: CheckboxTableViewCellViewModel?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,8 +38,27 @@ final class CheckboxTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        viewModel?.onUpdate = nil
+        viewModel = nil
+        
+        valueChanged = nil
         textView.htmlText = nil
         checkbox.isSelected = false
+    }
+    
+    func setViewModel(_ viewModel: CheckboxTableViewCellViewModel) {
+        self.viewModel = viewModel
+        
+        setText(viewModel.text, isRequired: viewModel.isRequired)
+        setIsSelected(viewModel.isSelected)
+        
+        valueChanged = { [weak viewModel] isSelected in
+            viewModel?.selectionDidChange(isSelected)
+        }
+        
+        viewModel.onUpdate = { [weak self] viewModel in
+            self?.setIsSelected(viewModel.isSelected)
+        }
     }
     
     func setText(_ text: String, isRequired: Bool) {

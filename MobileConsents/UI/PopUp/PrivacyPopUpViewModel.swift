@@ -38,20 +38,7 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             let title = solution.title.localeTranslation()?.text ?? ""
             let descriptionSection = PopUpDescriptionSection(text: solution.description.localeTranslation()?.text ?? "")
             
-            let consentViewModels: [PopUpConsentViewModel] = solution
-                .consentItems
-                .filter { $0.type == .setting }
-                .map { item in
-                    let vm = PopUpConsentViewModel(
-                        id: item.id,
-                        text: item.translations.localeTranslation()?.longText ?? "",
-                        isRequired: item.required
-                    )
-                    vm.delegate = self
-                    
-                    return vm
-                }
-            
+            let consentViewModels = self.consentViewModels(from: solution)
             let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
             
             let data = PrivacyPopUpData(
@@ -65,6 +52,22 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         
             self.onDataLoaded?(data)
         }
+    }
+    
+    private func consentViewModels(from solution: ConsentSolution) -> [PopUpConsentViewModel] {
+        solution
+            .consentItems
+            .filter { $0.type == .setting }
+            .map { item in
+                let vm = PopUpConsentViewModel(
+                    id: item.id,
+                    text: item.translations.localeTranslation()?.longText ?? "",
+                    isRequired: item.required,
+                    consentItemProvider: consentSolutionManager
+                )
+                
+                return vm
+            }
     }
     
     private func buttonViewModels(templateTexts: TemplateTexts) -> [PopUpButtonViewModelProtocol] {
@@ -94,12 +97,6 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         viewModels.forEach { $0.delegate = self }
         
         return viewModels
-    }
-}
-
-extension PrivacyPopUpViewModel: PopUpConsentViewModelDelegate {
-    func consentSelectionDidChange(id: String, isSelected: Bool) {
-        print("Item \(id) selection changed to: \(isSelected)")
     }
 }
 

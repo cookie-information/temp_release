@@ -8,34 +8,61 @@
 
 import UIKit
 
-protocol PopUpConsentViewModelProtocol: AnyObject {
-    var text: String { get }
-    var isRequired: Bool { get }
-    var isSelected: Bool { get }
-    
-    func onSelectionChange(_ isSelected: Bool)
-}
-
+// TODO: Probably not needed, to remove
 protocol PopUpConsentViewModelDelegate: AnyObject {
     func consentSelectionDidChange(id: String, isSelected: Bool)
 }
 
-final class PopUpConsentViewModel: PopUpConsentViewModelProtocol {
+final class PopUpConsentViewModel: CheckboxTableViewCellViewModel {
     let text: String
     let isRequired: Bool
+    
+    var isSelected: Bool { consentItemProvider.isConsentItemSelected(id: id) }
+    var onUpdate: ((CheckboxTableViewCellViewModel) -> Void)?
+    
     private let id: String
-    private(set) var isSelected = false
+    private let consentItemProvider: ConsentItemProvider
+    private let notificationCenter: NotificationCenter
+    
+    private var observationToken: Any?
     
     weak var delegate: PopUpConsentViewModelDelegate?
     
-    init(id: String, text: String, isRequired: Bool) {
+    init(
+        id: String,
+        text: String,
+        isRequired: Bool,
+        consentItemProvider: ConsentItemProvider,
+        notificationCenter: NotificationCenter = NotificationCenter.default
+    ) {
         self.id = id
         self.text = text
         self.isRequired = isRequired
+        self.consentItemProvider = consentItemProvider
+        self.notificationCenter = notificationCenter
+        
+        observationToken = notificationCenter.addObserver(
+            forName: ConsentSolutionManager.consentItemSelectionDidChange,
+            object: nil,
+            queue: nil
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.onUpdate?(self)
+        }
     }
     
-    func onSelectionChange(_ isSelected: Bool) {
-        self.isSelected = isSelected
+    deinit {
+        if let observationToken = observationToken {
+            notificationCenter.removeObserver(observationToken)
+        }
+    }
+    
+    func selectionDidChangeExternally(_ isSelected: Bool) {
+        print("Selection did change externally")
+    }
+    
+    func selectionDidChange(_ isSelected: Bool) {
+        consentItemProvider.markConsentItem(id: id, asSelected: isSelected)
         
         delegate?.consentSelectionDidChange(id: id, isSelected: isSelected)
     }
@@ -46,9 +73,9 @@ final class PopUpConsentsSection: Section {
         tableView.register(CheckboxTableViewCell.self)
     }
     
-    private let viewModels: [PopUpConsentViewModelProtocol]
+    private let viewModels: [CheckboxTableViewCellViewModel]
     
-    init(viewModels: [PopUpConsentViewModelProtocol]) {
+    init(viewModels: [CheckboxTableViewCellViewModel]) {
         self.viewModels = viewModels
     }
     
@@ -58,11 +85,7 @@ final class PopUpConsentsSection: Section {
         let cell: CheckboxTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         let viewModel = viewModels[indexPath.row]
         
-        cell.setText(viewModel.text, isRequired: viewModel.isRequired)
-        cell.setIsSelected(viewModel.isSelected)
-        cell.valueChanged = { [weak viewModel] isSelected in
-            viewModel?.onSelectionChange(isSelected)
-        }
+        cell.setViewModel(viewModel)
         
         return cell
     }

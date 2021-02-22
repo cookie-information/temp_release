@@ -8,27 +8,60 @@
 
 import Foundation
 
-protocol ConsentSolutionManagerProtocol {
+protocol ConsentItemProvider {
+    func isConsentItemSelected(id: String) -> Bool
+    func markConsentItem(id: String, asSelected selected: Bool)
+}
+
+protocol ConsentSolutionManagerProtocol: ConsentItemProvider {
     func loadConsentSolutionIfNeeded(completion: @escaping (Result<ConsentSolution, Error>) -> Void)
 }
 
 final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
+    static let consentItemSelectionDidChange = Notification.Name(rawValue: "com.cookieinformation.consentItemSelectionDidChange")
+    
     private let consentSolutionId: String
     private let mobileConsents: MobileConsentsProtocol
+    private let notificationCenter: NotificationCenter
     
-    init(consentSolutionId: String, mobileConsents: MobileConsentsProtocol) {
+    private var consentSolution: ConsentSolution?
+    private var selectedConsentItemIds = Set<String>()
+    
+    init(consentSolutionId: String, mobileConsents: MobileConsentsProtocol, notificationCenter: NotificationCenter = NotificationCenter.default) {
         self.consentSolutionId = consentSolutionId
         self.mobileConsents = mobileConsents
+        self.notificationCenter = notificationCenter
     }
     
     func loadConsentSolutionIfNeeded(completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
-        mobileConsents.fetchConsentSolution(forUniversalConsentSolutionId: consentSolutionId, completion: completion)
+        mobileConsents.fetchConsentSolution(forUniversalConsentSolutionId: consentSolutionId) { [weak self] result in
+            DispatchQueue.main.async {
+                if case .success(let solution) = result {
+                    self?.consentSolution = solution
+                }
+                
+                completion(result)
+            }
+        }
+    }
+    
+    func isConsentItemSelected(id: String) -> Bool {
+        selectedConsentItemIds.contains(id)
+    }
+    
+    func markConsentItem(id: String, asSelected selected: Bool) {
+        if selected {
+            selectedConsentItemIds.insert(id)
+        } else {
+            selectedConsentItemIds.remove(id)
+        }
+        
+        notificationCenter.post(Notification(name: Self.consentItemSelectionDidChange))
     }
 }
 
 final class MockMobileConsents: MobileConsentsProtocol {
     func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             completion(.success(mockConsentSolution))
         }
