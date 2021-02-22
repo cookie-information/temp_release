@@ -24,6 +24,13 @@ final class CheckboxTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        textView.htmlText = nil
+        checkbox.isSelected = false
+    }
+    
     func setText(_ text: String, isRequired: Bool) {
         textView.htmlText = text + (isRequired ? "<b>*</b>" : "")
     }

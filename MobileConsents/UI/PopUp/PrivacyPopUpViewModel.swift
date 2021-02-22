@@ -25,38 +25,44 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     
     var router: RouterProtocol?
     
+    private let consentSolutionManager: ConsentSolutionManagerProtocol
+    
+    init(consentSolutionManager: ConsentSolutionManagerProtocol) {
+        self.consentSolutionManager = consentSolutionManager
+    }
+    
     func viewDidLoad() {
-        let solution = mockConsentSolution
+        consentSolutionManager.loadConsentSolutionIfNeeded { result in
+            guard case .success(let solution) = result else { return }
+            
+            let title = solution.title.localeTranslation()?.text ?? ""
+            let descriptionSection = PopUpDescriptionSection(text: solution.description.localeTranslation()?.text ?? "")
+            
+            let consentViewModels: [PopUpConsentViewModel] = solution
+                .consentItems
+                .filter { $0.type == .setting }
+                .map { item in
+                    let vm = PopUpConsentViewModel(
+                        id: item.id,
+                        text: item.translations.localeTranslation()?.longText ?? "",
+                        isRequired: item.required
+                    )
+                    vm.delegate = self
+                    
+                    return vm
+                }
+            
+            let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
+            
+            let data = PrivacyPopUpData(
+                title: title,
+                sections: [
+                    descriptionSection,
+                    consentsSection
+                ],
+                buttonViewModels: self.buttonViewModels(templateTexts: solution.templateTexts)
+            )
         
-        let title = solution.title.localeTranslation()?.text ?? ""
-        let descriptionSection = PopUpDescriptionSection(text: solution.description.localeTranslation()?.text ?? "")
-        
-        let consentViewModels: [PopUpConsentViewModel] = solution
-            .consentItems
-            .filter { $0.type == .setting }
-            .map { item in
-                let vm = PopUpConsentViewModel(
-                    id: item.id,
-                    text: item.translations.localeTranslation()?.longText ?? "",
-                    isRequired: item.required
-                )
-                vm.delegate = self
-                
-                return vm
-            }
-        
-        let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
-        
-        let data = PrivacyPopUpData(
-            title: title,
-            sections: [
-                descriptionSection,
-                consentsSection
-            ],
-            buttonViewModels: buttonViewModels(templateTexts: solution.templateTexts)
-        )
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.onDataLoaded?(data)
         }
     }

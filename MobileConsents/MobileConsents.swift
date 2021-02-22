@@ -99,8 +99,13 @@ public final class MobileConsents: MobileConsentsProtocol {
     public static func showPrivacyPopUp() {
         let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
         
+        let consentSolutionManager = ConsentSolutionManager(
+            consentSolutionId: "1234",
+            mobileConsents: MockMobileConsents() // TODO: Pass self as mobile consents
+        )
         let router = Router()
-        let viewModel = PrivacyPopUpViewModel()
+        let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
+        
         viewModel.router = router
         let viewController = PrivacyPopUpViewController(viewModel: viewModel)
         router.rootViewController = viewController
