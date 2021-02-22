@@ -110,6 +110,7 @@
 		91CD982425D861E5001CAC83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91CD982325D861E5001CAC83 /* Assets.xcassets */; };
 		91CD982825D86257001CAC83 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD982725D86257001CAC83 /* UIFont+Extension.swift */; };
 		91CD982C25D97405001CAC83 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD982B25D97405001CAC83 /* UITableView+Reusable.swift */; };
+		91DDCCB125E3ABF30091352A /* StyleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DDCCB025E3ABF30091352A /* StyleConstants.swift */; };
 		9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 		9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B8E95B72519C8B0001DF8BD /* MobileConsentsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */; };
@@ -246,6 +247,7 @@
 		91CD982325D861E5001CAC83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91CD982725D86257001CAC83 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		91CD982B25D97405001CAC83 /* UITableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
+		91DDCCB025E3ABF30091352A /* StyleConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleConstants.swift; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSDKTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -537,6 +539,7 @@
 				910AF06925D4038E00D5F2BF /* Cells */,
 				916293F525D5AA94004820C7 /* FontLoader.swift */,
 				91B780D325E0387600B78B38 /* Router.swift */,
+				91DDCCB025E3ABF30091352A /* StyleConstants.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				91CD982C25D97405001CAC83 /* UITableView+Reusable.swift in Sources */,
 				111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
 				9169605025D9B04C00930302 /* UIImage+Extension.swift in Sources */,
+				91DDCCB125E3ABF30091352A /* StyleConstants.swift in Sources */,
 				11B51925251DCA8000581FF4 /* ConsentTranslation.swift in Sources */,
 				91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */,
 				1141FDE0251B4FEE00748076 /* Task.swift in Sources */,

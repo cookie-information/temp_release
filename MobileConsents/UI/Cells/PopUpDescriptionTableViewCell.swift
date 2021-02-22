@@ -28,7 +28,7 @@ final class PopUpDescriptionTableViewCell: UITableViewCell {
     private func setup() {
         textView.isScrollEnabled = false
         textView.isEditable = false
-        textView.style = contentStyle
+        textView.style = StyleConstants.textViewStyle
         
         contentView.addSubview(textView)
         

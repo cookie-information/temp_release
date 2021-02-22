@@ -44,7 +44,7 @@ final class CheckboxTableViewCell: UITableViewCell {
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.textContainerInset = .zero
-        textView.style = contentStyle
+        textView.style = StyleConstants.textViewStyle
         
         contentView.addSubview(checkbox)
         contentView.addSubview(textView)
