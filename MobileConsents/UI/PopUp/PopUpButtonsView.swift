@@ -62,6 +62,11 @@ final class PopUpButtonsView: UIView {
     func setButtonViewModels(_ viewModels: [PopUpButtonViewModelProtocol]) {
         self.viewModels = viewModels
         
+        stackView.arrangedSubviews.forEach { subview in
+            stackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
+        
         viewModels
             .enumerated()
             .map(button)
