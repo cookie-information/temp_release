@@ -82,7 +82,12 @@ public final class MobileConsents: MobileConsentsProtocol {
     
     public static func showPrivacyCenter() {
         let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
-        let viewModel = PrivacyCenterViewModel()
+        
+        let consentSolutionManager = ConsentSolutionManager(
+            consentSolutionId: "1234",
+            mobileConsents: MockMobileConsents() // TODO: Pass self as mobile consents
+        )
+        let viewModel = PrivacyCenterViewModel(consentSolutionManager: consentSolutionManager)
         let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
@@ -103,7 +108,7 @@ public final class MobileConsents: MobileConsentsProtocol {
             consentSolutionId: "1234",
             mobileConsents: MockMobileConsents() // TODO: Pass self as mobile consents
         )
-        let router = Router()
+        let router = Router(consentSolutionManager: consentSolutionManager)
         let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
         
         viewModel.router = router

@@ -9,18 +9,35 @@
 import UIKit
 
 protocol PreferenceViewModelProtocol: AnyObject {
-    var title: String { get }
-    var isOn: Bool { get set }
+    var text: String { get }
+    var isSelected: Bool { get }
+//    var onUpdate: ((CheckboxTableViewCellViewModel) -> Void)? { get set }
+    
+    func selectionDidChange(_ isSelected: Bool)
 }
 
 final class PreferenceViewModel: PreferenceViewModelProtocol {
-    let title: String
+    let text: String
     
-    var isOn: Bool
+    var isSelected: Bool {
+        consentItemProvider.isConsentItemSelected(id: id)
+    }
     
-    init(title: String, isOn: Bool) {
-        self.title = title
-        self.isOn = isOn
+    private let id: String
+    private let consentItemProvider: ConsentItemProvider
+    
+    init(
+        id: String,
+        text: String,
+        consentItemProvider: ConsentItemProvider
+    ) {
+        self.id = id
+        self.text = text
+        self.consentItemProvider = consentItemProvider
+    }
+    
+    func selectionDidChange(_ isSelected: Bool) {
+        consentItemProvider.markConsentItem(id: id, asSelected: isSelected)
     }
 }
 
@@ -116,10 +133,10 @@ final class PreferencesSection: Section {
         
         let viewModel = viewModels[adjustedRow]
         
-        cell.setTitle(viewModel.title)
-        cell.setValue(viewModel.isOn)
+        cell.setTitle(viewModel.text)
+        cell.setValue(viewModel.isSelected)
         cell.valueChanged = { [weak viewModel] newValue in
-            viewModel?.isOn = newValue
+            viewModel?.selectionDidChange(newValue)
         }
         
         return cell

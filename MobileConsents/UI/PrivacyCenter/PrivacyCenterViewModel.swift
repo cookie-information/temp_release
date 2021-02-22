@@ -29,11 +29,19 @@ final class PrivacyCenterViewModel {
     var onDataLoaded: ((PrivacyCenterData) -> Void)?
     
     var router: RouterProtocol?
+    
+    private let consentSolutionManager: ConsentSolutionManagerProtocol
+    
+    init(consentSolutionManager: ConsentSolutionManagerProtocol) {
+        self.consentSolutionManager = consentSolutionManager
+    }
 }
 
 extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     func viewDidLoad() {
-        let sections = SectionGenerator().generateSections(from: mockConsentSolution)
+        let sections = SectionGenerator(
+            consentItemProvider: consentSolutionManager
+        ).generateSections(from: mockConsentSolution)
         
         let data = PrivacyCenterData(
             translations: .init(
@@ -57,6 +65,12 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
 }
 
 final class SectionGenerator {
+    private let consentItemProvider: ConsentItemProvider
+    
+    init(consentItemProvider: ConsentItemProvider) {
+        self.consentItemProvider = consentItemProvider
+    }
+    
     func generateSections(from consentSolution: ConsentSolution) -> [Section] {
         let infoConsentItems = consentSolution.consentItems.filter { $0.type == .info }
         let settingConsentItems = consentSolution.consentItems.filter { $0.type == .setting }
@@ -78,7 +92,11 @@ final class SectionGenerator {
         let viewModels = consentItems.map { item -> PreferenceViewModel in
             let translation = item.translations.localeTranslation()
             
-            return PreferenceViewModel(title: translation?.shortText ?? "", isOn: false)
+            return PreferenceViewModel(
+                id: item.id,
+                text: translation?.shortText ?? "",
+                consentItemProvider: consentItemProvider
+            )
         }
         
         let translations = PreferencesSection.Translations(
