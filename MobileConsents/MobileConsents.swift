@@ -8,7 +8,13 @@
 
 import UIKit
 
-public final class MobileConsents {
+protocol MobileConsentsProtocol {
+    func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping (Result<ConsentSolution, Error>) -> Void)
+    
+    func postConsent(_ consent: Consent, completion:@escaping (Error?) -> Void)
+}
+
+public final class MobileConsents: MobileConsentsProtocol {
     private let networkManager: NetworkManager
     private let localStorageManager: LocalStorageManager
     
