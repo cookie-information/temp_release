@@ -22,10 +22,13 @@ protocol PrivacyCenterViewModelProtocol: AnyObject {
     
     func viewDidLoad()
     func acceptButtonTapped()
+    func backButtonTapped()
 }
 
 final class PrivacyCenterViewModel {
     var onDataLoaded: ((PrivacyCenterData) -> Void)?
+    
+    var router: RouterProtocol?
 }
 
 extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
@@ -46,6 +49,10 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     
     func acceptButtonTapped() {
         print("Accept button tapped")
+    }
+    
+    func backButtonTapped() {
+        router?.closePrivacyCenter()
     }
 }
 
@@ -86,7 +93,7 @@ final class SectionGenerator {
 
 private let locale = Locale(identifier: "en_US")
 
-private let mockConsentSolution = ConsentSolution(
+let mockConsentSolution = ConsentSolution(
     id: "9187d0f0-9e25-469b-9125-6a63b1b22b12",
     versionId: "00000000-0000-4000-8000-000000000000",
     title: Translated(
@@ -97,7 +104,12 @@ private let mockConsentSolution = ConsentSolution(
     ),
     description: Translated(
         translations: [
-            TemplateTranslation(language: "EN", text: "Privacy description")
+            TemplateTranslation(
+                language: "EN",
+                text: """
+                Privacy description. Lorem ipsum dolor<br>Some link <a href="https://apple.com">here</a>
+                """
+            )
         ],
         locale: locale
     ),
@@ -182,7 +194,17 @@ private let mockConsentSolution = ConsentSolution(
                     ConsentTranslation(
                         language: "EN",
                         shortText: "Second consent item short text",
-                        longText: "Second consent item long text"
+                        longText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """
                     )
                 ],
                 locale: locale

@@ -73,6 +73,10 @@
 		910AF06625D400C300D5F2BF /* PreferencesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06525D400C300D5F2BF /* PreferencesSection.swift */; };
 		910AF06B25D4039B00D5F2BF /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */; };
 		913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */; };
+		913A058225DE74FE00571BA3 /* PopUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */; };
+		913A058825DE7D3B00571BA3 /* PrivacyPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */; };
+		913A058C25DE8ED500571BA3 /* CheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */; };
+		913A059425DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */; };
 		916293ED25D5A925004820C7 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293E925D5A925004820C7 /* Rubik-Bold.ttf */; };
 		916293EE25D5A925004820C7 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EA25D5A925004820C7 /* Rubik-Light.ttf */; };
 		916293EF25D5A925004820C7 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EB25D5A925004820C7 /* Rubik-Medium.ttf */; };
@@ -91,6 +95,12 @@
 		916C543E25DA8E97000B7993 /* ConsentSolution.json in Resources */ = {isa = PBXBuildFile; fileRef = 916C543825DA8E94000B7993 /* ConsentSolution.json */; };
 		9172AD7E25DBB84100CB0FFC /* ProcessingPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* ProcessingPurpose.swift */; };
 		9172AD8125DBB86C00CB0FFC /* ConsentSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51920251DC95500581FF4 /* ConsentSolution.swift */; };
+		91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */; };
+		91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */; };
+		91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */; };
+		91B780C225DFC83C00B78B38 /* PopUpTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780C125DFC83C00B78B38 /* PopUpTitleView.swift */; };
+		91B780C625DFD0D000B78B38 /* PrivacyPopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780C525DFD0D000B78B38 /* PrivacyPopUpViewModel.swift */; };
+		91B780D425E0387600B78B38 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780D325E0387600B78B38 /* Router.swift */; };
 		91CD980D25D6B881001CAC83 /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD980C25D6B881001CAC83 /* HTMLTextView.swift */; };
 		91CD981625D6BB3E001CAC83 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91CD981225D6BB3E001CAC83 /* Rubik-BoldItalic.ttf */; };
 		91CD981725D6BB3E001CAC83 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91CD981325D6BB3E001CAC83 /* Rubik-MediumItalic.ttf */; };
@@ -100,6 +110,7 @@
 		91CD982425D861E5001CAC83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91CD982325D861E5001CAC83 /* Assets.xcassets */; };
 		91CD982825D86257001CAC83 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD982725D86257001CAC83 /* UIFont+Extension.swift */; };
 		91CD982C25D97405001CAC83 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD982B25D97405001CAC83 /* UITableView+Reusable.swift */; };
+		91DDCCB125E3ABF30091352A /* StyleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DDCCB025E3ABF30091352A /* StyleConstants.swift */; };
 		9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 		9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B8E95B72519C8B0001DF8BD /* MobileConsentsSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */; };
@@ -201,6 +212,10 @@
 		910AF06525D400C300D5F2BF /* PreferencesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesSection.swift; sourceTree = "<group>"; };
 		910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+FromHTML.swift"; sourceTree = "<group>"; };
+		913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPresentationController.swift; sourceTree = "<group>"; };
+		913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPopUpViewController.swift; sourceTree = "<group>"; };
+		913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxTableViewCell.swift; sourceTree = "<group>"; };
+		913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		916293E925D5A925004820C7 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		916293EA25D5A925004820C7 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
 		916293EB25D5A925004820C7 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
@@ -217,6 +232,12 @@
 		916C542825DA87A2000B7993 /* Translated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translated.swift; sourceTree = "<group>"; };
 		916C542C25DA8DD5000B7993 /* DecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTests.swift; sourceTree = "<group>"; };
 		916C543825DA8E94000B7993 /* ConsentSolution.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ConsentSolution.json; sourceTree = "<group>"; };
+		91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionSection.swift; sourceTree = "<group>"; };
+		91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConsentsSection.swift; sourceTree = "<group>"; };
+		91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonsView.swift; sourceTree = "<group>"; };
+		91B780C125DFC83C00B78B38 /* PopUpTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTitleView.swift; sourceTree = "<group>"; };
+		91B780C525DFD0D000B78B38 /* PrivacyPopUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPopUpViewModel.swift; sourceTree = "<group>"; };
+		91B780D325E0387600B78B38 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		91CD980C25D6B881001CAC83 /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 		91CD981225D6BB3E001CAC83 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
 		91CD981325D6BB3E001CAC83 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -226,6 +247,7 @@
 		91CD982325D861E5001CAC83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91CD982725D86257001CAC83 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		91CD982B25D97405001CAC83 /* UITableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
+		91DDCCB025E3ABF30091352A /* StyleConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleConstants.swift; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8E95B62519C8B0001DF8BD /* MobileConsentsSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsSDKTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -510,11 +532,14 @@
 		910AF04325D3C3B000D5F2BF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				913A058025DE718E00571BA3 /* PopUp */,
 				91CD983725D97872001CAC83 /* PrivacyCenter */,
 				91CD981C25D85FEB001CAC83 /* Extensions */,
 				91CD980B25D6B86C001CAC83 /* Views */,
 				910AF06925D4038E00D5F2BF /* Cells */,
 				916293F525D5AA94004820C7 /* FontLoader.swift */,
+				91B780D325E0387600B78B38 /* Router.swift */,
+				91DDCCB025E3ABF30091352A /* StyleConstants.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -538,8 +563,23 @@
 				916C540925DA66F1000B7993 /* SubheaderTableViewCell.swift */,
 				916C540D25DA66FC000B7993 /* TitleTableViewCell.swift */,
 				916C541525DA73AA000B7993 /* BaseTableViewCell.swift */,
+				913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */,
+				913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		913A058025DE718E00571BA3 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				91B780A425DFBCE600B78B38 /* Sections */,
+				913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */,
+				913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */,
+				91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */,
+				91B780C125DFC83C00B78B38 /* PopUpTitleView.swift */,
+				91B780C525DFD0D000B78B38 /* PrivacyPopUpViewModel.swift */,
+			);
+			path = PopUp;
 			sourceTree = "<group>";
 		};
 		916293E825D5A925004820C7 /* Fonts */ = {
@@ -563,6 +603,15 @@
 				916C543825DA8E94000B7993 /* ConsentSolution.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		91B780A425DFBCE600B78B38 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */,
+				91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */,
+			);
+			path = Sections;
 			sourceTree = "<group>";
 		};
 		91CD980B25D6B86C001CAC83 /* Views */ = {
@@ -790,11 +839,13 @@
 				9172AD8125DBB86C00CB0FFC /* ConsentSolution.swift in Sources */,
 				91CD982825D86257001CAC83 /* UIFont+Extension.swift in Sources */,
 				916C540A25DA66F1000B7993 /* SubheaderTableViewCell.swift in Sources */,
+				913A058C25DE8ED500571BA3 /* CheckboxTableViewCell.swift in Sources */,
 				916C541B25DA7643000B7993 /* PrivacyCenterViewModel.swift in Sources */,
 				11B5182B251C691D00581FF4 /* ParameterEncoding.swift in Sources */,
 				916C542525DA8064000B7993 /* TemplateTexts.swift in Sources */,
 				112C42F52535C60B004E115A /* UserDefaults+Extensions.swift in Sources */,
 				11B51852251C728E00581FF4 /* NetworkManager.swift in Sources */,
+				913A058825DE7D3B00571BA3 /* PrivacyPopUpViewController.swift in Sources */,
 				910AF06B25D4039B00D5F2BF /* SwitchTableViewCell.swift in Sources */,
 				111C7CDB252C970100E93EE2 /* Date+Extensions.swift in Sources */,
 				11B5192B251DEBCE00581FF4 /* Consent.swift in Sources */,
@@ -806,12 +857,16 @@
 				112C42FC2535C65C004E115A /* UserDefaultsProtocol.swift in Sources */,
 				117BF216251A72770089C9E9 /* MobileConsents.swift in Sources */,
 				91CD981E25D85FFA001CAC83 /* UIColor+Extension.swift in Sources */,
+				913A058225DE74FE00571BA3 /* PopUpPresentationController.swift in Sources */,
 				111C7CE1252C972900E93EE2 /* Formatter+Extensions.swift in Sources */,
 				916C542125DA7A5B000B7993 /* TemplateTranslation.swift in Sources */,
+				913A059425DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift in Sources */,
 				91CD982C25D97405001CAC83 /* UITableView+Reusable.swift in Sources */,
 				111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
 				9169605025D9B04C00930302 /* UIImage+Extension.swift in Sources */,
+				91DDCCB125E3ABF30091352A /* StyleConstants.swift in Sources */,
 				11B51925251DCA8000581FF4 /* ConsentTranslation.swift in Sources */,
+				91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */,
 				1141FDE0251B4FEE00748076 /* Task.swift in Sources */,
 				910AF05325D3F1B900D5F2BF /* HeaderTableViewCell.swift in Sources */,
 				916C542925DA87A2000B7993 /* Translated.swift in Sources */,
@@ -819,9 +874,13 @@
 				916C540E25DA66FC000B7993 /* TitleTableViewCell.swift in Sources */,
 				11B5184B251C710700581FF4 /* APIService.swift in Sources */,
 				11B51859251C73B400581FF4 /* ConsentItem.swift in Sources */,
+				91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */,
 				910AF04525D3C3E400D5F2BF /* PrivacyCenterViewController.swift in Sources */,
+				91B780C625DFD0D000B78B38 /* PrivacyPopUpViewModel.swift in Sources */,
 				11B5183A251C6BA700581FF4 /* Provider.swift in Sources */,
+				91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */,
 				910AF05725D3F1D200D5F2BF /* ContentTableViewCell.swift in Sources */,
+				91B780C225DFC83C00B78B38 /* PopUpTitleView.swift in Sources */,
 				119AFB3325232A7100186CB7 /* HTTPURLResponse+Extenions.swift in Sources */,
 				910AF05C25D3FE0F00D5F2BF /* Section.swift in Sources */,
 				117BF219251A72D20089C9E9 /* Environment.swift in Sources */,
@@ -830,6 +889,7 @@
 				11B51831251C69F700581FF4 /* JSONParameterEncoder.swift in Sources */,
 				11B51846251C6E7D00581FF4 /* URLParameterEncoder.swift in Sources */,
 				114D8FD7251B236500D8D113 /* EndpointType.swift in Sources */,
+				91B780D425E0387600B78B38 /* Router.swift in Sources */,
 				91CD980D25D6B881001CAC83 /* HTMLTextView.swift in Sources */,
 				916C541625DA73AA000B7993 /* BaseTableViewCell.swift in Sources */,
 				1161EC59252B510F0078C76F /* PlatformInformationGenerator.swift in Sources */,
@@ -1104,6 +1164,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				INFOPLIST_FILE = Example/Info.plist;
@@ -1114,6 +1175,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.droids.MobileConsents.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1125,6 +1187,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				INFOPLIST_FILE = Example/Info.plist;
@@ -1135,6 +1198,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.droids.MobileConsents.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

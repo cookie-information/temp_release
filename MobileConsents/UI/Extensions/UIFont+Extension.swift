@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIFont {
+    static func light(size: CGFloat) -> UIFont {
+        fontWithFallback(name: "Rubik-Light", size: size, fallbackWeight: .light)
+    }
+    
     static func regular(size: CGFloat) -> UIFont {
         fontWithFallback(name: "Rubik-Regular", size: size, fallbackWeight: .regular)
     }

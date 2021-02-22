@@ -14,6 +14,9 @@ extension UIColor {
     static let privacyCenterSeparator = UIColor(hex: 0xE4E8F0)
     static let privacyCenterAcceptButton = UIColor(hex: 0x2E5BFF)
     static let privacyCenterText = UIColor(hex: 0x596075)
+    static let popUpOverlay = UIColor(hex: 0x384049, alpha: 0.6)
+    static let popUpButton1 = UIColor(hex: 0xC1C1C1)
+    static let popUpButton2 = UIColor.black
 }
 
 extension UIColor {
@@ -30,12 +33,12 @@ extension UIColor {
         return String(format: "#%06x", rgb)
     }
     
-    convenience init(hex: UInt) {
+    convenience init(hex: UInt, alpha: CGFloat = 1.0) {
         self.init(
             red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(hex & 0x0000FF) / 255.0,
-            alpha: 1.0
+            alpha: alpha
         )
     }
 
