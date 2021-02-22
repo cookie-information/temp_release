@@ -36,7 +36,6 @@ final class CheckboxTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         checkbox.titleLabel?.font = .systemFont(ofSize: 1)
-//        checkbox.contentEdgeInsets = UIEdgeInsets(top: -8, left: 0, bottom: -8, right: 0)
         checkbox.setImage(UIImage(named: "checkbox", in: Bundle(for: Self.self), compatibleWith: nil), for: .normal)
         checkbox.setImage(UIImage(named: "checkboxSelected", in: Bundle(for: Self.self), compatibleWith: nil), for: .selected)
         
