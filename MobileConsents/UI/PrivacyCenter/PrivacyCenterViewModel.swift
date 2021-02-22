@@ -39,18 +39,21 @@ final class PrivacyCenterViewModel {
 
 extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     func viewDidLoad() {
-        let sections = SectionGenerator(
-            consentItemProvider: consentSolutionManager
-        ).generateSections(from: mockConsentSolution)
-        
-        let data = PrivacyCenterData(
-            translations: .init(
-                title: mockConsentSolution.templateTexts.privacyCenterTitle.localeTranslation()?.text ?? ""
-            ),
-            sections: sections
-        )
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        consentSolutionManager.loadConsentSolutionIfNeeded { [weak self] result in
+            guard let self = self else { return }
+            guard case .success(let solution) = result else { return }
+            
+            let sections = SectionGenerator(
+                consentItemProvider: self.consentSolutionManager
+            ).generateSections(from: solution)
+            
+            let data = PrivacyCenterData(
+                translations: .init(
+                    title: solution.templateTexts.privacyCenterTitle.localeTranslation()?.text ?? ""
+                ),
+                sections: sections
+            )
+            
             self.onDataLoaded?(data)
         }
     }

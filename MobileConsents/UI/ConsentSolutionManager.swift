@@ -34,6 +34,12 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
     }
     
     func loadConsentSolutionIfNeeded(completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
+        if let consentSolution = consentSolution {
+            completion(.success(consentSolution))
+            
+            return
+        }
+        
         mobileConsents.fetchConsentSolution(forUniversalConsentSolutionId: consentSolutionId) { [weak self] result in
             DispatchQueue.main.async {
                 if case .success(let solution) = result {
@@ -74,7 +80,7 @@ final class MockMobileConsents: MobileConsentsProtocol {
 
 private let locale = Locale(identifier: "en_US")
 
-let mockConsentSolution = ConsentSolution(
+private let mockConsentSolution = ConsentSolution(
     id: "9187d0f0-9e25-469b-9125-6a63b1b22b12",
     versionId: "00000000-0000-4000-8000-000000000000",
     title: Translated(
