@@ -19,6 +19,7 @@ struct PrivacyCenterData {
 
 protocol PrivacyCenterViewModelProtocol: AnyObject {
     var onDataLoaded: ((PrivacyCenterData) -> Void)? { get set }
+    var onAcceptButtonIsEnabledChange: ((Bool) -> Void)? { get set }
     
     func viewDidLoad()
     func acceptButtonTapped()
@@ -27,18 +28,40 @@ protocol PrivacyCenterViewModelProtocol: AnyObject {
 
 final class PrivacyCenterViewModel {
     var onDataLoaded: ((PrivacyCenterData) -> Void)?
+    var onAcceptButtonIsEnabledChange: ((Bool) -> Void)?
     
     var router: RouterProtocol?
     
     private let consentSolutionManager: ConsentSolutionManagerProtocol
+    private let notificationCenter: NotificationCenter
     
-    init(consentSolutionManager: ConsentSolutionManagerProtocol) {
+    private var observationToken: Any?
+    
+    init(
+        consentSolutionManager: ConsentSolutionManagerProtocol,
+        notificationCenter: NotificationCenter = .default
+    ) {
         self.consentSolutionManager = consentSolutionManager
+        self.notificationCenter = notificationCenter
+    }
+    
+    deinit {
+        if let observationToken = observationToken {
+            notificationCenter.removeObserver(observationToken)
+        }
     }
 }
 
 extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     func viewDidLoad() {
+        observationToken = notificationCenter.addObserver(
+            forName: ConsentSolutionManager.consentItemSelectionDidChange,
+            object: nil,
+            queue: nil
+        ) { [weak self] _ in
+            self?.onAcceptButtonIsEnabledChange?(self?.consentSolutionManager.areAllRequiredConsentItemsSelected ?? false)
+        }
+        
         consentSolutionManager.loadConsentSolutionIfNeeded { [weak self] result in
             guard let self = self else { return }
             guard case .success(let solution) = result else { return }
@@ -55,6 +78,7 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
             )
             
             self.onDataLoaded?(data)
+            self.onAcceptButtonIsEnabledChange?(self.consentSolutionManager.areAllRequiredConsentItemsSelected)
         }
     }
     

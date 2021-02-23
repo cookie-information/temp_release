@@ -13,6 +13,7 @@ final class PrivacyCenterViewController: UIViewController {
     
     private let viewModel: PrivacyCenterViewModelProtocol
     private let tableView = UITableView()
+    private let acceptButton = UIButton()
     
     init(viewModel: PrivacyCenterViewModelProtocol) {
         self.viewModel = viewModel
@@ -40,7 +41,6 @@ final class PrivacyCenterViewController: UIViewController {
     }
     
     private func setupLayout() {
-        let acceptButton = UIButton()
         acceptButton.setTitle("Accept", for: .normal)
         acceptButton.setTitleColor(.white, for: .normal)
         acceptButton.titleLabel?.font = .medium(size: 15)
@@ -84,6 +84,10 @@ final class PrivacyCenterViewController: UIViewController {
             self?.setTitle(data.translations.title)
             self?.sections = data.sections
             self?.tableView.reloadData()
+        }
+        
+        viewModel.onAcceptButtonIsEnabledChange = { [weak self] isEnabled in
+            self?.acceptButton.isEnabled = isEnabled
         }
         
         viewModel.viewDidLoad()
