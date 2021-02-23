@@ -14,11 +14,37 @@ protocol ConsentItemProvider {
 }
 
 protocol ConsentSolutionManagerProtocol: ConsentItemProvider {
+    var areAllRequiredConsentItemsSelected: Bool { get }
+    var hasRequiredConsentItems: Bool { get }
+    
     func loadConsentSolutionIfNeeded(completion: @escaping (Result<ConsentSolution, Error>) -> Void)
+    
+    func rejectAllConsentItems()
+    func acceptAllConsentItems()
+    func acceptSelectedConsentItems()
 }
 
 final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
     static let consentItemSelectionDidChange = Notification.Name(rawValue: "com.cookieinformation.consentItemSelectionDidChange")
+    
+    var areAllRequiredConsentItemsSelected: Bool {
+        consentSolution?
+            .consentItems
+            .filter { $0.required && $0.type == .setting }
+            .map(\.id)
+            .allSatisfy(selectedConsentItemIds.contains)
+            ??
+            false
+    }
+    
+    var hasRequiredConsentItems: Bool {
+        !(consentSolution?
+            .consentItems
+            .filter { $0.required && $0.type == .setting }
+            .isEmpty
+            ??
+            true)
+    }
     
     private let consentSolutionId: String
     private let mobileConsents: MobileConsentsProtocol
@@ -62,6 +88,24 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             selectedConsentItemIds.remove(id)
         }
         
+        postConsentItemSelectionDidChangeNotification()
+    }
+    
+    func rejectAllConsentItems() {
+        selectedConsentItemIds.removeAll()
+        
+        postConsentItemSelectionDidChangeNotification()
+    }
+    
+    func acceptAllConsentItems() {
+        consentSolution?.consentItems.map(\.id).forEach { selectedConsentItemIds.insert($0) }
+        
+        postConsentItemSelectionDidChangeNotification()
+    }
+    
+    func acceptSelectedConsentItems() {}
+    
+    private func postConsentItemSelectionDidChangeNotification() {
         notificationCenter.post(Notification(name: Self.consentItemSelectionDidChange))
     }
 }

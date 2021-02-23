@@ -74,23 +74,26 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         let viewModels = [
             PopUpButtonViewModel(
                 title: templateTexts.privacyCenterButton.localeTranslation()?.text ?? "",
-                color: .popUpButton1,
-                type: .privacyCenter
+                type: .privacyCenter,
+                stateProvider: ConstantButtonStateProvider(isEnabled: true)
             ),
             PopUpButtonViewModel(
                 title: templateTexts.rejectAllButton.localeTranslation()?.text ?? "",
-                color: .popUpButton1,
-                type: .rejectAll
+                type: .rejectAll,
+                stateProvider: ConstantButtonStateProvider(isEnabled: !consentSolutionManager.hasRequiredConsentItems)
             ),
             PopUpButtonViewModel(
                 title: templateTexts.acceptAllButton.localeTranslation()?.text ?? "",
-                color: .popUpButton2,
-                type: .acceptAll
+                type: .acceptAll,
+                stateProvider: ConstantButtonStateProvider(isEnabled: true)
             ),
             PopUpButtonViewModel(
                 title: templateTexts.acceptSelectedButton.localeTranslation()?.text ?? "",
-                color: .popUpButton2,
-                type: .acceptSelected
+                type: .acceptSelected,
+                stateProvider: NotificationButtonStateProvider(
+                    isEnabled: { [consentSolutionManager] in consentSolutionManager.areAllRequiredConsentItemsSelected },
+                    notificationName: ConsentSolutionManager.consentItemSelectionDidChange
+                )
             )
         ]
         
@@ -107,8 +110,12 @@ extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
         switch type {
         case .privacyCenter:
             router?.showPrivacyCenter()
-        default:
-            ()
+        case .rejectAll:
+            consentSolutionManager.rejectAllConsentItems()
+        case .acceptAll:
+            consentSolutionManager.acceptAllConsentItems()
+        case .acceptSelected:
+            consentSolutionManager.acceptSelectedConsentItems()
         }
     }
 }

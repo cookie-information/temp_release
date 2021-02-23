@@ -15,8 +15,8 @@ extension UIColor {
     static let privacyCenterAcceptButton = UIColor(hex: 0x2E5BFF)
     static let privacyCenterText = UIColor(hex: 0x596075)
     static let popUpOverlay = UIColor(hex: 0x384049, alpha: 0.6)
-    static let popUpButton1 = UIColor(hex: 0xC1C1C1)
-    static let popUpButton2 = UIColor.black
+    static let popUpButtonEnabled = UIColor.black
+    static let popUpButtonDisabled = UIColor(hex: 0xC1C1C1)
 }
 
 extension UIColor {

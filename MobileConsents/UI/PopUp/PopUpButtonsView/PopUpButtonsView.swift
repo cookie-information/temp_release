@@ -8,42 +8,6 @@
 
 import UIKit
 
-protocol PopUpButtonViewModelProtocol {
-    var title: String { get }
-    var color: UIColor { get }
-    
-    func onTap()
-}
-
-protocol PopUpButtonViewModelDelegate: AnyObject {
-    func buttonTapped(type: PopUpButtonViewModel.ButtonType)
-}
-
-final class PopUpButtonViewModel: PopUpButtonViewModelProtocol {
-    enum ButtonType {
-        case privacyCenter
-        case rejectAll
-        case acceptAll
-        case acceptSelected
-    }
-    
-    let title: String
-    let color: UIColor
-    let type: ButtonType
-    
-    weak var delegate: PopUpButtonViewModelDelegate?
-    
-    init(title: String, color: UIColor, type: ButtonType) {
-        self.title = title
-        self.color = color
-        self.type = type
-    }
-    
-    func onTap() {
-        delegate?.buttonTapped(type: type)
-    }
-}
-
 final class PopUpButtonsView: UIView {
     private let stackView = UIStackView()
     
@@ -95,8 +59,14 @@ final class PopUpButtonsView: UIView {
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
         button.setTitle(viewModel.title, for: .normal)
-        button.setBackgroundImage(.resizableRoundedRect(color: viewModel.color, cornerRadius: 4), for: .normal)
+        button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonEnabled, cornerRadius: 4), for: .normal)
+        button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonDisabled, cornerRadius: 4), for: .disabled)
         button.titleLabel?.font = .medium(size: 15)
+        button.isEnabled = viewModel.isEnabled
+        
+        viewModel.onIsEnabledChange = { [weak button] isEnabled in
+            button?.isEnabled = isEnabled
+        }
         
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         

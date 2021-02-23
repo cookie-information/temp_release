@@ -95,6 +95,8 @@
 		916C543E25DA8E97000B7993 /* ConsentSolution.json in Resources */ = {isa = PBXBuildFile; fileRef = 916C543825DA8E94000B7993 /* ConsentSolution.json */; };
 		9172AD7E25DBB84100CB0FFC /* ProcessingPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* ProcessingPurpose.swift */; };
 		9172AD8125DBB86C00CB0FFC /* ConsentSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51920251DC95500581FF4 /* ConsentSolution.swift */; };
+		919FB57625E4ED79000CE411 /* PopUpButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */; };
+		919FB57E25E4EDC0000CE411 /* ButtonStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */; };
 		91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */; };
 		91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */; };
 		91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */; };
@@ -233,6 +235,8 @@
 		916C542825DA87A2000B7993 /* Translated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translated.swift; sourceTree = "<group>"; };
 		916C542C25DA8DD5000B7993 /* DecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTests.swift; sourceTree = "<group>"; };
 		916C543825DA8E94000B7993 /* ConsentSolution.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ConsentSolution.json; sourceTree = "<group>"; };
+		919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonViewModel.swift; sourceTree = "<group>"; };
+		919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStateProvider.swift; sourceTree = "<group>"; };
 		91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionSection.swift; sourceTree = "<group>"; };
 		91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConsentsSection.swift; sourceTree = "<group>"; };
 		91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonsView.swift; sourceTree = "<group>"; };
@@ -575,10 +579,10 @@
 		913A058025DE718E00571BA3 /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
+				919FB57425E4ED69000CE411 /* PopUpButtonsView */,
 				91B780A425DFBCE600B78B38 /* Sections */,
 				913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */,
 				913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */,
-				91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */,
 				91B780C125DFC83C00B78B38 /* PopUpTitleView.swift */,
 				91B780C525DFD0D000B78B38 /* PrivacyPopUpViewModel.swift */,
 			);
@@ -606,6 +610,16 @@
 				916C543825DA8E94000B7993 /* ConsentSolution.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		919FB57425E4ED69000CE411 /* PopUpButtonsView */ = {
+			isa = PBXGroup;
+			children = (
+				91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */,
+				919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */,
+				919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */,
+			);
+			path = PopUpButtonsView;
 			sourceTree = "<group>";
 		};
 		91B780A425DFBCE600B78B38 /* Sections */ = {
@@ -855,6 +869,7 @@
 				916C541225DA71B6000B7993 /* UIView+Extension.swift in Sources */,
 				111C7CE7252C976600E93EE2 /* String+Extensions.swift in Sources */,
 				1141FDA6251B343700748076 /* HTTPMethod.swift in Sources */,
+				919FB57625E4ED79000CE411 /* PopUpButtonViewModel.swift in Sources */,
 				913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */,
 				9172AD7E25DBB84100CB0FFC /* ProcessingPurpose.swift in Sources */,
 				112C42FC2535C65C004E115A /* UserDefaultsProtocol.swift in Sources */,
@@ -898,6 +913,7 @@
 				916C541625DA73AA000B7993 /* BaseTableViewCell.swift in Sources */,
 				1161EC59252B510F0078C76F /* PlatformInformationGenerator.swift in Sources */,
 				910AF06225D3FE2F00D5F2BF /* ConsentItemSection.swift in Sources */,
+				919FB57E25E4EDC0000CE411 /* ButtonStateProvider.swift in Sources */,
 				1116CC20252EF3C60080E01E /* SavedConsent.swift in Sources */,
 				910AF06625D400C300D5F2BF /* PreferencesSection.swift in Sources */,
 				112C427925348FC2004E115A /* APIError.swift in Sources */,
