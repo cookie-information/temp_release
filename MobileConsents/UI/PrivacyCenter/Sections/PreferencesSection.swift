@@ -11,7 +11,6 @@ import UIKit
 protocol PreferenceViewModelProtocol: AnyObject {
     var text: String { get }
     var isSelected: Bool { get }
-//    var onUpdate: ((CheckboxTableViewCellViewModel) -> Void)? { get set }
     
     func selectionDidChange(_ isSelected: Bool)
 }
