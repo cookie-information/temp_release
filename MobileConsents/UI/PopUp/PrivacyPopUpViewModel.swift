@@ -61,7 +61,7 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             .map { item in
                 let vm = PopUpConsentViewModel(
                     id: item.id,
-                    text: item.translations.localeTranslation()?.longText ?? "",
+                    text: item.translations.localeTranslation()?.shortText ?? "",
                     isRequired: item.required,
                     consentItemProvider: consentSolutionManager
                 )
