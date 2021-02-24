@@ -97,6 +97,7 @@
 		9171D94025E65A5B00DF3F96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9171D93A25E65A0A00DF3F96 /* Constants.swift */; };
 		9172AD7E25DBB84100CB0FFC /* ProcessingPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51942251E19A100581FF4 /* ProcessingPurpose.swift */; };
 		9172AD8125DBB86C00CB0FFC /* ConsentSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B51920251DC95500581FF4 /* ConsentSolution.swift */; };
+		918C4E7525E6DAF800FFA4D9 /* AsyncDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C4E7425E6DAF800FFA4D9 /* AsyncDispatcher.swift */; };
 		919FB57625E4ED79000CE411 /* PopUpButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */; };
 		919FB57E25E4EDC0000CE411 /* ButtonStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */; };
 		91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */; };
@@ -239,6 +240,7 @@
 		916C543825DA8E94000B7993 /* ConsentSolution.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ConsentSolution.json; sourceTree = "<group>"; };
 		9171D93625E54EF900DF3F96 /* ConsentSolutionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentSolutionManagerTests.swift; sourceTree = "<group>"; };
 		9171D93A25E65A0A00DF3F96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		918C4E7425E6DAF800FFA4D9 /* AsyncDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDispatcher.swift; sourceTree = "<group>"; };
 		919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonViewModel.swift; sourceTree = "<group>"; };
 		919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStateProvider.swift; sourceTree = "<group>"; };
 		91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionSection.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 		910AF04325D3C3B000D5F2BF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				918C4E7325E6DAEB00FFA4D9 /* Utils */,
 				913A058025DE718E00571BA3 /* PopUp */,
 				91CD983725D97872001CAC83 /* PrivacyCenter */,
 				91CD981C25D85FEB001CAC83 /* Extensions */,
@@ -615,6 +618,14 @@
 				916C543825DA8E94000B7993 /* ConsentSolution.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		918C4E7325E6DAEB00FFA4D9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				918C4E7425E6DAF800FFA4D9 /* AsyncDispatcher.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		919FB57425E4ED69000CE411 /* PopUpButtonsView */ = {
@@ -870,6 +881,7 @@
 				11B51852251C728E00581FF4 /* NetworkManager.swift in Sources */,
 				913A058825DE7D3B00571BA3 /* PrivacyPopUpViewController.swift in Sources */,
 				910AF06B25D4039B00D5F2BF /* SwitchTableViewCell.swift in Sources */,
+				918C4E7525E6DAF800FFA4D9 /* AsyncDispatcher.swift in Sources */,
 				111C7CDB252C970100E93EE2 /* Date+Extensions.swift in Sources */,
 				11B5192B251DEBCE00581FF4 /* Consent.swift in Sources */,
 				916C541225DA71B6000B7993 /* UIView+Extension.swift in Sources */,

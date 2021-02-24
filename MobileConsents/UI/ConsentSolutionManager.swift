@@ -8,16 +8,6 @@
 
 import Foundation
 
-protocol AsyncDispatcher {
-    func async(execute work: @escaping () -> Void)
-}
-
-extension DispatchQueue: AsyncDispatcher {
-    func async(execute work: @escaping () -> Void) {
-        async(group: nil, qos: .unspecified, flags: [], execute: work)
-    }
-}
-
 protocol ConsentItemProvider {
     func isConsentItemSelected(id: String) -> Bool
     func markConsentItem(id: String, asSelected selected: Bool)
