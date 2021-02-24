@@ -188,7 +188,7 @@ private let mockConsentSolution = ConsentSolution(
         ),
         savePreferencesButton: Translated(
             translations: [
-                TemplateTranslation(language: "EN", text: "Save preferences button title")
+                TemplateTranslation(language: "EN", text: "Accept")
             ],
             locale: locale
         ),

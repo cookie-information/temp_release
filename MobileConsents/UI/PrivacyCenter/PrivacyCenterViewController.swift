@@ -41,13 +41,11 @@ final class PrivacyCenterViewController: UIViewController {
     }
     
     private func setupLayout() {
-        acceptButton.setTitle("Accept", for: .normal)
         acceptButton.setTitleColor(.white, for: .normal)
         acceptButton.titleLabel?.font = .medium(size: 15)
         acceptButton.contentEdgeInsets = .init(top: 2, left: 13, bottom: 2, right: 13)
         acceptButton.setBackgroundImage(.resizableRoundedRect(color: .privacyCenterAcceptButton, cornerRadius: 4), for: .normal)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: acceptButton)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "backArrow", in: Bundle(for: Self.self), compatibleWith: nil),
             style: .plain,
@@ -81,9 +79,13 @@ final class PrivacyCenterViewController: UIViewController {
     
     private func setupViewModel() {
         viewModel.onDataLoaded = { [weak self] data in
-            self?.setTitle(data.translations.title)
-            self?.sections = data.sections
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            
+            self.setTitle(data.translations.title)
+            self.acceptButton.setTitle(data.translations.acceptButtonTitle, for: .normal)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.acceptButton)
+            self.sections = data.sections
+            self.tableView.reloadData()
         }
         
         viewModel.onAcceptButtonIsEnabledChange = { [weak self] isEnabled in

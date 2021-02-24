@@ -11,6 +11,7 @@ import Foundation
 struct PrivacyCenterData {
     struct Translations {
         let title: String
+        let acceptButtonTitle: String
     }
     
     let translations: Translations
@@ -72,7 +73,8 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
             
             let data = PrivacyCenterData(
                 translations: .init(
-                    title: solution.templateTexts.privacyCenterTitle.localeTranslation()?.text ?? ""
+                    title: solution.templateTexts.privacyCenterTitle.localeTranslation()?.text ?? "",
+                    acceptButtonTitle: solution.templateTexts.savePreferencesButton.localeTranslation()?.text ?? ""
                 ),
                 sections: sections
             )
