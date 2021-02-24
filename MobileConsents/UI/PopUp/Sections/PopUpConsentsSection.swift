@@ -8,11 +8,6 @@
 
 import UIKit
 
-// TODO: Probably not needed, to remove
-protocol PopUpConsentViewModelDelegate: AnyObject {
-    func consentSelectionDidChange(id: String, isSelected: Bool)
-}
-
 final class PopUpConsentViewModel: CheckboxTableViewCellViewModel {
     let text: String
     let isRequired: Bool
@@ -25,8 +20,6 @@ final class PopUpConsentViewModel: CheckboxTableViewCellViewModel {
     private let notificationCenter: NotificationCenter
     
     private var observationToken: Any?
-    
-    weak var delegate: PopUpConsentViewModelDelegate?
     
     init(
         id: String,
@@ -57,14 +50,8 @@ final class PopUpConsentViewModel: CheckboxTableViewCellViewModel {
         }
     }
     
-    func selectionDidChangeExternally(_ isSelected: Bool) {
-        print("Selection did change externally")
-    }
-    
     func selectionDidChange(_ isSelected: Bool) {
         consentItemProvider.markConsentItem(id: id, asSelected: isSelected)
-        
-        delegate?.consentSelectionDidChange(id: id, isSelected: isSelected)
     }
 }
 
