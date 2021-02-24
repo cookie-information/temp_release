@@ -81,12 +81,17 @@ final class PreferencesSection: Section {
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
         defer { tableView.deselectRow(at: indexPath, animated: false) }
         
-        guard indexPath.row == 0 else { return }
-        
-        isExpanded.toggle()
-        (tableView.cellForRow(at: indexPath) as? HeaderTableViewCell)?.setIsExpanded(isExpanded, animated: true)
-        
-        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+        switch indexPath.row {
+        case Indices.header:
+            isExpanded.toggle()
+            (tableView.cellForRow(at: indexPath) as? HeaderTableViewCell)?.setIsExpanded(isExpanded, animated: true)
+            
+            tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+        case Indices.poweredBy:
+            UIApplication.shared.open(Constants.cookieInformationUrl)
+        default:
+            break
+        }
     }
     
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
