@@ -8,6 +8,16 @@
 
 import Foundation
 
+protocol AsyncDispatcher {
+    func async(execute work: @escaping () -> Void)
+}
+
+extension DispatchQueue: AsyncDispatcher {
+    func async(execute work: @escaping () -> Void) {
+        async(group: nil, qos: .unspecified, flags: [], execute: work)
+    }
+}
+
 protocol ConsentItemProvider {
     func isConsentItemSelected(id: String) -> Bool
     func markConsentItem(id: String, asSelected selected: Bool)
@@ -49,14 +59,21 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
     private let consentSolutionId: String
     private let mobileConsents: MobileConsentsProtocol
     private let notificationCenter: NotificationCenter
+    private let asyncDispatcher: AsyncDispatcher
     
     private var consentSolution: ConsentSolution?
     private var selectedConsentItemIds = Set<String>()
     
-    init(consentSolutionId: String, mobileConsents: MobileConsentsProtocol, notificationCenter: NotificationCenter = NotificationCenter.default) {
+    init(
+        consentSolutionId: String,
+        mobileConsents: MobileConsentsProtocol,
+        notificationCenter: NotificationCenter = NotificationCenter.default,
+        asyncDispatcher: AsyncDispatcher = DispatchQueue.main
+    ) {
         self.consentSolutionId = consentSolutionId
         self.mobileConsents = mobileConsents
         self.notificationCenter = notificationCenter
+        self.asyncDispatcher = asyncDispatcher
     }
     
     func loadConsentSolutionIfNeeded(completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
@@ -66,8 +83,8 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             return
         }
         
-        mobileConsents.fetchConsentSolution(forUniversalConsentSolutionId: consentSolutionId) { [weak self] result in
-            DispatchQueue.main.async {
+        mobileConsents.fetchConsentSolution(forUniversalConsentSolutionId: consentSolutionId) { [weak self, asyncDispatcher] result in
+            asyncDispatcher.async {
                 if case .success(let solution) = result {
                     self?.consentSolution = solution
                 }
