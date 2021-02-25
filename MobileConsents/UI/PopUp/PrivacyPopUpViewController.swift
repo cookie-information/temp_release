@@ -12,6 +12,7 @@ final class PrivacyPopUpViewController: UIViewController {
     private let titleView = PopUpTitleView()
     private let tableView = UITableView()
     private let buttonsView = PopUpButtonsView()
+    private let gradientContainer: GradientContainer<UITableView>
     
     private let viewModel: PrivacyPopUpViewModelProtocol
     
@@ -19,6 +20,16 @@ final class PrivacyPopUpViewController: UIViewController {
     
     init(viewModel: PrivacyPopUpViewModelProtocol) {
         self.viewModel = viewModel
+        
+        gradientContainer = GradientContainer(
+            tableView,
+            config: .init(
+                color: .lightGray,
+                gradientHeight: 20,
+                gradientHorizontalInset: 15,
+                gradientBottomOffset: 2
+            )
+        )
         
         super.init(nibName: nil, bundle: nil)
         
@@ -44,20 +55,20 @@ final class PrivacyPopUpViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         view.addSubview(titleView)
-        view.addSubview(tableView)
+        view.addSubview(gradientContainer)
         view.addSubview(buttonsView)
         titleView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        gradientContainer.translatesAutoresizingMaskIntoConstraints = false
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleView.topAnchor.constraint(equalTo: view.topAnchor),
             titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: titleView.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            buttonsView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            gradientContainer.topAnchor.constraint(equalTo: titleView.bottomAnchor),
+            gradientContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gradientContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonsView.topAnchor.constraint(equalTo: gradientContainer.bottomAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             buttonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             buttonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
