@@ -17,8 +17,16 @@ protocol RouterProtocol {
 final class Router: RouterProtocol {
     weak var rootViewController: UIViewController?
     
+    private let consentSolutionManager: ConsentSolutionManagerProtocol
+    
+    init(consentSolutionManager: ConsentSolutionManagerProtocol) {
+        self.consentSolutionManager = consentSolutionManager
+    }
+    
     func showPrivacyCenter() {
-        let viewModel = PrivacyCenterViewModel()
+        let viewModel = PrivacyCenterViewModel(
+            consentSolutionManager: consentSolutionManager
+        )
         viewModel.router = self
         let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))
         if #available(iOS 13.0, *) {

@@ -9,18 +9,34 @@
 import UIKit
 
 protocol PreferenceViewModelProtocol: AnyObject {
-    var title: String { get }
-    var isOn: Bool { get set }
+    var text: String { get }
+    var isSelected: Bool { get }
+    
+    func selectionDidChange(_ isSelected: Bool)
 }
 
 final class PreferenceViewModel: PreferenceViewModelProtocol {
-    let title: String
+    let text: String
     
-    var isOn: Bool
+    var isSelected: Bool {
+        consentItemProvider.isConsentItemSelected(id: id)
+    }
     
-    init(title: String, isOn: Bool) {
-        self.title = title
-        self.isOn = isOn
+    private let id: String
+    private let consentItemProvider: ConsentItemProvider
+    
+    init(
+        id: String,
+        text: String,
+        consentItemProvider: ConsentItemProvider
+    ) {
+        self.id = id
+        self.text = text
+        self.consentItemProvider = consentItemProvider
+    }
+    
+    func selectionDidChange(_ isSelected: Bool) {
+        consentItemProvider.markConsentItem(id: id, asSelected: isSelected)
     }
 }
 
@@ -64,12 +80,17 @@ final class PreferencesSection: Section {
     func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
         defer { tableView.deselectRow(at: indexPath, animated: false) }
         
-        guard indexPath.row == 0 else { return }
-        
-        isExpanded.toggle()
-        (tableView.cellForRow(at: indexPath) as? HeaderTableViewCell)?.setIsExpanded(isExpanded, animated: true)
-        
-        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+        switch indexPath.row {
+        case Indices.header:
+            isExpanded.toggle()
+            (tableView.cellForRow(at: indexPath) as? HeaderTableViewCell)?.setIsExpanded(isExpanded, animated: true)
+            
+            tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+        case Indices.poweredBy:
+            UIApplication.shared.open(Constants.cookieInformationUrl)
+        default:
+            break
+        }
     }
     
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
@@ -116,10 +137,10 @@ final class PreferencesSection: Section {
         
         let viewModel = viewModels[adjustedRow]
         
-        cell.setTitle(viewModel.title)
-        cell.setValue(viewModel.isOn)
+        cell.setTitle(viewModel.text)
+        cell.setValue(viewModel.isSelected)
         cell.valueChanged = { [weak viewModel] newValue in
-            viewModel?.isOn = newValue
+            viewModel?.selectionDidChange(newValue)
         }
         
         return cell
