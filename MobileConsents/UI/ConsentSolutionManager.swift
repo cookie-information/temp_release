@@ -216,7 +216,112 @@ private let mockConsentSolution = ConsentSolution(
                 translations: [
                     ConsentTranslation(
                         language: "EN",
-                        shortText: "First consent item short text",
+                        shortText: "First consent item short text 1",
+                        longText: "First consent item long text"
+                    )
+                ],
+                locale: locale
+            )
+        ),
+        ConsentItem(
+            id: "a10853b5-85b8-4541-a9ab-fd203176bdce2",
+            required: true,
+            type: .setting,
+            translations: Translated(
+                translations: [
+                    ConsentTranslation(
+                        language: "EN",
+                        shortText: "First consent item short text 2",
+                        longText: "First consent item long text"
+                    )
+                ],
+                locale: locale
+            )
+        ),
+        ConsentItem(
+            id: "a10853b5-85b8-4541-a9ab-fd203176bdce3",
+            required: true,
+            type: .setting,
+            translations: Translated(
+                translations: [
+                    ConsentTranslation(
+                        language: "EN",
+                        shortText: "First consent item short text 3",
+                        longText: "First consent item long text"
+                    )
+                ],
+                locale: locale
+            )
+        ),
+        ConsentItem(
+            id: "a10853b5-85b8-4541-a9ab-fd203176bdce4",
+            required: true,
+            type: .setting,
+            translations: Translated(
+                translations: [
+                    ConsentTranslation(
+                        language: "EN",
+                        shortText: "First consent item short text 4",
+                        longText: "First consent item long text"
+                    )
+                ],
+                locale: locale
+            )
+        ),
+        ConsentItem(
+            id: "a10853b5-85b8-4541-a9ab-fd203176bdce5",
+            required: true,
+            type: .setting,
+            translations: Translated(
+                translations: [
+                    ConsentTranslation(
+                        language: "EN",
+                        shortText: "First consent item short text 5",
+                        longText: "First consent item long text"
+                    )
+                ],
+                locale: locale
+            )
+        ),
+        ConsentItem(
+            id: "a10853b5-85b8-4541-a9ab-fd203176bdce6",
+            required: true,
+            type: .setting,
+            translations: Translated(
+                translations: [
+                    ConsentTranslation(
+                        language: "EN",
+                        shortText: "First consent item short text 6",
+                        longText: "First consent item long text"
+                    )
+                ],
+                locale: locale
+            )
+        ),
+        ConsentItem(
+            id: "a10853b5-85b8-4541-a9ab-fd203176bdce7",
+            required: true,
+            type: .setting,
+            translations: Translated(
+                translations: [
+                    ConsentTranslation(
+                        language: "EN",
+                        shortText: "First consent item short text 7",
+                        longText: "First consent item long text"
+                    )
+                ],
+                locale: locale
+            )
+        ),
+        ConsentItem(
+            id: "a10853b5-85b8-4541-a9ab-fd203176bdce8",
+            required: true,
+            type: .setting,
+            translations: Translated(
+                translations: [
+                    ConsentTranslation(
+                        language: "EN",
+                        shortText: "First consent item short text 8",
                         longText: "First consent item long text"
                     )
                 ],
