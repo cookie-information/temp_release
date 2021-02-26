@@ -46,11 +46,11 @@ final class ConsentSolutionManagerTests: XCTestCase {
         notificationCenter.removeObserver(observationToken as Any)
     }
     
-    func testAreAllRequiredConsentItemsSelectedIsFalse_whenConsentSolutionIsNotLoaded() {
+    func test_areAllRequiredConsentItemsSelectedIsFalse_whenConsentSolutionIsNotLoaded() {
         XCTAssertFalse(sut.areAllRequiredConsentItemsSelected)
     }
     
-    func testHasRequiredConsentItemsIsFalse_whenConsentSolutionIsNotLoaded() {
+    func test_hasRequiredConsentItemsIsFalse_whenConsentSolutionIsNotLoaded() {
         XCTAssertFalse(sut.hasRequiredConsentItems)
     }
     
@@ -116,7 +116,7 @@ final class ConsentSolutionManagerTests: XCTestCase {
     func test_acceptAllConsentItemsMarksAllConsentsAsSelected() {
         loadConsentSolution(consentSolution(consentItemConfigs: [(true, .setting), (true, .setting)]))
         
-        sut.acceptAllConsentItems()
+        sut.acceptAllConsentItems { _ in }
         
         XCTAssertTrue(sut.isConsentItemSelected(id: "0"))
         XCTAssertTrue(sut.isConsentItemSelected(id: "1"))
@@ -124,13 +124,39 @@ final class ConsentSolutionManagerTests: XCTestCase {
         XCTAssertEqual(notificationCount, 1)
     }
     
+    func test_acceptAllConsentItemsPostsAllConsentsAsGiven() throws {
+        loadConsentSolution(consentSolution(consentItemConfigs: [(true, .setting), (false, .setting), (true, .info)]))
+        
+        sut.acceptAllConsentItems { _ in }
+        
+        let processingPurposes = try XCTUnwrap(mobileConsents.postedConsents?.processingPurposes)
+        
+        XCTAssertTrue(processingPurposes.first { $0.consentItemId == "0" }?.consentGiven ?? false)
+        XCTAssertTrue(processingPurposes.first { $0.consentItemId == "1" }?.consentGiven ?? false)
+        XCTAssertTrue(processingPurposes.first { $0.consentItemId == "2" }?.consentGiven ?? false)
+    }
+    
+    func test_acceptSelectedConsentItemsPostsOnlySelectedConsentsAndInfoConsentsAsGiven() throws {
+        loadConsentSolution(consentSolution(consentItemConfigs: [(true, .setting), (false, .setting), (true, .info)]))
+        
+        sut.markConsentItem(id: "0", asSelected: true)
+        
+        sut.acceptSelectedConsentItems { _ in }
+        
+        let processingPurposes = try XCTUnwrap(mobileConsents.postedConsents?.processingPurposes)
+        
+        XCTAssertTrue(processingPurposes.first { $0.consentItemId == "0" }?.consentGiven ?? false)
+        XCTAssertFalse(processingPurposes.first { $0.consentItemId == "1" }?.consentGiven ?? true)
+        XCTAssertTrue(processingPurposes.first { $0.consentItemId == "2" }?.consentGiven ?? false)
+    }
+    
     func test_rejectAllConsentItemsMarksAllConsentsAsNotSelected() {
         loadConsentSolution(consentSolution(consentItemConfigs: [(true, .setting), (true, .setting)]))
-        
+         
         sut.markConsentItem(id: "0", asSelected: false)
         sut.markConsentItem(id: "1", asSelected: false)
         
-        sut.rejectAllConsentItems()
+        sut.rejectAllConsentItems { _ in }
         
         XCTAssertFalse(sut.isConsentItemSelected(id: "0"))
         XCTAssertFalse(sut.isConsentItemSelected(id: "1"))
@@ -151,11 +177,14 @@ private final class MobileConsentsMock: MobileConsentsProtocol {
     var fetchConsentSolutionResult: Result<ConsentSolution, Error>!
     var postConsentResult: Error?
     
+    var postedConsents: Consent?
+    
     func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
         completion(fetchConsentSolutionResult)
     }
     
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void) {
+        postedConsents = consent
         completion(postConsentResult)
     }
 }

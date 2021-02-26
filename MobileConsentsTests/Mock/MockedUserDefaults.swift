@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import MobileConsentsSDK
 
 final class MockedUserDefaults: UserDefaultsProtocol {
     private var data: [String: Any] = [:]
