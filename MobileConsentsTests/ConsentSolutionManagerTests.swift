@@ -162,6 +162,20 @@ final class ConsentSolutionManagerTests: XCTestCase {
         XCTAssertEqual(notificationCount, 3)
     }
     
+    func test_rejectAllConsentItemsPostsOnlyInfoConsentsAsGiven() throws {
+        loadConsentSolution(consentSolution(consentItemConfigs: [(false, .setting), (false, .setting), (true, .info)]))
+        
+        sut.markConsentItem(id: "0", asSelected: true) // Mark some consent as selected to check if it is not posted
+        
+        sut.rejectAllConsentItems { _ in }
+        
+        let processingPurposes = try XCTUnwrap(mobileConsents.postedConsents?.processingPurposes)
+        
+        XCTAssertFalse(processingPurposes.first { $0.consentItemId == "0" }?.consentGiven ?? true)
+        XCTAssertFalse(processingPurposes.first { $0.consentItemId == "1" }?.consentGiven ?? true)
+        XCTAssertTrue(processingPurposes.first { $0.consentItemId == "2" }?.consentGiven ?? false)
+    }
+    
     private func loadConsentSolution(_ consentSolution: ConsentSolution) {
         mobileConsents.fetchConsentSolutionResult = .success(consentSolution)
         
