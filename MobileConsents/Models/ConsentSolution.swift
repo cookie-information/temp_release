@@ -14,6 +14,10 @@ public struct ConsentSolution: Decodable, Equatable {
     public let templateTexts: TemplateTexts
     public let consentItems: [ConsentItem]
     
+    var currentLanguage: String {
+        consentItems.first?.translations.currentLanguage ?? "EN"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "universalConsentSolutionId"
         case versionId = "universalConsentSolutionVersionId"

@@ -134,7 +134,7 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             ProcessingPurpose(
                 consentItemId: item.id,
                 consentGiven: givenConsentItemIds.contains(item.id),
-                language: "EN" // TODO: pass correct language
+                language: consentSolution.currentLanguage
             )
         }
         
