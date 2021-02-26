@@ -19,9 +19,9 @@ protocol ConsentSolutionManagerProtocol: ConsentItemProvider {
     
     func loadConsentSolutionIfNeeded(completion: @escaping (Result<ConsentSolution, Error>) -> Void)
     
-    func rejectAllConsentItems()
-    func acceptAllConsentItems()
-    func acceptSelectedConsentItems()
+    func rejectAllConsentItems(completion: @escaping (Error?) -> Void)
+    func acceptAllConsentItems(completion: @escaping (Error?) -> Void)
+    func acceptSelectedConsentItems(completion: @escaping (Error?) -> Void)
 }
 
 final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
@@ -98,19 +98,52 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
         postConsentItemSelectionDidChangeNotification()
     }
     
-    func rejectAllConsentItems() {
+    func rejectAllConsentItems(completion: @escaping (Error?) -> Void) {
         selectedConsentItemIds.removeAll()
         
         postConsentItemSelectionDidChangeNotification()
+        
+        postConsent(selectedConsentItemIds: [], completion: completion)
     }
     
-    func acceptAllConsentItems() {
-        consentSolution?.consentItems.map(\.id).forEach { selectedConsentItemIds.insert($0) }
+    func acceptAllConsentItems(completion: @escaping (Error?) -> Void) {
+        let allSettingsItemIds = consentSolution?.consentItems
+            .filter { $0.type == .setting }
+            .map(\.id)
+            ?? []
+        
+        selectedConsentItemIds.formUnion(allSettingsItemIds)
         
         postConsentItemSelectionDidChangeNotification()
+        
+        postConsent(selectedConsentItemIds: selectedConsentItemIds, completion: completion)
     }
     
-    func acceptSelectedConsentItems() {}
+    func acceptSelectedConsentItems(completion: @escaping (Error?) -> Void) {
+        postConsent(selectedConsentItemIds: selectedConsentItemIds, completion: completion)
+    }
+    
+    private func postConsent(selectedConsentItemIds: Set<String>, completion: @escaping (Error?) -> Void) {
+        guard let consentSolution = consentSolution else { return }
+        
+        let infoConsentItemIds = consentSolution.consentItems.filter { $0.type == .info }.map(\.id)
+        let givenConsentItemIds = selectedConsentItemIds.union(infoConsentItemIds)
+        
+        var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId)
+        consent.processingPurposes = consentSolution.consentItems.map { item in
+            ProcessingPurpose(
+                consentItemId: item.id,
+                consentGiven: givenConsentItemIds.contains(item.id),
+                language: "EN" // TODO: pass correct language
+            )
+        }
+        
+        mobileConsents.postConsent(consent) { [asyncDispatcher] error in
+            asyncDispatcher.async {
+                completion(error)
+            }
+        }
+    }
     
     private func postConsentItemSelectionDidChangeNotification() {
         notificationCenter.post(Notification(name: Self.consentItemSelectionDidChange))
@@ -125,7 +158,9 @@ final class MockMobileConsents: MobileConsentsProtocol {
     }
     
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void) {
-        completion(nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            completion(nil)
+        }
     }
 }
 

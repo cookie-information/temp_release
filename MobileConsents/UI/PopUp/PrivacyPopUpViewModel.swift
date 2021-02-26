@@ -15,12 +15,14 @@ struct PrivacyPopUpData {
 }
 
 protocol PrivacyPopUpViewModelProtocol: AnyObject {
+    var onLoadingChange: ((Bool) -> Void)? { get set }
     var onDataLoaded: ((PrivacyPopUpData) -> Void)? { get set }
     
     func viewDidLoad()
 }
 
 final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
+    var onLoadingChange: ((Bool) -> Void)?
     var onDataLoaded: ((PrivacyPopUpData) -> Void)?
     
     var router: RouterProtocol?
@@ -32,7 +34,10 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     }
     
     func viewDidLoad() {
-        consentSolutionManager.loadConsentSolutionIfNeeded { result in
+        onLoadingChange?(true)
+        
+        consentSolutionManager.loadConsentSolutionIfNeeded { [weak self] result in
+            guard let self = self else { return }
             guard case .success(let solution) = result else { return }
             
             let title = solution.title.localeTranslation()?.text ?? ""
@@ -51,6 +56,7 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             )
         
             self.onDataLoaded?(data)
+            self.onLoadingChange?(false)
         }
     }
     
@@ -101,21 +107,36 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         
         return viewModels
     }
+    
+    private func handlePostingConsent(error: Error?) {
+        onLoadingChange?(false)
+        
+        if error == nil {
+            router?.closeAll()
+        }
+    }
 }
 
 extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
     func buttonTapped(type: PopUpButtonViewModel.ButtonType) {
-        print("Button \(type) tapped")
-        
         switch type {
         case .privacyCenter:
             router?.showPrivacyCenter()
         case .rejectAll:
-            consentSolutionManager.rejectAllConsentItems()
+            onLoadingChange?(true)
+            consentSolutionManager.rejectAllConsentItems { [weak self] error in
+                self?.handlePostingConsent(error: error)
+            }
         case .acceptAll:
-            consentSolutionManager.acceptAllConsentItems()
+            onLoadingChange?(true)
+            consentSolutionManager.acceptAllConsentItems { [weak self] error in
+                self?.handlePostingConsent(error: error)
+            }
         case .acceptSelected:
-            consentSolutionManager.acceptSelectedConsentItems()
+            onLoadingChange?(true)
+            consentSolutionManager.acceptSelectedConsentItems { [weak self] error in
+                self?.handlePostingConsent(error: error)
+            }
         }
     }
 }
