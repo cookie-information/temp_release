@@ -13,6 +13,7 @@ final class PrivacyPopUpViewController: UIViewController {
     private let tableView = UITableView()
     private let buttonsView = PopUpButtonsView()
     private let gradientContainer: GradientContainer<UITableView>
+    private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     private let viewModel: PrivacyPopUpViewModelProtocol
     
@@ -51,15 +52,19 @@ final class PrivacyPopUpViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = .white
         
+        activityIndicator.color = .activityIndicator
+        
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         
         view.addSubview(titleView)
         view.addSubview(gradientContainer)
         view.addSubview(buttonsView)
+        view.addSubview(activityIndicator)
         titleView.translatesAutoresizingMaskIntoConstraints = false
         gradientContainer.translatesAutoresizingMaskIntoConstraints = false
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -71,7 +76,9 @@ final class PrivacyPopUpViewController: UIViewController {
             buttonsView.topAnchor.constraint(equalTo: gradientContainer.bottomAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             buttonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            buttonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            buttonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         ([
@@ -88,6 +95,11 @@ final class PrivacyPopUpViewController: UIViewController {
             self?.buttonsView.setButtonViewModels(data.buttonViewModels)
             self?.sections = data.sections
             self?.tableView.reloadData()
+        }
+        
+        viewModel.onLoadingChange = { [weak self, activityIndicator] isLoading in
+            isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+            self?.view.isUserInteractionEnabled = !isLoading
         }
         
         viewModel.viewDidLoad()

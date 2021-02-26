@@ -17,4 +17,3 @@ extension DispatchQueue: AsyncDispatcher {
         async(group: nil, qos: .unspecified, flags: [], execute: work)
     }
 }
-

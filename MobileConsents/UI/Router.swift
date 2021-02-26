@@ -12,6 +12,8 @@ protocol RouterProtocol {
     func showPrivacyCenter()
     
     func closePrivacyCenter()
+    
+    func closeAll()
 }
 
 final class Router: RouterProtocol {
@@ -44,5 +46,9 @@ final class Router: RouterProtocol {
     
     func closePrivacyCenter() {
         rootViewController?.dismiss(animated: true)
+    }
+    
+    func closeAll() {
+        rootViewController?.presentingViewController?.dismiss(animated: true)
     }
 }

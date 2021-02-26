@@ -18,6 +18,10 @@ public struct Translated<T: Translation & Decodable & Equatable>: Decodable, Equ
     public let translations: [T]
     private let locale: Locale?
     
+    var currentLanguage: String {
+        localeTranslation()?.language ?? "EN"
+    }
+    
     init(translations: [T], locale: Locale?) {
         self.translations = translations
         self.locale = locale
