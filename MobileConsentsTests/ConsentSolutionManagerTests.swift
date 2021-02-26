@@ -6,15 +6,13 @@
 //  Copyright © 2021 ClearCode. All rights reserved.
 //
 
-@testable import MobileConsentsSDK
 import XCTest
+@testable import MobileConsentsSDK
 
 final class ConsentSolutionManagerTests: XCTestCase {
     private var sut: ConsentSolutionManager!
     private var notificationCenter: NotificationCenter!
     private var mobileConsents: MobileConsentsMock!
-    
-    private var loadConsentSolutionResult: Result<ConsentSolution, Error>?
     
     private var notificationCount: Int!
     private var observationToken: Any!
@@ -167,9 +165,7 @@ final class ConsentSolutionManagerTests: XCTestCase {
     private func loadConsentSolution(_ consentSolution: ConsentSolution) {
         mobileConsents.fetchConsentSolutionResult = .success(consentSolution)
         
-        sut.loadConsentSolutionIfNeeded {
-            self.loadConsentSolutionResult = $0
-        }
+        sut.loadConsentSolutionIfNeeded { _ in }
     }
 }
 
