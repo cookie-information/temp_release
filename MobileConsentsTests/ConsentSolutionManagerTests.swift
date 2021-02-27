@@ -218,7 +218,9 @@ func consentSolution(consentItemConfigs: [(Bool, ConsentItemType)]) -> ConsentSo
     return ConsentSolution(
         id: "1",
         versionId: "1",
-        title: .init(translations: [], locale: nil),
+        title: .init(translations: [
+            .init(language: "EN", text: "TestTitle")
+        ], locale: nil),
         description: .init(translations: [], locale: nil),
         templateTexts: .init(
             privacyCenterButton: .init(translations: [], locale: nil),

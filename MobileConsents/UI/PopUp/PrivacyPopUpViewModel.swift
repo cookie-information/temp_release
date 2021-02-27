@@ -38,6 +38,9 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         
         consentSolutionManager.loadConsentSolutionIfNeeded { [weak self] result in
             guard let self = self else { return }
+            
+            self.onLoadingChange?(false)
+            
             guard case .success(let solution) = result else { return }
             
             let title = solution.title.localeTranslation()?.text ?? ""
@@ -56,7 +59,6 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             )
         
             self.onDataLoaded?(data)
-            self.onLoadingChange?(false)
         }
     }
     
