@@ -77,6 +77,8 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             asyncDispatcher.async {
                 if case .success(let solution) = result {
                     self?.consentSolution = solution
+                    let givenConsentIds = self?.mobileConsents.getSavedConsents().filter(\.consentGiven).map(\.consentItemId) ?? []
+                    self?.selectedConsentItemIds = Set(givenConsentIds)
                 }
                 
                 completion(result)
@@ -161,6 +163,10 @@ final class MockMobileConsents: MobileConsentsProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             completion(nil)
         }
+    }
+    
+    func getSavedConsents() -> [SavedConsent] {
+        []
     }
 }
 
