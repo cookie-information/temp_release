@@ -12,7 +12,7 @@ final class SwitchTableViewCell: BaseTableViewCell {
     var valueChanged: ((Bool) -> Void)?
     
     private let uiSwitch = UISwitch()
-    private let label = UILabel()
+    private let textView = HTMLTextView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,14 +25,14 @@ final class SwitchTableViewCell: BaseTableViewCell {
     }
     
     override func prepareForReuse() {
-        label.text = nil
+        textView.htmlText = nil
         uiSwitch.isOn = false
         valueChanged = nil
         isSeparatorHidden = true
     }
     
     func setTitle(_ title: String) {
-        label.text = title
+        textView.htmlText = title
     }
     
     func setValue(_ value: Bool) {
@@ -42,22 +42,25 @@ final class SwitchTableViewCell: BaseTableViewCell {
     private func setup() {
         selectionStyle = .none
         
-        label.font = .regular(size: 13)
-        
         uiSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         
-        contentView.addSubview(label)
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.textContainerInset = .zero
+        textView.style = StyleConstants.textViewStyle
+        
+        contentView.addSubview(textView)
         contentView.addSubview(uiSwitch)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
         uiSwitch.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
-            uiSwitch.centerYAnchor.constraint(equalTo: label.centerYAnchor),
-            uiSwitch.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 8),
+            textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
+            uiSwitch.topAnchor.constraint(equalTo: textView.topAnchor),
+            uiSwitch.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: 8),
             uiSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -29)
         ])
     }
