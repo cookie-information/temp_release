@@ -259,75 +259,140 @@ private let mockConsentSolution = ConsentSolution(
             )
         ),
         ConsentItem(
-            id: "a10853b5-85b8-4541-a9ab-fd203176bdce2",
-            required: true,
+            id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b1",
+            required: false,
             type: .setting,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
                         language: "EN",
-                        shortText: "First consent item short text 2",
-                        longText: "First consent item long text"
+                        shortText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """,
+                        longText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """
                     )
                 ],
                 locale: locale
             )
         ),
         ConsentItem(
-            id: "a10853b5-85b8-4541-a9ab-fd203176bdce3",
-            required: true,
+            id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b2",
+            required: false,
             type: .setting,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
                         language: "EN",
-                        shortText: "First consent item short text 3",
-                        longText: "First consent item long text"
+                        shortText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """,
+                        longText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """
                     )
                 ],
                 locale: locale
             )
         ),
         ConsentItem(
-            id: "a10853b5-85b8-4541-a9ab-fd203176bdce4",
-            required: true,
+            id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b3",
+            required: false,
             type: .setting,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
                         language: "EN",
-                        shortText: "First consent item short text 4",
-                        longText: "First consent item long text"
+                        shortText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """,
+                        longText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """
                     )
                 ],
                 locale: locale
             )
         ),
         ConsentItem(
-            id: "a10853b5-85b8-4541-a9ab-fd203176bdce5",
-            required: true,
+            id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b4",
+            required: false,
             type: .setting,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
                         language: "EN",
-                        shortText: "First consent item short text 5",
-                        longText: "First consent item long text"
-                    )
-                ],
-                locale: locale
-            )
-        ),
-        ConsentItem(
-            id: "a10853b5-85b8-4541-a9ab-fd203176bdce6",
-            required: true,
-            type: .setting,
-            translations: Translated(
-                translations: [
-                    ConsentTranslation(
-                        language: "EN",
-                        shortText: "First consent item short text 6",
-                        longText: "First consent item long text"
+                        shortText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """,
+                        longText: """
+                        Example html capabilities<br>
+                        Lists:<br>
+                        <ul>
+                        <li><b>Bold text</b></li>
+                        <li><em>Emphasized text</em></li>
+                        <li><b><i>Bold and emphasized text</i></b></li>
+                        <li><a href=\"https://apple.com\">Link to website</a></li>
+                        <li><span style=\"color:red\">Text with custom color</span></li>
+                        </ul>
+                        """
                     )
                 ],
                 locale: locale
@@ -341,22 +406,7 @@ private let mockConsentSolution = ConsentSolution(
                 translations: [
                     ConsentTranslation(
                         language: "EN",
-                        shortText: "First consent item short text 7",
-                        longText: "First consent item long text"
-                    )
-                ],
-                locale: locale
-            )
-        ),
-        ConsentItem(
-            id: "a10853b5-85b8-4541-a9ab-fd203176bdce8",
-            required: true,
-            type: .setting,
-            translations: Translated(
-                translations: [
-                    ConsentTranslation(
-                        language: "EN",
-                        shortText: "First consent item short text 8",
+                        shortText: "Consent item short text 5",
                         longText: "First consent item long text"
                     )
                 ],
