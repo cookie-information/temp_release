@@ -14,6 +14,7 @@ final class PrivacyCenterViewController: UIViewController {
     private let viewModel: PrivacyCenterViewModelProtocol
     private let tableView = UITableView()
     private let acceptButton = UIButton()
+    private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     init(viewModel: PrivacyCenterViewModelProtocol) {
         self.viewModel = viewModel
@@ -41,6 +42,8 @@ final class PrivacyCenterViewController: UIViewController {
     }
     
     private func setupLayout() {
+        activityIndicator.color = .activityIndicator
+        
         acceptButton.setTitleColor(.white, for: .normal)
         acceptButton.titleLabel?.font = .medium(size: 15)
         acceptButton.contentEdgeInsets = .init(top: 2, left: 13, bottom: 2, right: 13)
@@ -57,13 +60,17 @@ final class PrivacyCenterViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         tableView.dataSource = self
@@ -86,6 +93,11 @@ final class PrivacyCenterViewController: UIViewController {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.acceptButton)
             self.sections = data.sections
             self.tableView.reloadData()
+        }
+        
+        viewModel.onLoadingChange = { [weak self, activityIndicator] isLoading in
+            isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+            self?.view.isUserInteractionEnabled = !isLoading
         }
         
         viewModel.onAcceptButtonIsEnabledChange = { [weak self] isEnabled in
