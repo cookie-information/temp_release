@@ -92,7 +92,14 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     }
     
     func acceptButtonTapped() {
-        print("Accept button tapped")
+        onLoadingChange?(true)
+        consentSolutionManager.acceptSelectedConsentItems { [weak self] error in
+            self?.onLoadingChange?(false)
+            
+            if error == nil {
+                self?.router?.closeAll()
+            }
+        }
     }
     
     func backButtonTapped() {
