@@ -69,6 +69,7 @@ final class GradientContainer<T: UIScrollView>: UIView {
         addSubview(gradientView)
         
         gradientView.translatesAutoresizingMaskIntoConstraints = false
+        gradientView.isUserInteractionEnabled = false
         
         NSLayoutConstraint.activate([
             gradientView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: config.gradientBottomOffset),
