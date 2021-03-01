@@ -63,6 +63,8 @@
 		910AF06225D3FE2F00D5F2BF /* ConsentItemSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06125D3FE2F00D5F2BF /* ConsentItemSection.swift */; };
 		910AF06625D400C300D5F2BF /* PreferencesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06525D400C300D5F2BF /* PreferencesSection.swift */; };
 		910AF06B25D4039B00D5F2BF /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */; };
+		9139FE8B25E92E72002FDE43 /* PopUpConsentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9139FE8A25E92E72002FDE43 /* PopUpConsentViewModelTests.swift */; };
+		9139FE9125E933BE002FDE43 /* PrivacyPopUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9139FE9025E933BE002FDE43 /* PrivacyPopUpViewModelTests.swift */; };
 		913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */; };
 		913A058225DE74FE00571BA3 /* PopUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */; };
 		913A058825DE7D3B00571BA3 /* PrivacyPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */; };
@@ -208,6 +210,8 @@
 		910AF06125D3FE2F00D5F2BF /* ConsentItemSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentItemSection.swift; sourceTree = "<group>"; };
 		910AF06525D400C300D5F2BF /* PreferencesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesSection.swift; sourceTree = "<group>"; };
 		910AF06A25D4039B00D5F2BF /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		9139FE8A25E92E72002FDE43 /* PopUpConsentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConsentViewModelTests.swift; sourceTree = "<group>"; };
+		9139FE9025E933BE002FDE43 /* PrivacyPopUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPopUpViewModelTests.swift; sourceTree = "<group>"; };
 		913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+FromHTML.swift"; sourceTree = "<group>"; };
 		913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPresentationController.swift; sourceTree = "<group>"; };
 		913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPopUpViewController.swift; sourceTree = "<group>"; };
@@ -575,6 +579,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		9139FE8825E92E29002FDE43 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9139FE8A25E92E72002FDE43 /* PopUpConsentViewModelTests.swift */,
+				9139FE9025E933BE002FDE43 /* PrivacyPopUpViewModelTests.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		913A058025DE718E00571BA3 /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +686,7 @@
 		9B8E95B52519C8B0001DF8BD /* MobileConsentsTests */ = {
 			isa = PBXGroup;
 			children = (
+				9139FE8825E92E29002FDE43 /* UI */,
 				916C543725DA8E79000B7993 /* Resources */,
 				112C42ED2535B02D004E115A /* Mock */,
 				111C7CC4252C522100E93EE2 /* ConsentTests.swift */,
@@ -956,8 +970,10 @@
 			files = (
 				112C42EF2535B044004E115A /* MockedUserDefaults.swift in Sources */,
 				111C7CC5252C522100E93EE2 /* ConsentTests.swift in Sources */,
+				9139FE8B25E92E72002FDE43 /* PopUpConsentViewModelTests.swift in Sources */,
 				1116CB94252DFF4E0080E01E /* LocalStorageManagerTests.swift in Sources */,
 				916C543425DA8E44000B7993 /* DecodingTests.swift in Sources */,
+				9139FE9125E933BE002FDE43 /* PrivacyPopUpViewModelTests.swift in Sources */,
 				91B83B4C25E90F81006973E7 /* ConsentSolutionManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
