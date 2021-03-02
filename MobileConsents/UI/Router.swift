@@ -21,6 +21,8 @@ final class Router: RouterProtocol {
     
     private let consentSolutionManager: ConsentSolutionManagerProtocol
     
+    private var privacyCenterTransitioningDelegate: PushPopPrivacyCenterTransitioningDelegate?
+    
     init(consentSolutionManager: ConsentSolutionManagerProtocol) {
         self.consentSolutionManager = consentSolutionManager
     }
@@ -41,14 +43,29 @@ final class Router: RouterProtocol {
         
         viewController.modalPresentationStyle = .overFullScreen
         
+        privacyCenterTransitioningDelegate = PushPopPrivacyCenterTransitioningDelegate()
+        viewController.transitioningDelegate = privacyCenterTransitioningDelegate
+        
         rootViewController?.present(viewController, animated: true)
     }
     
     func closePrivacyCenter() {
-        rootViewController?.dismiss(animated: true)
+        rootViewController?.dismiss(animated: true) { [weak self] in
+            self?.privacyCenterTransitioningDelegate = nil
+        }
     }
     
     func closeAll() {
         rootViewController?.presentingViewController?.dismiss(animated: true)
+    }
+}
+
+private final class PushPopPrivacyCenterTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        PushModalTransition()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        PopModalTransition()
     }
 }
