@@ -10,6 +10,7 @@ import UIKit
 
 protocol PreferenceViewModelProtocol: AnyObject {
     var text: String { get }
+    var isRequired: Bool { get }
     var isSelected: Bool { get }
     
     func selectionDidChange(_ isSelected: Bool)
@@ -17,6 +18,7 @@ protocol PreferenceViewModelProtocol: AnyObject {
 
 final class PreferenceViewModel: PreferenceViewModelProtocol {
     let text: String
+    let isRequired: Bool
     
     var isSelected: Bool {
         consentItemProvider.isConsentItemSelected(id: id)
@@ -28,10 +30,12 @@ final class PreferenceViewModel: PreferenceViewModelProtocol {
     init(
         id: String,
         text: String,
+        isRequired: Bool,
         consentItemProvider: ConsentItemProvider
     ) {
         self.id = id
         self.text = text
+        self.isRequired = isRequired
         self.consentItemProvider = consentItemProvider
     }
     
@@ -137,7 +141,7 @@ final class PreferencesSection: Section {
         
         let viewModel = viewModels[adjustedRow]
         
-        cell.setTitle(viewModel.text)
+        cell.setText(viewModel.text, isRequired: viewModel.isRequired)
         cell.setValue(viewModel.isSelected)
         cell.valueChanged = { [weak viewModel] newValue in
             viewModel?.selectionDidChange(newValue)

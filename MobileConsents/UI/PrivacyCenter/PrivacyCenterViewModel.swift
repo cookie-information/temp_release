@@ -138,6 +138,7 @@ private final class SectionGenerator {
             return PreferenceViewModel(
                 id: item.id,
                 text: translation?.shortText ?? "",
+                isRequired: item.required,
                 consentItemProvider: consentItemProvider
             )
         }
