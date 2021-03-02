@@ -237,17 +237,30 @@ func consentSolution(consentItemConfigs: [(Bool, ConsentItemType)]) -> ConsentSo
     return ConsentSolution(
         id: "1",
         versionId: "1",
-        title: .init(translations: [
-            .init(language: "EN", text: "TestTitle")
-        ], locale: nil),
+        title: .init(
+            translations: [
+                .init(language: "EN", text: "TestTitle")
+            ],
+            locale: nil
+        ),
         description: .init(translations: [], locale: nil),
         templateTexts: .init(
             privacyCenterButton: .init(translations: [], locale: nil),
             rejectAllButton: .init(translations: [], locale: nil),
             acceptAllButton: .init(translations: [], locale: nil),
             acceptSelectedButton: .init(translations: [], locale: nil),
-            savePreferencesButton: .init(translations: [], locale: nil),
-            privacyCenterTitle: .init(translations: [], locale: nil),
+            savePreferencesButton: .init(
+                translations: [
+                    .init(language: "EN", text: "Save preferences button title")
+                ],
+                locale: nil
+            ),
+            privacyCenterTitle: .init(
+                translations: [
+                    .init(language: "EN", text: "Privacy center title")
+                ],
+                locale: nil
+            ),
             privacyPreferencesTabLabel: .init(translations: [], locale: nil),
             poweredByCoiLabel: .init(translations: [], locale: nil),
             consentPreferencesLabel: .init(translations: [], locale: nil)
