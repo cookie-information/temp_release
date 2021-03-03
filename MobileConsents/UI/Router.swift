@@ -35,10 +35,10 @@ final class Router: RouterProtocol {
         let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
-            appearance.backgroundColor = .white
+            appearance.backgroundColor = .privacyCenterBackground
             viewController.navigationBar.standardAppearance = appearance
         } else {
-            viewController.navigationBar.backgroundColor = .white
+            viewController.navigationBar.backgroundColor = .privacyCenterBackground
         }
         
         viewController.modalPresentationStyle = .overFullScreen

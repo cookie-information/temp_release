@@ -26,7 +26,7 @@ final class TitleTableViewCell: UITableViewCell {
     }
     
     private func setup() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .privacyCenterBackground
         label.textColor = .privacyCenterText
         label.font = .medium(size: 13)
         

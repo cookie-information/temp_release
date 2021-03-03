@@ -55,7 +55,8 @@ final class HeaderTableViewCell: BaseTableViewCell {
     
     private func setup() {
         isSeparatorHidden = false
-        chevronIconView.image = UIImage(named: "headerChevron", in: Bundle(for: Self.self), compatibleWith: nil)
+        chevronIconView.image = UIImage(named: "headerChevron", in: Bundle(for: Self.self), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+        chevronIconView.tintColor = .headerText
         
         contentView.backgroundColor = .headerBackground
         label.textColor = .headerText

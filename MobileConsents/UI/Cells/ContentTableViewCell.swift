@@ -35,7 +35,7 @@ final class ContentTableViewCell: BaseTableViewCell {
         
         textView.style = StyleConstants.textViewStyle
         
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .privacyCenterBackground
         
         contentView.addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
