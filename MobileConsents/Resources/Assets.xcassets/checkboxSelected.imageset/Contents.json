@@ -3,6 +3,16 @@
     {
       "filename" : "checkboxSelected.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Checkbox.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

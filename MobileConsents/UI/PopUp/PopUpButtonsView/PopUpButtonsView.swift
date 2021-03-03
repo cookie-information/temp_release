@@ -37,6 +37,22 @@ final class PopUpButtonsView: UIView {
             .forEach(stackView.addArrangedSubview)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
+            return
+        }
+        
+        stackView
+            .subviews
+            .compactMap { $0 as? UIButton }
+            .forEach { button in
+                button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonEnabled, cornerRadius: 4), for: .normal)
+                button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonDisabled, cornerRadius: 4), for: .disabled)
+            }
+    }
+    
     private func setup() {
         stackView.axis = .vertical
         stackView.spacing = 15
@@ -59,6 +75,7 @@ final class PopUpButtonsView: UIView {
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
         button.setTitle(viewModel.title, for: .normal)
+        button.setTitleColor(.popUpButtonTitle, for: .normal)
         button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonEnabled, cornerRadius: 4), for: .normal)
         button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonDisabled, cornerRadius: 4), for: .disabled)
         button.titleLabel?.font = .medium(size: 15)

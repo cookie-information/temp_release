@@ -43,6 +43,8 @@ final class SwitchTableViewCell: BaseTableViewCell {
         selectionStyle = .none
         
         uiSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+        uiSwitch.onTintColor = .privacyCenterSwitch
+        uiSwitch.thumbTintColor = .privacyCenterSwitchThumb
         
         textView.isScrollEnabled = false
         textView.isEditable = false

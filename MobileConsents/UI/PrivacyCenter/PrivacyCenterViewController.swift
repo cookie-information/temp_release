@@ -36,6 +36,16 @@ final class PrivacyCenterViewController: UIViewController {
         setup()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
+            return
+        }
+        
+        acceptButton.setBackgroundImage(.resizableRoundedRect(color: .privacyCenterAcceptButton, cornerRadius: 4), for: .normal)
+    }
+    
     private func setup() {
         setupLayout()
         setupViewModel()
@@ -44,7 +54,7 @@ final class PrivacyCenterViewController: UIViewController {
     private func setupLayout() {
         activityIndicator.color = .activityIndicator
         
-        acceptButton.setTitleColor(.white, for: .normal)
+        acceptButton.setTitleColor(.privacyCenterAcceptButtonTitle, for: .normal)
         acceptButton.titleLabel?.font = .medium(size: 15)
         acceptButton.contentEdgeInsets = .init(top: 2, left: 13, bottom: 2, right: 13)
         acceptButton.setBackgroundImage(.resizableRoundedRect(color: .privacyCenterAcceptButton, cornerRadius: 4), for: .normal)
