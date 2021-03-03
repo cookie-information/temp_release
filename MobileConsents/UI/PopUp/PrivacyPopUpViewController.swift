@@ -25,7 +25,7 @@ final class PrivacyPopUpViewController: UIViewController {
         gradientContainer = GradientContainer(
             tableView,
             config: .init(
-                color: .lightGray,
+                color: .popUpGradient,
                 gradientHeight: 20,
                 gradientHorizontalInset: 15,
                 gradientBottomOffset: 2
@@ -50,7 +50,7 @@ final class PrivacyPopUpViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.backgroundColor = .white
+        view.backgroundColor = .popUpBackground
         
         activityIndicator.color = .activityIndicator
         

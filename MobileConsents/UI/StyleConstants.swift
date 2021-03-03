@@ -9,19 +9,18 @@
 import UIKit
 
 enum StyleConstants {
-    private static let bodyColor = UIColor.adaptive(light: .privacyCenterText, dark: .white)
     private static let fontSize = { UIFontMetrics(forTextStyle: .body).scaledValue(for: 13) }
 
     static let textViewStyle: [String: [String: HTMLTextView.StyleValue]] = [
         "body": [
             "font-family": "Rubik",
             "font-size": .init { "\(fontSize())px" },
-            "color": .init { bodyColor.hexString }
+            "color": .init { UIColor.consentText.hexString }
         ],
         "a": [
             "font-weight": "bold",
             "text-decoration": "none",
-            "color": .init { bodyColor.hexString }
+            "color": .init { UIColor.link.hexString }
         ],
         "li": [
             "list-style-position": "inside"

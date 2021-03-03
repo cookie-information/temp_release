@@ -123,6 +123,16 @@ private final class GradientView: UIView {
         gradientLayer.frame = bounds
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
+            return
+        }
+        
+        updateGradientColors()
+    }
+    
     private func updateGradientColors() {
         gradientLayer.colors = [
             gradientColor.withAlphaComponent(0.0).cgColor,
