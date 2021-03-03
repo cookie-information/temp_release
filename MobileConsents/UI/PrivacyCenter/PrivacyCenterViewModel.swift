@@ -20,6 +20,7 @@ struct PrivacyCenterData {
 
 protocol PrivacyCenterViewModelProtocol: AnyObject {
     var onDataLoaded: ((PrivacyCenterData) -> Void)? { get set }
+    var onLoadingChange: ((Bool) -> Void)? { get set }
     var onAcceptButtonIsEnabledChange: ((Bool) -> Void)? { get set }
     
     func viewDidLoad()
@@ -29,6 +30,7 @@ protocol PrivacyCenterViewModelProtocol: AnyObject {
 
 final class PrivacyCenterViewModel {
     var onDataLoaded: ((PrivacyCenterData) -> Void)?
+    var onLoadingChange: ((Bool) -> Void)?
     var onAcceptButtonIsEnabledChange: ((Bool) -> Void)?
     
     var router: RouterProtocol?
@@ -63,8 +65,13 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
             self?.onAcceptButtonIsEnabledChange?(self?.consentSolutionManager.areAllRequiredConsentItemsSelected ?? false)
         }
         
+        onLoadingChange?(true)
+        
         consentSolutionManager.loadConsentSolutionIfNeeded { [weak self] result in
             guard let self = self else { return }
+            
+            self.onLoadingChange?(false)
+            
             guard case .success(let solution) = result else { return }
             
             let sections = SectionGenerator(
@@ -85,7 +92,14 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     }
     
     func acceptButtonTapped() {
-        print("Accept button tapped")
+        onLoadingChange?(true)
+        consentSolutionManager.acceptSelectedConsentItems { [weak self] error in
+            self?.onLoadingChange?(false)
+            
+            if error == nil {
+                self?.router?.closeAll()
+            }
+        }
     }
     
     func backButtonTapped() {
@@ -93,7 +107,7 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     }
 }
 
-final class SectionGenerator {
+private final class SectionGenerator {
     private let consentItemProvider: ConsentItemProvider
     
     init(consentItemProvider: ConsentItemProvider) {
@@ -124,6 +138,7 @@ final class SectionGenerator {
             return PreferenceViewModel(
                 id: item.id,
                 text: translation?.shortText ?? "",
+                isRequired: item.required,
                 consentItemProvider: consentItemProvider
             )
         }

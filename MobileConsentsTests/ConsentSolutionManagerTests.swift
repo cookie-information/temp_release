@@ -88,6 +88,20 @@ final class ConsentSolutionManagerTests: XCTestCase {
         XCTAssertTrue(sut.hasRequiredConsentItems)
     }
     
+    func test_consentItemsSavedAsGivenAreAlreadyMarkedAsSelected_afterLoadingContentSolution() {
+        mobileConsents.savedConsents = [
+            SavedConsent(consentItemId: "0", consentGiven: true),
+            SavedConsent(consentItemId: "1", consentGiven: false),
+            SavedConsent(consentItemId: "2", consentGiven: true)
+        ]
+        
+        loadConsentSolution(consentSolution(consentItemConfigs: [(true, .setting), (true, .setting), (false, .setting)]))
+        
+        XCTAssertTrue(sut.isConsentItemSelected(id: "0"))
+        XCTAssertFalse(sut.isConsentItemSelected(id: "1"))
+        XCTAssertTrue(sut.isConsentItemSelected(id: "2"))
+    }
+    
     func test_consentItemIsNotSelected_afterLoadingConsentSolution() {
         loadConsentSolution(consentSolution(consentItemConfigs: [(true, .setting)]))
         
@@ -188,6 +202,7 @@ private final class MobileConsentsMock: MobileConsentsProtocol {
     var postConsentResult: Error?
     
     var postedConsents: Consent?
+    var savedConsents = [SavedConsent]()
     
     func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
         completion(fetchConsentSolutionResult)
@@ -196,6 +211,10 @@ private final class MobileConsentsMock: MobileConsentsProtocol {
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void) {
         postedConsents = consent
         completion(postConsentResult)
+    }
+    
+    func getSavedConsents() -> [SavedConsent] {
+        savedConsents
     }
 }
 
@@ -218,17 +237,30 @@ func consentSolution(consentItemConfigs: [(Bool, ConsentItemType)]) -> ConsentSo
     return ConsentSolution(
         id: "1",
         versionId: "1",
-        title: .init(translations: [
-            .init(language: "EN", text: "TestTitle")
-        ], locale: nil),
+        title: .init(
+            translations: [
+                .init(language: "EN", text: "TestTitle")
+            ],
+            locale: nil
+        ),
         description: .init(translations: [], locale: nil),
         templateTexts: .init(
             privacyCenterButton: .init(translations: [], locale: nil),
             rejectAllButton: .init(translations: [], locale: nil),
             acceptAllButton: .init(translations: [], locale: nil),
             acceptSelectedButton: .init(translations: [], locale: nil),
-            savePreferencesButton: .init(translations: [], locale: nil),
-            privacyCenterTitle: .init(translations: [], locale: nil),
+            savePreferencesButton: .init(
+                translations: [
+                    .init(language: "EN", text: "Save preferences button title")
+                ],
+                locale: nil
+            ),
+            privacyCenterTitle: .init(
+                translations: [
+                    .init(language: "EN", text: "Privacy center title")
+                ],
+                locale: nil
+            ),
             privacyPreferencesTabLabel: .init(translations: [], locale: nil),
             poweredByCoiLabel: .init(translations: [], locale: nil),
             consentPreferencesLabel: .init(translations: [], locale: nil)

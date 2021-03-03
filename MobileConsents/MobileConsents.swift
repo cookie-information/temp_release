@@ -11,6 +11,7 @@ import UIKit
 protocol MobileConsentsProtocol {
     func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void)
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void)
+    func getSavedConsents() -> [SavedConsent]
 }
 
 public final class MobileConsents: MobileConsentsProtocol {

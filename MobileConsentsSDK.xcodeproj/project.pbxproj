@@ -71,6 +71,7 @@
 		913A058C25DE8ED500571BA3 /* CheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */; };
 		913A059425DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */; };
 		914D988D25EADDE500588DF3 /* PushPopModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D988C25EADDE500588DF3 /* PushPopModalTransition.swift */; };
+		914D98A325EE28E600588DF3 /* PrivacyCenterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D98A225EE28E600588DF3 /* PrivacyCenterViewModelTests.swift */; };
 		916293ED25D5A925004820C7 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293E925D5A925004820C7 /* Rubik-Bold.ttf */; };
 		916293EE25D5A925004820C7 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EA25D5A925004820C7 /* Rubik-Light.ttf */; };
 		916293EF25D5A925004820C7 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 916293EB25D5A925004820C7 /* Rubik-Medium.ttf */; };
@@ -219,6 +220,7 @@
 		913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxTableViewCell.swift; sourceTree = "<group>"; };
 		913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		914D988C25EADDE500588DF3 /* PushPopModalTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPopModalTransition.swift; sourceTree = "<group>"; };
+		914D98A225EE28E600588DF3 /* PrivacyCenterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCenterViewModelTests.swift; sourceTree = "<group>"; };
 		916293E925D5A925004820C7 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		916293EA25D5A925004820C7 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
 		916293EB25D5A925004820C7 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
@@ -586,6 +588,7 @@
 			children = (
 				9139FE8A25E92E72002FDE43 /* PopUpConsentViewModelTests.swift */,
 				9139FE9025E933BE002FDE43 /* PrivacyPopUpViewModelTests.swift */,
+				914D98A225EE28E600588DF3 /* PrivacyCenterViewModelTests.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -978,6 +981,7 @@
 				1116CB94252DFF4E0080E01E /* LocalStorageManagerTests.swift in Sources */,
 				916C543425DA8E44000B7993 /* DecodingTests.swift in Sources */,
 				9139FE9125E933BE002FDE43 /* PrivacyPopUpViewModelTests.swift in Sources */,
+				914D98A325EE28E600588DF3 /* PrivacyCenterViewModelTests.swift in Sources */,
 				91B83B4C25E90F81006973E7 /* ConsentSolutionManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

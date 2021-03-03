@@ -31,8 +31,8 @@ final class SwitchTableViewCell: BaseTableViewCell {
         isSeparatorHidden = true
     }
     
-    func setTitle(_ title: String) {
-        textView.htmlText = title
+    func setText(_ text: String, isRequired: Bool) {
+        textView.htmlText = text + (isRequired ? "<b>*</b>" : "")
     }
     
     func setValue(_ value: Bool) {
