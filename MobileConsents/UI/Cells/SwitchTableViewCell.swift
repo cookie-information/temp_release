@@ -25,6 +25,8 @@ final class SwitchTableViewCell: BaseTableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         textView.htmlText = nil
         uiSwitch.isOn = false
         valueChanged = nil
@@ -57,14 +59,12 @@ final class SwitchTableViewCell: BaseTableViewCell {
         textView.translatesAutoresizingMaskIntoConstraints = false
         uiSwitch.translatesAutoresizingMaskIntoConstraints = false
         
-        textView.setContentHuggingPriority(.required, for: .horizontal)
-        
         NSLayoutConstraint.activate([
             textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -80),
             uiSwitch.centerYAnchor.constraint(equalTo: textView.firstBaselineAnchor),
-            uiSwitch.leadingAnchor.constraint(greaterThanOrEqualTo: textView.trailingAnchor, constant: 8),
             uiSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -29)
         ])
     }
