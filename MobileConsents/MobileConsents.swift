@@ -101,13 +101,18 @@ public final class MobileConsents: MobileConsentsProtocol {
         keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    public static func showPrivacyPopUp() {
-        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+    public func showPopUp(
+        forUniversalConsentSolutionId universalConsentSolutionId: String,
+        onViewController presentingViewController: UIViewController? = nil,
+        animated: Bool = true
+    ) {
+        let presentingViewController = presentingViewController ?? UIApplication.shared.windows.first { $0.isKeyWindow }?.topViewController
         
         let consentSolutionManager = ConsentSolutionManager(
-            consentSolutionId: "1234",
+            consentSolutionId: universalConsentSolutionId,
             mobileConsents: MockMobileConsents() // TODO: Pass self as mobile consents
         )
+        
         let router = Router(consentSolutionManager: consentSolutionManager)
         let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
         
@@ -115,7 +120,7 @@ public final class MobileConsents: MobileConsentsProtocol {
         let viewController = PrivacyPopUpViewController(viewModel: viewModel)
         router.rootViewController = viewController
         
-        keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
+        presentingViewController?.present(viewController, animated: animated)
     }
 }
 
@@ -123,5 +128,17 @@ extension MobileConsents {
     func saveConsentResult(_ consent: Consent) {
         let consents = consent.processingPurposes.map({ [$0.consentItemId: $0.consentGiven] })
         localStorageManager.addConsentsArray(consents)
+    }
+}
+
+extension UIWindow {
+    var topViewController: UIViewController? {
+        var viewController = rootViewController
+        
+        while let presentedViewController = viewController?.presentedViewController {
+            viewController = presentedViewController
+        }
+        
+        return viewController
     }
 }
