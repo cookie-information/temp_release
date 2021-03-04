@@ -387,19 +387,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8D-eY-ktD">
-                                                    <rect key="frame" x="20" y="34" width="374" height="16.5"/>
+                                                    <rect key="frame" x="20" y="34" width="374" height="17"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consent Given" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wA-yS-70O">
-                                                    <rect key="frame" x="20" y="60.5" width="374" height="14"/>
+                                                    <rect key="frame" x="20" y="61" width="374" height="14"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55D-fT-GNz">
-                                                    <rect key="frame" x="20" y="79.5" width="374" height="16.5"/>
+                                                    <rect key="frame" x="20" y="80" width="374" height="17"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -443,6 +443,11 @@
                             <color key="tintColor" red="0.34901960780000002" green="0.37647058820000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="closeAction" destination="mXx-hw-eV0" id="v62-ye-xFY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="cp4-kz-yJX">
+                            <connections>
+                                <action selector="clearAllAction" destination="mXx-hw-eV0" id="deh-Gi-yGe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
