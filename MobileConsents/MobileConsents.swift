@@ -24,14 +24,14 @@ public final class MobileConsents: MobileConsentsProtocol {
     ///
     /// - Parameters:
     ///   - url: URL to server where Consents will be posted
-    ///   - locale: Locale used for translations. Defaults to `Locale.autoupdatingCurrent`
-    public convenience init(withBaseURL url: URL, locale: Locale = .autoupdatingCurrent) {
-        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), locale: locale)
+    ///   - language: Language code used for translations in privacy screens. If not provided, current app language is used. If translations are not available in given language, English is used.
+    public convenience init(withBaseURL url: URL, language: String? = Bundle.main.preferredLocalizations.first) {
+        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), language: language)
     }
     
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, locale: Locale) {
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, language: String?) {
         let jsonDecoder = JSONDecoder()
-        jsonDecoder.userInfo[translationLocale] = locale
+        jsonDecoder.userInfo[primaryLanguageCodingUserInfoKey] = language
         
         self.networkManager = NetworkManager(
             withBaseURL: url,

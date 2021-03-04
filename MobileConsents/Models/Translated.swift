@@ -6,37 +6,32 @@
 //  Copyright © 2021 ClearCode. All rights reserved.
 //
 
-import Foundation
-
 public protocol Translation {
     var language: String { get }
 }
 
-let translationLocale = CodingUserInfoKey(rawValue: "locale")!
+let primaryLanguageCodingUserInfoKey = CodingUserInfoKey(rawValue: "primaryLanguage")!
 
 public struct Translated<T: Translation & Decodable & Equatable>: Decodable, Equatable {
     public let translations: [T]
-    private let locale: Locale?
+
+    let primaryLanguage: String
     
-    var currentLanguage: String {
-        localeTranslation()?.language ?? "EN"
-    }
-    
-    init(translations: [T], locale: Locale?) {
+    init(translations: [T], primaryLanguage: String?) {
         self.translations = translations
-        self.locale = locale
+        self.primaryLanguage = primaryLanguage ?? "EN"
     }
 
     public init(from decoder: Decoder) throws {
         self.translations = try [T](from: decoder)
-        self.locale = decoder.userInfo[translationLocale] as? Locale
+        self.primaryLanguage = decoder.userInfo[primaryLanguageCodingUserInfoKey] as? String ?? "EN"
     }
     
-    public func translation(with locale: Locale) -> T? {
-        translations.first { $0.language.uppercased() == locale.languageCode?.uppercased() }
+    public func translation(with languageCode: String) -> T? {
+        translations.first { $0.language.uppercased() == languageCode.uppercased() }
     }
     
-    public func localeTranslation() -> T? {
-        locale.flatMap(translation(with:)) ?? translation(with: Locale(identifier: "EN"))
+    public func primaryTranslation() -> T? {
+        translation(with: primaryLanguage)
     }
 }

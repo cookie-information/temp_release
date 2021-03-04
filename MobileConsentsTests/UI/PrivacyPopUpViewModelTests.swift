@@ -66,7 +66,7 @@ class PrivacyPopUpViewModelTests: XCTestCase {
         
         let data = try XCTUnwrap(loadedData)
         
-        XCTAssertEqual(data.title, solution.title.localeTranslation()?.text)
+        XCTAssertEqual(data.title, solution.title.primaryTranslation()?.text)
         
         XCTAssertEqual(data.buttonViewModels.count, 4)
     }

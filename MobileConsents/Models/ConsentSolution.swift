@@ -14,8 +14,8 @@ public struct ConsentSolution: Decodable, Equatable {
     public let templateTexts: TemplateTexts
     public let consentItems: [ConsentItem]
     
-    var currentLanguage: String {
-        consentItems.first?.translations.currentLanguage ?? "EN"
+    var primaryLanguage: String {
+        consentItems.first?.translations.primaryLanguage ?? "EN"
     }
     
     enum CodingKeys: String, CodingKey {
