@@ -110,7 +110,7 @@ public final class MobileConsents: MobileConsentsProtocol {
         
         let consentSolutionManager = ConsentSolutionManager(
             consentSolutionId: universalConsentSolutionId,
-            mobileConsents: MockMobileConsents() // TODO: Pass self as mobile consents
+            mobileConsents: self
         )
         
         let router = Router(consentSolutionManager: consentSolutionManager)
