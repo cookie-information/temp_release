@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k4K-JY-aCE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k4K-JY-aCE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -327,6 +328,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bq0-aF-Ck4">
+                        <leftBarButtonItems>
+                            <barButtonItem title="Item" id="aTw-e0-xLI">
+                                <imageReference key="image" image="bubble.middle.bottom" catalog="system" symbolScale="medium"/>
+                                <connections>
+                                    <action selector="showPopUpAction" destination="BYZ-38-t0r" id="ZYh-Q9-bjy"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="JOv-qg-y0k">
+                                <imageReference key="image" image="lock.shield" catalog="system" symbolScale="medium"/>
+                                <connections>
+                                    <action selector="showPrivacyCenterAction" destination="BYZ-38-t0r" id="30O-9P-OTp"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="organize" id="D2O-Ob-l4c">
                             <color key="tintColor" red="0.34901960780000002" green="0.37647058820000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -366,25 +381,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consent Item Identifier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPu-HX-quQ">
-                                                    <rect key="frame" x="20" y="15" width="374" height="15"/>
+                                                    <rect key="frame" x="20" y="15" width="374" height="14"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8D-eY-ktD">
-                                                    <rect key="frame" x="20" y="35" width="374" height="17"/>
+                                                    <rect key="frame" x="20" y="34" width="374" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consent Given" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wA-yS-70O">
-                                                    <rect key="frame" x="20" y="62" width="374" height="15"/>
+                                                    <rect key="frame" x="20" y="60.5" width="374" height="14"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55D-fT-GNz">
-                                                    <rect key="frame" x="20" y="82" width="374" height="17"/>
+                                                    <rect key="frame" x="20" y="79.5" width="374" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -482,8 +497,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bubble.middle.bottom" catalog="system" width="128" height="110"/>
         <image name="checkbox" width="16" height="16"/>
         <image name="checkboxSelected" width="16" height="16"/>
+        <image name="lock.shield" catalog="system" width="128" height="118"/>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
