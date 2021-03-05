@@ -9,10 +9,8 @@
 import UIKit
 
 protocol RouterProtocol {
-    func showPrivacyCenter()
-    
+    func showPrivacyCenter(animated: Bool)
     func closePrivacyCenter()
-    
     func closeAll()
 }
 
@@ -21,17 +19,25 @@ final class Router: RouterProtocol {
     
     private let consentSolutionManager: ConsentSolutionManagerProtocol
     
-    private var privacyCenterTransitioningDelegate: PushPopPrivacyCenterTransitioningDelegate?
+    private var privacyCenterTransitionProvider: PrivacyCenterPushPopTransitionProvider?
     
     init(consentSolutionManager: ConsentSolutionManagerProtocol) {
         self.consentSolutionManager = consentSolutionManager
     }
     
-    func showPrivacyCenter() {
-        let viewModel = PrivacyCenterViewModel(
-            consentSolutionManager: consentSolutionManager
-        )
+    func showPrivacyPopUp(animated: Bool) {
+        let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
         viewModel.router = self
+        
+        let viewController = PrivacyPopUpViewController(viewModel: viewModel)
+        
+        rootViewController?.topViewController.present(viewController, animated: animated)
+    }
+    
+    func showPrivacyCenter(animated: Bool) {
+        let viewModel = PrivacyCenterViewModel(consentSolutionManager: consentSolutionManager)
+        viewModel.router = self
+        
         let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
@@ -43,24 +49,26 @@ final class Router: RouterProtocol {
         
         viewController.modalPresentationStyle = .overFullScreen
         
-        privacyCenterTransitioningDelegate = PushPopPrivacyCenterTransitioningDelegate()
-        viewController.transitioningDelegate = privacyCenterTransitioningDelegate
+        privacyCenterTransitionProvider = PrivacyCenterPushPopTransitionProvider()
+        viewController.transitioningDelegate = privacyCenterTransitionProvider
         
-        rootViewController?.present(viewController, animated: true)
+        rootViewController?.topViewController.present(viewController, animated: animated)
     }
     
     func closePrivacyCenter() {
-        rootViewController?.dismiss(animated: true) { [weak self] in
-            self?.privacyCenterTransitioningDelegate = nil
+        rootViewController?.topViewController.presentingViewController?.dismiss(animated: true) { [weak self] in
+            self?.privacyCenterTransitionProvider = nil
         }
     }
     
     func closeAll() {
-        rootViewController?.presentingViewController?.dismiss(animated: true)
+        rootViewController?.dismiss(animated: true) { [weak self] in
+            self?.privacyCenterTransitionProvider = nil
+        }
     }
 }
 
-private final class PushPopPrivacyCenterTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
+private final class PrivacyCenterPushPopTransitionProvider: NSObject, UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         PushModalTransition()
     }
