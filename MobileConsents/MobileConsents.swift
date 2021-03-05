@@ -130,15 +130,3 @@ extension MobileConsents {
         localStorageManager.addConsentsArray(consents)
     }
 }
-
-extension UIWindow {
-    var topViewController: UIViewController? {
-        var viewController = rootViewController
-        
-        while let presentedViewController = viewController?.presentedViewController {
-            viewController = presentedViewController
-        }
-        
-        return viewController
-    }
-}
