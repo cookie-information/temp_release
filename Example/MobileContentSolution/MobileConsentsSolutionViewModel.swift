@@ -146,6 +146,6 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     }
     
     func showPrivacyCenter(for identifier: String) {
-        print("Show privacy center")
+        mobileConsentsSDK.showPreferencesCenter(forUniversalConsentSolutionId: identifier)
     }
 }

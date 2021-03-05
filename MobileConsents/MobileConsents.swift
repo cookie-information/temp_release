@@ -80,27 +80,6 @@ public final class MobileConsents: MobileConsentsProtocol {
         networkManager.cancel()
     }
     
-    public static func showPrivacyCenter() {
-        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
-        
-        let consentSolutionManager = ConsentSolutionManager(
-            consentSolutionId: "1234",
-            mobileConsents: MockMobileConsents() // TODO: Pass self as mobile consents
-        )
-        let viewModel = PrivacyCenterViewModel(consentSolutionManager: consentSolutionManager)
-        let viewController = UINavigationController(rootViewController: PrivacyCenterViewController(viewModel: viewModel))
-        if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.backgroundColor = .white
-            viewController.navigationBar.standardAppearance = appearance
-        } else {
-            viewController.navigationBar.backgroundColor = .white
-        }
-        viewController.modalPresentationStyle = .fullScreen
-        
-        keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
-    }
-    
     /// Method responsible for showing Privacy Pop Up screen
     /// - Parameters:
     ///   - universalConsentSolutionId: Consent Solution identifier
@@ -119,13 +98,32 @@ public final class MobileConsents: MobileConsentsProtocol {
         )
         
         let router = Router(consentSolutionManager: consentSolutionManager)
-        let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
+        router.rootViewController = presentingViewController
         
-        viewModel.router = router
-        let viewController = PrivacyPopUpViewController(viewModel: viewModel)
-        router.rootViewController = viewController
+        router.showPrivacyPopUp(animated: animated)
+    }
+    
+    /// Method responsible for showing Privacy Preferences Center screen
+    /// - Parameters:
+    ///   - universalConsentSolutionId: Consent Solution identifier
+    ///   - presentingViewController: UIViewController to present preferences center on.. If not provided, top-most presented view controller of key window of the application is used.
+    ///   - animated:If presentation should be animated. Defaults to `true`.
+    public func showPreferencesCenter(
+        forUniversalConsentSolutionId universalConsentSolutionId: String,
+        onViewController presentingViewController: UIViewController? = nil,
+        animated: Bool = true
+    ) {
+        let presentingViewController = presentingViewController ?? UIApplication.shared.windows.first { $0.isKeyWindow }?.topViewController
         
-        presentingViewController?.present(viewController, animated: animated)
+        let consentSolutionManager = ConsentSolutionManager(
+            consentSolutionId: universalConsentSolutionId,
+            mobileConsents: self
+        )
+        
+        let router = Router(consentSolutionManager: consentSolutionManager)
+        router.rootViewController = presentingViewController
+        
+        router.showPrivacyCenter(animated: animated)
     }
 }
 
