@@ -25,6 +25,8 @@ final class SwitchTableViewCell: BaseTableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         textView.htmlText = nil
         uiSwitch.isOn = false
         valueChanged = nil
@@ -61,8 +63,10 @@ final class SwitchTableViewCell: BaseTableViewCell {
             textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
-            uiSwitch.topAnchor.constraint(equalTo: textView.topAnchor),
-            uiSwitch.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: 8),
+            // Setting constraint to `uiSwitch.leadingAnchor` causes layout to
+            // break when cell is reused
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -80),
+            uiSwitch.centerYAnchor.constraint(equalTo: textView.firstBaselineAnchor),
             uiSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -29)
         ])
     }

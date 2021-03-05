@@ -136,7 +136,7 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             ProcessingPurpose(
                 consentItemId: item.id,
                 consentGiven: givenConsentItemIds.contains(item.id),
-                language: consentSolution.currentLanguage
+                language: consentSolution.primaryLanguage
             )
         }
         
@@ -170,7 +170,7 @@ final class MockMobileConsents: MobileConsentsProtocol {
     }
 }
 
-private let locale = Locale(identifier: "en_US")
+private let languageCode = "EN"
 
 private let mockConsentSolution = ConsentSolution(
     id: "9187d0f0-9e25-469b-9125-6a63b1b22b12",
@@ -179,7 +179,7 @@ private let mockConsentSolution = ConsentSolution(
         translations: [
             TemplateTranslation(language: "EN", text: "Privacy title")
         ],
-        locale: locale
+        primaryLanguage: languageCode
     ),
     description: Translated(
         translations: [
@@ -190,62 +190,62 @@ private let mockConsentSolution = ConsentSolution(
                 """
             )
         ],
-        locale: locale
+        primaryLanguage: languageCode
     ),
     templateTexts: TemplateTexts(
         privacyCenterButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy center button title")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         rejectAllButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Reject all button title")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         acceptAllButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Accept all button title")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         acceptSelectedButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Accept selected button title")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         savePreferencesButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Accept")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         privacyCenterTitle: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy center title")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         privacyPreferencesTabLabel: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy preferences tab")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         poweredByCoiLabel: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Powered by Cookie Information")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         ),
         consentPreferencesLabel: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Consent preferences label")
             ],
-            locale: locale
+            primaryLanguage: languageCode
         )
     ),
     consentItems: [
@@ -261,7 +261,7 @@ private let mockConsentSolution = ConsentSolution(
                         longText: "First consent item long text"
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -296,7 +296,7 @@ private let mockConsentSolution = ConsentSolution(
                         """
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -331,7 +331,7 @@ private let mockConsentSolution = ConsentSolution(
                         """
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -366,7 +366,7 @@ private let mockConsentSolution = ConsentSolution(
                         """
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -401,7 +401,7 @@ private let mockConsentSolution = ConsentSolution(
                         """
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -416,7 +416,7 @@ private let mockConsentSolution = ConsentSolution(
                         longText: "First consent item long text"
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -441,7 +441,7 @@ private let mockConsentSolution = ConsentSolution(
                         """
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -466,7 +466,7 @@ private let mockConsentSolution = ConsentSolution(
                         """
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         ),
         ConsentItem(
@@ -481,7 +481,7 @@ private let mockConsentSolution = ConsentSolution(
                         longText: "Fourth consent item long text"
                     )
                 ],
-                locale: locale
+                primaryLanguage: languageCode
             )
         )
     ]

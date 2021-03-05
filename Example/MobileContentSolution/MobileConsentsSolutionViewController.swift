@@ -42,9 +42,8 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAppearance()
         
-        MobileConsents.showPrivacyPopUp()
+        setupAppearance()
     }
     
     private func setupAppearance() {
@@ -85,6 +84,18 @@ final class MobileConsentsSolutionViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    @IBAction private func showPopUpAction() {
+        guard let identifier = identifierTextField.text else { return }
+        
+        viewModel.showPrivacyPopUp(for: identifier)
+    }
+    
+    @IBAction private func showPrivacyCenterAction() {
+        guard let identifier = identifierTextField.text else { return }
+        
+        viewModel.showPrivacyCenter(for: identifier)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

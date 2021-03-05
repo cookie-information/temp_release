@@ -9,6 +9,10 @@
 import UIKit
 
 final class HTMLTextView: UITextView {
+    // Believe it or not, this resolves issue with UITableView animation glitches
+    // when reloading sections with cells containing HTMLTextView
+    private static let attributedStringCache = NSCache<NSString, NSAttributedString>()
+    
     struct StyleValue: ExpressibleByStringLiteral {
         let expression: () -> String
         
@@ -76,7 +80,15 @@ final class HTMLTextView: UITextView {
             </html>
             """
         
-        attributedText = NSAttributedString.fromHTML(htmlTemplate)
+        let cacheKey = htmlTemplate as NSString
+        
+        if let cached = Self.attributedStringCache.object(forKey: cacheKey) {
+            attributedText = cached
+        } else if let attributedString = NSAttributedString.fromHTML(htmlTemplate) {
+            Self.attributedStringCache.setObject(attributedString, forKey: cacheKey)
+            
+            attributedText = attributedString
+        }
     }
     
     private func css(from style: [String: [String: StyleValue]]) -> String {

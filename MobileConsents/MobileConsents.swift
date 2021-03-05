@@ -24,14 +24,14 @@ public final class MobileConsents: MobileConsentsProtocol {
     ///
     /// - Parameters:
     ///   - url: URL to server where Consents will be posted
-    ///   - locale: Locale used for translations. Defaults to `Locale.autoupdatingCurrent`
-    public convenience init(withBaseURL url: URL, locale: Locale = .autoupdatingCurrent) {
-        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), locale: locale)
+    ///   - language: Language code used for translations in privacy screens. If not provided, current app language is used. If translations are not available in given language, English is used.
+    public convenience init(withBaseURL url: URL, language: String? = Bundle.main.preferredLocalizations.first) {
+        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), language: language)
     }
     
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, locale: Locale) {
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, language: String?) {
         let jsonDecoder = JSONDecoder()
-        jsonDecoder.userInfo[translationLocale] = locale
+        jsonDecoder.userInfo[primaryLanguageCodingUserInfoKey] = language
         
         self.networkManager = NetworkManager(
             withBaseURL: url,
@@ -101,13 +101,23 @@ public final class MobileConsents: MobileConsentsProtocol {
         keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    public static func showPrivacyPopUp() {
-        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+    /// Method responsible for showing Privacy Pop Up screen
+    /// - Parameters:
+    ///   - universalConsentSolutionId: Consent Solution identifier
+    ///   - presentingViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
+    ///   - animated:If presentation should be animated. Defaults to `true`.
+    public func showPopUp(
+        forUniversalConsentSolutionId universalConsentSolutionId: String,
+        onViewController presentingViewController: UIViewController? = nil,
+        animated: Bool = true
+    ) {
+        let presentingViewController = presentingViewController ?? UIApplication.shared.windows.first { $0.isKeyWindow }?.topViewController
         
         let consentSolutionManager = ConsentSolutionManager(
-            consentSolutionId: "1234",
-            mobileConsents: MockMobileConsents() // TODO: Pass self as mobile consents
+            consentSolutionId: universalConsentSolutionId,
+            mobileConsents: self
         )
+        
         let router = Router(consentSolutionManager: consentSolutionManager)
         let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
         
@@ -115,7 +125,7 @@ public final class MobileConsents: MobileConsentsProtocol {
         let viewController = PrivacyPopUpViewController(viewModel: viewModel)
         router.rootViewController = viewController
         
-        keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
+        presentingViewController?.present(viewController, animated: animated)
     }
 }
 

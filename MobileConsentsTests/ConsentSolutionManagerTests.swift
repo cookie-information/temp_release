@@ -230,7 +230,7 @@ func consentSolution(consentItemConfigs: [(Bool, ConsentItemType)]) -> ConsentSo
             id: "\(index)",
             required: config.0,
             type: config.1,
-            translations: .init(translations: [], locale: nil)
+            translations: .init(translations: [], primaryLanguage: nil)
         )
     }
     
@@ -241,29 +241,29 @@ func consentSolution(consentItemConfigs: [(Bool, ConsentItemType)]) -> ConsentSo
             translations: [
                 .init(language: "EN", text: "TestTitle")
             ],
-            locale: nil
+            primaryLanguage: nil
         ),
-        description: .init(translations: [], locale: nil),
+        description: .init(translations: [], primaryLanguage: nil),
         templateTexts: .init(
-            privacyCenterButton: .init(translations: [], locale: nil),
-            rejectAllButton: .init(translations: [], locale: nil),
-            acceptAllButton: .init(translations: [], locale: nil),
-            acceptSelectedButton: .init(translations: [], locale: nil),
+            privacyCenterButton: .init(translations: [], primaryLanguage: nil),
+            rejectAllButton: .init(translations: [], primaryLanguage: nil),
+            acceptAllButton: .init(translations: [], primaryLanguage: nil),
+            acceptSelectedButton: .init(translations: [], primaryLanguage: nil),
             savePreferencesButton: .init(
                 translations: [
                     .init(language: "EN", text: "Save preferences button title")
                 ],
-                locale: nil
+                primaryLanguage: nil
             ),
             privacyCenterTitle: .init(
                 translations: [
                     .init(language: "EN", text: "Privacy center title")
                 ],
-                locale: nil
+                primaryLanguage: nil
             ),
-            privacyPreferencesTabLabel: .init(translations: [], locale: nil),
-            poweredByCoiLabel: .init(translations: [], locale: nil),
-            consentPreferencesLabel: .init(translations: [], locale: nil)
+            privacyPreferencesTabLabel: .init(translations: [], primaryLanguage: nil),
+            poweredByCoiLabel: .init(translations: [], primaryLanguage: nil),
+            consentPreferencesLabel: .init(translations: [], primaryLanguage: nil)
         ),
         consentItems: consentItems
     )

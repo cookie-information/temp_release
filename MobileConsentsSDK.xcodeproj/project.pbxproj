@@ -95,6 +95,7 @@
 		918C4E7F25E78DEF00FFA4D9 /* GradientContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C4E7E25E78DEF00FFA4D9 /* GradientContainer.swift */; };
 		919FB57625E4ED79000CE411 /* PopUpButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */; };
 		919FB57E25E4EDC0000CE411 /* ButtonStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */; };
+		91AE8B1025F21DD1002384F0 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */; };
 		91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */; };
 		91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */; };
 		91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */; };
@@ -242,6 +243,7 @@
 		918C4E7E25E78DEF00FFA4D9 /* GradientContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientContainer.swift; sourceTree = "<group>"; };
 		919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonViewModel.swift; sourceTree = "<group>"; };
 		919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStateProvider.swift; sourceTree = "<group>"; };
+		91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionSection.swift; sourceTree = "<group>"; };
 		91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConsentsSection.swift; sourceTree = "<group>"; };
 		91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonsView.swift; sourceTree = "<group>"; };
@@ -674,6 +676,7 @@
 				91CD982B25D97405001CAC83 /* UITableView+Reusable.swift */,
 				916C541125DA71B6000B7993 /* UIView+Extension.swift */,
 				913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */,
+				91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				9172AD8125DBB86C00CB0FFC /* ConsentSolution.swift in Sources */,
 				91CD982825D86257001CAC83 /* UIFont+Extension.swift in Sources */,
 				916C540A25DA66F1000B7993 /* SubheaderTableViewCell.swift in Sources */,
+				91AE8B1025F21DD1002384F0 /* UIWindow+Extension.swift in Sources */,
 				913A058C25DE8ED500571BA3 /* CheckboxTableViewCell.swift in Sources */,
 				916C541B25DA7643000B7993 /* PrivacyCenterViewModel.swift in Sources */,
 				11B5182B251C691D00581FF4 /* ParameterEncoding.swift in Sources */,
@@ -1214,7 +1218,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1237,7 +1241,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = URYNPG7RQE;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

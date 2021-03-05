@@ -43,8 +43,8 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             
             guard case .success(let solution) = result else { return }
             
-            let title = solution.title.localeTranslation()?.text ?? ""
-            let descriptionSection = PopUpDescriptionSection(text: solution.description.localeTranslation()?.text ?? "")
+            let title = solution.title.primaryTranslation()?.text ?? ""
+            let descriptionSection = PopUpDescriptionSection(text: solution.description.primaryTranslation()?.text ?? "")
             
             let consentViewModels = self.consentViewModels(from: solution)
             let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
@@ -69,7 +69,7 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             .map { item in
                 let vm = PopUpConsentViewModel(
                     id: item.id,
-                    text: item.translations.localeTranslation()?.shortText ?? "",
+                    text: item.translations.primaryTranslation()?.shortText ?? "",
                     isRequired: item.required,
                     consentItemProvider: consentSolutionManager
                 )
@@ -81,22 +81,22 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     private func buttonViewModels(templateTexts: TemplateTexts) -> [PopUpButtonViewModelProtocol] {
         let viewModels = [
             PopUpButtonViewModel(
-                title: templateTexts.privacyCenterButton.localeTranslation()?.text ?? "",
+                title: templateTexts.privacyCenterButton.primaryTranslation()?.text ?? "",
                 type: .privacyCenter,
                 stateProvider: ConstantButtonStateProvider(isEnabled: true)
             ),
             PopUpButtonViewModel(
-                title: templateTexts.rejectAllButton.localeTranslation()?.text ?? "",
+                title: templateTexts.rejectAllButton.primaryTranslation()?.text ?? "",
                 type: .rejectAll,
                 stateProvider: ConstantButtonStateProvider(isEnabled: !consentSolutionManager.hasRequiredConsentItems)
             ),
             PopUpButtonViewModel(
-                title: templateTexts.acceptAllButton.localeTranslation()?.text ?? "",
+                title: templateTexts.acceptAllButton.primaryTranslation()?.text ?? "",
                 type: .acceptAll,
                 stateProvider: ConstantButtonStateProvider(isEnabled: true)
             ),
             PopUpButtonViewModel(
-                title: templateTexts.acceptSelectedButton.localeTranslation()?.text ?? "",
+                title: templateTexts.acceptSelectedButton.primaryTranslation()?.text ?? "",
                 type: .acceptSelected,
                 stateProvider: NotificationButtonStateProvider(
                     isEnabled: { [consentSolutionManager] in consentSolutionManager.areAllRequiredConsentItemsSelected },

@@ -42,7 +42,7 @@ class BaseViewController: UIViewController {
     func showProgressView() {
         DispatchQueue.main.async { [weak self] in
             let alert = UIAlertController(title: "Loading ...", message: nil, preferredStyle: .alert)
-            let activityIndicator = UIActivityIndicatorView(style: .gray)
+            let activityIndicator = UIActivityIndicatorView(style: .medium)
             activityIndicator.translatesAutoresizingMaskIntoConstraints = false
             activityIndicator.isUserInteractionEnabled = false
             activityIndicator.startAnimating()

@@ -15,7 +15,7 @@ final class DecodingTests: XCTestCase {
         let data = try Data(contentsOf: bundle.url(forResource: "ConsentSolution", withExtension: "json")!)
         
         let decoder = JSONDecoder()
-        decoder.userInfo[translationLocale] = locale
+        decoder.userInfo[primaryLanguageCodingUserInfoKey] = primaryLanguage
         
         let consentSolution = try decoder.decode(ConsentSolution.self, from: data)
         
@@ -23,7 +23,7 @@ final class DecodingTests: XCTestCase {
     }
 }
 
-private let locale = Locale(identifier: "pl_PL")
+private let primaryLanguage = "PL"
 
 private let expectedConsentSolution = ConsentSolution(
     id: "9187d0f0-9e25-469b-9125-6a63b1b22b12",
@@ -32,68 +32,68 @@ private let expectedConsentSolution = ConsentSolution(
         translations: [
             TemplateTranslation(language: "EN", text: "Privacy title")
         ],
-        locale: locale
+        primaryLanguage: primaryLanguage
     ),
     description: Translated(
         translations: [
             TemplateTranslation(language: "EN", text: "Privacy description")
         ],
-        locale: locale
+        primaryLanguage: primaryLanguage
     ),
     templateTexts: TemplateTexts(
         privacyCenterButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy center button title")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         rejectAllButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Reject all button title")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         acceptAllButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Accept all button title")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         acceptSelectedButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Accept selected button title")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         savePreferencesButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Save preferences button title")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         privacyCenterTitle: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy center title")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         privacyPreferencesTabLabel: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy preferences tab")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         poweredByCoiLabel: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Powered by Cookie Information")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         ),
         consentPreferencesLabel: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Consent preferences label")
             ],
-            locale: locale
+            primaryLanguage: primaryLanguage
         )
     ),
     consentItems: [
@@ -109,7 +109,7 @@ private let expectedConsentSolution = ConsentSolution(
                         longText: "First consent item long text"
                     )
                 ],
-                locale: locale
+                primaryLanguage: primaryLanguage
             )
         ),
         ConsentItem(
@@ -124,7 +124,7 @@ private let expectedConsentSolution = ConsentSolution(
                         longText: "Second consent item long text"
                     )
                 ],
-                locale: locale
+                primaryLanguage: primaryLanguage
             )
         ),
         ConsentItem(
@@ -139,7 +139,7 @@ private let expectedConsentSolution = ConsentSolution(
                         longText: "Third consent item long text"
                     )
                 ],
-                locale: locale
+                primaryLanguage: primaryLanguage
             )
         ),
         ConsentItem(
@@ -154,7 +154,7 @@ private let expectedConsentSolution = ConsentSolution(
                         longText: "Fourth consent item long text"
                     )
                 ],
-                locale: locale
+                primaryLanguage: primaryLanguage
             )
         )
     ]

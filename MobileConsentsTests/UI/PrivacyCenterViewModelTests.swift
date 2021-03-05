@@ -68,8 +68,8 @@ final class PrivacyCenterViewModelTests: XCTestCase {
         
         let data = try XCTUnwrap(loadedData)
         
-        XCTAssertEqual(data.translations.title, solution.templateTexts.privacyCenterTitle.localeTranslation()?.text)
-        XCTAssertEqual(data.translations.acceptButtonTitle, solution.templateTexts.savePreferencesButton.localeTranslation()?.text)
+        XCTAssertEqual(data.translations.title, solution.templateTexts.privacyCenterTitle.primaryTranslation()?.text)
+        XCTAssertEqual(data.translations.acceptButtonTitle, solution.templateTexts.savePreferencesButton.primaryTranslation()?.text)
     }
     
     func test_acceptButtonIsEnabled_whenLoadedSolutionHasAllRequiredConsentsSelected() {
