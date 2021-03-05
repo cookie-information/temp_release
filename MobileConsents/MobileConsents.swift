@@ -101,7 +101,6 @@ public final class MobileConsents: MobileConsentsProtocol {
         keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    
     /// Method responsible for showing Privacy Pop Up screen
     /// - Parameters:
     ///   - universalConsentSolutionId: Consent Solution identifier
