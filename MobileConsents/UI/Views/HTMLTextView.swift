@@ -9,6 +9,8 @@
 import UIKit
 
 final class HTMLTextView: UITextView {
+    // Believe it or not, this resolves issue with UITableView animation glitches
+    // when reloading sections with cells containing HTMLTextView
     private static let attributedStringCache = NSCache<NSString, NSAttributedString>()
     
     struct StyleValue: ExpressibleByStringLiteral {
