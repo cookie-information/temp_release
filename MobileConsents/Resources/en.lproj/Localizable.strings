@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  MobileConsentsSDK
+
+  Created by Sebastian Osiński on 08/03/2021.
+  Copyright © 2021 ClearCode. All rights reserved.
+*/
+
+"errorAlert.title" = "Error";
+"errorAlert.message" = "Message";
+"errorAlert.retryButtonTitle" = "Retry button title";

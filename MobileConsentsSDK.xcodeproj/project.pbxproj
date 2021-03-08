@@ -98,6 +98,7 @@
 		91AE8B1025F21DD1002384F0 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */; };
 		91AE8B1A25F24BC6002384F0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AE8B1925F24BC6002384F0 /* UIViewController+Extension.swift */; };
 		91AE8B1E25F24C49002384F0 /* MobileConsentsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AE8B1D25F24C49002384F0 /* MobileConsentsMock.swift */; };
+		91AE8B3425F62929002384F0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 91AE8B3625F62929002384F0 /* Localizable.strings */; };
 		91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */; };
 		91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */; };
 		91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */; };
@@ -248,6 +249,7 @@
 		91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		91AE8B1925F24BC6002384F0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		91AE8B1D25F24C49002384F0 /* MobileConsentsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsMock.swift; sourceTree = "<group>"; };
+		91AE8B3525F62929002384F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionSection.swift; sourceTree = "<group>"; };
 		91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConsentsSection.swift; sourceTree = "<group>"; };
 		91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonsView.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			children = (
 				916293E825D5A925004820C7 /* Fonts */,
 				91CD982325D861E5001CAC83 /* Assets.xcassets */,
+				91AE8B3625F62929002384F0 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				91CD981825D6BB3E001CAC83 /* Rubik-LightItalic.ttf in Resources */,
 				916293EF25D5A925004820C7 /* Rubik-Medium.ttf in Resources */,
 				91CD981925D6BB3E001CAC83 /* Rubik-Italic.ttf in Resources */,
+				91AE8B3425F62929002384F0 /* Localizable.strings in Resources */,
 				916293F025D5A925004820C7 /* Rubik-Regular.ttf in Resources */,
 				916293ED25D5A925004820C7 /* Rubik-Bold.ttf in Resources */,
 				91CD982425D861E5001CAC83 /* Assets.xcassets in Resources */,
@@ -1028,6 +1032,14 @@
 				119AFB1025230F9200186CB7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		91AE8B3625F62929002384F0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				91AE8B3525F62929002384F0 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

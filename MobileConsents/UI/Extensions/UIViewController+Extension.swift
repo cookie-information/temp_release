@@ -21,13 +21,13 @@ extension UIViewController {
 extension UIViewController {
     func showErrorAlert(retryCallback: @escaping () -> Void) {
         let alert = UIAlertController(
-            title: "Error title",
-            message: "Error message",
+            title: "errorAlert.title".localized,
+            message: "errorAlert.message".localized,
             preferredStyle: .alert
         )
         
         let retryAction = UIAlertAction(
-            title: "Retry button",
+            title: "errorAlert.retryButtonTitle".localized,
             style: .default,
             handler: { _ in retryCallback() }
         )
