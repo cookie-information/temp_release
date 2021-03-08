@@ -116,6 +116,10 @@ final class PrivacyCenterViewController: UIViewController {
             self?.acceptButton.isEnabled = isEnabled
         }
         
+        viewModel.onError = { [weak self] retryCallback in
+            self?.showErrorAlert(retryCallback: retryCallback)
+        }
+        
         viewModel.viewDidLoad()
     }
     

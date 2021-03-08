@@ -36,6 +36,10 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     }
     
     func viewDidLoad() {
+        loadConsentSolution()
+    }
+    
+    private func loadConsentSolution() {
         onLoadingChange?(true)
         
         consentSolutionManager.loadConsentSolutionIfNeeded { [weak self] result in

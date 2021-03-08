@@ -20,6 +20,7 @@ struct PrivacyCenterData {
 
 protocol PrivacyCenterViewModelProtocol: AnyObject {
     var onDataLoaded: ((PrivacyCenterData) -> Void)? { get set }
+    var onError: ((@escaping () -> Void) -> Void)? { get set }
     var onLoadingChange: ((Bool) -> Void)? { get set }
     var onAcceptButtonIsEnabledChange: ((Bool) -> Void)? { get set }
     
@@ -30,6 +31,7 @@ protocol PrivacyCenterViewModelProtocol: AnyObject {
 
 final class PrivacyCenterViewModel {
     var onDataLoaded: ((PrivacyCenterData) -> Void)?
+    var onError: ((@escaping () -> Void) -> Void)?
     var onLoadingChange: ((Bool) -> Void)?
     var onAcceptButtonIsEnabledChange: ((Bool) -> Void)?
     
@@ -65,6 +67,21 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
             self?.onAcceptButtonIsEnabledChange?(self?.consentSolutionManager.areAllRequiredConsentItemsSelected ?? false)
         }
         
+        loadConsentSolution()
+    }
+    
+    func acceptButtonTapped() {
+        onLoadingChange?(true)
+        consentSolutionManager.acceptSelectedConsentItems { [weak self] error in
+            self?.handlePostingConsent(error: error)
+        }
+    }
+    
+    func backButtonTapped() {
+        router?.closePrivacyCenter()
+    }
+    
+    private func loadConsentSolution() {
         onLoadingChange?(true)
         
         consentSolutionManager.loadConsentSolutionIfNeeded { [weak self] result in
@@ -72,7 +89,11 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
             
             self.onLoadingChange?(false)
             
-            guard case .success(let solution) = result else { return }
+            guard case .success(let solution) = result else {
+                self.handleConsentSolutionLoadingError()
+                
+                return
+            }
             
             let sections = SectionGenerator(
                 consentItemProvider: self.consentSolutionManager
@@ -91,19 +112,22 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
         }
     }
     
-    func acceptButtonTapped() {
-        onLoadingChange?(true)
-        consentSolutionManager.acceptSelectedConsentItems { [weak self] error in
-            self?.onLoadingChange?(false)
-            
-            if error == nil {
-                self?.router?.closeAll()
-            }
-        }
+    private func handleConsentSolutionLoadingError() {
+        onError?({ [weak self] in
+            self?.loadConsentSolution()
+        })
     }
     
-    func backButtonTapped() {
-        router?.closePrivacyCenter()
+    private func handlePostingConsent(error: Error?) {
+        onLoadingChange?(false)
+        
+        if error == nil {
+            router?.closeAll()
+        } else {
+            onError? { [weak self] in
+                self?.acceptButtonTapped()
+            }
+        }
     }
 }
 
