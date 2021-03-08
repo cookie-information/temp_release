@@ -99,7 +99,7 @@ final class PrivacyPopUpViewController: UIViewController {
         
         viewModel.onLoadingChange = { [weak self, activityIndicator] isLoading in
             isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
-            self?.view.isUserInteractionEnabled = !isLoading
+            self?.setInteractionEnabled(!isLoading)
         }
         
         viewModel.onError = { [weak self] retryCallback in

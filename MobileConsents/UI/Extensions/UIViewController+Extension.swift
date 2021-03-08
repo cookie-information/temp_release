@@ -12,6 +12,10 @@ extension UIViewController {
     var topViewController: UIViewController {
         presentedViewController?.topViewController ?? self
     }
+    
+    func setInteractionEnabled(_ enabled: Bool) {
+        (tabBarController ?? navigationController ?? self).view.isUserInteractionEnabled = enabled
+    }
 }
 
 extension UIViewController {
@@ -33,4 +37,3 @@ extension UIViewController {
         present(alert, animated: true)
     }
 }
-

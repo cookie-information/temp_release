@@ -109,7 +109,7 @@ final class PrivacyCenterViewController: UIViewController {
         
         viewModel.onLoadingChange = { [weak self, activityIndicator] isLoading in
             isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
-            self?.view.isUserInteractionEnabled = !isLoading
+            self?.setInteractionEnabled(!isLoading)
         }
         
         viewModel.onAcceptButtonIsEnabledChange = { [weak self] isEnabled in
