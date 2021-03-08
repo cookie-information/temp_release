@@ -84,7 +84,7 @@ public final class MobileConsents: MobileConsentsProtocol {
     /// - Parameters:
     ///   - universalConsentSolutionId: Consent Solution identifier
     ///   - presentingViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
-    ///   - animated:If presentation should be animated. Defaults to `true`.
+    ///   - animated: If presentation should be animated. Defaults to `true`.
     public func showPrivacyPopUp(
         forUniversalConsentSolutionId universalConsentSolutionId: String,
         onViewController presentingViewController: UIViewController? = nil,
