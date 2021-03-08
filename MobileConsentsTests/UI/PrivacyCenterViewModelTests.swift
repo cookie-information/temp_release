@@ -17,6 +17,9 @@ final class PrivacyCenterViewModelTests: XCTestCase {
     private var isLoading: Bool?
     private var isAcceptButtonEnabled: Bool?
     private var loadedData: PrivacyCenterData?
+    private var errorAlert: ErrorAlertModel?
+    
+    private let sampleError = NSError(domain: "Sample", code: 1234)
     
     override func setUp() {
         consentSolutionManager = ConsentSolutionManagerMock()
@@ -40,9 +43,14 @@ final class PrivacyCenterViewModelTests: XCTestCase {
             self?.loadedData = data
         }
         
+        sut.onError = { [weak self] alert in
+            self?.errorAlert = alert
+        }
+        
         sut.router = router
         
         isLoading = nil
+        errorAlert = nil
     }
     
     func test_itIsLoading_afterViewLoads() {
@@ -70,6 +78,36 @@ final class PrivacyCenterViewModelTests: XCTestCase {
         
         XCTAssertEqual(data.translations.title, solution.templateTexts.privacyCenterTitle.primaryTranslation()?.text)
         XCTAssertEqual(data.translations.acceptButtonTitle, solution.templateTexts.savePreferencesButton.primaryTranslation()?.text)
+    }
+    
+    func test_errorAlertIsShownAfterConsentSolutionFailsToLoad() {
+        sut.viewDidLoad()
+        
+        consentSolutionManager.loadConsentSolutionIfNeededCompletion?(.failure(sampleError))
+        
+        XCTAssertNotNil(errorAlert)
+    }
+    
+    func test_consentSolutionIsLoadedAgainAfterRetry() {
+        sut.viewDidLoad()
+        
+        consentSolutionManager.loadConsentSolutionIfNeededCompletion?(.failure(sampleError))
+        
+        errorAlert?.retryHandler()
+        
+        consentSolutionManager.loadConsentSolutionIfNeededCompletion?(.success(consentSolution(consentItemConfigs: [])))
+        
+        XCTAssertNotNil(loadedData)
+    }
+    
+    func test_cancellingConsentSolutionLoadingRetryCloses() {
+        sut.viewDidLoad()
+        
+        consentSolutionManager.loadConsentSolutionIfNeededCompletion?(.failure(sampleError))
+        
+        errorAlert?.cancelHandler?()
+        
+        XCTAssertTrue(router.closeAllCalled)
     }
     
     func test_acceptButtonIsEnabled_whenLoadedSolutionHasAllRequiredConsentsSelected() {
@@ -118,11 +156,38 @@ final class PrivacyCenterViewModelTests: XCTestCase {
         XCTAssertTrue(try XCTUnwrap(isLoading))
     }
     
-    func test_itIsNotLoading_afterAcceptingConsentItemsFinishes() {
+    func test_itIsNotLoading_afterAcceptingConsentItemsFinishesWithSuccess() {
         sut.acceptButtonTapped()
         
         consentSolutionManager.completion?(nil)
         
         XCTAssertFalse(try XCTUnwrap(isLoading))
+    }
+    
+    func test_itIsNotLoading_afterAcceptingConsentItemsFinishesWithError() {
+        sut.acceptButtonTapped()
+        
+        consentSolutionManager.completion?(sampleError)
+        
+        XCTAssertFalse(try XCTUnwrap(isLoading))
+    }
+    
+    func test_alertIsShown_afterAcceptingConsentItemsFinishesWithError() {
+        sut.acceptButtonTapped()
+        
+        consentSolutionManager.completion?(sampleError)
+        
+        XCTAssertNotNil(errorAlert)
+    }
+    
+    func test_acceptingConsentsIsRetries_afterRetryButtonIsTapped() {
+        sut.acceptButtonTapped()
+        
+        consentSolutionManager.completion?(sampleError)
+        consentSolutionManager.completion = nil
+        
+        errorAlert?.retryHandler()
+        
+        XCTAssertNotNil(consentSolutionManager.completion)
     }
 }
