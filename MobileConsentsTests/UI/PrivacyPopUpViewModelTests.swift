@@ -171,7 +171,7 @@ final class RouterMock: RouterProtocol {
     private(set) var closePrivacyCenterCalled = false
     private(set) var closeAllCalled = false
     
-    func showPrivacyCenter() {
+    func showPrivacyCenter(animated: Bool) {
         showPrivacyCenterCalled = true
     }
     
