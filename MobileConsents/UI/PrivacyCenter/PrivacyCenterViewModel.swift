@@ -20,7 +20,7 @@ struct PrivacyCenterData {
 
 protocol PrivacyCenterViewModelProtocol: AnyObject {
     var onDataLoaded: ((PrivacyCenterData) -> Void)? { get set }
-    var onError: ((@escaping () -> Void) -> Void)? { get set }
+    var onError: ((ErrorAlertModel) -> Void)? { get set }
     var onLoadingChange: ((Bool) -> Void)? { get set }
     var onAcceptButtonIsEnabledChange: ((Bool) -> Void)? { get set }
     
@@ -31,7 +31,7 @@ protocol PrivacyCenterViewModelProtocol: AnyObject {
 
 final class PrivacyCenterViewModel {
     var onDataLoaded: ((PrivacyCenterData) -> Void)?
-    var onError: ((@escaping () -> Void) -> Void)?
+    var onError: ((ErrorAlertModel) -> Void)?
     var onLoadingChange: ((Bool) -> Void)?
     var onAcceptButtonIsEnabledChange: ((Bool) -> Void)?
     
@@ -113,9 +113,14 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
     }
     
     private func handleConsentSolutionLoadingError() {
-        onError?({ [weak self] in
-            self?.loadConsentSolution()
-        })
+        onError?(.init(
+            retryHandler: { [weak self] in
+                self?.loadConsentSolution()
+            },
+            cancelHandler: { [weak self] in
+                self?.router?.closeAll()
+            }
+        ))
     }
     
     private func handlePostingConsent(error: Error?) {
@@ -124,9 +129,12 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
         if error == nil {
             router?.closeAll()
         } else {
-            onError? { [weak self] in
-                self?.acceptButtonTapped()
-            }
+            onError?(.init(
+                retryHandler: { [weak self] in
+                    self?.acceptButtonTapped()
+                },
+                cancelHandler: nil
+            ))
         }
     }
 }

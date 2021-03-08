@@ -18,8 +18,13 @@ extension UIViewController {
     }
 }
 
+struct ErrorAlertModel {
+    let retryHandler: () -> Void
+    let cancelHandler: (() -> Void)?
+}
+
 extension UIViewController {
-    func showErrorAlert(retryCallback: @escaping () -> Void) {
+    func showErrorAlert(_ model: ErrorAlertModel) {
         let alert = UIAlertController(
             title: "errorAlert.title".localized,
             message: "errorAlert.message".localized,
@@ -29,10 +34,17 @@ extension UIViewController {
         let retryAction = UIAlertAction(
             title: "errorAlert.retryButtonTitle".localized,
             style: .default,
-            handler: { _ in retryCallback() }
+            handler: { _ in model.retryHandler() }
+        )
+        
+        let cancelAction = UIAlertAction(
+            title: "errorAlert.cancelButtonTitle".localized,
+            style: .cancel,
+            handler: { _ in model.cancelHandler?() }
         )
         
         alert.addAction(retryAction)
+        alert.addAction(cancelAction)
         
         present(alert, animated: true)
     }

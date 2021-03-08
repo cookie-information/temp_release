@@ -16,6 +16,7 @@ class PrivacyPopUpViewModelTests: XCTestCase {
     
     var isLoading: Bool?
     var loadedData: PrivacyPopUpData?
+    var errorShown = false
 
     override func setUpWithError() throws {
         consentSolutionManager = ConsentSolutionManagerMock()

@@ -8,4 +8,5 @@
 
 "errorAlert.title" = "Error";
 "errorAlert.message" = "Message";
-"errorAlert.retryButtonTitle" = "Retry button title";
+"errorAlert.retryButtonTitle" = "Try again";
+"errorAlert.cancelButtonTitle" = "Cancel";

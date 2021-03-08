@@ -17,7 +17,7 @@ struct PrivacyPopUpData {
 protocol PrivacyPopUpViewModelProtocol: AnyObject {
     var onLoadingChange: ((Bool) -> Void)? { get set }
     var onDataLoaded: ((PrivacyPopUpData) -> Void)? { get set }
-    var onError: ((@escaping () -> Void) -> Void)? { get set }
+    var onError: ((ErrorAlertModel) -> Void)? { get set }
     
     func viewDidLoad()
 }
@@ -25,7 +25,7 @@ protocol PrivacyPopUpViewModelProtocol: AnyObject {
 final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     var onLoadingChange: ((Bool) -> Void)?
     var onDataLoaded: ((PrivacyPopUpData) -> Void)?
-    var onError: ((@escaping () -> Void) -> Void)?
+    var onError: ((ErrorAlertModel) -> Void)?
     
     var router: RouterProtocol?
     
@@ -73,9 +73,14 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     }
     
     private func handleConsentSolutionLoadingError() {
-        onError?({ [weak self] in
-            self?.viewDidLoad()
-        })
+        onError?(.init(
+            retryHandler: { [weak self] in
+                self?.loadConsentSolution()
+            },
+            cancelHandler: { [weak self] in
+                self?.router?.closeAll()
+            }
+        ))
     }
     
     private func consentViewModels(from solution: ConsentSolution) -> [PopUpConsentViewModel] {
@@ -132,9 +137,12 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         if error == nil {
             router?.closeAll()
         } else {
-            onError?({ [weak self] in
-                self?.buttonTapped(type: buttonType)
-            })
+            onError?(.init(
+                retryHandler: { [weak self] in
+                    self?.buttonTapped(type: buttonType)
+                },
+                cancelHandler: nil
+            ))
         }
     }
 }

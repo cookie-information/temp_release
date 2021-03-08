@@ -102,8 +102,8 @@ final class PrivacyPopUpViewController: UIViewController {
             self?.setInteractionEnabled(!isLoading)
         }
         
-        viewModel.onError = { [weak self] retryCallback in
-            self?.showErrorAlert(retryCallback: retryCallback)
+        viewModel.onError = { [weak self] alert in
+            self?.showErrorAlert(alert)
         }
         
         viewModel.viewDidLoad()
