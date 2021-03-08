@@ -31,8 +31,6 @@ final class PrivacyCenterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
         setup()
     }
     
@@ -52,6 +50,8 @@ final class PrivacyCenterViewController: UIViewController {
     }
     
     private func setupLayout() {
+        view.backgroundColor = .privacyCenterBackground
+        
         activityIndicator.color = .activityIndicator
         
         acceptButton.setTitleColor(.privacyCenterAcceptButtonTitle, for: .normal)
@@ -122,29 +122,10 @@ final class PrivacyCenterViewController: UIViewController {
     private func setTitle(_ title: String) {
         navigationItem.titleView = nil
         
-        let label = UILabel()
-        label.text = title
-        label.font = .medium(size: 18)
+        let titleView = PrivacyCenterTitleView()
+        titleView.text = title
         
-        let imageView = UIImageView(image: UIImage(named: "downChevron", in: Bundle(for: Self.self), compatibleWith: nil))
-        
-        let stackView = UIStackView(arrangedSubviews: [label, imageView])
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        
-        stackView.spacing = 10
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        
-        stackView.layoutIfNeeded()
-        stackView.sizeToFit()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = true
-        
-        navigationItem.titleView = stackView
+        navigationItem.titleView = titleView
     }
     
     @objc private func acceptButtonTapped() {
@@ -173,5 +154,58 @@ extension PrivacyCenterViewController: UITableViewDataSource {
 extension PrivacyCenterViewController: UITableViewDelegate {    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         sections[indexPath.section].didSelectCell(at: indexPath, in: tableView)
+    }
+}
+
+final class PrivacyCenterTitleView: UIView {
+    private enum Constants {
+        static let spacing: CGFloat = 10
+    }
+    
+    var text: String? {
+        get { label.text }
+        set { label.text = newValue }
+    }
+    
+    private let label = UILabel()
+    private let chevronView = UIImageView(image: UIImage(named: "downChevron", in: Bundle(for: PrivacyCenterTitleView.self), compatibleWith: nil))
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setup() {
+        label.font = .medium(size: 18)
+        
+        addSubview(label)
+        addSubview(chevronView)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        label.sizeToFit()
+        
+        label.frame.origin.x = 0
+        label.center.y = bounds.midY
+        
+        chevronView.frame.origin.x = label.frame.maxX + Constants.spacing
+        chevronView.center.y = bounds.midY
+    }
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let labelSize = label.sizeThatFits(size)
+        let chevronSize = chevronView.sizeThatFits(size)
+        
+        return CGSize(
+            width: labelSize.width + chevronSize.width + Constants.spacing,
+            height: max(labelSize.height, chevronSize.height)
+        )
     }
 }

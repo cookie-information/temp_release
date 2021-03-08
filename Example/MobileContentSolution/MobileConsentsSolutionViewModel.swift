@@ -142,10 +142,10 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     }
     
     func showPrivacyPopUp(for identifier: String) {
-        mobileConsentsSDK.showPopUp(forUniversalConsentSolutionId: identifier)
+        mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: identifier)
     }
     
     func showPrivacyCenter(for identifier: String) {
-        print("Show privacy center")
+        mobileConsentsSDK.showPrivacyCenter(forUniversalConsentSolutionId: identifier)
     }
 }

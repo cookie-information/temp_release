@@ -96,6 +96,8 @@
 		919FB57625E4ED79000CE411 /* PopUpButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */; };
 		919FB57E25E4EDC0000CE411 /* ButtonStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */; };
 		91AE8B1025F21DD1002384F0 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */; };
+		91AE8B1A25F24BC6002384F0 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AE8B1925F24BC6002384F0 /* UIViewController+Extension.swift */; };
+		91AE8B1E25F24C49002384F0 /* MobileConsentsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AE8B1D25F24C49002384F0 /* MobileConsentsMock.swift */; };
 		91B780AA25DFBE8100B78B38 /* PopUpDescriptionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */; };
 		91B780AE25DFBEC500B78B38 /* PopUpConsentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */; };
 		91B780B625DFC14100B78B38 /* PopUpButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */; };
@@ -244,6 +246,8 @@
 		919FB57525E4ED79000CE411 /* PopUpButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonViewModel.swift; sourceTree = "<group>"; };
 		919FB57D25E4EDC0000CE411 /* ButtonStateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStateProvider.swift; sourceTree = "<group>"; };
 		91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
+		91AE8B1925F24BC6002384F0 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		91AE8B1D25F24C49002384F0 /* MobileConsentsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConsentsMock.swift; sourceTree = "<group>"; };
 		91B780A925DFBE8100B78B38 /* PopUpDescriptionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionSection.swift; sourceTree = "<group>"; };
 		91B780AD25DFBEC500B78B38 /* PopUpConsentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConsentsSection.swift; sourceTree = "<group>"; };
 		91B780B525DFC14100B78B38 /* PopUpButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonsView.swift; sourceTree = "<group>"; };
@@ -556,6 +560,7 @@
 				91DDCCB025E3ABF30091352A /* StyleConstants.swift */,
 				91DDCCBA25E3B96F0091352A /* ConsentSolutionManager.swift */,
 				9171D93A25E65A0A00DF3F96 /* Constants.swift */,
+				91AE8B1D25F24C49002384F0 /* MobileConsentsMock.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 				916C541125DA71B6000B7993 /* UIView+Extension.swift */,
 				913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */,
 				91AE8B0F25F21DD1002384F0 /* UIWindow+Extension.swift */,
+				91AE8B1925F24BC6002384F0 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -902,6 +908,7 @@
 				916C541225DA71B6000B7993 /* UIView+Extension.swift in Sources */,
 				111C7CE7252C976600E93EE2 /* String+Extensions.swift in Sources */,
 				1141FDA6251B343700748076 /* HTTPMethod.swift in Sources */,
+				91AE8B1A25F24BC6002384F0 /* UIViewController+Extension.swift in Sources */,
 				919FB57625E4ED79000CE411 /* PopUpButtonViewModel.swift in Sources */,
 				913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */,
 				9172AD7E25DBB84100CB0FFC /* ProcessingPurpose.swift in Sources */,
@@ -915,6 +922,7 @@
 				916C542125DA7A5B000B7993 /* TemplateTranslation.swift in Sources */,
 				913A059425DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift in Sources */,
 				91CD982C25D97405001CAC83 /* UITableView+Reusable.swift in Sources */,
+				91AE8B1E25F24C49002384F0 /* MobileConsentsMock.swift in Sources */,
 				111C7CD5252C96D200E93EE2 /* ISO8601DateFormatter+Extensions.swift in Sources */,
 				9169605025D9B04C00930302 /* UIImage+Extension.swift in Sources */,
 				91DDCCB125E3ABF30091352A /* StyleConstants.swift in Sources */,
