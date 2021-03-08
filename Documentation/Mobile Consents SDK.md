@@ -76,6 +76,7 @@ mobileConsentsSDK.postConsent(consent) { error in
   /* if error is nil it means that post succeeded */
 }
 ```
+
 ## Getting locally saved consents data
 ```swift
 let savedData:[SavedConsent] = mobileConsentsSDK.getSavedConsents()
@@ -91,4 +92,46 @@ struct  SavedConsent {
 ## Canceling last post to server request
 ```swift
 mobileConsentsSDK.cancel()
+```
+
+# Using built-in mobile consents UI
+
+## Showing Privacy Pop-Up
+
+<img src="privacyPopUp.png" width="300px">
+
+To show Privacy Pop Up screen, use `showPrivacyPopUp` method:
+
+```swift
+mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: "consent solution identifier")
+```
+
+By default, pop up is presented by top view controller of key window of the application.
+To change that, you can pass presenting view controller as an optional parameter:
+
+```swift
+mobileConsentsSDK.showPrivacyPopUp(
+  forUniversalConsentSolutionId: "consent solution identifier",
+  onViewController: someViewController
+)
+```
+
+## Showing Privacy Center
+
+<img src="privacyCenter.png" width="300px">
+
+To show Privacy Center screen, use `showPrivacyCenter` method:
+
+```swift
+mobileConsentsSDK.showPrivacyCenter(forUniversalConsentSolutionId: "consent solution identifier")
+```
+
+By default, privsacy center is presented by top view controller of key window of the application.
+To change that, you can pass presenting view controller as an optional parameter:
+
+```swift
+mobileConsentsSDK.showPrivacyCenter(
+  forUniversalConsentSolutionId: "consent solution identifier",
+  onViewController: someViewController
+)
 ```
