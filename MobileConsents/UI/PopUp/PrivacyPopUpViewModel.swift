@@ -17,6 +17,7 @@ struct PrivacyPopUpData {
 protocol PrivacyPopUpViewModelProtocol: AnyObject {
     var onLoadingChange: ((Bool) -> Void)? { get set }
     var onDataLoaded: ((PrivacyPopUpData) -> Void)? { get set }
+    var onError: ((@escaping () -> Void) -> Void)? { get set }
     
     func viewDidLoad()
 }
@@ -24,6 +25,7 @@ protocol PrivacyPopUpViewModelProtocol: AnyObject {
 final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
     var onLoadingChange: ((Bool) -> Void)?
     var onDataLoaded: ((PrivacyPopUpData) -> Void)?
+    var onError: ((@escaping () -> Void) -> Void)?
     
     var router: RouterProtocol?
     
@@ -41,7 +43,11 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
             
             self.onLoadingChange?(false)
             
-            guard case .success(let solution) = result else { return }
+            guard case .success(let solution) = result else {
+                self.handleConsentSolutionLoadingError()
+                
+                return
+            }
             
             let title = solution.title.primaryTranslation()?.text ?? ""
             let descriptionSection = PopUpDescriptionSection(text: solution.description.primaryTranslation()?.text ?? "")
@@ -60,6 +66,12 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         
             self.onDataLoaded?(data)
         }
+    }
+    
+    private func handleConsentSolutionLoadingError() {
+        onError?({ [weak self] in
+            self?.viewDidLoad()
+        })
     }
     
     private func consentViewModels(from solution: ConsentSolution) -> [PopUpConsentViewModel] {
@@ -110,11 +122,15 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         return viewModels
     }
     
-    private func handlePostingConsent(error: Error?) {
+    private func handlePostingConsent(buttonType: PopUpButtonViewModel.ButtonType, error: Error?) {
         onLoadingChange?(false)
         
         if error == nil {
             router?.closeAll()
+        } else {
+            onError?({ [weak self] in
+                self?.buttonTapped(type: buttonType)
+            })
         }
     }
 }
@@ -127,17 +143,17 @@ extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
         case .rejectAll:
             onLoadingChange?(true)
             consentSolutionManager.rejectAllConsentItems { [weak self] error in
-                self?.handlePostingConsent(error: error)
+                self?.handlePostingConsent(buttonType: type, error: error)
             }
         case .acceptAll:
             onLoadingChange?(true)
             consentSolutionManager.acceptAllConsentItems { [weak self] error in
-                self?.handlePostingConsent(error: error)
+                self?.handlePostingConsent(buttonType: type, error: error)
             }
         case .acceptSelected:
             onLoadingChange?(true)
             consentSolutionManager.acceptSelectedConsentItems { [weak self] error in
-                self?.handlePostingConsent(error: error)
+                self?.handlePostingConsent(buttonType: type, error: error)
             }
         }
     }

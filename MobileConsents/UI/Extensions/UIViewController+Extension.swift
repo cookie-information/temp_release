@@ -13,3 +13,24 @@ extension UIViewController {
         presentedViewController?.topViewController ?? self
     }
 }
+
+extension UIViewController {
+    func showErrorAlert(retryCallback: @escaping () -> Void) {
+        let alert = UIAlertController(
+            title: "Error title",
+            message: "Error message",
+            preferredStyle: .alert
+        )
+        
+        let retryAction = UIAlertAction(
+            title: "Retry button",
+            style: .default,
+            handler: { _ in retryCallback() }
+        )
+        
+        alert.addAction(retryAction)
+        
+        present(alert, animated: true)
+    }
+}
+
