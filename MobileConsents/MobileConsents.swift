@@ -24,14 +24,14 @@ public final class MobileConsents: MobileConsentsProtocol {
     ///
     /// - Parameters:
     ///   - url: URL to server where Consents will be posted
-    ///   - language: Language code used for translations in privacy screens. If not provided, current app language is used. If translations are not available in given language, English is used.
-    public convenience init(withBaseURL url: URL, language: String? = Bundle.main.preferredLocalizations.first) {
-        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), language: language)
+    ///   - uiLanguageCode: Language code used for translations in built-in privacy screens. If not provided, current app language is used. If translations are not available in given language, English is used.
+    public convenience init(withBaseURL url: URL, uiLanguageCode: String? = Bundle.main.preferredLocalizations.first) {
+        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), uiLanguageCode: uiLanguageCode)
     }
     
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, language: String?) {
+    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, uiLanguageCode: String?) {
         let jsonDecoder = JSONDecoder()
-        jsonDecoder.userInfo[primaryLanguageCodingUserInfoKey] = language
+        jsonDecoder.userInfo[primaryLanguageCodingUserInfoKey] = uiLanguageCode
         
         self.networkManager = NetworkManager(
             withBaseURL: url,
