@@ -6,7 +6,7 @@
   Copyright © 2021 ClearCode. All rights reserved.
 */
 
-"errorAlert.title" = "Error";
-"errorAlert.message" = "Message";
+"errorAlert.title" = "Consent Terms Not Available";
+"errorAlert.message" = "Consent terms can not be loaded at this time";
 "errorAlert.retryButtonTitle" = "Try again";
 "errorAlert.cancelButtonTitle" = "Cancel";
