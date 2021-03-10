@@ -23,6 +23,8 @@ protocol MobileConsentSolutionViewModelProtocol {
     func isItemSelected(_ item: ConsentItem) -> Bool
     func fetchData(for identifier: String, language: String, _ completion:@escaping (Error?) -> Void)
     func sendData( _ completion:@escaping (Error?) -> Void)
+    func showPrivacyPopUp(for identifier: String)
+    func showPrivacyCenter(for identifier: String)
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
@@ -102,7 +104,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     func translation(for indexPath: IndexPath) -> ConsentTranslation? {
         guard sectionType(for: indexPath.section) == .items  else { return nil }
         
-        return items[safe: indexPath.row]?.translations[safe: indexPath.row - 1]
+        return items[safe: indexPath.row]?.translations.translations[safe: indexPath.row - 1]
     }
     
     func handleItemCheck(_ item: ConsentItem) {
@@ -137,5 +139,13 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         }
 
         mobileConsentsSDK.postConsent(consent, completion: completion)
+    }
+    
+    func showPrivacyPopUp(for identifier: String) {
+        mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: identifier)
+    }
+    
+    func showPrivacyCenter(for identifier: String) {
+        mobileConsentsSDK.showPrivacyCenter(forUniversalConsentSolutionId: identifier)
     }
 }

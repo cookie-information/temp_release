@@ -23,7 +23,7 @@ final class ConsentItemDetailsTableViewCell: UITableViewCell {
 
     func setup(withConsentItem item: ConsentItem, language: String) {
         consentItemIdLabel.text = item.id
-        let translation = item.translations.first(where: { $0.language == language })
+        let translation = item.translations.translations.first(where: { $0.language == language })
         shortTextLabel.text = translation?.shortText
         longTextLabel.text = translation?.longText
     }

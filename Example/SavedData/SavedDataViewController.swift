@@ -29,6 +29,11 @@ class SavedDataViewController: BaseViewController {
     @IBAction private func closeAction() {
         dismiss(animated: true)
     }
+    
+    @IBAction private func clearAllAction() {
+        UserDefaults.standard.removeObject(forKey: "com.MobileConsents.consentsKey")
+        dismiss(animated: true)
+    }
 }
 
 extension SavedDataViewController: UITableViewDataSource, UITableViewDelegate {

@@ -76,6 +76,7 @@ mobileConsentsSDK.postConsent(consent) { error in
   /* if error is nil it means that post succeeded */
 }
 ```
+
 ## Getting locally saved consents data
 ```swift
 let savedData:[SavedConsent] = mobileConsentsSDK.getSavedConsents()
@@ -91,4 +92,74 @@ struct  SavedConsent {
 ## Canceling last post to server request
 ```swift
 mobileConsentsSDK.cancel()
+```
+
+# Using built-in mobile consents UI
+
+SDK contains built-in screens for managing consents.
+By default, built-in UI tries to use application's current langauge for consent translations.
+If application's language is not available in translations, English will be used.
+
+## Privacy Pop-Up
+
+<img src="privacyPopUp.png" width="300px">
+
+To show Privacy Pop Up screen, use `showPrivacyPopUp` method:
+
+```swift
+mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: "consent solution identifier")
+```
+
+By default, pop up is presented by top view controller of key window of the application.
+To change that, you can pass presenting view controller as an optional parameter:
+
+```swift
+mobileConsentsSDK.showPrivacyPopUp(
+  forUniversalConsentSolutionId: "consent solution identifier",
+  onViewController: someViewController
+)
+```
+
+## Privacy Center
+
+<img src="privacyCenter.png" width="300px">
+
+To show Privacy Center screen, use `showPrivacyCenter` method:
+
+```swift
+mobileConsentsSDK.showPrivacyCenter(forUniversalConsentSolutionId: "consent solution identifier")
+```
+
+By default, privacy center is presented by top view controller of key window of the application.
+To change that, you can pass presenting view controller as an optional parameter:
+
+```swift
+mobileConsentsSDK.showPrivacyCenter(
+  forUniversalConsentSolutionId: "consent solution identifier",
+  onViewController: someViewController
+)
+```
+
+## Styling
+
+Consent solution description and consent item texts can leverage HTML tags for basic text styling. Supported tags include:
+- `<b>` for bolding text
+- `<i>` and `<em>` for emphasizing text
+- `<br>` for line breaking
+- `<ul>` and `<li>` for creating lists
+- `<a href>` for embeding links
+
+Basic inline css are also supported, e.g. `<span style=\"color:red\">Text with custom color</span>`
+
+## UI language
+
+By default, Privacy Pop-up and Privacy Center use application's current langauge for consent translations. If application's language is not available in consent translations, English is used.
+
+You can override langauge used by the screens by initializing SDK with custom langauge code:
+
+```swift
+import MobileConsentsSDK
+
+let serverURL = URL(string: "{address_of_the_server_to_send_consent}")!
+let mobileConsentsSDK = MobileConsents(withBaseURL: serverURL, uiLanguageCode: "DE")
 ```

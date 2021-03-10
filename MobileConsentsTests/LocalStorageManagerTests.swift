@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import MobileConsentsSDK
 
 final class LocalStorageManagerTests: XCTestCase {
     let localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(userDefaults: MockedUserDefaults())
