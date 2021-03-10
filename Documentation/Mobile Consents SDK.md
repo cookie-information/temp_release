@@ -140,6 +140,17 @@ mobileConsentsSDK.showPrivacyCenter(
 )
 ```
 
+## Styling
+
+Consent solution description and consent item texts can leverage HTML tags for basic text styling. Supported tags include:
+- `<b>` for bolding text
+- `<i>` and `<em>` for emphasizing text
+- `<br>` for line breaking
+- `<ul>` and `<li>` for creating lists
+- `<a href>` for embeding links
+
+Basic inline css are also supported, e.g. `<span style=\"color:red\">Text with custom color</span>`
+
 ## UI language
 
 By default, Privacy Pop-up and Privacy Center use application's current langauge for consent translations. If application's language is not available in consent translations, English is used.
