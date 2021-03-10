@@ -96,7 +96,11 @@ mobileConsentsSDK.cancel()
 
 # Using built-in mobile consents UI
 
-## Showing Privacy Pop-Up
+SDK contains built-in screens for managing consents.
+By default, built-in UI tries to use application's current langauge for consent translations.
+If application's language is not available in translations, English will be used.
+
+## Privacy Pop-Up
 
 <img src="privacyPopUp.png" width="300px">
 
@@ -116,7 +120,7 @@ mobileConsentsSDK.showPrivacyPopUp(
 )
 ```
 
-## Showing Privacy Center
+## Privacy Center
 
 <img src="privacyCenter.png" width="300px">
 
@@ -126,7 +130,7 @@ To show Privacy Center screen, use `showPrivacyCenter` method:
 mobileConsentsSDK.showPrivacyCenter(forUniversalConsentSolutionId: "consent solution identifier")
 ```
 
-By default, privsacy center is presented by top view controller of key window of the application.
+By default, privacy center is presented by top view controller of key window of the application.
 To change that, you can pass presenting view controller as an optional parameter:
 
 ```swift
@@ -134,4 +138,17 @@ mobileConsentsSDK.showPrivacyCenter(
   forUniversalConsentSolutionId: "consent solution identifier",
   onViewController: someViewController
 )
+```
+
+## UI language
+
+By default, Privacy Pop-up and Privacy Center use application's current langauge for consent translations. If application's language is not available in consent translations, English is used.
+
+You can override langauge used by the screens by initializing SDK with custom langauge code:
+
+```swift
+import MobileConsentsSDK
+
+let serverURL = URL(string: "{address_of_the_server_to_send_consent}")!
+let mobileConsentsSDK = MobileConsents(withBaseURL: serverURL, uiLanguageCode: "DE")
 ```
