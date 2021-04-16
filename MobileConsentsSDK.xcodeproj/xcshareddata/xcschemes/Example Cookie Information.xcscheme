@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release Client Signing"
+      buildConfiguration = "Release Cookie Information"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -72,7 +72,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release Client Signing"
+      buildConfiguration = "Release Cookie Information"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
