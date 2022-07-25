@@ -6,11 +6,24 @@ struct AuthRequest: Encodable {
     let grantType: String = "client_credentials"
 }
 
-struct AuthResponse: Decodable {
+struct AuthResponse: Codable {
     let accessToken: String?
-    private let expiresIn: Int?
-    var expiresAt: Date { expiresIn != nil ? Date(timeIntervalSinceNow: Double(expiresIn!)) : Date() }
+    let expiresIn: Date
+//    var expiresAt: Date { expiresIn != nil ? Date(timeIntervalSinceNow: Double(expiresIn!)) : Date() }
     
     var errorDescription: String?
     var error: String?
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let expires = (try? container.decode(Double.self, forKey: .expiresIn)) ?? -1
+        
+        expiresIn = Date(timeIntervalSinceNow: expires)
+        accessToken = try? container.decode(String?.self, forKey: .accessToken)
+        errorDescription = try? container.decode(String?.self, forKey: .errorDescription)
+        error = try? container.decode(String.self, forKey: .error)
+        
+    }
+    
+
 }

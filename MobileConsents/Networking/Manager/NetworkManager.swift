@@ -104,7 +104,7 @@ final class NetworkManager {
     }
     
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void) {
-      if let token = token, token.expiresAt > Date() {
+      if let token = token, token.expiresIn > Date() {
         postConsent(consent: consent, completion: completion)
       } else {
         authorize { repsponse in
