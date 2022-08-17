@@ -23,20 +23,22 @@ public final class MobileConsents: MobileConsentsProtocol {
     /// MobileConsents class initializer.
     ///
     /// - Parameters:
-    ///   - url: URL to server where Consents will be posted
     ///   - uiLanguageCode: Language code used for translations in built-in privacy screens. If not provided, current app language is used. If translations are not available in given language, English is used.
-    public convenience init(withBaseURL url: URL, uiLanguageCode: String? = Bundle.main.preferredLocalizations.first) {
-        self.init(withBaseURL: url, localStorageManager: LocalStorageManager(), uiLanguageCode: uiLanguageCode)
+    ///   - clientID: the client identifier, can be obtained from Cookie Information dashboard
+    ///   - clientSecret: the client secret, can be obtained from Cookie Information dashboard
+    public convenience init(uiLanguageCode: String? = Bundle.main.preferredLocalizations.first, clientID: String, clientSecret: String) {
+        self.init(localStorageManager: LocalStorageManager(), uiLanguageCode: uiLanguageCode, clientID: clientID, clientSecret: clientSecret)
     }
     
-    init(withBaseURL url: URL, localStorageManager: LocalStorageManager, uiLanguageCode: String?) {
+    init(localStorageManager: LocalStorageManager, uiLanguageCode: String?, clientID: String, clientSecret: String) {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.userInfo[primaryLanguageCodingUserInfoKey] = uiLanguageCode
         
         self.networkManager = NetworkManager(
-            withBaseURL: url,
             jsonDecoder: jsonDecoder,
-            localStorageManager: localStorageManager
+            localStorageManager: localStorageManager,
+            clientID: clientID,
+            clientSecret: clientSecret
         )
         self.localStorageManager = localStorageManager
     }

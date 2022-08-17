@@ -65,7 +65,11 @@ final class Provider<EndPoint: EndpointType>: NetworkProvider {
         switch endpoint.task {
         case .request:
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        case .requestWithParameters(let parameters, let encoding):
+        case .requestWithParameters(let parameters, let encoding, let headers):
+            headers.forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+
             try self.configureParameters(
                 bodyParameters: parameters,
                 bodyEncoding: encoding,
