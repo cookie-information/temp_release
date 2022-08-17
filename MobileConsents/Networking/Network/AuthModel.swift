@@ -8,8 +8,7 @@ struct AuthRequest: Encodable {
 
 struct AuthResponse: Codable {
     let accessToken: String?
-    let expiresIn: Date
-//    var expiresAt: Date { expiresIn != nil ? Date(timeIntervalSinceNow: Double(expiresIn!)) : Date() }
+    var expiresIn: Date
     
     var errorDescription: String?
     var error: String?

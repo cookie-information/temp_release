@@ -8,12 +8,12 @@
 
 import UIKit
 
-final class PopUpConsentViewModel: CheckboxTableViewCellViewModel {
+final class PopUpConsentViewModel: SwitchCellViewModel {
     let text: String
     let isRequired: Bool
     
     var isSelected: Bool { consentItemProvider.isConsentItemSelected(id: id) }
-    var onUpdate: ((CheckboxTableViewCellViewModel) -> Void)?
+    var onUpdate: ((SwitchCellViewModel) -> Void)?
     
     private let id: String
     private let consentItemProvider: ConsentItemProvider
@@ -57,19 +57,19 @@ final class PopUpConsentViewModel: CheckboxTableViewCellViewModel {
 
 final class PopUpConsentsSection: Section {
     static func registerCells(in tableView: UITableView) {
-        tableView.register(CheckboxTableViewCell.self)
+        tableView.register(SwitchTableViewCell.self)
     }
     
-    private let viewModels: [CheckboxTableViewCellViewModel]
+    private let viewModels: [SwitchCellViewModel]
     
-    init(viewModels: [CheckboxTableViewCellViewModel]) {
+    init(viewModels: [SwitchCellViewModel]) {
         self.viewModels = viewModels
     }
     
     var numberOfCells: Int { viewModels.count }
     
     func cell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-        let cell: CheckboxTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: SwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         let viewModel = viewModels[indexPath.row]
         
         cell.setViewModel(viewModel)
