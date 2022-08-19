@@ -30,7 +30,6 @@ final class Router: RouterProtocol {
         viewModel.router = self
         
         let viewController = PrivacyPopUpViewController(viewModel: viewModel)
-        
         rootViewController?.topViewController.present(viewController, animated: animated)
     }
     
@@ -46,11 +45,6 @@ final class Router: RouterProtocol {
         } else {
             viewController.navigationBar.backgroundColor = .privacyCenterBackground
         }
-        
-        viewController.modalPresentationStyle = .overFullScreen
-        
-        privacyCenterTransitionProvider = PrivacyCenterPushPopTransitionProvider()
-        viewController.transitioningDelegate = privacyCenterTransitionProvider
         
         rootViewController?.topViewController.present(viewController, animated: animated)
     }

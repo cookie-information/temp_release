@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol CheckboxTableViewCellViewModel: AnyObject {
+protocol SwitchCellViewModel: AnyObject {
     var text: String { get }
     var isRequired: Bool { get }
     var isSelected: Bool { get }
-    var onUpdate: ((CheckboxTableViewCellViewModel) -> Void)? { get set }
+    var onUpdate: ((SwitchCellViewModel) -> Void)? { get set }
     
     func selectionDidChange(_ isSelected: Bool)
 }
@@ -23,7 +23,7 @@ final class CheckboxTableViewCell: UITableViewCell {
     private let checkbox = UIButton()
     private let textView = HTMLTextView()
     
-    private var viewModel: CheckboxTableViewCellViewModel?
+    private var viewModel: SwitchCellViewModel?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,7 +46,7 @@ final class CheckboxTableViewCell: UITableViewCell {
         checkbox.isSelected = false
     }
     
-    func setViewModel(_ viewModel: CheckboxTableViewCellViewModel) {
+    func setViewModel(_ viewModel: SwitchCellViewModel) {
         self.viewModel = viewModel
         
         setText(viewModel.text, isRequired: viewModel.isRequired)

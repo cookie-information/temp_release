@@ -10,7 +10,8 @@ import UIKit
 
 final class SwitchTableViewCell: BaseTableViewCell {
     var valueChanged: ((Bool) -> Void)?
-    
+    private var viewModel: SwitchCellViewModel?
+
     private let uiSwitch = UISwitch()
     private let textView = HTMLTextView()
     
@@ -33,6 +34,26 @@ final class SwitchTableViewCell: BaseTableViewCell {
         isSeparatorHidden = true
     }
     
+    func setViewModel(_ viewModel: SwitchCellViewModel) {
+        self.viewModel = viewModel
+        
+        setText(viewModel.text, isRequired: viewModel.isRequired)
+        setIsSelected(viewModel.isSelected)
+        
+        valueChanged = { [weak viewModel] isSelected in
+            viewModel?.selectionDidChange(isSelected)
+        }
+        
+        viewModel.onUpdate = { [weak self] viewModel in
+            self?.setIsSelected(viewModel.isSelected)
+        }
+    }
+    
+    func setIsSelected(_ isSelected: Bool) {
+        uiSwitch.isOn = isSelected
+        
+    }
+    
     func setText(_ text: String, isRequired: Bool) {
         textView.htmlText = text + (isRequired ? "<b>*</b>" : "")
     }
@@ -43,7 +64,7 @@ final class SwitchTableViewCell: BaseTableViewCell {
     
     private func setup() {
         selectionStyle = .none
-        
+        self.isSeparatorHidden = true
         uiSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         uiSwitch.onTintColor = .privacyCenterSwitch
         uiSwitch.thumbTintColor = .privacyCenterSwitchThumb

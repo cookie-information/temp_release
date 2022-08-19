@@ -33,9 +33,7 @@ final class PrivacyPopUpViewController: UIViewController {
         )
         
         super.init(nibName: nil, bundle: nil)
-        
-        transitioningDelegate = self
-        modalPresentationStyle = .custom
+
     }
     
     required init?(coder: NSCoder) {

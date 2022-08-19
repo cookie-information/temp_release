@@ -23,7 +23,7 @@ enum APIService: EndpointType {
     var apiURL: URL {
         switch NetworkManager.environment {
         case .production: return URL(string: "https://consent-api.app.cookieinformation.com")!
-        case .staging: return URL(string: "https://consent-api.app.cookieinformation.com")!
+        case .staging: return URL(string: "https://consent-api-staging.app.cookieinformation.com")!
         }
         
     }
