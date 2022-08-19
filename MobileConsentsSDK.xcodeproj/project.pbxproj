@@ -272,6 +272,9 @@
 		91DDCCBA25E3B96F0091352A /* ConsentSolutionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentSolutionManager.swift; sourceTree = "<group>"; };
 		9339DBA5288EBFAC00303010 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		9339DBA7288ED2A900303010 /* Encodable+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Dictionary.swift"; sourceTree = "<group>"; };
+		93D5388828AD0ED500014BD2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
+		93D5388928AD0ED500014BD2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		93D5388A28AD0ED600014BD2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -820,6 +823,7 @@
 			knownRegions = (
 				en,
 				Base,
+				hu,
 			);
 			mainGroup = 117BF12C2518D2940089C9E9;
 			productRefGroup = 117BF1372518D2940089C9E9 /* Products */;
@@ -1030,6 +1034,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				119AFB0B25230F9100186CB7 /* Base */,
+				93D5388828AD0ED500014BD2 /* hu */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1038,6 +1043,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				119AFB1025230F9200186CB7 /* Base */,
+				93D5388928AD0ED500014BD2 /* hu */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1046,6 +1052,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				91AE8B3525F62929002384F0 /* en */,
+				93D5388A28AD0ED600014BD2 /* hu */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1057,6 +1064,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1121,6 +1129,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1243,7 +1252,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				DEVELOPMENT_TEAM = URYNPG7RQE;
+				DEVELOPMENT_TEAM = SE736AR5PY;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1265,7 +1274,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				DEVELOPMENT_TEAM = URYNPG7RQE;
+				DEVELOPMENT_TEAM = SE736AR5PY;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1292,6 +1301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1383,7 +1393,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				DEVELOPMENT_TEAM = 3FK7U8AFJC;
+				DEVELOPMENT_TEAM = SE736AR5PY;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
