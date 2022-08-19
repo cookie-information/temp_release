@@ -28,7 +28,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     
     private enum Constants {
         static let defaultLanguage = "EN"
-        static let sampleIdentifier = "19e927e8-5767-4f11-93dd-4dec4d57456e"
+        static let sampleIdentifier = "1d8ab51d-4423-4853-b05e-65802e63b886"
         static let buttonCornerRadius: CGFloat = 5.0
     }
     
@@ -55,6 +55,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         sendButton.setCornerRadius(Constants.buttonCornerRadius)
         
         identifierTextField.delegate = self
+        identifierTextField.text = Constants.sampleIdentifier
         languageTextField.delegate = self
         
         sendButton.setEnabled(false)

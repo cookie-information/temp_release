@@ -40,8 +40,6 @@ final class PrivacyCenterViewController: UIViewController {
         guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
             return
         }
-        
-        acceptButton.setBackgroundImage(.resizableRoundedRect(color: .privacyCenterAcceptButton, cornerRadius: 4), for: .normal)
     }
     
     private func setup() {
@@ -55,14 +53,13 @@ final class PrivacyCenterViewController: UIViewController {
         activityIndicator.color = .activityIndicator
         
         acceptButton.setTitleColor(.privacyCenterAcceptButtonTitle, for: .normal)
-        acceptButton.titleLabel?.font = .medium(size: 15)
-        acceptButton.contentEdgeInsets = .init(top: 2, left: 13, bottom: 2, right: 13)
-        acceptButton.setBackgroundImage(.resizableRoundedRect(color: .privacyCenterAcceptButton, cornerRadius: 4), for: .normal)
-        
+        acceptButton.setTitleColor(.privacyCenterAcceptButtonDisabledTitle, for: .disabled)
+
+        acceptButton.titleLabel?.font = .medium(size: 15)        
         acceptButton.addTarget(self, action: #selector(acceptButtonTapped), for: .touchUpInside)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "backArrow", in: Bundle(for: Self.self), compatibleWith: nil),
+            image: UIImage(named: "xmark", in: Bundle(for: Self.self), compatibleWith: nil),
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)

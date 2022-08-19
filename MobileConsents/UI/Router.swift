@@ -30,6 +30,9 @@ final class Router: RouterProtocol {
         viewModel.router = self
         
         let viewController = PrivacyPopUpViewController(viewModel: viewModel)
+        if #available(iOS 13.0, *) {
+            viewController.isModalInPresentation = true
+        }
         rootViewController?.topViewController.present(viewController, animated: animated)
     }
     
