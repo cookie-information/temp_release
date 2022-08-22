@@ -18,18 +18,19 @@ final class Router: RouterProtocol {
     weak var rootViewController: UIViewController?
     
     private let consentSolutionManager: ConsentSolutionManagerProtocol
-    
+    private let accentColor: UIColor
     private var privacyCenterTransitionProvider: PrivacyCenterPushPopTransitionProvider?
     
-    init(consentSolutionManager: ConsentSolutionManagerProtocol) {
+    init(consentSolutionManager: ConsentSolutionManagerProtocol, accentColor: UIColor? = nil) {
         self.consentSolutionManager = consentSolutionManager
+        self.accentColor = accentColor ?? .popUpButtonEnabled
     }
     
     func showPrivacyPopUp(animated: Bool) {
         let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
         viewModel.router = self
         
-        let viewController = PrivacyPopUpViewController(viewModel: viewModel)
+        let viewController = PrivacyPopUpViewController(viewModel: viewModel, accentColor: accentColor)
         if #available(iOS 13.0, *) {
             viewController.isModalInPresentation = true
         }
