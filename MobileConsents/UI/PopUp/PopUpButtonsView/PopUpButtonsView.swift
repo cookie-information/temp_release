@@ -10,15 +10,15 @@ import UIKit
 
 final class PopUpButtonsView: UIView {
     private let stackView = UIStackView()
-    
+    private var accentColor: UIColor
     private var viewModels = [PopUpButtonViewModelProtocol]()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    init(accentColor: UIColor) {
+        self.accentColor = accentColor
+        super.init(frame: .zero)
         setup()
     }
-    
+   
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -76,7 +76,7 @@ final class PopUpButtonsView: UIView {
         
         button.setTitle(viewModel.title, for: .normal)
         button.setTitleColor(.popUpButtonTitle, for: .normal)
-        button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonEnabled, cornerRadius: 4), for: .normal)
+        button.setBackgroundImage(.resizableRoundedRect(color: accentColor, cornerRadius: 4), for: .normal)
         button.setBackgroundImage(.resizableRoundedRect(color: .popUpButtonDisabled, cornerRadius: 4), for: .disabled)
         button.titleLabel?.font = .medium(size: 15)
         button.isEnabled = viewModel.isEnabled

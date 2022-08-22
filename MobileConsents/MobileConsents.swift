@@ -18,6 +18,7 @@ public final class MobileConsents: MobileConsentsProtocol {
     private let networkManager: NetworkManager
     private let localStorageManager: LocalStorageManager
     
+    private let accentColor: UIColor
     public typealias ConsentSolutionCompletion = (Result<ConsentSolution, Error>) -> Void
     
     /// MobileConsents class initializer.
@@ -26,13 +27,17 @@ public final class MobileConsents: MobileConsentsProtocol {
     ///   - uiLanguageCode: Language code used for translations in built-in privacy screens. If not provided, current app language is used. If translations are not available in given language, English is used.
     ///   - clientID: the client identifier, can be obtained from Cookie Information dashboard
     ///   - clientSecret: the client secret, can be obtained from Cookie Information dashboard
-    public convenience init(uiLanguageCode: String? = Bundle.main.preferredLocalizations.first, clientID: String, clientSecret: String) {
-        self.init(localStorageManager: LocalStorageManager(), uiLanguageCode: uiLanguageCode, clientID: clientID, clientSecret: clientSecret)
+    public convenience init(uiLanguageCode: String? = Bundle.main.preferredLocalizations.first, clientID: String, clientSecret: String, accentColor: UIColor? = nil) {
+        self.init(localStorageManager: LocalStorageManager(), uiLanguageCode: uiLanguageCode, clientID: clientID, clientSecret: clientSecret, accentColor: accentColor)
     }
     
-    init(localStorageManager: LocalStorageManager, uiLanguageCode: String?, clientID: String, clientSecret: String) {
+    init(localStorageManager: LocalStorageManager, uiLanguageCode: String?, clientID: String, clientSecret: String, accentColor: UIColor? = nil) {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.userInfo[primaryLanguageCodingUserInfoKey] = uiLanguageCode
+        
+        
+        self.accentColor = accentColor ?? .systemBlue
+        
         
         self.networkManager = NetworkManager(
             jsonDecoder: jsonDecoder,
@@ -99,7 +104,7 @@ public final class MobileConsents: MobileConsentsProtocol {
             mobileConsents: self
         )
         
-        let router = Router(consentSolutionManager: consentSolutionManager)
+        let router = Router(consentSolutionManager: consentSolutionManager, accentColor: accentColor)
         router.rootViewController = presentingViewController
         
         router.showPrivacyPopUp(animated: animated)

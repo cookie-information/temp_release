@@ -11,17 +11,17 @@ import UIKit
 final class PrivacyPopUpViewController: UIViewController {
     private let titleView = PopUpTitleView()
     private let tableView = UITableView()
-    private let buttonsView = PopUpButtonsView()
+    private lazy var buttonsView = { PopUpButtonsView(accentColor: accentColor) }()
     private let gradientContainer: GradientContainer<UITableView>
     private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-    
+    private let accentColor: UIColor
     private let viewModel: PrivacyPopUpViewModelProtocol
     
     private var sections = [Section]()
     
-    init(viewModel: PrivacyPopUpViewModelProtocol) {
+    init(viewModel: PrivacyPopUpViewModelProtocol, accentColor: UIColor) {
         self.viewModel = viewModel
-        
+        self.accentColor = accentColor
         gradientContainer = GradientContainer(
             tableView,
             config: .init(
