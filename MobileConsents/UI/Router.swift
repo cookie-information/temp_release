@@ -27,7 +27,7 @@ final class Router: RouterProtocol {
     }
     
     func showPrivacyPopUp(animated: Bool) {
-        let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager)
+        let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager, accentColor: accentColor)
         viewModel.router = self
         
         let viewController = PrivacyPopUpViewController(viewModel: viewModel, accentColor: accentColor)

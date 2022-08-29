@@ -9,6 +9,8 @@
 import UIKit
 
 final class PopUpConsentViewModel: SwitchCellViewModel {
+    var accentColor: UIColor
+    
     let text: String
     let isRequired: Bool
     
@@ -26,14 +28,15 @@ final class PopUpConsentViewModel: SwitchCellViewModel {
         text: String,
         isRequired: Bool,
         consentItemProvider: ConsentItemProvider,
-        notificationCenter: NotificationCenter = NotificationCenter.default
+        notificationCenter: NotificationCenter = NotificationCenter.default,
+        accentColor: UIColor
     ) {
         self.id = id
         self.text = text
         self.isRequired = isRequired
         self.consentItemProvider = consentItemProvider
         self.notificationCenter = notificationCenter
-        
+        self.accentColor = accentColor
         observationToken = notificationCenter.addObserver(
             forName: ConsentSolutionManager.consentItemSelectionDidChange,
             object: nil,

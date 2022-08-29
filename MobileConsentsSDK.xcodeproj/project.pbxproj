@@ -68,7 +68,7 @@
 		913A057B25DE594000571BA3 /* NSAttributedString+FromHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */; };
 		913A058225DE74FE00571BA3 /* PopUpPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */; };
 		913A058825DE7D3B00571BA3 /* PrivacyPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */; };
-		913A058C25DE8ED500571BA3 /* CheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */; };
+		913A058C25DE8ED500571BA3 /* SwitchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A058B25DE8ED500571BA3 /* SwitchCellViewModel.swift */; };
 		913A059425DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */; };
 		914D988D25EADDE500588DF3 /* PushPopModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D988C25EADDE500588DF3 /* PushPopModalTransition.swift */; };
 		914D98A325EE28E600588DF3 /* PrivacyCenterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D98A225EE28E600588DF3 /* PrivacyCenterViewModelTests.swift */; };
@@ -223,7 +223,7 @@
 		913A057A25DE594000571BA3 /* NSAttributedString+FromHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+FromHTML.swift"; sourceTree = "<group>"; };
 		913A058125DE74FE00571BA3 /* PopUpPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPresentationController.swift; sourceTree = "<group>"; };
 		913A058725DE7D3B00571BA3 /* PrivacyPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPopUpViewController.swift; sourceTree = "<group>"; };
-		913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxTableViewCell.swift; sourceTree = "<group>"; };
+		913A058B25DE8ED500571BA3 /* SwitchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCellViewModel.swift; sourceTree = "<group>"; };
 		913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		914D988C25EADDE500588DF3 /* PushPopModalTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPopModalTransition.swift; sourceTree = "<group>"; };
 		914D98A225EE28E600588DF3 /* PrivacyCenterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCenterViewModelTests.swift; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 				916C540925DA66F1000B7993 /* SubheaderTableViewCell.swift */,
 				916C540D25DA66FC000B7993 /* TitleTableViewCell.swift */,
 				916C541525DA73AA000B7993 /* BaseTableViewCell.swift */,
-				913A058B25DE8ED500571BA3 /* CheckboxTableViewCell.swift */,
+				913A058B25DE8ED500571BA3 /* SwitchCellViewModel.swift */,
 				913A059325DED32D00571BA3 /* PopUpDescriptionTableViewCell.swift */,
 			);
 			path = Cells;
@@ -908,7 +908,7 @@
 				91CD982825D86257001CAC83 /* UIFont+Extension.swift in Sources */,
 				916C540A25DA66F1000B7993 /* SubheaderTableViewCell.swift in Sources */,
 				91AE8B1025F21DD1002384F0 /* UIWindow+Extension.swift in Sources */,
-				913A058C25DE8ED500571BA3 /* CheckboxTableViewCell.swift in Sources */,
+				913A058C25DE8ED500571BA3 /* SwitchCellViewModel.swift in Sources */,
 				916C541B25DA7643000B7993 /* PrivacyCenterViewModel.swift in Sources */,
 				11B5182B251C691D00581FF4 /* ParameterEncoding.swift in Sources */,
 				916C542525DA8064000B7993 /* TemplateTexts.swift in Sources */,

@@ -38,8 +38,9 @@ final class SwitchTableViewCell: BaseTableViewCell {
         self.viewModel = viewModel
         
         setText(viewModel.text, isRequired: viewModel.isRequired)
-        setIsSelected(viewModel.isSelected)
-        
+        setIsSelected(viewModel.isRequired || viewModel.isSelected)
+        uiSwitch.onTintColor = viewModel.accentColor
+        uiSwitch.isEnabled = !viewModel.isRequired
         valueChanged = { [weak viewModel] isSelected in
             viewModel?.selectionDidChange(isSelected)
         }
@@ -67,8 +68,6 @@ final class SwitchTableViewCell: BaseTableViewCell {
         self.isSeparatorHidden = true
         uiSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         uiSwitch.onTintColor = .privacyCenterSwitch
-        uiSwitch.thumbTintColor = .privacyCenterSwitchThumb
-        
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.textContainerInset = .zero

@@ -22,8 +22,8 @@ protocol PrivacyCenterViewModelProtocol: AnyObject {
     var onDataLoaded: ((PrivacyCenterData) -> Void)? { get set }
     var onError: ((ErrorAlertModel) -> Void)? { get set }
     var onLoadingChange: ((Bool) -> Void)? { get set }
-    var onAcceptButtonIsEnabledChange: ((Bool) -> Void)? { get set }
     
+   
     func viewDidLoad()
     func acceptButtonTapped()
     func backButtonTapped()
@@ -101,8 +101,8 @@ extension PrivacyCenterViewModel: PrivacyCenterViewModelProtocol {
             
             let data = PrivacyCenterData(
                 translations: .init(
-                    title: solution.templateTexts.privacyCenterTitle.primaryTranslation()?.text ?? "",
-                    acceptButtonTitle: solution.templateTexts.savePreferencesButton.primaryTranslation()?.text ?? ""
+                    title: solution.templateTexts.privacyCenterTitle.primaryTranslation().text,
+                    acceptButtonTitle: solution.templateTexts.savePreferencesButton.primaryTranslation().text
                 ),
                 sections: sections
             )
@@ -157,8 +157,8 @@ private final class SectionGenerator {
         consentItems.map { item in
             let translation = item.translations.primaryTranslation()
             return ConsentItemSection(
-                title: translation?.shortText ?? "",
-                text: translation?.longText ?? ""
+                title: translation.shortText,
+                text: translation.longText
             )
         }
     }
@@ -169,16 +169,16 @@ private final class SectionGenerator {
             
             return PreferenceViewModel(
                 id: item.id,
-                text: translation?.shortText ?? "",
+                text: translation.shortText,
                 isRequired: item.required,
                 consentItemProvider: consentItemProvider
             )
         }
         
         let translations = PreferencesSection.Translations(
-            header: templateTexts.privacyPreferencesTabLabel.primaryTranslation()?.text ?? "",
-            poweredBy: templateTexts.poweredByCoiLabel.primaryTranslation()?.text ?? "",
-            title: templateTexts.consentPreferencesLabel.primaryTranslation()?.text ?? ""
+            header: templateTexts.privacyPreferencesTabLabel.primaryTranslation().text,
+            poweredBy: templateTexts.poweredByCoiLabel.primaryTranslation().text,
+            title: templateTexts.consentPreferencesLabel.primaryTranslation().text
         )
         
         return PreferencesSection(viewModels: viewModels, translations: translations)
