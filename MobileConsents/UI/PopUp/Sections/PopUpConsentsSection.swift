@@ -14,7 +14,7 @@ final class PopUpConsentViewModel: SwitchCellViewModel {
     let text: String
     let isRequired: Bool
     
-    var isSelected: Bool { consentItemProvider.isConsentItemSelected(id: id) }
+    var isSelected: Bool { consentItemProvider.isConsentItemSelected(id: id)  || consentItemProvider.isConsentItemRequired(id: id)}
     var onUpdate: ((SwitchCellViewModel) -> Void)?
     
     private let id: String

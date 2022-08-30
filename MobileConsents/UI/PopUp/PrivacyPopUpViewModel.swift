@@ -14,6 +14,8 @@ struct PrivacyPopUpData {
     let sections: [Section]
     let acceptAllButtonTitle: String
     let saveSelectionButtonTitle: String
+
+    let privacyDescription: String
 }
 
 protocol PrivacyPopUpViewModelProtocol: AnyObject, UINavigationBarDelegate {
@@ -72,7 +74,7 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
                     consentsSection
                 ],
                 acceptAllButtonTitle: solution.templateTexts.acceptAllButton.primaryTranslation().text,
-                saveSelectionButtonTitle: solution.templateTexts.acceptSelectedButton.primaryTranslation().text
+                saveSelectionButtonTitle: solution.templateTexts.acceptSelectedButton.primaryTranslation().text, privacyDescription: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().shortText ?? ""
                 
             )
         

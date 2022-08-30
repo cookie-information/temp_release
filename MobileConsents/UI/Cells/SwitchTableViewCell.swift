@@ -1,11 +1,3 @@
-//
-//  SwitchTableViewCell.swift
-//  MobileConsentsSDK
-//
-//  Created by Sebastian Osiński on 10/02/2021.
-//  Copyright © 2021 ClearCode. All rights reserved.
-//
-
 import UIKit
 
 final class SwitchTableViewCell: BaseTableViewCell {
@@ -38,7 +30,7 @@ final class SwitchTableViewCell: BaseTableViewCell {
         self.viewModel = viewModel
         
         setText(viewModel.text, isRequired: viewModel.isRequired)
-        setIsSelected(viewModel.isRequired || viewModel.isSelected)
+        setIsSelected(viewModel.isRequired || viewModel.isSelected) //required settings will be selected by default
         uiSwitch.onTintColor = viewModel.accentColor
         uiSwitch.isEnabled = !viewModel.isRequired
         valueChanged = { [weak viewModel] isSelected in

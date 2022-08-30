@@ -30,6 +30,22 @@ final class PrivacyPopUpViewController: UIViewController {
         return item
     }()
     
+    private lazy var readModeButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle(.init(key: "readMoreButton") + " >", for: .normal)
+        btn.setTitleColor(accentColor, for: .normal)
+        btn.addTarget(self, action: #selector(openProvacyPolicy), for: .touchUpInside)
+        btn.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        return btn
+    }()
+    
+    private lazy var privacyDescription: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 14)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private let tableView = UITableView()
     private lazy var buttonsView = { PopUpButtonsView(accentColor: accentColor) }()
     private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -67,18 +83,32 @@ final class PrivacyPopUpViewController: UIViewController {
         view.addSubview(navigationBar)
         view.addSubview(tableView)
         view.addSubview(activityIndicator)
+        view.addSubview(privacyDescription)
+        view.addSubview(readModeButton)
+        
+        readModeButton.translatesAutoresizingMaskIntoConstraints = false
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        privacyDescription.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.topAnchor),
             navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            
+            privacyDescription.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 15),
+            privacyDescription.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            privacyDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            readModeButton.topAnchor.constraint(equalTo: privacyDescription.bottomAnchor, constant: 15),
+            readModeButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: readModeButton.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
@@ -97,6 +127,8 @@ final class PrivacyPopUpViewController: UIViewController {
             self?.tableView.reloadData()
             self?.barItem.title = data.title
             self?.barItem.leftBarButtonItem?.title = data.saveSelectionButtonTitle
+            
+            self?.privacyDescription.text = data.privacyDescription
         }
         
         viewModel.onLoadingChange = { [weak self, activityIndicator] isLoading in
@@ -138,5 +170,15 @@ extension PrivacyPopUpViewController {
     
     @objc func acceptSelected() {
         viewModel.acceptSelected()
+    }
+    
+    @objc func openProvacyPolicy() {
+        print("Privacy policy open")
+    }
+}
+
+extension String {
+    init(key: String) {
+        self = NSLocalizedString(key, bundle: Bundle(for: PrivacyPopUpViewController.self), comment: "")
     }
 }
