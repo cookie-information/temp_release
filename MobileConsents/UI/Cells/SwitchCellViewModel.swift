@@ -1,7 +1,8 @@
 import UIKit
 
 protocol SwitchCellViewModel: AnyObject {
-    var text: String { get }
+    var title: String { get }
+    var description: String { get }
     var isRequired: Bool { get }
     var isSelected: Bool { get }
     var onUpdate: ((SwitchCellViewModel) -> Void)? { get set }

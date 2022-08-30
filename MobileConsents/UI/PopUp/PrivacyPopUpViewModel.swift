@@ -61,7 +61,6 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
             }
             
             let title = solution.templateTexts.privacyCenterTitle.primaryTranslation().text
-            let descriptionSection = PopUpDescriptionSection(text: "") // TODO: This needs to go
             
             let consentViewModels = self.consentViewModels(from: solution)
             let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
@@ -70,7 +69,6 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
             let data = PrivacyPopUpData(
                 title: title,
                 sections: [
-                    descriptionSection,
                     consentsSection
                 ],
                 acceptAllButtonTitle: solution.templateTexts.acceptAllButton.primaryTranslation().text,
@@ -100,7 +98,8 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
             .map { item in
                 let vm = PopUpConsentViewModel(
                     id: item.id,
-                    text: item.translations.primaryTranslation().shortText,
+                    title: item.translations.primaryTranslation().shortText,
+                    description: item.translations.primaryTranslation().longText,
                     isRequired: item.required,
                     consentItemProvider: consentSolutionManager,
                     accentColor: accentColor

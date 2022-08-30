@@ -46,6 +46,20 @@ final class PrivacyPopUpViewController: UIViewController {
         return label
     }()
     
+    private lazy var poweredByLabel: UILabel = {
+        let label = UILabel()
+        let powered = NSAttributedString(string: "Powered by ",
+                                         attributes: [.font: UIFont.systemFont(ofSize: 10, weight: .regular), .foregroundColor: UIColor.lightGray])
+        let cookie = NSAttributedString(string: "Cookie Information",
+                                        attributes: [.font: UIFont.systemFont(ofSize: 10, weight: .semibold),
+                                                     .foregroundColor: UIColor.lightGray])
+        let combined = NSMutableAttributedString(attributedString: powered)
+        combined.append(cookie)
+        label.attributedText = combined
+        
+        return label
+    }()
+    
     private let tableView = UITableView()
     private lazy var buttonsView = { PopUpButtonsView(accentColor: accentColor) }()
     private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -66,10 +80,10 @@ final class PrivacyPopUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupLayout()
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         setupViewModel()
-        
+        setupLayout()
     }
     
     private func setupLayout() {
@@ -85,12 +99,14 @@ final class PrivacyPopUpViewController: UIViewController {
         view.addSubview(activityIndicator)
         view.addSubview(privacyDescription)
         view.addSubview(readModeButton)
+        view.addSubview(poweredByLabel)
         
         readModeButton.translatesAutoresizingMaskIntoConstraints = false
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         privacyDescription.translatesAutoresizingMaskIntoConstraints = false
+        poweredByLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             navigationBar.topAnchor.constraint(equalTo: view.topAnchor),
@@ -110,11 +126,13 @@ final class PrivacyPopUpViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            poweredByLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            poweredByLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)
         ])
         
         ([
-            PopUpDescriptionSection.self,
             PopUpConsentsSection.self
         ] as [Section.Type]).forEach { $0.registerCells(in: tableView) }
         
@@ -156,13 +174,9 @@ extension PrivacyPopUpViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         sections[indexPath.section].cell(for: indexPath, in: tableView)
     }
+    
 }
 
-extension PrivacyPopUpViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        PopUpPresentationController(presentedViewController: presented, presenting: presenting)
-    }
-}
 extension PrivacyPopUpViewController {
     @objc func acceptAll() {
         viewModel.acceptAll()
@@ -174,6 +188,7 @@ extension PrivacyPopUpViewController {
     
     @objc func openProvacyPolicy() {
         print("Privacy policy open")
+        
     }
 }
 
