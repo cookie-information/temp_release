@@ -32,7 +32,7 @@ final class PrivacyPopUpViewController: UIViewController {
     
     private lazy var readModeButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle(.init(key: "readMoreButton") + " >", for: .normal)
+        btn.setTitle("Read more >", for: .normal)
         btn.setTitleColor(accentColor, for: .normal)
         btn.addTarget(self, action: #selector(openProvacyPolicy), for: .touchUpInside)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 14)
@@ -49,9 +49,11 @@ final class PrivacyPopUpViewController: UIViewController {
     private lazy var poweredByLabel: UILabel = {
         let label = UILabel()
         let powered = NSAttributedString(string: "Powered by ",
-                                         attributes: [.font: UIFont.systemFont(ofSize: 10, weight: .regular), .foregroundColor: UIColor.lightGray])
+                                         attributes: [.font: UIFont.systemFont(ofSize: 10, weight: .regular),
+                                                      .foregroundColor: UIColor.lightGray])
+        
         let cookie = NSAttributedString(string: "Cookie Information",
-                                        attributes: [.font: UIFont.systemFont(ofSize: 10, weight: .semibold),
+                                        attributes: [.font: UIFont.systemFont(ofSize: 10, weight: .bold),
                                                      .foregroundColor: UIColor.lightGray])
         let combined = NSMutableAttributedString(attributedString: powered)
         combined.append(cookie)
@@ -59,7 +61,7 @@ final class PrivacyPopUpViewController: UIViewController {
         
         return label
     }()
-    
+    private var privacyPolicyLongtext = ""
     private let tableView = UITableView()
     private lazy var buttonsView = { PopUpButtonsView(accentColor: accentColor) }()
     private let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -123,13 +125,13 @@ final class PrivacyPopUpViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: readModeButton.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: poweredByLabel.topAnchor, constant: -2),
             
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            poweredByLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            poweredByLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)
+            poweredByLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -8),
+            poweredByLabel.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -8)
         ])
         
         ([
@@ -137,16 +139,20 @@ final class PrivacyPopUpViewController: UIViewController {
         ] as [Section.Type]).forEach { $0.registerCells(in: tableView) }
         
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     private func setupViewModel() {
         viewModel.onDataLoaded = { [weak self] data in
-            self?.sections = data.sections
-            self?.tableView.reloadData()
-            self?.barItem.title = data.title
-            self?.barItem.leftBarButtonItem?.title = data.saveSelectionButtonTitle
-            
-            self?.privacyDescription.text = data.privacyDescription
+            guard let self = self else { return }
+            self.sections = data.sections
+            self.tableView.reloadData()
+            self.barItem.title = data.title
+            self.barItem.leftBarButtonItem?.title = data.saveSelectionButtonTitle
+            self.barItem.rightBarButtonItem?.title = data.acceptAllButtonTitle
+            self.privacyDescription.text = data.privacyDescription
+            self.privacyPolicyLongtext = data.privacyPolicyLongtext
+            self.readModeButton.setTitle("\(data.readMoreButton) >", for: .normal)
         }
         
         viewModel.onLoadingChange = { [weak self, activityIndicator] isLoading in
@@ -162,7 +168,7 @@ final class PrivacyPopUpViewController: UIViewController {
     }
 }
 
-extension PrivacyPopUpViewController: UITableViewDataSource {
+extension PrivacyPopUpViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
     }
@@ -175,6 +181,15 @@ extension PrivacyPopUpViewController: UITableViewDataSource {
         sections[indexPath.section].cell(for: indexPath, in: tableView)
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection
+                                section: Int) -> String? {
+        return section == 0 ? "Required" : "Optional"
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.contentView.backgroundColor = .navigationBarbackground
+    }
 }
 
 extension PrivacyPopUpViewController {
@@ -187,7 +202,10 @@ extension PrivacyPopUpViewController {
     }
     
     @objc func openProvacyPolicy() {
-        print("Privacy policy open")
+        let detailView = PrivacyPolicyDetail(text: privacyPolicyLongtext, accentColor: accentColor)
+               
+        present(detailView, animated: true)
+
         
     }
 }

@@ -16,6 +16,8 @@ struct PrivacyPopUpData {
     let saveSelectionButtonTitle: String
 
     let privacyDescription: String
+    let privacyPolicyLongtext: String
+    let readMoreButton: String
 }
 
 protocol PrivacyPopUpViewModelProtocol: AnyObject, UINavigationBarDelegate {
@@ -62,17 +64,21 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
             
             let title = solution.templateTexts.privacyCenterTitle.primaryTranslation().text
             
-            let consentViewModels = self.consentViewModels(from: solution)
-            let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
             
+            let optionalSection = PopUpConsentsSection(viewModels: self.consentViewModels(from: solution))
+            let requiredRection = PopUpConsentsSection(viewModels: self.consentViewModels(from: solution, required: true))
             
             let data = PrivacyPopUpData(
                 title: title,
                 sections: [
-                    consentsSection
+                    requiredRection,
+                    optionalSection
                 ],
                 acceptAllButtonTitle: solution.templateTexts.acceptAllButton.primaryTranslation().text,
-                saveSelectionButtonTitle: solution.templateTexts.acceptSelectedButton.primaryTranslation().text, privacyDescription: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().shortText ?? ""
+                saveSelectionButtonTitle: solution.templateTexts.acceptSelectedButton.primaryTranslation().text,
+                privacyDescription: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().shortText ?? "",
+                privacyPolicyLongtext: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().longText ?? "",
+                readMoreButton: solution.templateTexts.readMoreButton.primaryTranslation().text
                 
             )
         
@@ -91,12 +97,12 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
         ))
     }
     
-    private func consentViewModels(from solution: ConsentSolution) -> [PopUpConsentViewModel] {
+    private func consentViewModels(from solution: ConsentSolution, required: Bool = false) -> [PopUpConsentViewModel] {
         solution
             .consentItems
-            .filter { $0.type == .setting }
+            .filter { $0.type == .setting && $0.required == required }
             .map { item in
-                let vm = PopUpConsentViewModel(
+                PopUpConsentViewModel(
                     id: item.id,
                     title: item.translations.primaryTranslation().shortText,
                     description: item.translations.primaryTranslation().longText,
@@ -104,41 +110,7 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
                     consentItemProvider: consentSolutionManager,
                     accentColor: accentColor
                 )
-                
-                return vm
             }
-    }
-    
-    private func buttonViewModels(templateTexts: TemplateTexts) -> [PopUpButtonViewModelProtocol] {
-        let viewModels = [
-            PopUpButtonViewModel(
-                title: templateTexts.privacyCenterButton.primaryTranslation().text,
-                type: .privacyCenter,
-                stateProvider: ConstantButtonStateProvider(isEnabled: true)
-            ),
-            PopUpButtonViewModel(
-                title: templateTexts.rejectAllButton.primaryTranslation().text,
-                type: .rejectAll,
-                stateProvider: ConstantButtonStateProvider(isEnabled: !consentSolutionManager.hasRequiredConsentItems)
-            ),
-            PopUpButtonViewModel(
-                title: templateTexts.acceptAllButton.primaryTranslation().text,
-                type: .acceptAll,
-                stateProvider: ConstantButtonStateProvider(isEnabled: true)
-            ),
-            PopUpButtonViewModel(
-                title: templateTexts.acceptSelectedButton.primaryTranslation().text,
-                type: .acceptSelected,
-                stateProvider: NotificationButtonStateProvider(
-                    isEnabled: { [consentSolutionManager] in consentSolutionManager.areAllRequiredConsentItemsSelected },
-                    notificationName: ConsentSolutionManager.consentItemSelectionDidChange
-                )
-            )
-        ]
-        
-        viewModels.forEach { $0.delegate = self }
-        
-        return viewModels
     }
     
     private func handlePostingConsent(buttonType: PopUpButtonViewModel.ButtonType, error: Error?) {

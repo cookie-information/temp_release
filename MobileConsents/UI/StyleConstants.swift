@@ -13,7 +13,7 @@ enum StyleConstants {
 
     static let textViewStyle: [String: [String: HTMLTextView.StyleValue]] = [
         "body": [
-            "font-family": "Rubik",
+            "font-family": "-apple-system;",
             "font-size": .init { "\(fontSize())px" },
             "color": .init { UIColor.consentText.hexString }
         ],
