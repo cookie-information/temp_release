@@ -109,29 +109,6 @@ public final class MobileConsents: MobileConsentsProtocol {
         
         router.showPrivacyPopUp(animated: animated)
     }
-    
-    /// Method responsible for showing Privacy Preferences Center screen
-    /// - Parameters:
-    ///   - universalConsentSolutionId: Consent Solution identifier
-    ///   - presentingViewController: UIViewController to present preferences center on.. If not provided, top-most presented view controller of key window of the application is used.
-    ///   - animated:If presentation should be animated. Defaults to `true`.
-    public func showPrivacyCenter(
-        forUniversalConsentSolutionId universalConsentSolutionId: String,
-        onViewController presentingViewController: UIViewController? = nil,
-        animated: Bool = true
-    ) {
-        let presentingViewController = presentingViewController ?? UIApplication.shared.windows.first { $0.isKeyWindow }?.topViewController
-        
-        let consentSolutionManager = ConsentSolutionManager(
-            consentSolutionId: universalConsentSolutionId,
-            mobileConsents: self
-        )
-        
-        let router = Router(consentSolutionManager: consentSolutionManager)
-        router.rootViewController = presentingViewController
-        
-        router.showPrivacyCenter(animated: animated)
-    }
 }
 
 extension MobileConsents {

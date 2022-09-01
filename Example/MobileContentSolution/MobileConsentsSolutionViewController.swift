@@ -57,25 +57,12 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     
     @IBAction private func getAction() {
         view.endEditing(true)
-        fetchData()
     }
     
     @IBAction private func defaultIdentifierAction() {
         identifierTextField.text = Constants.sampleIdentifier
     }
     
-    @IBAction private func sendAction() {
-        showProgressView()
-        viewModel.sendData { [weak self] error in
-            self?.dismissProgressView {
-                if let error = error {
-                    self?.showError(error)
-                } else {
-                    self?.showMessage("Consent sent")
-                }
-            }
-        }
-    }
     
     @IBAction private func showPopUpAction() {
         guard let identifier = identifierTextField.text else { return }
@@ -83,34 +70,10 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         viewModel.showPrivacyPopUp(for: identifier)
     }
     
-    @IBAction private func showPrivacyCenterAction() {
-        guard let identifier = identifierTextField.text else { return }
-        
-        viewModel.showPrivacyCenter(for: identifier)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationController = segue.destination as? UINavigationController, let savedDataViewController = navigationController.viewControllers.first as? SavedDataViewController else { return }
         
         savedDataViewController.savedItems = viewModel.savedConsents
-    }
-}
-
-
-extension MobileConsentsSolutionViewController {    
-    private func fetchData() {
-        guard let identifier = identifierTextField.text else { return }
-        showProgressView()
-        viewModel.fetchData(for: identifier, language: language) { [weak self] error in
-            self?.dismissProgressView {
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self?.showError(error)
-                    } else {
-                    }
-                }
-            }
-        }
     }
 }
 

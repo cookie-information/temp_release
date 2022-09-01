@@ -11,20 +11,8 @@ import MobileConsentsSDK
 
 protocol MobileConsentSolutionViewModelProtocol {
     var consentSolution: ConsentSolution? { get }
-    var sectionsCount: Int { get }
-    var sendAvailable: Bool { get }
     var savedConsents: [SavedConsent] { get }
-    func sectionType(for section: Int) -> MobileConsentsSolutionSectionType?
-    func cellType(for indexPath: IndexPath) -> MobileConsentsSolutionCellType?
-    func rowsCount(for section: Int) -> Int
-    func item(for indexPath: IndexPath) -> ConsentItem?
-    func translation(for indexPath: IndexPath) -> ConsentTranslation?
-    func handleItemCheck(_ item: ConsentItem)
-    func isItemSelected(_ item: ConsentItem) -> Bool
-    func fetchData(for identifier: String, language: String, _ completion:@escaping (Error?) -> Void)
-    func sendData( _ completion:@escaping (Error?) -> Void)
     func showPrivacyPopUp(for identifier: String)
-    func showPrivacyCenter(for identifier: String)
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
@@ -69,12 +57,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     }
     
     
-    func translation(for indexPath: IndexPath) -> ConsentTranslation? {
-        guard sectionType(for: indexPath.section) == .items  else { return nil }
-        
-        return items[safe: indexPath.row]?.translations.translations[safe: indexPath.row - 1]
-    }
-    
+   
     
     func isItemSelected(_ item: ConsentItem) -> Bool {
         return selectedItems.contains(where: { $0.id == item.id })
