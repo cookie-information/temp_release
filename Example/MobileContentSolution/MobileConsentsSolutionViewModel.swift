@@ -49,14 +49,6 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
 
     var consentSolution: ConsentSolution?
 
-    var sectionsCount: Int {
-        sectionTypes.count
-    }
-    
-    var sendAvailable: Bool {
-        consentSolution != nil
-    }
-    
     var savedConsents: [SavedConsent] {
         return mobileConsentsSDK.getSavedConsents()
     }
@@ -76,32 +68,6 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         return consent
     }
     
-    private func cellTypes(forSection section: Int) -> [MobileConsentsSolutionCellType] {
-        guard let type = sectionType(for: section) else { return [] }
-        
-        switch type {
-        case .info: return [.solutionDetails]
-        case .items: return Array(repeating: .consentItem, count: items.count)
-        }
-    }
-    
-    func sectionType(for section: Int) -> MobileConsentsSolutionSectionType? {
-        return sectionTypes[safe: section]
-    }
-    
-    func cellType(for indexPath: IndexPath) -> MobileConsentsSolutionCellType? {
-        return cellTypes(forSection: indexPath.section)[safe: indexPath.row]
-    }
-    
-    func rowsCount(for section: Int) -> Int {
-        return cellTypes(forSection: section).count
-    }
-    
-    func item(for indexPath: IndexPath) -> ConsentItem? {
-        guard sectionType(for: indexPath.section) == .items  else { return nil }
-        
-        return items[safe: indexPath.row]
-    }
     
     func translation(for indexPath: IndexPath) -> ConsentTranslation? {
         guard sectionType(for: indexPath.section) == .items  else { return nil }
@@ -109,45 +75,13 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         return items[safe: indexPath.row]?.translations.translations[safe: indexPath.row - 1]
     }
     
-    func handleItemCheck(_ item: ConsentItem) {
-        if let index = selectedItems.firstIndex(where: { $0.id == item.id }) {
-            selectedItems.remove(at: index)
-        } else {
-            selectedItems.append(item)
-        }
-    }
     
     func isItemSelected(_ item: ConsentItem) -> Bool {
         return selectedItems.contains(where: { $0.id == item.id })
-    }
-    
-    func fetchData(for identifier: String, language: String, _ completion: @escaping (Error?) -> Void) {
-        self.language = language
-        mobileConsentsSDK.fetchConsentSolution(forUniversalConsentSolutionId: identifier, completion: { [weak self] result in
-            switch result {
-            case .success(let consentSolution):
-                self?.consentSolution = consentSolution
-                completion(nil)
-            case .failure(let error):
-                completion(error)
-            }
-        })
-    }
-    
-    func sendData( _ completion: @escaping (Error?) -> Void) {
-        guard let consent = consent else {
-            completion(MobileConsentError.noConsentToSend)
-            return
-        }
-
-        mobileConsentsSDK.postConsent(consent, completion: completion)
     }
     
     func showPrivacyPopUp(for identifier: String) {
         mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: identifier)
     }
     
-    func showPrivacyCenter(for identifier: String) {
-        mobileConsentsSDK.showPrivacyCenter(forUniversalConsentSolutionId: identifier)
-    }
 }
