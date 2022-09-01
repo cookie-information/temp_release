@@ -133,7 +133,7 @@ extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
     func buttonTapped(type: PopUpButtonViewModel.ButtonType) {
         switch type {
         case .privacyCenter:
-            router?.showPrivacyCenter(animated: true)
+            break
         case .rejectAll:
             onLoadingChange?(true)
             consentSolutionManager.rejectAllConsentItems { [weak self] error in
