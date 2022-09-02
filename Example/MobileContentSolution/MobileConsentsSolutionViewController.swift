@@ -21,10 +21,7 @@ enum MobileConsentsSolutionCellType {
 
 final class MobileConsentsSolutionViewController: BaseViewController {
     @IBOutlet private weak var identifierTextField: UITextField!
-    @IBOutlet private weak var languageTextField: UITextField!
-    @IBOutlet private weak var getButton: UIButton!
-    @IBOutlet private weak var sendButton: UIButton!
-    @IBOutlet private weak var tableView: UITableView!
+   
     
     private enum Constants {
         static let defaultLanguage = "EN"
@@ -35,9 +32,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     private var viewModel: MobileConsentSolutionViewModelProtocol = MobileConsentSolutionViewModel()
     
     private var language: String {
-        guard let language = languageTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !language.isEmpty else { return Constants.defaultLanguage }
-        
-        return language
+        Constants.defaultLanguage
     }
     
     override func viewDidLoad() {
@@ -46,46 +41,28 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         setupAppearance()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let identifier = identifierTextField.text else { return }
+
+        viewModel.showPrivacyPopUp(for: identifier)
+    }
     private func setupAppearance() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.tableFooterView = UIView()
-        
-        getButton.setCornerRadius(Constants.buttonCornerRadius)
-        sendButton.setCornerRadius(Constants.buttonCornerRadius)
+       
         
         identifierTextField.delegate = self
         identifierTextField.text = Constants.sampleIdentifier
-        languageTextField.delegate = self
         
-        sendButton.setEnabled(false)
-    }
-    
-    private func updateView() {
-        sendButton.setEnabled(viewModel.sendAvailable)
     }
     
     @IBAction private func getAction() {
         view.endEditing(true)
-        fetchData()
     }
     
     @IBAction private func defaultIdentifierAction() {
         identifierTextField.text = Constants.sampleIdentifier
     }
     
-    @IBAction private func sendAction() {
-        showProgressView()
-        viewModel.sendData { [weak self] error in
-            self?.dismissProgressView {
-                if let error = error {
-                    self?.showError(error)
-                } else {
-                    self?.showMessage("Consent sent")
-                }
-            }
-        }
-    }
     
     @IBAction private func showPopUpAction() {
         guard let identifier = identifierTextField.text else { return }
@@ -93,81 +70,10 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         viewModel.showPrivacyPopUp(for: identifier)
     }
     
-    @IBAction private func showPrivacyCenterAction() {
-        guard let identifier = identifierTextField.text else { return }
-        
-        viewModel.showPrivacyCenter(for: identifier)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationController = segue.destination as? UINavigationController, let savedDataViewController = navigationController.viewControllers.first as? SavedDataViewController else { return }
         
         savedDataViewController.savedItems = viewModel.savedConsents
-    }
-}
-
-extension MobileConsentsSolutionViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sectionsCount
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  viewModel.rowsCount(for: section)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellType: MobileConsentsSolutionCellType = viewModel.cellType(for: indexPath) else { return UITableViewCell() }
-        
-        switch cellType {
-        case .solutionDetails:
-            let cell = tableView.dequeueReusableCell(withIdentifier: SolutionDetailsTableViewCell.identifier(), for: indexPath) as! SolutionDetailsTableViewCell
-            if let solution = viewModel.consentSolution {
-                cell.setup(withConsentsSolution: solution)
-            }
-            return cell
-        case .consentItem:
-            let cell: ConsentItemDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: ConsentItemDetailsTableViewCell.identifier(), for: indexPath) as! ConsentItemDetailsTableViewCell
-            
-            if let item = viewModel.item(for: indexPath) {
-                cell.setup(withConsentItem: item, language: language)
-                cell.setCheckboxSelected(viewModel.isItemSelected(item))
-            }
-            cell.delegate = self
-            
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-}
-
-extension MobileConsentsSolutionViewController {    
-    private func fetchData() {
-        guard let identifier = identifierTextField.text else { return }
-        showProgressView()
-        viewModel.fetchData(for: identifier, language: language) { [weak self] error in
-            self?.dismissProgressView {
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self?.showError(error)
-                    } else {
-                        self?.tableView.reloadData()
-                        self?.updateView()
-                    }
-                }
-            }
-        }
-    }
-}
-
-extension MobileConsentsSolutionViewController: ConsentItemDetailsTableViewCellDelegate {
-    func consentItemDetailsTableViewCellDidSelectCheckBox(_ cell: ConsentItemDetailsTableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell), let item = viewModel.item(for: indexPath) else { return }
-
-        viewModel.handleItemCheck(item)
-        tableView.reloadRows(at: [indexPath], with: .none)
     }
 }
 

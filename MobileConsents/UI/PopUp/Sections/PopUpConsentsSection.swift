@@ -9,10 +9,13 @@
 import UIKit
 
 final class PopUpConsentViewModel: SwitchCellViewModel {
-    let text: String
+    var accentColor: UIColor
+    
+    let title: String
+    let description: String
     let isRequired: Bool
     
-    var isSelected: Bool { consentItemProvider.isConsentItemSelected(id: id) }
+    var isSelected: Bool { consentItemProvider.isConsentItemSelected(id: id)  || consentItemProvider.isConsentItemRequired(id: id)}
     var onUpdate: ((SwitchCellViewModel) -> Void)?
     
     private let id: String
@@ -23,17 +26,20 @@ final class PopUpConsentViewModel: SwitchCellViewModel {
     
     init(
         id: String,
-        text: String,
+        title: String,
+        description: String,
         isRequired: Bool,
         consentItemProvider: ConsentItemProvider,
-        notificationCenter: NotificationCenter = NotificationCenter.default
+        notificationCenter: NotificationCenter = NotificationCenter.default,
+        accentColor: UIColor
     ) {
         self.id = id
-        self.text = text
+        self.title = title
+        self.description = description
         self.isRequired = isRequired
         self.consentItemProvider = consentItemProvider
         self.notificationCenter = notificationCenter
-        
+        self.accentColor = accentColor
         observationToken = notificationCenter.addObserver(
             forName: ConsentSolutionManager.consentItemSelectionDidChange,
             object: nil,

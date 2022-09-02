@@ -28,6 +28,7 @@ extension UIColor {
     static let popUpButtonDisabled = UIColor.adaptive(light: .init(hex: 0xC1C1C1), dark: .init(hex: 0x989899))
     static let popUpGradient = UIColor.adaptive(light: .lightGray, dark: .init(hex: 0x1D1D1D))
     static let activityIndicator = UIColor.adaptive(light: .init(hex: 0x2E5BFF), dark: .white)
+    static let navigationBarbackground = UIColor.adaptive(light: .init(hex: 0xF9F9F9), dark: .init(hex: 0x2A2A2A))
 }
 
 extension UIColor {

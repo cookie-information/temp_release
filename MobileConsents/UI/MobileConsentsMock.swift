@@ -49,7 +49,7 @@ private let mockConsentSolution = ConsentSolution(
         primaryLanguage: languageCode
     ),
     templateTexts: TemplateTexts(
-        privacyCenterButton: Translated(
+        readMoreButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy center button title")
             ],

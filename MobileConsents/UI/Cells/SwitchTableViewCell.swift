@@ -1,11 +1,3 @@
-//
-//  SwitchTableViewCell.swift
-//  MobileConsentsSDK
-//
-//  Created by Sebastian Osiński on 10/02/2021.
-//  Copyright © 2021 ClearCode. All rights reserved.
-//
-
 import UIKit
 
 final class SwitchTableViewCell: BaseTableViewCell {
@@ -13,8 +5,20 @@ final class SwitchTableViewCell: BaseTableViewCell {
     private var viewModel: SwitchCellViewModel?
 
     private let uiSwitch = UISwitch()
-    private let textView = HTMLTextView()
     
+    private lazy var titleView: UILabel =  {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .regular)
+        return label
+    }()
+    private lazy var descriptionView: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.numberOfLines = 0
+        label.isEnabled = false
+
+        return label
+    }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -28,7 +32,8 @@ final class SwitchTableViewCell: BaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        textView.htmlText = nil
+        titleView.text = nil
+        descriptionView.text = nil
         uiSwitch.isOn = false
         valueChanged = nil
         isSeparatorHidden = true
@@ -37,9 +42,11 @@ final class SwitchTableViewCell: BaseTableViewCell {
     func setViewModel(_ viewModel: SwitchCellViewModel) {
         self.viewModel = viewModel
         
-        setText(viewModel.text, isRequired: viewModel.isRequired)
-        setIsSelected(viewModel.isSelected)
-        
+        titleView.text = viewModel.title
+        descriptionView.text = viewModel.description
+        setIsSelected(viewModel.isRequired || viewModel.isSelected) //required settings will be selected by default
+        uiSwitch.onTintColor = viewModel.accentColor
+        uiSwitch.isEnabled = !viewModel.isRequired
         valueChanged = { [weak viewModel] isSelected in
             viewModel?.selectionDidChange(isSelected)
         }
@@ -55,8 +62,9 @@ final class SwitchTableViewCell: BaseTableViewCell {
     }
     
     func setText(_ text: String, isRequired: Bool) {
-        textView.htmlText = text + (isRequired ? "<b>*</b>" : "")
+        
     }
+    
     
     func setValue(_ value: Bool) {
         uiSwitch.isOn = value
@@ -64,33 +72,35 @@ final class SwitchTableViewCell: BaseTableViewCell {
     
     private func setup() {
         selectionStyle = .none
-        self.isSeparatorHidden = true
+        self.isSeparatorHidden = false
         uiSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
-        uiSwitch.onTintColor = .privacyCenterSwitch
-        uiSwitch.thumbTintColor = .privacyCenterSwitchThumb
         
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        textView.textContainerInset = .zero
-        textView.style = StyleConstants.textViewStyle
-        
-        contentView.addSubview(textView)
+        contentView.addSubview(titleView)
         contentView.addSubview(uiSwitch)
+        contentView.addSubview(descriptionView)
         
-        textView.translatesAutoresizingMaskIntoConstraints = false
+        titleView.translatesAutoresizingMaskIntoConstraints = false
         uiSwitch.translatesAutoresizingMaskIntoConstraints = false
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
+            titleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            titleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
             // Setting constraint to `uiSwitch.leadingAnchor` causes layout to
             // break when cell is reused
-            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -80),
-            uiSwitch.centerYAnchor.constraint(equalTo: textView.firstBaselineAnchor),
-            uiSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -29)
+            titleView.trailingAnchor.constraint(equalTo: uiSwitch.leadingAnchor, constant: -16),
+            uiSwitch.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
+            uiSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -29),
+            
+            descriptionView.topAnchor.constraint(equalTo: uiSwitch.bottomAnchor, constant: 8),
+            descriptionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 27),
+            descriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            descriptionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
+        
     }
+
     
     @objc private func switchValueChanged() {
         valueChanged?(uiSwitch.isOn)

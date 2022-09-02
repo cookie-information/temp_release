@@ -29,9 +29,10 @@ public struct Translated<T: Translation & Decodable & Equatable>: Decodable, Equ
     
     public func translation(with languageCode: String) -> T? {
         translations.first { $0.language.uppercased() == languageCode.uppercased() }
+        
     }
     
-    public func primaryTranslation() -> T? {
-        translation(with: primaryLanguage)
+    public func primaryTranslation() -> T {
+        translation(with: primaryLanguage) ?? translations.first!
     }
 }

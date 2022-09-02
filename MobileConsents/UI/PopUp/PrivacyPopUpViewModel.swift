@@ -7,32 +7,41 @@
 //
 
 import Foundation
+import UIKit
 
 struct PrivacyPopUpData {
     let title: String
     let sections: [Section]
-    let buttonViewModels: [PopUpButtonViewModelProtocol]
+    let acceptAllButtonTitle: String
+    let saveSelectionButtonTitle: String
+
+    let privacyDescription: String
+    let privacyPolicyLongtext: String
+    let readMoreButton: String
 }
 
-protocol PrivacyPopUpViewModelProtocol: AnyObject {
+protocol PrivacyPopUpViewModelProtocol: AnyObject, UINavigationBarDelegate {
     var onLoadingChange: ((Bool) -> Void)? { get set }
     var onDataLoaded: ((PrivacyPopUpData) -> Void)? { get set }
     var onError: ((ErrorAlertModel) -> Void)? { get set }
     
     func viewDidLoad()
+    func acceptAll()
+    func acceptSelected()
 }
 
-final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
+final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
     var onLoadingChange: ((Bool) -> Void)?
     var onDataLoaded: ((PrivacyPopUpData) -> Void)?
     var onError: ((ErrorAlertModel) -> Void)?
-    
+    var accentColor: UIColor
     var router: RouterProtocol?
     
     private let consentSolutionManager: ConsentSolutionManagerProtocol
     
-    init(consentSolutionManager: ConsentSolutionManagerProtocol) {
+    init(consentSolutionManager: ConsentSolutionManagerProtocol, accentColor: UIColor) {
         self.consentSolutionManager = consentSolutionManager
+        self.accentColor = accentColor
     }
     
     func viewDidLoad() {
@@ -53,19 +62,24 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
                 return
             }
             
-            let title = solution.title.primaryTranslation()?.text ?? ""
-            let descriptionSection = PopUpDescriptionSection(text: solution.description.primaryTranslation()?.text ?? "")
+            let title = solution.templateTexts.privacyCenterTitle.primaryTranslation().text
             
-            let consentViewModels = self.consentViewModels(from: solution)
-            let consentsSection = PopUpConsentsSection(viewModels: consentViewModels)
+            
+            let optionalSection = PopUpConsentsSection(viewModels: self.consentViewModels(from: solution))
+            let requiredRection = PopUpConsentsSection(viewModels: self.consentViewModels(from: solution, required: true))
             
             let data = PrivacyPopUpData(
                 title: title,
                 sections: [
-                    descriptionSection,
-                    consentsSection
+                    requiredRection,
+                    optionalSection
                 ],
-                buttonViewModels: self.buttonViewModels(templateTexts: solution.templateTexts)
+                acceptAllButtonTitle: solution.templateTexts.acceptAllButton.primaryTranslation().text,
+                saveSelectionButtonTitle: solution.templateTexts.acceptSelectedButton.primaryTranslation().text,
+                privacyDescription: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().shortText ?? "",
+                privacyPolicyLongtext: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().longText ?? "",
+                readMoreButton: solution.templateTexts.readMoreButton.primaryTranslation().text
+                
             )
         
             self.onDataLoaded?(data)
@@ -83,52 +97,20 @@ final class PrivacyPopUpViewModel: PrivacyPopUpViewModelProtocol {
         ))
     }
     
-    private func consentViewModels(from solution: ConsentSolution) -> [PopUpConsentViewModel] {
+    private func consentViewModels(from solution: ConsentSolution, required: Bool = false) -> [PopUpConsentViewModel] {
         solution
             .consentItems
-            .filter { $0.type == .setting }
+            .filter { $0.type == .setting && $0.required == required }
             .map { item in
-                let vm = PopUpConsentViewModel(
+                PopUpConsentViewModel(
                     id: item.id,
-                    text: item.translations.primaryTranslation()?.shortText ?? "",
+                    title: item.translations.primaryTranslation().shortText,
+                    description: item.translations.primaryTranslation().longText,
                     isRequired: item.required,
-                    consentItemProvider: consentSolutionManager
+                    consentItemProvider: consentSolutionManager,
+                    accentColor: accentColor
                 )
-                
-                return vm
             }
-    }
-    
-    private func buttonViewModels(templateTexts: TemplateTexts) -> [PopUpButtonViewModelProtocol] {
-        let viewModels = [
-            PopUpButtonViewModel(
-                title: templateTexts.privacyCenterButton.primaryTranslation()?.text ?? "",
-                type: .privacyCenter,
-                stateProvider: ConstantButtonStateProvider(isEnabled: true)
-            ),
-            PopUpButtonViewModel(
-                title: templateTexts.rejectAllButton.primaryTranslation()?.text ?? "",
-                type: .rejectAll,
-                stateProvider: ConstantButtonStateProvider(isEnabled: !consentSolutionManager.hasRequiredConsentItems)
-            ),
-            PopUpButtonViewModel(
-                title: templateTexts.acceptAllButton.primaryTranslation()?.text ?? "",
-                type: .acceptAll,
-                stateProvider: ConstantButtonStateProvider(isEnabled: true)
-            ),
-            PopUpButtonViewModel(
-                title: templateTexts.acceptSelectedButton.primaryTranslation()?.text ?? "",
-                type: .acceptSelected,
-                stateProvider: NotificationButtonStateProvider(
-                    isEnabled: { [consentSolutionManager] in consentSolutionManager.areAllRequiredConsentItemsSelected },
-                    notificationName: ConsentSolutionManager.consentItemSelectionDidChange
-                )
-            )
-        ]
-        
-        viewModels.forEach { $0.delegate = self }
-        
-        return viewModels
     }
     
     private func handlePostingConsent(buttonType: PopUpButtonViewModel.ButtonType, error: Error?) {
@@ -151,7 +133,7 @@ extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
     func buttonTapped(type: PopUpButtonViewModel.ButtonType) {
         switch type {
         case .privacyCenter:
-            router?.showPrivacyCenter(animated: true)
+            break
         case .rejectAll:
             onLoadingChange?(true)
             consentSolutionManager.rejectAllConsentItems { [weak self] error in
@@ -169,4 +151,24 @@ extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
             }
         }
     }
+    
+    @objc
+    func acceptAll() {
+        onLoadingChange?(true)
+        consentSolutionManager.acceptAllConsentItems { [weak self] error in
+            self?.handlePostingConsent(buttonType: .acceptAll, error: error)
+        }
+    }
+    
+    @objc
+    func acceptSelected() {
+        onLoadingChange?(true)
+        consentSolutionManager.acceptSelectedConsentItems { [weak self] error in
+            self?.handlePostingConsent(buttonType: .acceptSelected, error: error)
+        }
+    }
+}
+
+extension PrivacyPopUpViewModel: UINavigationBarDelegate {
+    
 }

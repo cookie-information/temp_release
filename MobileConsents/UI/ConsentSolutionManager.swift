@@ -10,6 +10,7 @@ import Foundation
 
 protocol ConsentItemProvider {
     func isConsentItemSelected(id: String) -> Bool
+    func isConsentItemRequired(id: String) -> Bool
     func markConsentItem(id: String, asSelected selected: Bool)
 }
 
@@ -88,6 +89,10 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
     
     func isConsentItemSelected(id: String) -> Bool {
         selectedConsentItemIds.contains(id)
+    }
+    
+    func isConsentItemRequired(id: String) -> Bool {
+        consentSolution?.consentItems.first { $0.id == id}?.required ?? false
     }
     
     func markConsentItem(id: String, asSelected selected: Bool) {

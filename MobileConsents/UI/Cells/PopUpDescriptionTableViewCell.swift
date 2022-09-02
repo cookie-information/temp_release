@@ -1,11 +1,3 @@
-//
-//  PopUpDescriptionTableViewCell.swift
-//  MobileConsentsSDK
-//
-//  Created by Sebastian Osiński on 18/02/2021.
-//  Copyright © 2021 ClearCode. All rights reserved.
-//
-
 import UIKit
 
 final class PopUpDescriptionTableViewCell: UITableViewCell {
