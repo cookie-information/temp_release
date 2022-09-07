@@ -64,7 +64,21 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     }
     
     func showPrivacyPopUp(for identifier: String) {
-        mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: identifier)
+        mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: identifier) { settings in
+            settings.forEach { consent in
+                switch consent.purpose {
+                case .statistical: break
+                case .functional: break
+                case .marketing: break
+                case .necessary: break
+                case .custom(title: let title):
+                    break
+                @unknown default:
+                    break
+                }
+                print("Consent given for: \(consent.purpose)")
+            }
+        }
     }
     
 }

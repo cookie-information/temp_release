@@ -106,6 +106,7 @@
 		9339DBA6288EBFAC00303010 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9339DBA5288EBFAC00303010 /* AuthModel.swift */; };
 		9339DBA8288ED2A900303010 /* Encodable+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9339DBA7288ED2A900303010 /* Encodable+Dictionary.swift */; };
 		93D50F0828C0E7F7007789D0 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D50F0728C0E7F7007789D0 /* Section.swift */; };
+		93D50F0A28C898BE007789D0 /* UserConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D50F0928C898BE007789D0 /* UserConsent.swift */; };
 		9B015048252C63AD00FE97A8 /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
 		9B015049252C63AD00FE97A8 /* MobileConsentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B8E95B92519C8B0001DF8BD /* MobileConsentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117BF1362518D2940089C9E9 /* MobileConsentsSDK.framework */; };
@@ -246,6 +247,7 @@
 		9339DBA5288EBFAC00303010 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		9339DBA7288ED2A900303010 /* Encodable+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Dictionary.swift"; sourceTree = "<group>"; };
 		93D50F0728C0E7F7007789D0 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		93D50F0928C898BE007789D0 /* UserConsent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConsent.swift; sourceTree = "<group>"; };
 		93D5388828AD0ED500014BD2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
 		93D5388928AD0ED500014BD2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		93D5388A28AD0ED600014BD2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				916C542025DA7A5B000B7993 /* TemplateTranslation.swift */,
 				916C542425DA8064000B7993 /* TemplateTexts.swift */,
 				916C542825DA87A2000B7993 /* Translated.swift */,
+				93D50F0928C898BE007789D0 /* UserConsent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 			files = (
 				9172AD8125DBB86C00CB0FFC /* ConsentSolution.swift in Sources */,
 				91CD982825D86257001CAC83 /* UIFont+Extension.swift in Sources */,
+				93D50F0A28C898BE007789D0 /* UserConsent.swift in Sources */,
 				916C540A25DA66F1000B7993 /* SubheaderTableViewCell.swift in Sources */,
 				91AE8B1025F21DD1002384F0 /* UIWindow+Extension.swift in Sources */,
 				913A058C25DE8ED500571BA3 /* SwitchCellViewModel.swift in Sources */,
