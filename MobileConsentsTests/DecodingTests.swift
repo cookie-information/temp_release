@@ -41,7 +41,7 @@ private let expectedConsentSolution = ConsentSolution(
         primaryLanguage: primaryLanguage
     ),
     templateTexts: TemplateTexts(
-        privacyCenterButton: Translated(
+        readMoreButton: Translated(
             translations: [
                 TemplateTranslation(language: "EN", text: "Privacy center button title")
             ],

@@ -24,7 +24,8 @@ class PrivacyPopUpViewModelTests: XCTestCase {
         consentSolutionManager = ConsentSolutionManagerMock()
         router = RouterMock()
         sut = PrivacyPopUpViewModel(
-            consentSolutionManager: consentSolutionManager
+            consentSolutionManager: consentSolutionManager,
+            accentColor: .popUpBackground
         )
         sut.router = router
         isLoading = nil
@@ -112,9 +113,8 @@ class PrivacyPopUpViewModelTests: XCTestCase {
         
         let data = try XCTUnwrap(loadedData)
         
-        XCTAssertEqual(data.title, solution.title.primaryTranslation()?.text)
+        XCTAssertEqual(data.title, solution.title.primaryTranslation().text)
         
-        XCTAssertEqual(data.buttonViewModels.count, 4)
     }
     
     func test_tappingPrivacyCenterButtonShowsPrivacyCenter() {
@@ -206,6 +206,12 @@ class PrivacyPopUpViewModelTests: XCTestCase {
 }
 
 final class ConsentSolutionManagerMock: ConsentSolutionManagerProtocol {
+    var settings: [MobileConsentsSDK.ConsentItem] { [] }
+    
+    func isConsentItemRequired(id: String) -> Bool {
+        false
+    }
+    
     var areAllRequiredConsentItemsSelected = false
     var hasRequiredConsentItems = true
     var consentItemSelections = [String: Bool]()
