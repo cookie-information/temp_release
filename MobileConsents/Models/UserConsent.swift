@@ -16,7 +16,7 @@ public enum ConsentPurpose {
     
     public init(_ rawValue: String) {
         switch rawValue.lowercased() {
-        case "necessary": self = .necessary
+        case "strictly necessary": self = .necessary
         case "marketing": self = .marketing
         case "functional": self = .functional
         case "statistical": self = .statistical

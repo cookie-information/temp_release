@@ -64,6 +64,8 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     }
     
     func showPrivacyPopUp(for identifier: String) {
+        // Display the popup and provide a closure for handling the user constent.
+        // This completion closure is the place to display
         mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: identifier) { settings in
             settings.forEach { consent in
                 switch consent.purpose {
@@ -72,7 +74,9 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
                 case .marketing: break
                 case .necessary: break
                 case .custom(title: let title):
-                    break
+                    if title.lowercased() == "age consent" {
+                        // handle user defined consent items such as age consent
+                    }
                 @unknown default:
                     break
                 }
