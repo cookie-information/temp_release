@@ -12,7 +12,7 @@ public protocol Translation {
 
 let primaryLanguageCodingUserInfoKey = CodingUserInfoKey(rawValue: "primaryLanguage")!
 
-public struct Translated<T: Translation & Decodable & Equatable>: Decodable, Equatable {
+public struct Translated<T: Translation & Codable & Equatable>: Codable, Equatable {
     public let translations: [T]
 
     let primaryLanguage: String
@@ -23,8 +23,18 @@ public struct Translated<T: Translation & Decodable & Equatable>: Decodable, Equ
     }
 
     public init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//
+//        self.translations = try container.decode( [T].self, forKey: .translations)
+//        self.primaryLanguage = (try? container.decode(String.self, forKey: .primaryLanguage)) ?? "EN"
+        
         self.translations = try [T](from: decoder)
         self.primaryLanguage = decoder.userInfo[primaryLanguageCodingUserInfoKey] as? String ?? "EN"
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.translations)
     }
     
     public func translation(with languageCode: String) -> T? {

@@ -37,8 +37,7 @@ final class Router: RouterProtocol {
     
     func closeAll() {
         completion?(consentSolutionManager.settings.map {UserConsent(consentItem: $0,
-                                                                     purpose: .init($0.translations.translation(with: "EN")?.shortText ?? ""),
-                                                                     isSelected: self.consentSolutionManager.isConsentItemSelected(id: $0.id))})
+                                                                     isSelected: self.consentSolutionManager.isConsentItemSelected(id: $0.id) || $0.required)})
         rootViewController?.dismiss(animated: true)
     }
 }

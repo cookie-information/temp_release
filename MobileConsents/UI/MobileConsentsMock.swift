@@ -21,7 +21,7 @@ final class MobileConsentsMock: MobileConsentsProtocol {
         }
     }
     
-    func getSavedConsents() -> [SavedConsent] {
+    func getSavedConsents() -> [UserConsent] {
         []
     }
 }
@@ -31,23 +31,6 @@ private let languageCode = "EN"
 private let mockConsentSolution = ConsentSolution(
     id: "9187d0f0-9e25-469b-9125-6a63b1b22b12",
     versionId: "00000000-0000-4000-8000-000000000000",
-    title: Translated(
-        translations: [
-            TemplateTranslation(language: "EN", text: "Privacy title")
-        ],
-        primaryLanguage: languageCode
-    ),
-    description: Translated(
-        translations: [
-            TemplateTranslation(
-                language: "EN",
-                text: """
-                Privacy description. Lorem ipsum dolor<br>Some link <a href="https://apple.com">here</a>
-                """
-            )
-        ],
-        primaryLanguage: languageCode
-    ),
     templateTexts: TemplateTexts(
         readMoreButton: Translated(
             translations: [

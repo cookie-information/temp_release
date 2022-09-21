@@ -45,7 +45,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         super.viewDidAppear(animated)
         guard let identifier = identifierTextField.text else { return }
 
-        viewModel.showPrivacyPopUp(for: identifier)
+        viewModel.showPrivacyPopUpIfNeeded(for: identifier)
     }
     private func setupAppearance() {
        

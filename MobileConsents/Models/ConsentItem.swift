@@ -1,17 +1,9 @@
-//
-//  ConsentItem.swift
-//  MobileConsentsSDK
-//
-//  Created by Jan Lipmann on 24/09/2020.
-//  Copyright © 2020 ClearCode. All rights reserved.
-//
-
-public enum ConsentItemType: String, Decodable {
+public enum ConsentItemType: String, Codable {
     case setting
     case info
 }
 
-public struct ConsentItem: Decodable, Equatable {
+public struct ConsentItem: Codable, Equatable {
     public let id: String
     public let required: Bool
     public let type: ConsentItemType

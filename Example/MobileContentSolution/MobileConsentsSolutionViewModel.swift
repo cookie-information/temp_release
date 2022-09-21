@@ -11,8 +11,10 @@ import MobileConsentsSDK
 
 protocol MobileConsentSolutionViewModelProtocol {
     var consentSolution: ConsentSolution? { get }
-    var savedConsents: [SavedConsent] { get }
+    var savedConsents: [UserConsent] { get }
     func showPrivacyPopUp(for identifier: String)
+    func showPrivacyPopUpIfNeeded(for identifier: String)
+
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
@@ -37,7 +39,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
 
     var consentSolution: ConsentSolution?
 
-    var savedConsents: [SavedConsent] {
+    var savedConsents: [UserConsent] {
         return mobileConsentsSDK.getSavedConsents()
     }
     
@@ -45,7 +47,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         guard let consentSolution = consentSolution, let language = language else { return nil }
         
         let customData = ["email": "test@test.com", "device_id": "824c259c-7bf5-4d2a-81bf-22c09af31261"]
-        var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId, customData: customData)
+        var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId, customData: customData, userConsents: [UserConsent]())
         
         items.forEach { item in
             let selected = selectedItems.contains(where: { $0.id == item.id })
@@ -80,7 +82,29 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
                 @unknown default:
                     break
                 }
-                print("Consent given for: \(consent.purpose)")
+                print("Consent given for:\(consent.purpose): \(consent.isSelected)")
+            }
+        }
+    }
+    
+    func showPrivacyPopUpIfNeeded(for identifier: String) {
+        // Display the popup and provide a closure for handling the user constent.
+        // This completion closure is the place to display
+        mobileConsentsSDK.showPrivacyPopUpIfNeeded(forUniversalConsentSolutionId: identifier) { settings in
+            settings.forEach { consent in
+                switch consent.purpose {
+                case .statistical: break
+                case .functional: break
+                case .marketing: break
+                case .necessary: break
+                case .custom(title: let title):
+                    if title.lowercased() == "age consent" {
+                        // handle user defined consent items such as age consent
+                    }
+                @unknown default:
+                    break
+                }
+                print("Consent given for:\(consent.purpose): \(consent.isSelected)")
             }
         }
     }

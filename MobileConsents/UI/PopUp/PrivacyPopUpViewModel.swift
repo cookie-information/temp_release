@@ -20,7 +20,7 @@ struct PrivacyPopUpData {
     let readMoreButton: String
 }
 
-protocol PrivacyPopUpViewModelProtocol: AnyObject, UINavigationBarDelegate {
+protocol PrivacyPopUpViewModelProtocol: UINavigationBarDelegate {
     var onLoadingChange: ((Bool) -> Void)? { get set }
     var onDataLoaded: ((PrivacyPopUpData) -> Void)? { get set }
     var onError: ((ErrorAlertModel) -> Void)? { get set }
