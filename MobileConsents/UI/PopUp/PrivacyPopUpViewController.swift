@@ -9,7 +9,7 @@
 import UIKit
 
 final class PrivacyPopUpViewController: UIViewController {
-    private lazy var navigationBar = {
+    private lazy var navigationBar: UINavigationBar = {
         let bar = UINavigationBar()
         bar.prefersLargeTitles = true
         bar.isTranslucent = false

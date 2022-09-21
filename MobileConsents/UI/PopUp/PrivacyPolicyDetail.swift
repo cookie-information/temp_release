@@ -2,7 +2,7 @@ import UIKit
 
 internal class PrivacyPolicyDetail: UIViewController {
     
-    private lazy var navigationBar = {
+    private lazy var navigationBar: UINavigationBar = {
         let bar = UINavigationBar()
         bar.isTranslucent = false
         bar.backgroundColor = .navigationBarbackground
