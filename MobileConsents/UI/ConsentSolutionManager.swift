@@ -89,7 +89,7 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             asyncDispatcher.async {
                 if case .success(let solution) = result {
                     self?.consentSolution = solution
-                    let givenConsentIds = self?.mobileConsents.getSavedConsents().filter(\.consentGiven).map(\.consentItemId) ?? []
+                    let givenConsentIds = self?.mobileConsents.getSavedConsents().filter(\.isSelected).map(\.consentItem.id) ?? []
                     self?.selectedConsentItemIds = Set(givenConsentIds)
                 }
                 
@@ -142,12 +142,13 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
         
         let infoConsentItemIds = consentSolution.consentItems.filter { $0.type == .info }.map(\.id)
         let givenConsentItemIds = selectedConsentItemIds.union(infoConsentItemIds)
+        let userConsents = consentSolution.consentItems.filter {$0.type == .setting}.map {UserConsent(consentItem: $0, isSelected: selectedConsentItemIds.contains($0.id) || $0.required)}
         
-        var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId)
-        consent.processingPurposes = consentSolution.consentItems.map { item in
+        var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId, userConsents: userConsents)
+        consent.processingPurposes = consentSolution.consentItems.filter {$0.type == .setting}.map { item in
             ProcessingPurpose(
                 consentItemId: item.id,
-                consentGiven: givenConsentItemIds.contains(item.id),
+                consentGiven: givenConsentItemIds.contains(item.id) || item.required,
                 language: consentSolution.primaryLanguage
             )
         }

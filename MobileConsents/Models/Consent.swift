@@ -14,13 +14,15 @@ public struct Consent {
     public let timestamp: Date
     public var processingPurposes: [ProcessingPurpose]
     public let customData: [String: String]?
+    public let userConsents: [UserConsent]
     
-    public init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: String]? = [:]) {
+    public init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: String]? = [:], userConsents: [UserConsent]) {
         self.consentSolutionId = consentSolutionId
         self.consentSolutionVersionId = consentSolutionVersionId
         self.timestamp = Date()
         self.processingPurposes = []
         self.customData = customData
+        self.userConsents = userConsents
     }
     
     public mutating func addProcessingPurpose(_ purpose: ProcessingPurpose) {

@@ -13,8 +13,8 @@ class SavedItemTableViewCell: UITableViewCell {
     @IBOutlet private weak var consentItemIdLabel: UILabel!
     @IBOutlet private weak var consentGivenLabel: UILabel!
     
-    func setup(with savedConsent: SavedConsent) {
-        consentItemIdLabel.text = savedConsent.consentItemId
-        consentGivenLabel.text = savedConsent.consentGiven ? "TRUE" : "FALSE"
+    func setup(with savedConsent: UserConsent) {
+        consentItemIdLabel.text = savedConsent.purpose.description
+        consentGivenLabel.text = savedConsent.isSelected ? "TRUE" : "FALSE"
     }
 }

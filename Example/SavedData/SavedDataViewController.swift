@@ -12,7 +12,7 @@ import MobileConsentsSDK
 class SavedDataViewController: BaseViewController {
     @IBOutlet private weak var tableView: UITableView!
     
-    var savedItems: [SavedConsent] = []
+    var savedItems: [UserConsent] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

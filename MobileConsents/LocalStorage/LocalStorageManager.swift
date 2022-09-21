@@ -10,10 +10,10 @@ import UIKit
 
 protocol LocalStorageManagerProtocol {
     var userId: String { get }
-    var consents: [String: Bool] { get }
+    var consents: [String: UserConsent] { get }
     func removeUserId()
-    func addConsent(consentItemId: String, consentGiven: Bool)
-    func addConsentsArray(_ consentsArray: [[String: Bool]])
+    func addConsent(consentItemId: String, consent: UserConsent)
+    func addConsentsArray(_ consentsArray: [UserConsent])
     func clearAll()
 }
 
@@ -21,9 +21,9 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
     private let userIdKey = "com.MobileConsents.userIdKey"
     private let consentsKey = "com.MobileConsents.consentsKey"
     
-    private let userDefaults: UserDefaultsProtocol
+    private let userDefaults: UserDefaults
     
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
+    init(userDefaults: UserDefaults = UserDefaults.standard) {
         self.userDefaults = userDefaults
     }
     
@@ -44,24 +44,46 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
         userDefaults.removeObject(forKey: userId)
     }
     
-    var consents: [String: Bool] {
-        guard let consents: [String: Bool] = userDefaults.get(forKey: consentsKey) else { return [:] }
+    var consents: [String: UserConsent] {
+        guard let consents: [String: Any] = userDefaults.get(forKey: consentsKey) else { return [:] }
+        return  consents
+            .map { dict -> [String: UserConsent] in
+                do {
+                    let decoded = try JSONDecoder().decode(UserConsent.self, from: dict.value as? Data ?? Data())
+                    return [dict.key : decoded]
+                } catch {
+                    debugPrint(error)
+                }
+                return [:]
+            }
+            .flatMap {$0}
+            .reduce([String: UserConsent](), { partialResult, tuple in
+                var dict = partialResult
+                dict[tuple.0] = tuple.1
+                return dict
+            })
         
-        return consents
     }
     
-    func addConsent(consentItemId: String, consentGiven: Bool) {
+    func addConsent(consentItemId: String, consent: UserConsent) {
         var consents = self.consents
-        consents[consentItemId] = consentGiven
+        consents[consentItemId] = consent
         userDefaults.set(consents, forKey: consentsKey)
+        
     }
     
-    func addConsentsArray(_ consentsArray: [[String: Bool]]) {
-        let localConsents = self.consents
-        let tupleArray: [(String, Bool)] = consentsArray.flatMap { $0 }
-        let newConsents = Dictionary(tupleArray, uniquingKeysWith: { _, last in last })
-        let merged = newConsents.reduce(into: localConsents) { r, e in r[e.0] = e.1 }
-        userDefaults.set(merged, forKey: consentsKey)
+    func addConsentsArray(_ consentsArray: [UserConsent]) {
+        var consents = [String: Any]()
+        consentsArray.forEach { consent in
+            do {
+                let id = consent.consentItem.id
+                let encoded = try JSONEncoder().encode(consent)
+                consents[id] = encoded
+            } catch {
+                debugPrint(error)
+            }
+            userDefaults.set(consents, forKey: consentsKey)
+        }
     }
     
     func clearAll() {
@@ -69,3 +91,5 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
         userDefaults.removeObject(forKey: consentsKey)
     }
 }
+
+

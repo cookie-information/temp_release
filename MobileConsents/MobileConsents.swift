@@ -11,7 +11,7 @@ import UIKit
 protocol MobileConsentsProtocol {
     func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void)
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void)
-    func getSavedConsents() -> [SavedConsent]
+    func getSavedConsents() -> [UserConsent]
 }
 
 public final class MobileConsents: MobileConsentsProtocol {
@@ -76,9 +76,8 @@ public final class MobileConsents: MobileConsentsProtocol {
     /// Method responsible for getting saved locally consents.
     ///
     /// Returns array of SavedConsent object
-    public func getSavedConsents() -> [SavedConsent] {
-        let savedData = localStorageManager.consents
-        return savedData.map { SavedConsent(consentItemId: $0.key, consentGiven: $0.value) }
+    public func getSavedConsents() -> [UserConsent] {
+        localStorageManager.consents.map {$0.value}
     }
     
     /// Method responsible for canceling last post consent request.
@@ -112,11 +111,34 @@ public final class MobileConsents: MobileConsentsProtocol {
         router.showPrivacyPopUp(animated: animated, completion: completion)
         
     }
+    
+    
+    /// Method responsible for showing Privacy Pop Up screen if there has not been a consent recorded or if the consent
+    /// - Parameters:
+    ///   - universalConsentSolutionId: Consent Solution identifier
+    ///   - presentingViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
+    ///   - animated: If presentation should be animated. Defaults to `true`.
+    ///   - completion: called after the user closes the privacy popup.
+    public func showPrivacyPopUpIfNeeded(
+        forUniversalConsentSolutionId universalConsentSolutionId: String,
+        onViewController presentingViewController: UIViewController? = nil,
+        animated: Bool = true,
+        completion: (([UserConsent])->())? = nil
+    ) {
+        guard !localStorageManager.consents.isEmpty else {
+            showPrivacyPopUp(forUniversalConsentSolutionId: universalConsentSolutionId, completion: completion)
+            return
+        }
+        let consents = localStorageManager.consents
+        let userConsents = consents.map(\.value)
+        completion?(userConsents)
+    }
+    
 }
 
 extension MobileConsents {
     func saveConsentResult(_ consent: Consent) {
-        let consents = consent.processingPurposes.map({ [$0.consentItemId: $0.consentGiven] })
+        let consents = consent.userConsents
         localStorageManager.addConsentsArray(consents)
     }
 }

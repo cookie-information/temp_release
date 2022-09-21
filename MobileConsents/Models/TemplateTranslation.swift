@@ -6,7 +6,7 @@
 //  Copyright © 2021 ClearCode. All rights reserved.
 //
 
-public struct TemplateTranslation: Decodable, Translation, Equatable {
+public struct TemplateTranslation: Codable, Translation, Equatable {
     public let language: String
     public let text: String
 }
