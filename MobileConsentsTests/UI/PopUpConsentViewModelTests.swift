@@ -20,10 +20,12 @@ class PopUpConsentViewModelTests: XCTestCase {
         consentItemProvider = ConsentItemProviderMock()
         sut = PopUpConsentViewModel(
             id: "testId",
-            text: "Test text",
+            title: "",
+            description: "",
             isRequired: true,
             consentItemProvider: consentItemProvider,
-            notificationCenter: notificationCenter
+            notificationCenter: notificationCenter,
+            accentColor: .white
         )
     }
     
@@ -59,6 +61,10 @@ class PopUpConsentViewModelTests: XCTestCase {
 }
 
 final class ConsentItemProviderMock: ConsentItemProvider {
+    func isConsentItemRequired(id: String) -> Bool {
+        true
+    }
+    
     var consentItemSelections = [String: Bool]()
     
     func isConsentItemSelected(id: String) -> Bool {

@@ -17,7 +17,7 @@ protocol ConsentItemProvider {
 protocol ConsentSolutionManagerProtocol: ConsentItemProvider {
     var areAllRequiredConsentItemsSelected: Bool { get }
     var hasRequiredConsentItems: Bool { get }
-    
+    var settings: [ConsentItem] { get }
     func loadConsentSolutionIfNeeded(completion: @escaping (Result<ConsentSolution, Error>) -> Void)
     
     func rejectAllConsentItems(completion: @escaping (Error?) -> Void)
@@ -46,6 +46,17 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             ??
             true)
     }
+    
+    public var settings: [ConsentItem] {
+        consentSolution?.consentItems.filter { $0.type == .setting} ?? []
+    }
+    
+    private var allSettingsItemIds: [String] {
+        consentSolution?.consentItems
+            .filter { $0.type == .setting }
+            .map(\.id) ?? []
+    }
+    
     
     private let consentSolutionId: String
     private let mobileConsents: MobileConsentsProtocol
@@ -114,10 +125,6 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
     }
     
     func acceptAllConsentItems(completion: @escaping (Error?) -> Void) {
-        let allSettingsItemIds = consentSolution?.consentItems
-            .filter { $0.type == .setting }
-            .map(\.id)
-            ?? []
         
         selectedConsentItemIds.formUnion(allSettingsItemIds)
         

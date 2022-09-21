@@ -17,16 +17,17 @@ final class Router: RouterProtocol {
     
     private let consentSolutionManager: ConsentSolutionManagerProtocol
     private let accentColor: UIColor
+    private var completion: (([UserConsent])->())?
     
     init(consentSolutionManager: ConsentSolutionManagerProtocol, accentColor: UIColor? = nil) {
         self.consentSolutionManager = consentSolutionManager
         self.accentColor = accentColor ?? .popUpButtonEnabled
     }
     
-    func showPrivacyPopUp(animated: Bool) {
+    func showPrivacyPopUp(animated: Bool, completion: (([UserConsent])->())? = nil) {
         let viewModel = PrivacyPopUpViewModel(consentSolutionManager: consentSolutionManager, accentColor: accentColor)
         viewModel.router = self
-        
+        self.completion = completion
         let viewController = PrivacyPopUpViewController(viewModel: viewModel, accentColor: accentColor)
         if #available(iOS 13.0, *) {
             viewController.isModalInPresentation = true
@@ -35,6 +36,9 @@ final class Router: RouterProtocol {
     }
     
     func closeAll() {
+        completion?(consentSolutionManager.settings.map {UserConsent(consentItem: $0,
+                                                                     purpose: .init($0.translations.translation(with: "EN")?.shortText ?? ""),
+                                                                     isSelected: self.consentSolutionManager.isConsentItemSelected(id: $0.id))})
         rootViewController?.dismiss(animated: true)
     }
 }

@@ -245,7 +245,7 @@ func consentSolution(consentItemConfigs: [(Bool, ConsentItemType)]) -> ConsentSo
         ),
         description: .init(translations: [], primaryLanguage: nil),
         templateTexts: .init(
-            privacyCenterButton: .init(translations: [], primaryLanguage: nil),
+            readMoreButton: .init(translations: [], primaryLanguage: nil),
             rejectAllButton: .init(translations: [], primaryLanguage: nil),
             acceptAllButton: .init(translations: [], primaryLanguage: nil),
             acceptSelectedButton: .init(translations: [], primaryLanguage: nil),

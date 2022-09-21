@@ -38,7 +38,6 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
     var router: RouterProtocol?
     
     private let consentSolutionManager: ConsentSolutionManagerProtocol
-    
     init(consentSolutionManager: ConsentSolutionManagerProtocol, accentColor: UIColor) {
         self.consentSolutionManager = consentSolutionManager
         self.accentColor = accentColor
@@ -79,7 +78,6 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
                 privacyDescription: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().shortText ?? "",
                 privacyPolicyLongtext: solution.consentItems.first { $0.type == .info}?.translations.primaryTranslation().longText ?? "",
                 readMoreButton: solution.templateTexts.readMoreButton.primaryTranslation().text
-                
             )
         
             self.onDataLoaded?(data)
