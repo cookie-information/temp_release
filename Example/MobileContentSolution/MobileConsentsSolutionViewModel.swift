@@ -6,20 +6,27 @@
 //  Copyright © 2020 ClearCode. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import MobileConsentsSDK
 
 protocol MobileConsentSolutionViewModelProtocol {
     var consentSolution: ConsentSolution? { get }
     var savedConsents: [UserConsent] { get }
-    func showPrivacyPopUp(for identifier: String)
+    func showPrivacyPopUp(for identifier: String, style: PrivacyPopupStyle)
     func showPrivacyPopUpIfNeeded(for identifier: String)
 
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
-    private let mobileConsentsSDK = MobileConsents(clientID: "68290ff1-da48-4e61-9eb9-590b86d9a8b9",
-                                                   clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d", accentColor: .systemPink)
+    private var mobileConsentsSDK = MobileConsents(clientID: "68290ff1-da48-4e61-9eb9-590b86d9a8b9",
+                                                   clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d",
+                                                   accentColor: .systemGreen,
+                                                   fontSet: FontSet(largeTitle: .boldSystemFont(ofSize: 34),
+                                                                    body: .monospacedSystemFont(ofSize: 14, weight: .regular),
+                                                                    bold: .monospacedSystemFont(ofSize: 14, weight: .bold))
+                                                                )
+    
+    
     
     private var selectedItems: [ConsentItem] = []
     private var language: String?
@@ -46,7 +53,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     private var consent: Consent? {
         guard let consentSolution = consentSolution, let language = language else { return nil }
         
-        let customData = ["email": "test@test.com", "device_id": "824c259c-7bf5-4d2a-81bf-22c09af31261"]
+        let customData = ["email": "mobile@cookieinformation.com", "device_id": "824c259c-7bf5-4d2a-81bf-22c09af31261"]
         var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId, customData: customData, userConsents: [UserConsent]())
         
         items.forEach { item in
@@ -65,9 +72,15 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         return selectedItems.contains(where: { $0.id == item.id })
     }
     
-    func showPrivacyPopUp(for identifier: String) {
+    func showPrivacyPopUp(for identifier: String, style: PrivacyPopupStyle = .standard) {
         // Display the popup and provide a closure for handling the user constent.
         // This completion closure is the place to display
+        
+        mobileConsentsSDK = MobileConsents(clientID: "68290ff1-da48-4e61-9eb9-590b86d9a8b9",
+                                           clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d",
+                                           accentColor: style.accentColor,
+                                           fontSet: style.fontSet)
+        
         mobileConsentsSDK.showPrivacyPopUp(forUniversalConsentSolutionId: identifier) { settings in
             settings.forEach { consent in
                 switch consent.purpose {
@@ -109,4 +122,24 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         }
     }
     
+}
+
+struct PrivacyPopupStyle {
+    var accentColor: UIColor
+    var fontSet: FontSet
+    
+    static let standard: PrivacyPopupStyle = {
+        PrivacyPopupStyle(accentColor: .systemBlue, fontSet: .standard)
+    }()
+    
+    static let greenTerminal: PrivacyPopupStyle = {
+        PrivacyPopupStyle(accentColor:.systemGreen , fontSet: FontSet(largeTitle:.monospacedSystemFont(ofSize: 26, weight: .bold),
+                                                                      body: .monospacedSystemFont(ofSize: 14, weight: .regular),
+                                                                      bold: .monospacedSystemFont(ofSize: 14, weight: .bold)))
+    }()
+    
+    static let pink: PrivacyPopupStyle = {
+        PrivacyPopupStyle(accentColor: .systemPink, fontSet: .standard)
+    }()
+
 }

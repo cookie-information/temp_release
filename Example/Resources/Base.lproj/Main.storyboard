@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21223" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k4K-JY-aCE">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k4K-JY-aCE">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,7 +23,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MobileConsentsSolutionViewController" customModule="MobileConsent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="51" translatesAutoresizingMaskIntoConstraints="NO" id="LaN-h4-wtu">
@@ -96,20 +96,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bq0-aF-Ck4">
-                        <leftBarButtonItems>
-                            <barButtonItem title="Item" id="aTw-e0-xLI">
-                                <imageReference key="image" image="bubble.middle.bottom" catalog="system" symbolScale="medium"/>
-                                <connections>
-                                    <action selector="showPopUpAction" destination="BYZ-38-t0r" id="ZYh-Q9-bjy"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Item" id="JOv-qg-y0k">
-                                <imageReference key="image" image="lock.shield" catalog="system" symbolScale="medium"/>
-                                <connections>
-                                    <action selector="showPrivacyCenterAction" destination="BYZ-38-t0r" id="30O-9P-OTp"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="aTw-e0-xLI">
+                            <imageReference key="image" image="bubble.middle.bottom" catalog="system" symbolScale="medium"/>
+                            <connections>
+                                <action selector="showPopUpAction" destination="BYZ-38-t0r" id="ZYh-Q9-bjy"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="organize" id="D2O-Ob-l4c">
                             <color key="tintColor" red="0.34901960780000002" green="0.37647058820000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -119,6 +111,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="identifierTextField" destination="cgY-5Q-3HF" id="bQ0-hd-mjy"/>
+                        <outlet property="showPrivacyCenterButton" destination="aTw-e0-xLI" id="rQy-az-wAB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -130,7 +123,7 @@
             <objects>
                 <viewController id="mXx-hw-eV0" customClass="SavedDataViewController" customModule="MobileConsent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="48x-Qg-2oz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qKS-YJ-HZP">
@@ -229,7 +222,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k4K-JY-aCE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nlU-fy-3e6">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.34901960780000002" green="0.37647058820000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -252,7 +244,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="veo-jx-I8f" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LvH-3j-4IT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -266,9 +257,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bubble.middle.bottom" catalog="system" width="128" height="110"/>
+        <image name="bubble.middle.bottom" catalog="system" width="32" height="32"/>
         <image name="cookie" width="436" height="60"/>
-        <image name="lock.shield" catalog="system" width="128" height="119"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
