@@ -1,11 +1,3 @@
-//
-//  BaseViewController.swift
-//  Example
-//
-//  Created by Jan Lipmann on 07/10/2020.
-//  Copyright © 2020 ClearCode. All rights reserved.
-//
-
 import UIKit
 
 class BaseViewController: UIViewController {
@@ -14,7 +6,6 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont(name: "Rubik-Medium", size: 24)!]
         navigationController?.navigationBar.barTintColor = .white
         title = "Mobile Consents"
     }

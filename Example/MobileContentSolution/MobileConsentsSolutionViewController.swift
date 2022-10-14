@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  Example
-//
-//  Created by Jan Lipmann on 29/09/2020.
-//  Copyright © 2020 ClearCode. All rights reserved.
-//
-
 import UIKit
 import MobileConsentsSDK
 
@@ -22,6 +14,7 @@ enum MobileConsentsSolutionCellType {
 final class MobileConsentsSolutionViewController: BaseViewController {
     @IBOutlet private weak var identifierTextField: UITextField!
    
+    @IBOutlet weak var showPrivacyCenterButton: UIBarButtonItem!
     
     private enum Constants {
         static let defaultLanguage = "EN"
@@ -47,12 +40,10 @@ final class MobileConsentsSolutionViewController: BaseViewController {
 
         viewModel.showPrivacyPopUpIfNeeded(for: identifier)
     }
+    
     private func setupAppearance() {
-       
-        
         identifierTextField.delegate = self
         identifierTextField.text = Constants.sampleIdentifier
-        
     }
     
     @IBAction private func getAction() {
@@ -65,15 +56,37 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     
     
     @IBAction private func showPopUpAction() {
-        guard let identifier = identifierTextField.text else { return }
-        
-        viewModel.showPrivacyPopUp(for: identifier)
+        guard identifierTextField.text != nil else { return }
+        showSelection()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationController = segue.destination as? UINavigationController, let savedDataViewController = navigationController.viewControllers.first as? SavedDataViewController else { return }
         
         savedDataViewController.savedItems = viewModel.savedConsents
+    }
+    
+    private func showSelection() {
+        let alert = UIAlertController(title: "Privacy popup style", message: "Please select a style", preferredStyle: .actionSheet)
+        
+        let popoverPresenter = alert.popoverPresentationController
+        popoverPresenter?.barButtonItem = showPrivacyCenterButton
+        
+        alert.addAction(UIAlertAction(title: "Default", style: .default, handler: { (_) in
+            self.viewModel.showPrivacyPopUp(for: Constants.sampleIdentifier, style: .standard)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Green terminal", style: .default, handler: { (_) in
+            self.viewModel.showPrivacyPopUp(for: Constants.sampleIdentifier, style: .greenTerminal)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Pink", style: .default, handler: { (_) in
+            self.viewModel.showPrivacyPopUp(for: Constants.sampleIdentifier, style: .pink)
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
     }
 }
 
