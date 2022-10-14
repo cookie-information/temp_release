@@ -1,11 +1,3 @@
-//
-//  MobileConsentsSolutionViewModel.swift
-//  Example
-//
-//  Created by Jan Lipmann on 01/10/2020.
-//  Copyright © 2020 ClearCode. All rights reserved.
-//
-
 import UIKit
 import MobileConsentsSDK
 
