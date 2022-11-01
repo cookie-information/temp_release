@@ -54,6 +54,11 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         identifierTextField.text = Constants.sampleIdentifier
     }
     
+    @IBAction func openInAppBrowser() {
+        let browser = WebViewController(consents: viewModel.mobileConsentsSDK)
+        
+        self.present(browser, animated: true)
+    }
     
     @IBAction private func showPopUpAction() {
         guard identifierTextField.text != nil else { return }

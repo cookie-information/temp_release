@@ -4,13 +4,15 @@ import MobileConsentsSDK
 protocol MobileConsentSolutionViewModelProtocol {
     var consentSolution: ConsentSolution? { get }
     var savedConsents: [UserConsent] { get }
+    var mobileConsentsSDK: MobileConsents { get }
     func showPrivacyPopUp(for identifier: String, style: PrivacyPopupStyle)
     func showPrivacyPopUpIfNeeded(for identifier: String)
+    
 
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
-    private var mobileConsentsSDK = MobileConsents(clientID: "68290ff1-da48-4e61-9eb9-590b86d9a8b9",
+    public var mobileConsentsSDK = MobileConsents(clientID: "68290ff1-da48-4e61-9eb9-590b86d9a8b9",
                                                    clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d",
                                                    accentColor: .systemGreen,
                                                    fontSet: FontSet(largeTitle: .boldSystemFont(ofSize: 34),
