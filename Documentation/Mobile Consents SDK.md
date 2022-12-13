@@ -1,23 +1,29 @@
-﻿![cocapods spec version badge](https://img.shields.io/cocoapods/v/MobileConsentsSDK?label=latest%20release)
-
+﻿
 # Mobile Consents SDK
 
 # Installation
-MobileConsentsSDK is available through [CocoaPods](https://cocoapods.org). To install it, simply add the following line to your Podfile:
-```ruby
-pod 'MobileConsentsSDK'
+MobileConsentsSDK is available through the Swift Package Manager (SPM). To start using it you need to add a new Package Dependency to your XCode project with the following repository URL:
 ```
-Then run `pod install`.
+https://bitbucket.org/cookieinformation/mobileconsents-ios/src/master/
+```
 
+In you're unable to use SPM in your project, you can add the source code to your project either as a Git submodule or manually copy it into your Xcode Workspace. Using the manual method is discouraged as it requires you to manually update the SDK when security or feature updates are released.
 # Using the SDK
 
 ## Initializing
-
+### Swift
 ```swift 
 import MobileConsentsSDK
 
 let serverURL = URL(string: "{address_of_the_server_to_send_consent}")!
 let mobileConsentsSDK = MobileConsents(withBaseURL: serverURL)
+```
+
+### Objective-C
+```objc
+@import MobileConsentsSDK;
+
+MobileConsents* mobileConsentsSDK = [[MobileConsents alloc] initWith]
 ```
 ## Getting Consent Solution
 

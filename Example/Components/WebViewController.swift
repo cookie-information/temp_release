@@ -51,7 +51,7 @@ final class WebViewController: UIViewController {
         let link = URL(string:"https://www.cookieinformation.com")!
         let request = URLRequest(url: link)
         setup()
-        webView.load(request)
+        webView.load(request) // Bug in XCode 14 shows threading warning, can be safely ignored
         
     }
     
@@ -67,7 +67,7 @@ final class WebViewController: UIViewController {
 
 extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript(scriptContent)
+        webView.evaluateJavaScript(self.scriptContent)
     }
 
 }

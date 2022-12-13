@@ -18,7 +18,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     
     private enum Constants {
         static let defaultLanguage = "EN"
-        static let sampleIdentifier = "1d8ab51d-4423-4853-b05e-65802e63b886"
+        static let sampleIdentifier = "4113ab88-4980-4429-b2d1-3454cc81197b"
         static let buttonCornerRadius: CGFloat = 5.0
     }
     
@@ -55,7 +55,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     }
     
     @IBAction func openInAppBrowser() {
-        let browser = WebViewController(consents: viewModel.mobileConsentsSDK)
+         let browser = WebViewController(consents: viewModel.mobileConsentsSDK)
         
         self.present(browser, animated: true)
     }

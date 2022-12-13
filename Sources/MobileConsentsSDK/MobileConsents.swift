@@ -6,7 +6,8 @@ protocol MobileConsentsProtocol {
     func getSavedConsents() -> [UserConsent]
 }
 
-public final class MobileConsents: MobileConsentsProtocol {
+@objc
+public final class MobileConsents: NSObject, MobileConsentsProtocol {
     private let networkManager: NetworkManager
     private let localStorageManager: LocalStorageManager
     
@@ -23,7 +24,7 @@ public final class MobileConsents: MobileConsentsProtocol {
     ///   - clientSecret: the client secret, can be obtained from Cookie Information dashboard
     ///   - accentColor: determines the tint of the colored elements, such as buttons in the default UI
     ///   - fontSet: overrides the system font. Make sure to test thoroughly when chosing your own font to prevent visual issues in your app
-    public convenience init(uiLanguageCode: String? = Bundle.main.preferredLocalizations.first,
+    @objc public convenience init(uiLanguageCode: String? = Bundle.main.preferredLocalizations.first,
                             clientID: String,
                             clientSecret: String,
                             accentColor: UIColor? = nil,
@@ -85,13 +86,14 @@ public final class MobileConsents: MobileConsentsProtocol {
         networkManager.cancel()
     }
     
+    
     /// Method responsible for showing Privacy Pop Up screen
     /// - Parameters:
     ///   - universalConsentSolutionId: Consent Solution identifier
     ///   - presentingViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
     ///   - animated: If presentation should be animated. Defaults to `true`.
     ///   - completion: called after the user closes the privacy popup.
-    public func showPrivacyPopUp(
+    @objc public func showPrivacyPopUp(
         forUniversalConsentSolutionId universalConsentSolutionId: String,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
@@ -117,7 +119,7 @@ public final class MobileConsents: MobileConsentsProtocol {
     ///   - presentingViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
     ///   - animated: If presentation should be animated. Defaults to `true`.
     ///   - completion: called after the user closes the privacy popup.
-    public func showPrivacyPopUpIfNeeded(
+    @objc public func showPrivacyPopUpIfNeeded(
         forUniversalConsentSolutionId universalConsentSolutionId: String,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,

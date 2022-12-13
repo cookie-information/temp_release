@@ -1,7 +1,12 @@
 import Foundation
 
 /// UserConsent
-public struct UserConsent: Codable {
+public class UserConsent: NSObject, Codable {
+    internal init(consentItem: ConsentItem, isSelected: Bool) {
+        self.consentItem = consentItem
+        self.isSelected = isSelected
+    }
+    
     public let consentItem: ConsentItem
     public var purpose: ConsentPurpose {
         .init(consentItem.translations.translation(with: "EN")?.shortText ?? "")

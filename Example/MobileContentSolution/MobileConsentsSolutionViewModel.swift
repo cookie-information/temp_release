@@ -12,7 +12,7 @@ protocol MobileConsentSolutionViewModelProtocol {
 }
 
 final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtocol {
-    public var mobileConsentsSDK = MobileConsents(clientID: "68290ff1-da48-4e61-9eb9-590b86d9a8b9",
+    public var mobileConsentsSDK = MobileConsents(clientID: "40dbe5a7-1c01-463a-bb08-a76970c0efa0",
                                                    clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d",
                                                    accentColor: .systemGreen,
                                                    fontSet: FontSet(largeTitle: .boldSystemFont(ofSize: 34),
@@ -70,8 +70,8 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
         // Display the popup and provide a closure for handling the user constent.
         // This completion closure is the place to display
         
-        mobileConsentsSDK = MobileConsents(clientID: "68290ff1-da48-4e61-9eb9-590b86d9a8b9",
-                                           clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d",
+        mobileConsentsSDK = MobileConsents(clientID: "40dbe5a7-1c01-463a-bb08-a76970c0efa0",
+                                           clientSecret:" 68cbf024407a20b8df4aecc3d9937f43c6e83169dafcb38b8d18296b515cc0d5f8bca8165d615caa4d12e236192851e9c5852a07319428562af8f920293bc1db",
                                            accentColor: style.accentColor,
                                            fontSet: style.fontSet)
         
@@ -97,6 +97,7 @@ final class MobileConsentSolutionViewModel: MobileConsentSolutionViewModelProtoc
     func showPrivacyPopUpIfNeeded(for identifier: String) {
         // Display the popup and provide a closure for handling the user constent.
         // This completion closure is the place to display
+      
         mobileConsentsSDK.showPrivacyPopUpIfNeeded(forUniversalConsentSolutionId: identifier) { settings in
             settings.forEach { consent in
                 switch consent.purpose {

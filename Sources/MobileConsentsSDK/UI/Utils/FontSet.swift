@@ -1,7 +1,8 @@
 import UIKit
 
-public struct FontSet {
-    public init(largeTitle: UIFont, body: UIFont, bold: UIFont) {
+@objc
+public class FontSet: NSObject {
+    @objc public init(largeTitle: UIFont, body: UIFont, bold: UIFont) {
         self.largeTitle = largeTitle
         self.body = body
         self.bold = bold

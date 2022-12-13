@@ -11,6 +11,7 @@ final class SwitchTableViewCell: BaseTableViewCell {
         label.font = .systemFont(ofSize: 17, weight: .regular)
         return label
     }()
+    
     private lazy var descriptionView: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
@@ -19,6 +20,7 @@ final class SwitchTableViewCell: BaseTableViewCell {
 
         return label
     }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
