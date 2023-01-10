@@ -12,17 +12,15 @@ enum MobileConsentsSolutionCellType {
 }
 
 final class MobileConsentsSolutionViewController: BaseViewController {
-    @IBOutlet private weak var identifierTextField: UITextField!
    
     @IBOutlet weak var showPrivacyCenterButton: UIBarButtonItem!
     
     private enum Constants {
         static let defaultLanguage = "EN"
-        static let sampleIdentifier = "4113ab88-4980-4429-b2d1-3454cc81197b"
         static let buttonCornerRadius: CGFloat = 5.0
     }
     
-    private var viewModel: MobileConsentSolutionViewModelProtocol = MobileConsentSolutionViewModel()
+    private var viewModel = MobileConsentSolutionViewModel()
     
     private var language: String {
         Constants.defaultLanguage
@@ -30,29 +28,19 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupAppearance()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard let identifier = identifierTextField.text else { return }
 
-        viewModel.showPrivacyPopUpIfNeeded(for: identifier)
+        viewModel.showPrivacyPopUpIfNeeded()
     }
     
-    private func setupAppearance() {
-        identifierTextField.delegate = self
-        identifierTextField.text = Constants.sampleIdentifier
-    }
     
     @IBAction private func getAction() {
         view.endEditing(true)
     }
     
-    @IBAction private func defaultIdentifierAction() {
-        identifierTextField.text = Constants.sampleIdentifier
-    }
     
     @IBAction func openInAppBrowser() {
          let browser = WebViewController(consents: viewModel.mobileConsentsSDK)
@@ -60,9 +48,7 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         self.present(browser, animated: true)
     }
     
-    @IBAction private func showPopUpAction() {
-        guard identifierTextField.text != nil else { return }
-        showSelection()
+    @IBAction private func showPopUpAction() {        showSelection()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -78,15 +64,15 @@ final class MobileConsentsSolutionViewController: BaseViewController {
         popoverPresenter?.barButtonItem = showPrivacyCenterButton
         
         alert.addAction(UIAlertAction(title: "Default", style: .default, handler: { (_) in
-            self.viewModel.showPrivacyPopUp(for: Constants.sampleIdentifier, style: .standard)
+            self.viewModel.showPrivacyPopUp(style: .standard)
         }))
         
         alert.addAction(UIAlertAction(title: "Green terminal", style: .default, handler: { (_) in
-            self.viewModel.showPrivacyPopUp(for: Constants.sampleIdentifier, style: .greenTerminal)
+            self.viewModel.showPrivacyPopUp(style: .greenTerminal)
         }))
         
         alert.addAction(UIAlertAction(title: "Pink", style: .default, handler: { (_) in
-            self.viewModel.showPrivacyPopUp(for: Constants.sampleIdentifier, style: .pink)
+            self.viewModel.showPrivacyPopUp(style: .pink)
         }))
         
         self.present(alert, animated: true, completion: {

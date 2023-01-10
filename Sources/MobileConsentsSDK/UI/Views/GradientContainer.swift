@@ -118,7 +118,11 @@ private final class GradientView: UIView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
+        if #available(iOS 12.0, *) {
+            guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
+                return
+            }
+        } else {
             return
         }
         

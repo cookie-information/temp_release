@@ -1,7 +1,7 @@
 import UIKit
 
 protocol MobileConsentsProtocol {
-    func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void)
+    func fetchConsentSolution(completion: @escaping (Result<ConsentSolution, Error>) -> Void)
     func postConsent(_ consent: Consent, completion: @escaping (Error?) -> Void)
     func getSavedConsents() -> [UserConsent]
 }
@@ -13,7 +13,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     
     private let accentColor: UIColor
     private let fontSet: FontSet
-    
+    private let solutionId: String
     public typealias ConsentSolutionCompletion = (Result<ConsentSolution, Error>) -> ()
     
     /// MobileConsents class initializer.
@@ -25,15 +25,16 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     ///   - accentColor: determines the tint of the colored elements, such as buttons in the default UI
     ///   - fontSet: overrides the system font. Make sure to test thoroughly when chosing your own font to prevent visual issues in your app
     @objc public convenience init(uiLanguageCode: String? = Bundle.main.preferredLocalizations.first,
-                            clientID: String,
-                            clientSecret: String,
-                            accentColor: UIColor? = nil,
-                            fontSet: FontSet = .standard) {
+                                  clientID: String,
+                                  clientSecret: String,
+                                  solutionId: String,
+                                  accentColor: UIColor? = nil,
+                                  fontSet: FontSet = .standard) {
         
-        self.init(localStorageManager: LocalStorageManager(), uiLanguageCode: uiLanguageCode, clientID: clientID, clientSecret: clientSecret, accentColor: accentColor, fontSet: fontSet)
+        self.init(localStorageManager: LocalStorageManager(), uiLanguageCode: uiLanguageCode, clientID: clientID, clientSecret: clientSecret, solutionID: solutionId, accentColor: accentColor, fontSet: fontSet)
     }
     
-    init(localStorageManager: LocalStorageManager, uiLanguageCode: String?, clientID: String, clientSecret: String, accentColor: UIColor?, fontSet: FontSet) {
+    init(localStorageManager: LocalStorageManager, uiLanguageCode: String?, clientID: String, clientSecret: String, solutionID: String, accentColor: UIColor?, fontSet: FontSet) {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.userInfo[primaryLanguageCodingUserInfoKey] = uiLanguageCode
         
@@ -43,18 +44,19 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
             jsonDecoder: jsonDecoder,
             localStorageManager: localStorageManager,
             clientID: clientID,
-            clientSecret: clientSecret
+            clientSecret: clientSecret,
+            solutionID: solutionID
         )
         self.localStorageManager = localStorageManager
+        self.solutionId = solutionID
     }
     
     /// Method responsible for fetching Consent Solutions.
     ///
     /// - Parameters:
-    ///   - universalConsentSolutionId: Consent Solution identifier
     ///   - completion: callback - (Result<ConsentSolution, Error>) -> Void
-    public func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion:@escaping ConsentSolutionCompletion) {
-        networkManager.getConsentSolution(forUUID: universalConsentSolutionId, completion: completion)
+    public func fetchConsentSolution(completion:@escaping ConsentSolutionCompletion) {
+        networkManager.getConsentSolution(completion: completion)
     }
     
     /// Method responsible for posting Consent to server.
@@ -94,7 +96,6 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     ///   - animated: If presentation should be animated. Defaults to `true`.
     ///   - completion: called after the user closes the privacy popup.
     @objc public func showPrivacyPopUp(
-        forUniversalConsentSolutionId universalConsentSolutionId: String,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
         completion: (([UserConsent])->())? = nil
@@ -102,7 +103,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
         let presentingViewController = presentingViewController ?? UIApplication.shared.windows.first { $0.isKeyWindow }?.topViewController
         
         let consentSolutionManager = ConsentSolutionManager(
-            consentSolutionId: universalConsentSolutionId,
+            consentSolutionId: self.solutionId,
             mobileConsents: self
         )
         
@@ -120,13 +121,12 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     ///   - animated: If presentation should be animated. Defaults to `true`.
     ///   - completion: called after the user closes the privacy popup.
     @objc public func showPrivacyPopUpIfNeeded(
-        forUniversalConsentSolutionId universalConsentSolutionId: String,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
         completion: (([UserConsent])->())? = nil
     ) {
         guard !localStorageManager.consents.isEmpty else {
-            showPrivacyPopUp(forUniversalConsentSolutionId: universalConsentSolutionId, completion: completion)
+            showPrivacyPopUp(completion: completion)
             return
         }
         let consents = localStorageManager.consents

@@ -12,6 +12,6 @@ public struct ProcessingPurpose: Codable {
     public init(consentItemId: String, consentGiven: Bool, language: String) {
         self.consentItemId = consentItemId
         self.consentGiven = consentGiven
-        self.language = language
+        self.language = language.uppercased()
     }
 }

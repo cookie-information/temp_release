@@ -1,7 +1,7 @@
 import Foundation
 
 final class MobileConsentsMock: MobileConsentsProtocol {
-    func fetchConsentSolution(forUniversalConsentSolutionId universalConsentSolutionId: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
+    func fetchConsentSolution(completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             completion(.success(mockConsentSolution))
         }
@@ -83,7 +83,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "a10853b5-85b8-4541-a9ab-fd203176bdce",
             required: true,
-            type: .setting,
+            type: .necessary,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -98,7 +98,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b1",
             required: false,
-            type: .setting,
+            type: .functional,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -133,7 +133,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b2",
             required: false,
-            type: .setting,
+            type: .necessary,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -168,7 +168,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b3",
             required: false,
-            type: .setting,
+            type: .functional,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -203,7 +203,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b4",
             required: false,
-            type: .setting,
+            type: .marketing,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -238,7 +238,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "a10853b5-85b8-4541-a9ab-fd203176bdce7",
             required: true,
-            type: .setting,
+            type: .statistical,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -253,7 +253,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "ef7d8f35-fc1a-4369-ada2-c00cc0eecc4b",
             required: false,
-            type: .setting,
+            type: .functional,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -278,7 +278,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "7d477dbf-5f88-420f-8dfc-2506907ebe07",
             required: true,
-            type: .info,
+            type: .privacyPolicy,
             translations: Translated(
                 translations: [
                     ConsentTranslation(
@@ -303,7 +303,7 @@ private let mockConsentSolution = ConsentSolution(
         ConsentItem(
             id: "1d5920c7-c5d1-4c08-93cc-4238457d7a1f",
             required: true,
-            type: .info,
+            type: .privacyPolicy,
             translations: Translated(
                 translations: [
                     ConsentTranslation(

@@ -23,7 +23,7 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
     var areAllRequiredConsentItemsSelected: Bool {
         consentSolution?
             .consentItems
-            .filter { $0.required && ($0.type != .privacyPolicy || $0.type != .info )}
+            .filter { $0.required && ($0.type != .privacyPolicy || $0.type != .privacyPolicy )}
             .map(\.id)
             .allSatisfy(selectedConsentItemIds.contains)
             ??
@@ -33,19 +33,19 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
     var hasRequiredConsentItems: Bool {
         !(consentSolution?
             .consentItems
-            .filter { $0.required && ($0.type != .privacyPolicy || $0.type != .info ) }
+            .filter { $0.required && ($0.type != .privacyPolicy || $0.type != .privacyPolicy ) }
             .isEmpty
             ??
             true)
     }
     
     public var settings: [ConsentItem] {
-        consentSolution?.consentItems.filter { ($0.type != .privacyPolicy || $0.type != .info )} ?? []
+        consentSolution?.consentItems.filter { ($0.type != .privacyPolicy || $0.type != .privacyPolicy )} ?? []
     }
     
     private var allSettingsItemIds: [String] {
         consentSolution?.consentItems
-            .filter {($0.type != .privacyPolicy || $0.type != .info ) }
+            .filter {($0.type != .privacyPolicy || $0.type != .privacyPolicy ) }
             .map(\.id) ?? []
     }
     
@@ -77,7 +77,7 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
             return
         }
         
-        mobileConsents.fetchConsentSolution(forUniversalConsentSolutionId: consentSolutionId) { [weak self, asyncDispatcher] result in
+        mobileConsents.fetchConsentSolution { [weak self, asyncDispatcher] result in
             asyncDispatcher.async {
                 if case .success(let solution) = result {
                     self?.consentSolution = solution
@@ -134,10 +134,10 @@ final class ConsentSolutionManager: ConsentSolutionManagerProtocol {
         
         let infoConsentItemIds = consentSolution.consentItems.filter { $0.type == .privacyPolicy }.map(\.id)
         let givenConsentItemIds = selectedConsentItemIds.union(infoConsentItemIds)
-        let userConsents = consentSolution.consentItems.filter {($0.type != .privacyPolicy || $0.type != .info )}.map {UserConsent(consentItem: $0, isSelected: selectedConsentItemIds.contains($0.id) || $0.required)}
+        let userConsents = consentSolution.consentItems.filter {($0.type != .privacyPolicy || $0.type != .privacyPolicy )}.map {UserConsent(consentItem: $0, isSelected: selectedConsentItemIds.contains($0.id) || $0.required)}
         
         var consent = Consent(consentSolutionId: consentSolution.id, consentSolutionVersionId: consentSolution.versionId, userConsents: userConsents)
-        consent.processingPurposes = consentSolution.consentItems.filter {($0.type != .privacyPolicy || $0.type != .info )}.map { item in
+        consent.processingPurposes = consentSolution.consentItems.filter {($0.type != .privacyPolicy || $0.type != .privacyPolicy )}.map { item in
             ProcessingPurpose(
                 consentItemId: item.id,
                 consentGiven: givenConsentItemIds.contains(item.id) || item.required,

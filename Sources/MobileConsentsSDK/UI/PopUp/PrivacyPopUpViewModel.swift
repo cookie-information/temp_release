@@ -92,7 +92,7 @@ final class PrivacyPopUpViewModel: NSObject, PrivacyPopUpViewModelProtocol {
     private func consentViewModels(from solution: ConsentSolution, required: Bool = false) -> [PopUpConsentViewModel] {
         solution
             .consentItems
-            .filter { ($0.type != .privacyPolicy && $0.type != .info ) && $0.required == required }
+            .filter { ($0.type != .privacyPolicy && $0.type != .privacyPolicy ) && $0.required == required }
             .map { item in
                 PopUpConsentViewModel(
                     id: item.id,

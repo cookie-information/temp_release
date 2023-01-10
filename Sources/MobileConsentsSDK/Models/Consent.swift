@@ -3,7 +3,6 @@ import Foundation
 public struct Consent {
     public let consentSolutionId: String
     public let consentSolutionVersionId: String
-    public let timestamp: Date
     public var processingPurposes: [ProcessingPurpose]
     public let customData: [String: String]?
     public let userConsents: [UserConsent]
@@ -11,7 +10,6 @@ public struct Consent {
     public init(consentSolutionId: String, consentSolutionVersionId: String, customData: [String: String]? = [:], userConsents: [UserConsent]) {
         self.consentSolutionId = consentSolutionId
         self.consentSolutionVersionId = consentSolutionVersionId
-        self.timestamp = Date()
         self.processingPurposes = []
         self.customData = customData
         self.userConsents = userConsents
@@ -31,7 +29,6 @@ public struct Consent {
         if let purposesData = try? JSONEncoder().encode(processingPurposes), let purposesJSON = try? JSONSerialization.jsonObject(with: purposesData) as? [[String: Any]] {
             json["processingPurposes"] = purposesJSON
         }
-        json["timestamp"] = timestamp.iso8601withFractionalSeconds
         
         return json
     }
