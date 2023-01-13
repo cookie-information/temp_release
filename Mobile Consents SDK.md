@@ -41,7 +41,7 @@ If application's language is not available in translations, English will be used
 
 ## Privacy Pop-Up
 
-<img src="privacyPopUp.png" width="300px">
+<img src="Documentation/privacyPopUp.png" width="300px">
 
 To show the Privacy Pop Up screen, use either `showPrivacyPopUp` (typically used in settings to allow for modification of the consent) or  `showPrivacyPopUpIfNeeded` (typically used at startup to ) method:
 
