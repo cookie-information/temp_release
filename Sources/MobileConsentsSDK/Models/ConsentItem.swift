@@ -1,11 +1,14 @@
-public enum ConsentItemType: String, Codable {
-    case setting
-    case info
-    case functional = "Functional"
-    case necessary = "Necessary"
-    case statistical = "Statistical"
-    case marketing = "Marketing"
-    case privacyPolicy = "Privacy policy"
+public enum ConsentItemType: String,  Codable, Equatable {
+    case functional
+    case necessary
+    case statistical
+    case marketing
+    case privacyPolicy = "privacy policy"
+    case custom
+    
+    public var description: String {
+        String(describing: self)
+    }
 }
 
 public struct ConsentItem: Codable, Equatable {

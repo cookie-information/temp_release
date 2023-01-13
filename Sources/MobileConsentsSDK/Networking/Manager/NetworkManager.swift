@@ -38,23 +38,26 @@ final class NetworkManager {
     private let clientID: String
     private let clientSecret: String
     private var token: AuthResponse?
-  
+    private let solutionID: String
+    
     init(
         jsonDecoder: JSONDecoder,
         localStorageManager: LocalStorageManagerProtocol = LocalStorageManager(),
         platformInformationGenerator: PlatformInformationGeneratorProtocol = PlatformInformationGenerator(),
         clientID: String,
-        clientSecret: String
+        clientSecret: String,
+        solutionID: String
     ) {
         self.jsonDecoder = jsonDecoder
         self.localStorageManager = localStorageManager
         self.platformInformationGenerator = platformInformationGenerator
         self.clientID = clientID
         self.clientSecret = clientSecret
+        self.solutionID = solutionID
     }
     
-    func getConsentSolution(forUUID uuid: String, completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
-        provider.request(.getConsents(uuid: uuid)) { [jsonDecoder] data, response, error in
+    func getConsentSolution(completion: @escaping (Result<ConsentSolution, Error>) -> Void) {
+        provider.request(.getConsents(uuid: self.solutionID)) { [jsonDecoder] data, response, error in
             guard let response = response as? HTTPURLResponse else {
                 return completion(.failure(NetworkResponseError.noProperResponse))
             }

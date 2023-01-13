@@ -12,20 +12,19 @@ protocol LocalStorageManagerProtocol {
 struct LocalStorageManager: LocalStorageManagerProtocol {
     private let userIdKey = "com.MobileConsents.userIdKey"
     private let consentsKey = "com.MobileConsents.consentsKey"
-    
     private let userDefaults: UserDefaults
     
     init(userDefaults: UserDefaults = UserDefaults.standard) {
         self.userDefaults = userDefaults
     }
     
-    var userId: String {
+    internal var userId: String {
         guard let userId: String = userDefaults.get(forKey: userIdKey) else {
             return generateAndStoreUserId()
         }
         return userId
     }
-
+    
     private func generateAndStoreUserId() -> String {
         let userId = UUID().uuidString
         userDefaults.set(userId, forKey: userIdKey)
@@ -77,6 +76,8 @@ struct LocalStorageManager: LocalStorageManagerProtocol {
             userDefaults.set(consents, forKey: consentsKey)
         }
     }
+    
+    
     
     func clearAll() {
         userDefaults.removeObject(forKey: userIdKey)

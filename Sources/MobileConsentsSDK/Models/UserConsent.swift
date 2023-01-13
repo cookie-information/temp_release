@@ -9,7 +9,11 @@ public class UserConsent: NSObject, Codable {
     
     public let consentItem: ConsentItem
     public var purpose: ConsentPurpose {
-        .init(consentItem.translations.translation(with: "EN")?.shortText ?? "")
+        .init(from: consentItem)
+    }
+    
+    public var purposeDescription: String {
+        consentItem.translations.primaryTranslation().shortText
     }
     public let isSelected: Bool
 }
@@ -21,13 +25,15 @@ public enum ConsentPurpose: Codable {
     case statistical
     case custom(title: String)
     
-    public init(_ rawValue: String) {
-        switch rawValue.lowercased() {
-        case "necessary": self = .necessary
-        case "marketing": self = .marketing
-        case "functional": self = .functional
-        case "statistical": self = .statistical
-        default: self = .custom(title: rawValue)
+    public init(from consentItem: ConsentItem) {
+        switch consentItem.type {
+        case .necessary: self = .necessary
+        case .marketing: self = .marketing
+        case .functional: self = .functional
+        case .statistical: self = .statistical
+        case .custom: self = .custom(title: consentItem.translations.primaryTranslation().shortText)
+        case .privacyPolicy: fatalError("Invalid processing purpose") // this won't happen 
+        
         }
     }
     
