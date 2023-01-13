@@ -61,7 +61,13 @@ final class MobileConsentSolutionViewModel {
     func showPrivacyPopUp(style: PrivacyPopupStyle = .standard) {
         // Display the popup and provide a closure for handling the user constent.
         // This completion closure is the place to display
-        
+        mobileConsentsSDK = MobileConsents(clientID: "40dbe5a7-1c01-463a-bb08-a76970c0efa0",
+                                           clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d",
+                                          solutionId: "4113ab88-4980-4429-b2d1-3454cc81197b",
+                                           accentColor: style.accentColor,
+                                           fontSet: style.fontSet
+                                                        )
+
         mobileConsentsSDK.showPrivacyPopUp() { settings in
             settings.forEach { consent in
                 switch consent.purpose {
@@ -84,7 +90,15 @@ final class MobileConsentSolutionViewModel {
     func showPrivacyPopUpIfNeeded() {
         // Display the popup and provide a closure for handling the user constent.
         // This completion closure is the place to display
-      
+        MobileConsents(clientID: "40dbe5a7-1c01-463a-bb08-a76970c0efa0",
+                                                       clientSecret: "bfa6f31561827fbc59c5d9dc0b04bdfd9752305ce814e87533e61ea90f9f8da8743c376074e372d3386c2a608c267fe1583472fe6369e3fa9cf0082f7fe2d56d",
+                                                      solutionId: "4113ab88-4980-4429-b2d1-3454cc81197b",
+                                                      accentColor: .systemGreen,
+                                                       fontSet: FontSet(largeTitle: .boldSystemFont(ofSize: 34),
+                                                                        body: .monospacedSystemFont(ofSize: 14, weight: .regular),
+                                                                        bold: .monospacedSystemFont(ofSize: 14, weight: .bold))
+                                                                    )
+        
         mobileConsentsSDK.showPrivacyPopUpIfNeeded() { settings in
             settings.forEach { consent in
                 switch consent.purpose {

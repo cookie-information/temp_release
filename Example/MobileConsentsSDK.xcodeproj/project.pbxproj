@@ -26,6 +26,14 @@
 		935E138628F955EB00BAF8E3 /* SavedDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935E137028F955EB00BAF8E3 /* SavedDataViewController.swift */; };
 		935E138A28F9564300BAF8E3 /* MobileConsentsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 935E138928F9564300BAF8E3 /* MobileConsentsSDK */; };
 		935E138C290A6BDA00BAF8E3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935E138B290A6BDA00BAF8E3 /* WebViewController.swift */; };
+		93BE518F296EB1E5000DA679 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BE518E296EB1E5000DA679 /* AppDelegate.m */; };
+		93BE5192296EB1E5000DA679 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BE5191296EB1E5000DA679 /* SceneDelegate.m */; };
+		93BE5195296EB1E5000DA679 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BE5194296EB1E5000DA679 /* ViewController.m */; };
+		93BE5198296EB1E5000DA679 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BE5196296EB1E5000DA679 /* Main.storyboard */; };
+		93BE519A296EB1E6000DA679 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93BE5199296EB1E6000DA679 /* Assets.xcassets */; };
+		93BE519D296EB1E6000DA679 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BE519B296EB1E6000DA679 /* LaunchScreen.storyboard */; };
+		93BE51A0296EB1E6000DA679 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BE519F296EB1E6000DA679 /* main.m */; };
+		93BE51A6296EB200000DA679 /* MobileConsentsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 93BE51A5296EB200000DA679 /* MobileConsentsSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +75,18 @@
 		935E137028F955EB00BAF8E3 /* SavedDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataViewController.swift; sourceTree = "<group>"; };
 		935E138828F9563100BAF8E3 /* mobileconsentsios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = mobileconsentsios; path = ..; sourceTree = "<group>"; };
 		935E138B290A6BDA00BAF8E3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		93BE518B296EB1E5000DA679 /* ObjC example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjC example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93BE518D296EB1E5000DA679 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		93BE518E296EB1E5000DA679 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		93BE5190296EB1E5000DA679 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		93BE5191296EB1E5000DA679 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		93BE5193296EB1E5000DA679 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		93BE5194296EB1E5000DA679 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		93BE5197296EB1E5000DA679 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		93BE5199296EB1E6000DA679 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		93BE519C296EB1E6000DA679 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		93BE519E296EB1E6000DA679 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93BE519F296EB1E6000DA679 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileConsentsSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,6 +96,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				935E138A28F9564300BAF8E3 /* MobileConsentsSDK in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93BE5188296EB1E5000DA679 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93BE51A6296EB200000DA679 /* MobileConsentsSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +122,7 @@
 			children = (
 				935E138728F9563100BAF8E3 /* Packages */,
 				935E133F28F9553100BAF8E3 /* Example */,
+				93BE518C296EB1E5000DA679 /* ObjC example */,
 				117BF1372518D2940089C9E9 /* Products */,
 				119AFB1925230F9F00186CB7 /* Frameworks */,
 			);
@@ -104,6 +133,7 @@
 			children = (
 				9B8E95B42519C8AF001DF8BD /* MobileConsentsSDKTests.xctest */,
 				119AFB0225230F9100186CB7 /* MobileConsent.app */,
+				93BE518B296EB1E5000DA679 /* ObjC example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,6 +239,24 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		93BE518C296EB1E5000DA679 /* ObjC example */ = {
+			isa = PBXGroup;
+			children = (
+				93BE518D296EB1E5000DA679 /* AppDelegate.h */,
+				93BE518E296EB1E5000DA679 /* AppDelegate.m */,
+				93BE5190296EB1E5000DA679 /* SceneDelegate.h */,
+				93BE5191296EB1E5000DA679 /* SceneDelegate.m */,
+				93BE5193296EB1E5000DA679 /* ViewController.h */,
+				93BE5194296EB1E5000DA679 /* ViewController.m */,
+				93BE5196296EB1E5000DA679 /* Main.storyboard */,
+				93BE5199296EB1E6000DA679 /* Assets.xcassets */,
+				93BE519B296EB1E6000DA679 /* LaunchScreen.storyboard */,
+				93BE519E296EB1E6000DA679 /* Info.plist */,
+				93BE519F296EB1E6000DA679 /* main.m */,
+			);
+			path = "ObjC example";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -231,6 +279,26 @@
 			);
 			productName = Example;
 			productReference = 119AFB0225230F9100186CB7 /* MobileConsent.app */;
+			productType = "com.apple.product-type.application";
+		};
+		93BE518A296EB1E5000DA679 /* ObjC example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93BE51A4296EB1E6000DA679 /* Build configuration list for PBXNativeTarget "ObjC example" */;
+			buildPhases = (
+				93BE5187296EB1E5000DA679 /* Sources */,
+				93BE5188296EB1E5000DA679 /* Frameworks */,
+				93BE5189296EB1E5000DA679 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ObjC example";
+			packageProductDependencies = (
+				93BE51A5296EB200000DA679 /* MobileConsentsSDK */,
+			);
+			productName = "ObjC example";
+			productReference = 93BE518B296EB1E5000DA679 /* ObjC example.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9B8E95B32519C8AF001DF8BD /* MobileConsentsSDKTests */ = {
@@ -264,6 +332,9 @@
 						CreatedOnToolsVersion = 12.0.1;
 						LastSwiftMigration = 1400;
 					};
+					93BE518A296EB1E5000DA679 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					9B8E95B32519C8AF001DF8BD = {
 						CreatedOnToolsVersion = 11.7;
 						LastSwiftMigration = 1400;
@@ -286,6 +357,7 @@
 			targets = (
 				9B8E95B32519C8AF001DF8BD /* MobileConsentsSDKTests */,
 				119AFB0125230F9100186CB7 /* MobileConsent */,
+				93BE518A296EB1E5000DA679 /* ObjC example */,
 			);
 		};
 /* End PBXProject section */
@@ -300,6 +372,16 @@
 				935E137C28F955EB00BAF8E3 /* Main.strings in Resources */,
 				935E137B28F955EB00BAF8E3 /* LaunchScreen.strings in Resources */,
 				935E137A28F955EB00BAF8E3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93BE5189296EB1E5000DA679 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93BE519D296EB1E6000DA679 /* LaunchScreen.storyboard in Resources */,
+				93BE519A296EB1E6000DA679 /* Assets.xcassets in Resources */,
+				93BE5198296EB1E5000DA679 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +412,17 @@
 				935E137728F955EB00BAF8E3 /* Collection+Extensions.swift in Sources */,
 				935E138C290A6BDA00BAF8E3 /* WebViewController.swift in Sources */,
 				935E138528F955EB00BAF8E3 /* SavedItemTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93BE5187296EB1E5000DA679 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93BE5195296EB1E5000DA679 /* ViewController.m in Sources */,
+				93BE518F296EB1E5000DA679 /* AppDelegate.m in Sources */,
+				93BE51A0296EB1E6000DA679 /* main.m in Sources */,
+				93BE5192296EB1E5000DA679 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +466,22 @@
 				935E136228F955EB00BAF8E3 /* hu */,
 			);
 			name = Main.strings;
+			sourceTree = "<group>";
+		};
+		93BE5196296EB1E5000DA679 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				93BE5197296EB1E5000DA679 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		93BE519B296EB1E6000DA679 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				93BE519C296EB1E6000DA679 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -645,6 +754,93 @@
 			};
 			name = ReleaseCookieInformation;
 		};
+		93BE51A1296EB1E6000DA679 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3FK7U8AFJC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ObjC example/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cookieinformation.ObjC-example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		93BE51A2296EB1E6000DA679 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3FK7U8AFJC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ObjC example/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cookieinformation.ObjC-example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		93BE51A3296EB1E6000DA679 /* ReleaseCookieInformation */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3FK7U8AFJC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ObjC example/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cookieinformation.ObjC-example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = ReleaseCookieInformation;
+		};
 		9B8E95BC2519C8B0001DF8BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -707,6 +903,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		93BE51A4296EB1E6000DA679 /* Build configuration list for PBXNativeTarget "ObjC example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93BE51A1296EB1E6000DA679 /* Debug */,
+				93BE51A2296EB1E6000DA679 /* Release */,
+				93BE51A3296EB1E6000DA679 /* ReleaseCookieInformation */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9B8E95BE2519C8B0001DF8BD /* Build configuration list for PBXNativeTarget "MobileConsentsSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -721,6 +927,10 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		935E138928F9564300BAF8E3 /* MobileConsentsSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MobileConsentsSDK;
+		};
+		93BE51A5296EB200000DA679 /* MobileConsentsSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MobileConsentsSDK;
 		};

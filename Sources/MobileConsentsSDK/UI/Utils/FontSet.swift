@@ -13,7 +13,7 @@ public class FontSet: NSObject {
     let bold: UIFont
 }
 
-public extension FontSet {
+@objc public extension FontSet {
     static var standard: FontSet {
         FontSet(largeTitle: .systemFont(ofSize: 34, weight: .bold),
                 body: .systemFont(ofSize: 14),
