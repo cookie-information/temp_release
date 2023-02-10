@@ -100,17 +100,20 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
         animated: Bool = true,
         completion: (([UserConsent])->())? = nil
     ) {
-        let presentingViewController = presentingViewController ?? UIApplication.shared.windows.first { $0.isKeyWindow }?.topViewController
-        
-        let consentSolutionManager = ConsentSolutionManager(
-            consentSolutionId: self.solutionId,
-            mobileConsents: self
-        )
-        
-        let router = Router(consentSolutionManager: consentSolutionManager, accentColor: accentColor, fontSet: fontSet)
-        router.rootViewController = presentingViewController
-        
-        router.showPrivacyPopUp(animated: animated, completion: completion)
+        DispatchQueue.main.async {
+            let presentingViewController = presentingViewController ?? UIApplication.shared.windows.first { $0.isKeyWindow }?.topViewController
+            
+            let consentSolutionManager = ConsentSolutionManager(
+                consentSolutionId: self.solutionId,
+                mobileConsents: self
+            )
+            
+            let router = Router(consentSolutionManager: consentSolutionManager, accentColor: self.accentColor, fontSet: self.fontSet)
+            router.rootViewController = presentingViewController
+            
+            router.showPrivacyPopUp(animated: animated, completion: completion)
+        }
+       
     }
     
     
@@ -123,15 +126,28 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     @objc public func showPrivacyPopUpIfNeeded(
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
+        ignoreForcedUpdates: Bool = false,
         completion: (([UserConsent])->())? = nil
     ) {
-        guard !localStorageManager.consents.isEmpty else {
-            showPrivacyPopUp(completion: completion)
-            return
+        
+        self.fetchConsentSolution { result in
+            guard case let .success(value) = result else {
+                return // do something else here maybe??
+            }
+            
+            let storedConsents = self.localStorageManager.consents
+            let versionId = value.versionId
+            let storedVersionId = self.localStorageManager.versionId
+            
+            guard !storedConsents.isEmpty && storedVersionId == versionId else {
+                self.showPrivacyPopUp(completion: completion)
+                return
+            }
+            
+            let userConsents = storedConsents.map(\.value)
+            completion?(userConsents)
         }
-        let consents = localStorageManager.consents
-        let userConsents = consents.map(\.value)
-        completion?(userConsents)
+        
     }
     
 }
@@ -139,6 +155,6 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
 extension MobileConsents {
     func saveConsentResult(_ consent: Consent) {
         let consents = consent.userConsents
-        localStorageManager.addConsentsArray(consents)
+        localStorageManager.addConsentsArray(consents, versionId: consent.consentSolutionVersionId)
     }
 }
