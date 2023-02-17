@@ -24,7 +24,8 @@ final class PrivacyPopUpViewController: UIViewController {
     
     private lazy var readModeButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Read more >", for: .normal)
+        btn.setTitle("Read more", for: .normal)
+        btn.tintColor = accentColor
         btn.setTitleColor(accentColor, for: .normal)
         btn.addTarget(self, action: #selector(openProvacyPolicy), for: .touchUpInside)
         btn.titleLabel?.font = fontSet.bold
@@ -80,8 +81,10 @@ final class PrivacyPopUpViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         setupViewModel()
         setupLayout()
+        
+        self.view.accessibilityElements = [navigationBar,tableView]
     }
-    
+        
     private func setupLayout() {
         view.backgroundColor = .popUpBackground
         
@@ -115,6 +118,7 @@ final class PrivacyPopUpViewController: UIViewController {
             
             readModeButton.topAnchor.constraint(equalTo: privacyDescription.bottomAnchor, constant: 15),
             readModeButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            readModeButton.heightAnchor.constraint(equalToConstant: readModeButton.titleLabel?.font.pointSize ?? 14),
             
             tableView.topAnchor.constraint(equalTo: readModeButton.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -147,7 +151,11 @@ final class PrivacyPopUpViewController: UIViewController {
             self.barItem.rightBarButtonItem?.title = data.acceptAllButtonTitle
             self.privacyDescription.text = data.privacyDescription
             self.privacyPolicyLongtext = data.privacyPolicyLongtext
-            self.readModeButton.setTitle("\(data.readMoreButton) >", for: .normal)
+            self.readModeButton.setTitle("\(data.readMoreButton) ", for: .normal)
+            let chevron = UIImage(named: "chevron", in: .module, compatibleWith: nil)
+            self.readModeButton.setImage(chevron, for: .normal)
+            self.readModeButton
+            self.readModeButton.semanticContentAttribute = .forceRightToLeft
         }
         
         viewModel.onLoadingChange = { [weak self, activityIndicator] isLoading in
@@ -210,3 +218,4 @@ extension String {
         self = NSLocalizedString(key, bundle: Bundle(for: PrivacyPopUpViewController.self), comment: "")
     }
 }
+
