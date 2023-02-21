@@ -134,7 +134,7 @@ final class PrivacyPopUpViewController: UIViewController {
             readModeButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             readModeButton.heightAnchor.constraint(equalToConstant: readModeButton.titleLabel?.font.pointSize ?? 14),
             
-            tableView.topAnchor.constraint(equalTo: readModeButton.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: readModeButton.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: poweredByLabel.topAnchor, constant: -2),
