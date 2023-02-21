@@ -3,7 +3,7 @@ import UIKit
 final class PrivacyPopUpViewController: UIViewController {
     private lazy var navigationBar: UINavigationBar = {
         let bar = UINavigationBar()
-        bar.isTranslucent = false
+        bar.isTranslucent = true
         bar.delegate = self.viewModel
         bar.backgroundColor = .navigationBarbackground
         bar.items = [self.barItem]
