@@ -23,7 +23,8 @@ final class PrivacyPopUpViewController: UIViewController {
     private lazy var titleView: UILabel = {
         let view = UILabel()
         view.text = "Privacy"
-        view.font = fontSet.largeTitle
+        view.adjustsFontForContentSizeCategory = true
+        view.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: fontSet.largeTitle)
         
         return view
     }()
@@ -34,13 +35,15 @@ final class PrivacyPopUpViewController: UIViewController {
         btn.tintColor = accentColor
         btn.setTitleColor(accentColor, for: .normal)
         btn.addTarget(self, action: #selector(openProvacyPolicy), for: .touchUpInside)
-        btn.titleLabel?.font = fontSet.bold
+        btn.titleLabel?.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontSet.bold)
+        btn.titleLabel?.adjustsFontForContentSizeCategory = true
         return btn
     }()
     
     private lazy var privacyDescription: UILabel = {
         let label = UILabel()
-        label.font = fontSet.bold
+        label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: fontSet.bold)
+        label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         return label
     }()
