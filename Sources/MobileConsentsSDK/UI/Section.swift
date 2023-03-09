@@ -12,7 +12,7 @@ public protocol Section {
 extension Section {
     var numberOfCells: Int { 1 }
     
-    func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
+    public func didSelectCell(at indexPath: IndexPath, in tableView: UITableView) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }

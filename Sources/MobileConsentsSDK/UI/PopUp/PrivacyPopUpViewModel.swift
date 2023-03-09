@@ -3,7 +3,7 @@ import UIKit
 
 public struct PrivacyPopUpData {
     public let title: String
-    public let sections: [Section]
+    public let sections: [PopUpConsentsSection]
     public let acceptAllButtonTitle: String
     public let saveSelectionButtonTitle: String
 
@@ -150,6 +150,14 @@ extension PrivacyPopUpViewModel: PopUpButtonViewModelDelegate {
         onLoadingChange?(true)
         consentSolutionManager.acceptAllConsentItems { [weak self] error in
             self?.handlePostingConsent(buttonType: .acceptAll, error: error)
+        }
+    }
+    
+    @objc
+    public func rejectAll() {
+        onLoadingChange?(true)
+        consentSolutionManager.rejectAllConsentItems { [weak self] error in
+            self?.handlePostingConsent(buttonType: .rejectAll, error: error)
         }
     }
     
