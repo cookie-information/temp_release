@@ -1,6 +1,6 @@
 import UIKit
 
-protocol Section {
+public protocol Section {
     static func registerCells(in tableView: UITableView)
     
     var numberOfCells: Int { get }

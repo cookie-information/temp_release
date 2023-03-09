@@ -96,6 +96,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     ///   - animated: If presentation should be animated. Defaults to `true`.
     ///   - completion: called after the user closes the privacy popup.
     @objc public func showPrivacyPopUp(
+        popupViewController: PrivacyPopupProtocol.Type? = nil,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
         completion: (([UserConsent])->())? = nil
@@ -110,8 +111,8 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
             
             let router = Router(consentSolutionManager: consentSolutionManager, accentColor: self.accentColor, fontSet: self.fontSet)
             router.rootViewController = presentingViewController
-            
-            router.showPrivacyPopUp(animated: animated, completion: completion)
+           
+            router.showPrivacyPopUp(popupController: popupViewController, animated: animated, completion: completion)
         }
        
     }
@@ -125,6 +126,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     ///   - ignoreVersionChanges: if set to `true` the SDK will ignore changes made to the consent solution in the Cookie Information web interface
     ///   - completion: called after the user closes the privacy popup.
     @objc public func showPrivacyPopUpIfNeeded(
+        popupViewController: PrivacyPopupProtocol.Type? = nil,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
         ignoreVersionChanges: Bool = false,
@@ -141,7 +143,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
             let storedVersionId = self.localStorageManager.versionId
             
             guard !storedConsents.isEmpty && (storedVersionId == versionId || ignoreVersionChanges) else {
-                self.showPrivacyPopUp(completion: completion)
+                self.showPrivacyPopUp(popupViewController: popupViewController, completion: completion)
                 return
             }
             
