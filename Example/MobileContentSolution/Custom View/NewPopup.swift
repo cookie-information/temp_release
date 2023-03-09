@@ -14,7 +14,7 @@ final class NewPopup: UIViewController, PrivacyPopupProtocol {
     }()
     
     lazy var buttonGroup: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [rejectAllBtn, acceptAllBtn])
+        let stack = UIStackView(arrangedSubviews: [rejectAllBtn, saveBtn, acceptAllBtn])
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 8
@@ -30,6 +30,16 @@ final class NewPopup: UIViewController, PrivacyPopupProtocol {
         btn.tintColor = .white
         btn.layer.cornerRadius = 7
         btn.addTarget(self.viewModel, action: #selector(viewModel.acceptAll), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var saveBtn: UIButton = {
+        let btn = UIButton(type: .roundedRect)
+        btn.backgroundColor = .systemOrange
+        btn.setTitle("Save selection", for: .normal)
+        btn.tintColor = .white
+        btn.layer.cornerRadius = 7
+        btn.addTarget(self.viewModel, action: #selector(viewModel.acceptSelected), for: .touchUpInside)
         return btn
     }()
     
@@ -166,8 +176,8 @@ final class ToggleCell: UITableViewCell {
         self.toggle.isOn = viewModel.isSelected
         self.toggle.isEnabled = !viewModel.isRequired
         self.titleLabel.text = viewModel.title
-        
-        self.toggle.addTarget(self, action: #selector(selectionChanged), for: .touchUpInside)
+        self.viewModel = viewModel
+        self.toggle.addTarget(self, action: #selector(selectionChanged), for: .valueChanged)
     }
     
     @objc func selectionChanged() {
