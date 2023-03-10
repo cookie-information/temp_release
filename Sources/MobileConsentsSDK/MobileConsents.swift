@@ -91,12 +91,12 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     
     /// Method responsible for showing Privacy Pop Up screen
     /// - Parameters:
-    ///   - universalConsentSolutionId: Consent Solution identifier
-    ///   - presentingViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
+    ///   - customViewType: the type of the custom view controller that is to be presented instead of the built in one. E.g. `MyCustomVC.self`
+    ///   - onViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
     ///   - animated: If presentation should be animated. Defaults to `true`.
     ///   - completion: called after the user closes the privacy popup.
     @objc public func showPrivacyPopUp(
-        popupViewController: PrivacyPopupProtocol.Type? = nil,
+        customViewType: PrivacyPopupProtocol.Type? = nil,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
         completion: (([UserConsent])->())? = nil
@@ -112,7 +112,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
             let router = Router(consentSolutionManager: consentSolutionManager, accentColor: self.accentColor, fontSet: self.fontSet)
             router.rootViewController = presentingViewController
            
-            router.showPrivacyPopUp(popupController: popupViewController, animated: animated, completion: completion)
+            router.showPrivacyPopUp(popupController: customViewType, animated: animated, completion: completion)
         }
        
     }
@@ -120,13 +120,13 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     
     /// Method responsible for showing Privacy Pop Up screen if there has not been a consent recorded or if the consent
     /// - Parameters:
-    ///   - universalConsentSolutionId: Consent Solution identifier
-    ///   - presentingViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
+    ///   - customViewType: the type of the custom view controller that is to be presented instead of the built in one. E.g. `MyCustomVC.self`
+    ///   - onViewController: UIViewController to present pop up on. If not provided, top-most presented view controller of key window of the application is used.
     ///   - animated: If presentation should be animated. Defaults to `true`.
     ///   - ignoreVersionChanges: if set to `true` the SDK will ignore changes made to the consent solution in the Cookie Information web interface
     ///   - completion: called after the user closes the privacy popup.
     @objc public func showPrivacyPopUpIfNeeded(
-        popupViewController: PrivacyPopupProtocol.Type? = nil,
+        customViewType: PrivacyPopupProtocol.Type? = nil,
         onViewController presentingViewController: UIViewController? = nil,
         animated: Bool = true,
         ignoreVersionChanges: Bool = false,
@@ -143,7 +143,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
             let storedVersionId = self.localStorageManager.versionId
             
             guard !storedConsents.isEmpty && (storedVersionId == versionId || ignoreVersionChanges) else {
-                self.showPrivacyPopUp(popupViewController: popupViewController, completion: completion)
+                self.showPrivacyPopUp(customViewType: customViewType, completion: completion)
                 return
             }
             

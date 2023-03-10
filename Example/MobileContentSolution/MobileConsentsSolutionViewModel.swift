@@ -68,7 +68,7 @@ final class MobileConsentSolutionViewModel {
                                            fontSet: style.fontSet
                                                         )
 
-        mobileConsentsSDK.showPrivacyPopUp(popupViewController: style.customController) { settings in
+        mobileConsentsSDK.showPrivacyPopUp(customViewType: style.customController) { settings in
             settings.forEach { consent in
                 switch consent.purpose {
                 case .statistical: break
@@ -78,6 +78,9 @@ final class MobileConsentSolutionViewModel {
                 case .custom:
                     if consent.purposeDescription.lowercased() == "age consent" {
                         // handle user defined consent items such as age consent
+                    }
+                    if consent.consentItem.id == "<UUID of consent item>" {
+                        // handle user defined consent items such as age consent based on it's UUID
                     }
 
                 }
