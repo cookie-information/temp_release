@@ -132,7 +132,7 @@ struct PrivacyPopupStyle {
     }()
     
     static let customController: PrivacyPopupStyle = {
-        PrivacyPopupStyle(accentColor: .systemPink, fontSet: .standard, customController: NewPopup.self)
+        PrivacyPopupStyle(accentColor: .systemPink, fontSet: .standard, customController: CustomPopup.self)
     }()
 
 }

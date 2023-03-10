@@ -176,6 +176,7 @@ mobileConsentsSDK.showPrivacyPopUp(customViewType: CustomController.self) { sett
 
 ```
 
+To see a more complete implementation, please refer to the Example app and look for `CustomPopup.swift`
 ## Sending Consent to server manually
 
 If you want to send consent to the server, first you have to create `Consent` object which structure looks like this:
