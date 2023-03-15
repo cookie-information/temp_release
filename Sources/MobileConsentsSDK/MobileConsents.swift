@@ -153,6 +153,11 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
         
     }
     
+    /// Removes all stored consents from the device. Consents stored in the Cookie Information database persist.
+    public func removeStoredConsents() {
+        localStorageManager.clearAll()
+    }
+    
 }
 
 extension MobileConsents {
