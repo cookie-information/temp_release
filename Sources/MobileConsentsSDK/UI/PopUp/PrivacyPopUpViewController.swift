@@ -188,6 +188,7 @@ final class PrivacyPopUpViewController: UIViewController, PrivacyPopupProtocol {
         
         viewModel.onError = { [weak self] alert in
             debugPrint(alert)
+            self?.dismiss(animated: true)
         }
         
         viewModel.viewDidLoad()
