@@ -9,8 +9,3 @@ extension UIViewController {
         (tabBarController ?? navigationController ?? self).view.isUserInteractionEnabled = enabled
     }
 }
-
-public struct ErrorAlertModel {
-    let retryHandler: () -> Void
-    let cancelHandler: (() -> Void)?
-}
