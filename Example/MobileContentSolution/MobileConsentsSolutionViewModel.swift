@@ -9,8 +9,8 @@ final class MobileConsentSolutionViewModel {
                                                   accentColor: .systemGreen,
                                                    fontSet: FontSet(largeTitle: .boldSystemFont(ofSize: 34),
                                                                     body: .monospacedSystemFont(ofSize: 14, weight: .regular),
-                                                                    bold: .monospacedSystemFont(ofSize: 14, weight: .bold))
-                                                                )
+                                                                    bold: .monospacedSystemFont(ofSize: 14, weight: .bold)),
+                                                    enableNetworkLogger: true)
     
     
     
@@ -69,7 +69,8 @@ final class MobileConsentSolutionViewModel {
                                            clientSecret: clientSecret,
                                            solutionId: solutionId,
                                            accentColor: style.accentColor,
-                                           fontSet: style.fontSet
+                                           fontSet: style.fontSet,
+                                           enableNetworkLogger: true
                                                         )
 
         mobileConsentsSDK.showPrivacyPopUp(customViewType: style.customController) { settings in
