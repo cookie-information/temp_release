@@ -42,12 +42,6 @@ final class MobileConsentsSolutionViewController: BaseViewController {
     }
     
     
-    @IBAction func openInAppBrowser() {
-         let browser = WebViewController(consents: viewModel.mobileConsentsSDK)
-        
-        self.present(browser, animated: true)
-    }
-    
     @IBAction private func showPopUpAction() {        showSelection()
     }
     
