@@ -222,7 +222,7 @@ struct  SavedConsent {
 mobileConsentsSDK.cancel()
 ```
 
-### Logging
+## Logging
 
 The SDK can be configured to print the network events in the console. These events include all network requests, responses and errors. By default this option is disabled to keep the unnecessary clutter out of the console, however in case of unexpected behaviour or to verify that everything works as expected it can be switched on in the SDK initializer.
 
@@ -235,3 +235,10 @@ solutionId: "<SOLUTION ID>",
 enableNetworkLogger: true
 )
 ```
+## Displaying the device identifier
+All consents sent to the Cookie Information servers are identified by a unique device identifier that is generated randomly after opening the privacy popup for the first time. This ID is necessary for Cookie Information to retrieve consents saved by the end user. 
+
+During normal operation the identifier is not required, however in case the end user wants to access their saved consents, it is only possible if they provide the above mentioned identifier. When using the default user interface, the identifier can be displayed by opening the privacy screen and long pressing on the title label that reads "Privacy" by default. The minimum duration for the press is 3 seconds, and if performed correctly, an action sheet is presented with the device identifier and the option to copy it to the clipboard.
+
+
+<img src="Documentation/DeviceID.jpeg" width="300px">

@@ -180,7 +180,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
-    font: -apple-system-body; font-family: -apple-system;
+    font: -apple-system-body; font-family: -apple-system; font-size: 14;
 
 }
 ol, ul {
@@ -200,9 +200,9 @@ table {
 }
 
 h1 {font: -apple-system-headine; font-family: -apple-system;}
-p {font: -apple-system-body; font-family: -apple-system;}
-b {font: -apple-system-body; font-family: -apple-system; font-weight: bold;}
-i {font: -apple-system-body; font-family: -apple-system; font-style: italic;}
+p {font: -apple-system-body; font-family: -apple-system; font-size: inherit;}
+b {font: -apple-system-body; font-family: -apple-system; font-weight: bold; font-size: inherit;}
+i {font: -apple-system-body; font-family: -apple-system; font-style: italic; font-size: inherit;}
 
 """
     }
