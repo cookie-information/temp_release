@@ -30,12 +30,6 @@ final class PrivacyPopUpViewController: UIViewController, PrivacyPopupProtocol {
         view.text = "Privacy"
         view.adjustsFontForContentSizeCategory = true
         view.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: fontSet.largeTitle)
-        
-        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(displayDeviceId))
-        recognizer.minimumPressDuration = 3
-        view.addGestureRecognizer(recognizer)
-        view.isUserInteractionEnabled = true
-        
         return view
     }()
     
@@ -242,23 +236,6 @@ extension PrivacyPopUpViewController {
         present(detailView, animated: true)
     }
     
-    @objc func displayDeviceId() {
-        let id = LocalStorageManager().userId
-        let alert = UIAlertController(title: "Device Identifier",
-                                      message: id,
-                                      preferredStyle: .actionSheet)
-        
-        let closeAction = UIAlertAction(title: "Close", style: .default) { _ in }
-        let copyAction = UIAlertAction(title: "Copy to clipboard", style: .default) {_ in
-            UIPasteboard.general.setValue(id,
-                                          forPasteboardType: "public.plain-text")
-        }
-        alert.addAction(copyAction)
-        alert.addAction(closeAction)
-        
-        present(alert, animated: true)
-        
-    }
 }
 
 extension String {

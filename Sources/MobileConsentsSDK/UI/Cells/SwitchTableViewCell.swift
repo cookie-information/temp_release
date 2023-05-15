@@ -126,7 +126,7 @@ final class SwitchTableViewCell: BaseTableViewCell {
 }
 
 
-private extension String {
+internal extension String {
     var containsHtml: Bool {
         let range = NSRange(location: 0, length: self.utf16.count)
         let regex = try! NSRegularExpression(pattern: #"</?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)/?>"#)
@@ -134,7 +134,14 @@ private extension String {
     }
     
     var attributedHtmlString: NSAttributedString? {
-        let page = """
+        let page = wrappedInHtml
+        let data = Data(page.utf8)
+        return try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+        
+    }
+    
+    var wrappedInHtml: String {
+        """
 <html>
 <head>
 <style>
@@ -146,9 +153,6 @@ private extension String {
 </body>
 </html>
 """
-        let data = Data(page.utf8)
-        return try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-        
     }
     
     var baseCSS: String {
