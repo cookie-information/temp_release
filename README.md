@@ -238,7 +238,12 @@ enableNetworkLogger: true
 ## Displaying the device identifier
 All consents sent to the Cookie Information servers are identified by a unique device identifier that is generated randomly after opening the privacy popup for the first time. This ID is necessary for Cookie Information to retrieve consents saved by the end user. 
 
-During normal operation the identifier is not required, however in case the end user wants to access their saved consents, it is only possible if they provide the above mentioned identifier. When using the default user interface, the identifier can be displayed by opening the privacy screen and long pressing on the title label that reads "Privacy" by default. The minimum duration for the press is 3 seconds, and if performed correctly, an action sheet is presented with the device identifier and the option to copy it to the clipboard.
+During normal operation the identifier is not required, however in case the end user wants to access their saved consents, it is only possible if they provide the above mentioned identifier. When using the default user interface, the device identifier can be located at the bottom of the privacy policy page (after tapping "read more"). It can be copied to the clipboard by tapping the text and selecting the appropriate button from the action sheet.
 
 
-<img src="Documentation/DeviceID.jpeg" width="300px">
+
+
+
+<img src="Documentation/deviceId1.png" width="300px">
+<img src="Documentation/deviceId2.png" width="300px">
+
