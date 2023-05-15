@@ -31,7 +31,7 @@ public class PrivacyPolicyDetail: UIViewController {
     
     private lazy var deviceInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Device identifier: \n \(LocalStorageManager().userId)"
+        label.text = "Device identifier:\n\(LocalStorageManager().userId)"
         label.numberOfLines = 2
         label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: .regular(size: 12))
         label.translatesAutoresizingMaskIntoConstraints = false
