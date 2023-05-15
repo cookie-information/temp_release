@@ -99,6 +99,18 @@ Just like in Swift, the same methods are used to display the privacy pop-up, onl
     }];
 ```
 
+### Handling errors
+
+Both the `showPrivacyPopUp` and `showPrivacyPopUpIfNeeded` can be passed a `errorHandler` closure that is called when an error occurs. After the `errorHandler` is called, the popup is dismissed by the router, the selection made by the user is persisted locally and an attempt is made the next time `showPrivacyPopUpIfNeeded` is called or if `synchronizeIfNeeded` method is called manually.
+
+```swift
+        mobileConsentsSDK.showPrivacyPopUpIfNeeded(ignoreVersionChanges: true) { settings in
+         // handle results here
+        } errorHandler: { err in
+            // handle the error here
+        }
+```
+
 ## Styling
 
 The UI accent color and the fonts can be customized in the SDKs initializer:
