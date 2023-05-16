@@ -16,7 +16,7 @@ public final class MobileConsents: NSObject, MobileConsentsProtocol {
     private let solutionId: String
     public typealias ConsentSolutionCompletion = (Result<ConsentSolution, Error>) -> ()
     
-    /// 
+    /// Unique identifier of the user in Cookie Information records. This ID is assigned upon first run of the SDK
     public var userId: String {
         localStorageManager.userId
     }
