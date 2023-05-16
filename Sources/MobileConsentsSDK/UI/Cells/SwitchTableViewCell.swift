@@ -48,7 +48,6 @@ final class SwitchTableViewCell: BaseTableViewCell {
         titleView.text = viewModel.title
         titleView.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: viewModel.fontSet.body.withSize(17))
         titleView.accessibilityLabel = "\(viewModel.title) \n \(viewModel.description)"
-
         
         descriptionView.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: viewModel.fontSet.body)
         if viewModel.description.containsHtml, let attributedString = viewModel.description.attributedHtmlString {
@@ -61,6 +60,7 @@ final class SwitchTableViewCell: BaseTableViewCell {
         setIsSelected(viewModel.isRequired || viewModel.isSelected) //required settings will be selected by default
         uiSwitch.onTintColor = viewModel.accentColor
         uiSwitch.isEnabled = !viewModel.isRequired
+        uiSwitch.accessibilityLabel = "\(viewModel.title) switch"
         valueChanged = { [weak viewModel] isSelected in
             viewModel?.selectionDidChange(isSelected)
         }
